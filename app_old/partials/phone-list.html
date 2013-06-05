@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+
+    <div class="span10">
+      <!--Body content-->
+
+      <ul class="phones">
+        <li class="thumbnail">
+<!--           <a class="thumb"><img ng-src="http://localhost:8000/app/img/phones/motorola-xoom-with-wi-fi.0.jpg"></a>
+ -->          <a href="#">WHAT</a>
+          <p></p>
+        </li>
+      </ul>
+
+      <ul class="phones">
+        <li ng-repeat="phone in phones | filter:query | orderBy:orderProp" class="thumbnail">
+          <a href="#/phones/{{phone.id}}" class="thumb"><img ng-src="{{phone.imageUrl}}"></a>
+          <a href="#/phones/{{phone.id}}">{{phone.name}}</a>
+          <p>{{phone.snippet}}</p>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>

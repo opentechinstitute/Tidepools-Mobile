@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en" ng-app="phonecat">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Tidepools</title>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+
+
+  <link href="css/flat-ui.css" rel="stylesheet">
+   <!-- Loading Flat UI -->
+  <link rel="shortcut icon" href="images/favicon.ico">
+
+  <script src="lib/angular/angular.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/services.js"></script>
+  <script src="lib/angular/angular-resource.js"></script>
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+
+
+<!-- <button ng-click="changeFoo()">what</button> -->
+
+
+
+  <div id="wrapper">
+
+      <div id="menu">
+        <ul>
+          <li>Menu item</li>
+          <li>Menu item</li>
+          <li>Menu item</li>
+        </ul>
+      </div>
+
+    <div id="main">
+
+<!--       <div id="bar">
+        <div id="show" href="#"> ☀ Menu</div>
+
+        <div id="selector" href="#"> 
+
+          <li class="dropdown" ng-controller="DropdownCtrl">
+            <a class="dropdown-toggle">
+              Click me for a dropdown, yo!
+            </a>
+            <ul class="dropdown-menu">
+              <li ng-repeat="choice in items">
+                <a>{{choice}}</a>
+              </li>
+            </ul>
+          </li>
+
+        </div>
+
+        <div id="search" href="#"> Search </div>
+
+      </div> -->
+
+     
+      <div class="row-fluid">
+        <li class="thumbnail" style="height:43px;">
+
+          <div id="show" href="#"> ☀ Menu</div>
+
+
+          <div id="search" href="#"> Search </div>
+        </li>
+
+      </div>
+
+
+
+<!--       <div class="container-fluid"> -->
+        <div class="row-fluid">
+              <li class="thumbnail" style="height:43px;">
+
+
+                <a href="#" ng-click="action()" class="menubutton">Sessions</a>
+                <a href="#" class="menubutton">Conversations</a>
+                <a href="#" class="menubutton">Conf Map</a>
+              </li>
+         </div>
+
+
+
+      <!--  <div class="btn-group">
+          <button type="button" class="btn btn-primary" ng-model="checkModel.left" btn-checkbox>Left</button>
+          <button type="button" class="btn btn-primary" ng-model="checkModel.middle" btn-checkbox>Middle</button>
+          <button type="button" class="btn btn-primary" ng-model="checkModel.right" btn-checkbox>Right</button>
+      </div> -->
+    
+      <div id="content">
+
+          <!-- <div id="cardpanel">
+            <div style="float:left;">Sessions</div>
+            <div id="filter" style="background:#000; height:100%; width:78px; float:Right; position: relative; margin-top: -13px;">Filter</div>
+          </div> -->
+       
+          <div ng-view></div>
+
+    </div>
+
+  </div>
+
+<script>
+
+//temp use of jquery, switch to angular?
+$('#show').click(function(e) {
+    $('body').toggleClass('menu');
+    return false;
+});
+
+
+
+</script>
+
+</body>
+</html>
