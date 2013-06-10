@@ -1,6 +1,6 @@
 var express = require('express'),
     app = module.exports.app = express(), 
-    db = require('mongojs').connect('defaultMap');
+    db = require('mongojs').connect('amc');
     //db = require('mongojs').connect('PhoneCat');
     
 app.configure(function () {
