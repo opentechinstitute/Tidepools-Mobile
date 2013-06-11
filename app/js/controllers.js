@@ -43,25 +43,33 @@
 
 function PhoneListCtrl( $location, $scope, db) {
 
-    $scope.orderProp = 'age';
+    //$scope.orderProp = '_id';
+   // $scope.order = -1;
     //$scope.phones = Phone.query({order:$scope.orderProp, name:$scope.query});
-    $scope.phones = db.phones.query({order:$scope.orderProp, name:$scope.query});
+
+    //$scope.phones = db.phones.query({order:$scope.orderProp, name:$scope.query});
+
+    $scope.time = "now";
+
+    $scope.phones = db.phones.query({name:$scope.query, time:$scope.time});
+
     //var phones = $scope.phones;
     
-    $scope.remove = function (phone) {
-        var ok = db.phone.delete({_id: phone._id}, function (res) {
-            console.log('indexOf: '+phones.indexOf(phone));
-            if (res.ok === 1) {
-                phones.splice(phones.indexOf(phone), 1);
-            } else {
-                alert(JSON.stringify(res.ok));
-            }
-        })
-    }
+    // $scope.remove = function (phone) {
+    //     var ok = db.phone.delete({_id: phone._id}, function (res) {
+    //         console.log('indexOf: '+phones.indexOf(phone));
+    //         if (res.ok === 1) {
+    //             phones.splice(phones.indexOf(phone), 1);
+    //         } else {
+    //             alert(JSON.stringify(res.ok));
+    //         }
+    //     })
+    // }
 
+    $scope.filter = function() {
 
-    $scope.alert = function() {
-	    alert('wht');
+        $scope.time = "soon";
+	    $scope.phones = db.phones.query({name:$scope.query, time:$scope.time});
   	};
     
 }
@@ -83,7 +91,7 @@ function PhoneDetailCtrl(Phone, $routeParams, $scope) {
     $scope.phone = Phone.get({_id: $routeParams.phoneId}, function(phone) {
 
         //$scope.mainImageUrl = phone.details.images[0];
-        $scope.mainImageUrl = phone.type;
+        $scope.mainImageUrl = phone.stats.avatar;
 
     });
     $scope.setImage = function(imageUrl) {

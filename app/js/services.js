@@ -27,10 +27,6 @@ angular.module('phonecatServices', ['ngResource'])
                 'aggregate': {method:'PUT', params:{_id: 'aggregate'}, isArray:true}   
             }
             res = $resource('api/landmarks/:_id:id', {}, actions);
-           // res = $resource('api/phones/:_id', {}, actions);
-            //Object.defineProperty(res.prototype, "teste", {get:function(){this.age}})
-            //res.prototype.teste = "test"
-            //console.log(res);
             return res;
         }
     ])

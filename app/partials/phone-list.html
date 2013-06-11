@@ -12,7 +12,7 @@
         </li>
       </ul>
 
-      <a href ng-click="alert()">alert</a>
+      <button ng-click="filter()">filter</button>
 
       <ul class="phones">
         <li ng-repeat="phone in phones | filter:query | orderBy:orderProp" class="thumbnail">

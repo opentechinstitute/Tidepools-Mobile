@@ -1,6 +1,6 @@
 var express = require('express'),
     app = module.exports.app = express(), 
-    db = require('mongojs').connect('amc');
+    db = require('mongojs').connect('amctest');
     //db = require('mongojs').connect('PhoneCat');
     
 app.configure(function () {
@@ -45,17 +45,78 @@ var fn = function (req, res) {
 // Query
 app.get('/api/:collection', function(req, res) { 
 
-    var item, sort = {}, qw = {};
-    for (item in req.query) {
-        req.query[item] = (typeof +req.query[item] === 'number' && isFinite(req.query[item])) 
-            ? parseFloat(req.query[item],10) 
-            : req.query[item];
-        if (item != 'limit' && item != 'skip' && item != 'sort' && item != 'order' && req.query[item] != "undefined" && req.query[item]) {
-            qw[item] = req.query[item]; 
-        }
-    }  
-    if (req.query.sort) { sort[req.query.sort] = (req.query.order === 'desc' || req.query.order === -1) ? -1 : 1; }
-    db.collection(req.params.collection).find(qw).sort(sort).skip(req.query.skip).limit(req.query.limit).toArray(fn(req, res))
+    var item, sort = {};
+
+
+    console.log(req.query.time);
+
+    // for (item in req.query) {
+    //     req.query[item] = (typeof +req.query[item] === 'number' && isFinite(req.query[item])) 
+    //         ? parseFloat(req.query[item],10) 
+    //         : req.query[item];
+    //     if (item != 'limit' && item != 'skip' && item != 'sort' && item != 'order' && req.query[item] != "undefined" && req.query[item]) {
+    //         qw[item] = req.query[item]; 
+    //     }
+    // }  
+    // if (req.query.sort) { 
+    //     sort[req.query.sort] = (req.query.order === 'desc' || req.query.order === -1) ? -1 : 1; 
+    // }
+
+   // console.log(req.query.sort);
+
+    //db.collection(req.params.collection).find(qw).sort(sort).skip(req.query.skip).limit(req.query.limit).toArray(fn(req, res))
+
+
+    //db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
+
+    //qw. = {level:{$gt:90}};
+
+
+
+    //------ Happening soon  ------//
+
+    if (req.query.time == "all"){
+       // var currentTime = new Date(oldDateObj.getTime() + diff*60000); //adding 30 minutes to time for "soon" //http://stackoverflow.com/questions/1197928/how-to-add-30-minutes-to-a-javascript-date-object/1197939
+       var currentTime = new Date(); 
+       currentTime.setMinutes(currentTime.getMinutes() + 30); // adding 30minutes to current time for "soon"
+
+       //LOGIC HERE ----> READ CURRENT TIME, determine place within hour, match to how conference schedule time is handled, ADD MORE TIME TO CURRENT TIME FOR QUERY based on how much avg. time is left in a conference BLOCK period
+
+        var qw = {
+            'time.start': {$lt: currentTime},
+            'time.end': {$gt: currentTime}
+        };
+        db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
+    }
+
+    else if (req.query.time == "soon"){
+       // var currentTime = new Date(oldDateObj.getTime() + diff*60000); //adding 30 minutes to time for "soon" //http://stackoverflow.com/questions/1197928/how-to-add-30-minutes-to-a-javascript-date-object/1197939
+       var currentTime = new Date(); 
+       currentTime.setMinutes(currentTime.getMinutes() + 30); // adding 30minutes to current time for "soon"
+
+       //LOGIC HERE ----> READ CURRENT TIME, determine place within hour, match to how conference schedule time is handled, ADD MORE TIME TO CURRENT TIME FOR QUERY based on how much avg. time is left in a conference BLOCK period
+
+        var qw = {
+            'time.start': {$lt: currentTime},
+            'time.end': {$gt: currentTime}
+        };
+        db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
+    }
+
+
+    //------ Happening now ------//
+    else {
+        var currentTime = new Date();
+        var qw = {
+            'time.start': {$lt: currentTime},
+            'time.end': {$gt: currentTime}
+        };
+        db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
+    }
+
+
+    
+
 
 });
 
