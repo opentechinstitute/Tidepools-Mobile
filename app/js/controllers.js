@@ -151,6 +151,19 @@ talktagCtrl.$inject = [ '$location', '$scope', '$routeParams', 'db'];
 
 function mapCtrl() {
 
+        var minZ = 6; //min map zoom
+        var maxZ = 19; //max map zoom
+        var map = new L.Map('map', {crs:L.CRS.EPSG3857}).setView([42.36219069106654,-83.06988000869751], 16);
+        var base = L.tileLayer('1.0.0/conftest/{z}/{x}/{y}.png', {minZoom:minZ, maxZoom:maxZ, tms:'true'});
+
+        //---------- ADDING OPTIONAL EXTERNAL WEB MAP LAYER (UNCOMMENT TO ACTIVATE) ----------//
+
+        // var cloudUrl = 'http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
+        // cloud = new L.TileLayer(cloudUrl);
+        // map.addLayer(cloud,true); 
+
+        map.addLayer(base,true);
+
 
     
 }
