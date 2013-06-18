@@ -28,7 +28,6 @@ db.once('open', function callback () {
 	lm.name = "twitterrers";
 	lm.description = "asdff";
 	lm.type = "event";
-	lm.id = uniqueID;
 	lm.loc.unshift(42,-38);
 	lm.mapID = "23434";
 
