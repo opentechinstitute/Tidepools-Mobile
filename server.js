@@ -26,7 +26,6 @@ var objectId = function (_id) {
 var fn = function (req, res) {
     res.contentType('application/json');
     var fn = function (err, doc) { 
-    //console.log('asdasdas',req.body ,err,doc)
         if (err) { 
             if (err.message) {
                 doc = {error : err.message} 
@@ -46,9 +45,6 @@ var fn = function (req, res) {
 app.get('/api/:collection', function(req, res) { 
 
     var item, sort = {};
-
-
-    console.log(req.query.time);
 
     // for (item in req.query) {
     //     req.query[item] = (typeof +req.query[item] === 'number' && isFinite(req.query[item])) 
@@ -72,47 +68,86 @@ app.get('/api/:collection', function(req, res) {
     //qw. = {level:{$gt:90}};
 
 
+    //if (req.query.time){
+        //------ Happening soon  ------//
 
-    //------ Happening soon  ------//
+        if (req.query.time == "all"){
+           
+            /////CHANGE FOR TWITTER to created
 
-    if (req.query.time == "all"){
-       // var currentTime = new Date(oldDateObj.getTime() + diff*60000); //adding 30 minutes to time for "soon" //http://stackoverflow.com/questions/1197928/how-to-add-30-minutes-to-a-javascript-date-object/1197939
-       var currentTime = new Date(); 
-       currentTime.setMinutes(currentTime.getMinutes() + 30); // adding 30minutes to current time for "soon"
+            if (req.query.tag){ //hashtag search?
 
-       //LOGIC HERE ----> READ CURRENT TIME, determine place within hour, match to how conference schedule time is handled, ADD MORE TIME TO CURRENT TIME FOR QUERY based on how much avg. time is left in a conference BLOCK period
+                var qw = {
+                   'hashtags' : req.query.tag
+                };
 
-        var qw = {
-            'time.start': {$lt: currentTime},
-            'time.end': {$gt: currentTime}
-        };
-        db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
-    }
+                db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
 
-    else if (req.query.time == "soon"){
-       // var currentTime = new Date(oldDateObj.getTime() + diff*60000); //adding 30 minutes to time for "soon" //http://stackoverflow.com/questions/1197928/how-to-add-30-minutes-to-a-javascript-date-object/1197939
-       var currentTime = new Date(); 
-       currentTime.setMinutes(currentTime.getMinutes() + 30); // adding 30minutes to current time for "soon"
+                //COMBINE with other query to db.collection('landmarks').find(qw)  
 
-       //LOGIC HERE ----> READ CURRENT TIME, determine place within hour, match to how conference schedule time is handled, ADD MORE TIME TO CURRENT TIME FOR QUERY based on how much avg. time is left in a conference BLOCK period
+                //COMMENTS in seperate collection!
 
-        var qw = {
-            'time.start': {$lt: currentTime},
-            'time.end': {$gt: currentTime}
-        };
-        db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
-    }
+                //combine JSON, sort by _id
+            }
+
+            else {
+
+                var qw = {};
+
+                db.collection(req.params.collection).find(qw).sort({'time.start': 1}).toArray(fn(req, res));
+
+            }
+        }
 
 
-    //------ Happening now ------//
-    else {
-        var currentTime = new Date();
-        var qw = {
-            'time.start': {$lt: currentTime},
-            'time.end': {$gt: currentTime}
-        };
-        db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
-    }
+        else if (req.query.time == "today"){
+
+            //getting today & tomm
+            var tod = new Date();
+            var tom = new Date();
+            tom.setDate(tod.getDate()+1);
+            tod.setHours(0,0,0,0);
+            tom.setHours(0,0,0,0);
+
+            var qw = {
+                'time.start': {
+                    $gte: tod,
+                    $lt: tom
+                }
+            };
+
+            db.collection(req.params.collection).find(qw).sort({'time.start': 1}).toArray(fn(req, res));
+        }
+
+        else if (req.query.time == "soon"){
+
+
+           // var currentTime = new Date(oldDateObj.getTime() + diff*60000); //adding 30 minutes to time for "soon" //http://stackoverflow.com/questions/1197928/how-to-add-30-minutes-to-a-javascript-date-object/1197939
+           var currentTime = new Date(); 
+           currentTime.setMinutes(currentTime.getMinutes() + 30); // adding 30minutes to current time for "soon"
+
+           //LOGIC HERE ----> READ CURRENT TIME, determine place within hour, match to how conference schedule time is handled, ADD MORE TIME TO CURRENT TIME FOR QUERY based on how much avg. time is left in a conference BLOCK period
+
+            var qw = {
+                'time.start': {$lt: currentTime},
+                'time.end': {$gt: currentTime}
+            };
+            db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
+            //SORT BY START TIME !!!
+        }
+
+
+        //------ Happening now ------//
+        else {
+            var currentTime = new Date();
+            var qw = {
+                'time.start': {$lt: currentTime},
+                'time.end': {$gt: currentTime}
+            };
+            db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
+        }
+  //  }
+
 
 
     

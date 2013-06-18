@@ -1,4 +1,19 @@
 <!doctype html>
+<!--
+
+.===.      .                    .
+  |  o     |                    |
+  |  .  .-.| .-. .,-.  .-.  .-. | .==.
+  |  | (   |(.-' |   )(   )(   )| `==.
+  '-' `-`-'`-`=='|`-'  `-'  `-' `-`==' Mobile ≈☯ v0.3
+                 |
+                 '
+  Open Technology Institute & J.R. Baldwin
+
+    Contributors: Lisa J. Lovchik, Nicholas Frota, Hilal Koyuncu
+
+  //-->
+
 <html lang="en" ng-app="phonecat">
 <head>
   <meta charset="utf-8">
@@ -12,7 +27,8 @@
    <!-- Loading Flat UI -->
   <link rel="shortcut icon" href="images/favicon.ico">
 
-  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/angular/angular-sanitize.min.js"></script>
   <script src="js/app.js"></script>
   <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>
@@ -69,7 +85,7 @@
       <div class="row-fluid">
         <li class="thumbnail" style="height:43px;">
 
-          <div id="show" href="#"> ☀ Menu</div>
+          <div id="show" style="font-size:60px;" href="#"> ≈ </div>
 
 
           <div id="search" href="#"> Search </div>
@@ -79,14 +95,15 @@
 
 
 
+
 <!--       <div class="container-fluid"> -->
         <div class="row-fluid">
               <li class="thumbnail" style="height:43px;">
 
 
                 <a href="#" ng-click="action()" class="menubutton">Sessions</a>
-                <a href="#" class="menubutton">Conversations</a>
-                <a href="#" class="menubutton">Conf Map</a>
+                <a href="#/talk" class="menubutton">Conversations</a>
+                <a href="#/map" class="menubutton">Conf Map</a>
               </li>
          </div>
 
@@ -99,15 +116,10 @@
       </div> -->
     
       <div id="content">
-
-          <!-- <div id="cardpanel">
-            <div style="float:left;">Sessions</div>
-            <div id="filter" style="background:#000; height:100%; width:78px; float:Right; position: relative; margin-top: -13px;">Filter</div>
-          </div> -->
        
           <div ng-view></div>
 
-    </div>
+      </div>
 
   </div>
 
@@ -118,7 +130,6 @@ $('#show').click(function(e) {
     $('body').toggleClass('menu');
     return false;
 });
-
 
 
 </script>

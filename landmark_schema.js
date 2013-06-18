@@ -1,11 +1,7 @@
-	var mongoose = require('mongoose'),
-	monguurl = require('monguurl');
+var mongoose = require('mongoose');
 
-	mongoose.connect('mongodb://localhost/amctest');
-	
 	//schema construction
-	var Schema = mongoose.Schema
-		, ObjectID = Schema.ObjectID;
+	var Schema = mongoose.Schema, ObjectID = Schema.ObjectID;
 
 	//social media schemas
 	var twitterSchema = new Schema({
@@ -67,6 +63,7 @@
 		instagramFeed: [],
 		tumblrFeed: [],
 		vineFeed: [],
+		etherpad: String,
 		loc_nicknames : [String], //room name "i.e. Hilberry A"
 		tags: [String], //hashtag for session from field_2013hash
 		permissions: {
@@ -75,50 +72,7 @@
 			openedit: Boolean,
 			admins: [String]
 		}
-	});
+	},
+	{_id: false}); //not writing _id let mongo kk
 
-	//monguurl to gen unique id based on landmark name
-	landmarkSchema.plugin(monguurl({
-		length: 40,
-		source: 'name',
-		target: 'id'
-	}));
-
-
-	mongoose.model('landmark', landmarkSchema, 'landmarks');
-	var Landmark = mongoose.model('landmark');
-
-	LandmarkProvider = function(){};
-
-	LandmarkProvider.prototype.findAll = function(callback) {
-
-	  // Landmark.find({}, function (err, posts) {
-	  //   callback( null, posts )
-	  // });  
-		
-
-	  	Landmark.find(function (err, landmarks) {
-		    if (err) // TODO handle err
-		        console.log(err);
-		    else {
-		        callback(err, landmarks);
-		    }
-		});
-
-	};
-
-	exports.LandmarkProvider = LandmarkProvider;
-
-// var db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
-
-// var landmarkModel = mongoose.model('landmark', landmarkSchema, 'landmarks');  // compiling schema model into mongoose
-// 	var lm = new landmarkModel(); 
-
-
-
-
-
-
-
-
+module.exports = landmarkSchema;

@@ -1,0 +1,62 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+
+    <div class="span10">
+      <!--Body content-->
+
+      <ul class="phones">
+        <li class="thumbnail">
+         <h2> Conversations (｡◕‿◕｡)</h2>
+
+
+         <li class="dropdown" ng-controller="DropdownCtrl">
+            <a class="dropdown-toggle">
+              Current Session #Hashtags
+            </a>
+            <ul class="dropdown-menu">
+              <li ng-repeat="choice in items">
+                <a>{{choice}}</a>
+              </li>
+            </ul>
+          </li>
+
+
+        </li>
+
+        <form ng-submit="tagSearch()">
+            <input type="text" ng-model="searchText" size="30"
+                   placeholder="#CURRENT HASHTAG (search)">
+            <input class="btn-primary" type="submit" value="search">
+          </form>
+
+      </ul>
+
+
+      <ul class="feed">
+        <!-- FILTER QUERY?? for HASH? -->
+        <li ng-repeat="tweet in tweets| filter:query | orderBy:orderProp" class="thumbnail" >
+          <a ng-href="#/{{tweet.id}}" class="thumb"><img ng-src="{{tweet.user.profile_image_url}}"></a>
+          <a ng-href="#/{{tweet.id}}">{{tweet.user.name}}</a>
+          <a ng-href="#/{{tweet.id}}">{{tweet.user.screen_name}}</a>
+          <p ng-bind-html-unsafe="tweet.text | hashtag"></p>
+
+            <div ng-switch on = "tweet.media.media_type">
+               <span ng-switch-when="image"> <img src="{{tweet.media.media_url}}" width="200px"> </span>
+               <span ng-switch-when="vine"> <p><iframe src="{{tweet.media.media_url}}/card" width="380" height="380" frameborder="0"></iframe></p> </span>
+               <span ng-switch-when="youtube"> <iframe width="380" src="{{tweet.media.media_url}}" frameborder="0" allowFullScreen></iframe></span>
+               <span ng-switch-when="instagram"><img src="{{tweet.media.media_url}}media/?size=t" width="200px"> </span>
+               <span ng-switch-when="tumblr"><img src="{{tweet.media.media_url}}" width="200px"> </span>
+               <span ng-switch-default></span>
+             </div>
+
+
+        </li>
+
+
+        <li ng-show="!tweets.length"> Nothing from {{}} (◕︵◕) </li>
+
+      </ul>
+
+    </div>
+  </div>
+</div>
