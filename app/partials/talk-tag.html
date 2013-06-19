@@ -6,26 +6,14 @@
 
       <ul class="phones">
         <li class="thumbnail">
-         <h2> Conversations (｡◕‿◕｡)</h2>
-
-
-         <li class="dropdown" ng-controller="DropdownCtrl">
-            <a class="dropdown-toggle">
-              Current Session #Hashtags
-            </a>
-            <ul class="dropdown-menu">
-              <li ng-repeat="choice in items">
-                <a>{{choice}}</a>
-              </li>
-            </ul>
-          </li>
+         <h2> #{{currentTag}}</h2>
 
 
         </li>
 
         <form ng-submit="tagSearch()">
             <input type="text" ng-model="searchText" size="30"
-                   placeholder="#CURRENT HASHTAG (search)">
+                   placeholder="#{{currentTag}}" value="#{{currentTag}}">
             <input class="btn-primary" type="submit" value="search">
           </form>
 

@@ -41,6 +41,29 @@
 /* App Controllers */
 
 
+
+
+
+
+
+
+// myApp.controller('MyCtrl', function($scope) {
+
+//     $scope.addresses = [
+//         {'state': 'AL'},
+//         {'state': 'CA'},
+//         {'state': 'FL'}
+//     ];
+
+//     $scope.lov_state = [
+//         {'lookupCode': 'AL', 'description': 'Alabama'},
+//         {'lookupCode': 'FL', 'description': 'Florida'},
+//         {'lookupCode': 'CA', 'description': 'California'},
+//         {'lookupCode': 'DE', 'description': 'Delaware'}
+//     ];
+// });
+
+
 function PhoneListCtrl( $location, $scope, db) {
 
     //$scope.orderProp = '_id';
@@ -48,7 +71,6 @@ function PhoneListCtrl( $location, $scope, db) {
     //$scope.phones = Phone.query({order:$scope.orderProp, name:$scope.query});
 
     //$scope.phones = db.phones.query({order:$scope.orderProp, name:$scope.query});
-
 
     $scope.time = "now";
 
@@ -66,24 +88,28 @@ function PhoneListCtrl( $location, $scope, db) {
     //         }
     //     })
     // }
+    
 
     $scope.filter = function(filter) {
-
         $scope.time = filter;
 	    $scope.phones = db.phones.query({name:$scope.query, time:$scope.time});
   	};
+
+    $scope.go2 = function(url) {
+       // alert(hash);
+      $location.path('talk/'+url);
+    };
+
+    $scope.items = [
+        "∆ The first choice!",
+        "∆ And another choice for you.",
+        "∆ but wait! A third!"
+    ];
+
     
 }
 PhoneListCtrl.$inject = [ '$location', '$scope', 'db'];
 
-
-function alertCtrl($scope) {
-
-	$scope.alert = function() {
-	    alert('lol');
-  	};
-
-}  
 
 
 function PhoneDetailCtrl(Phone, $routeParams, $scope) {  
@@ -123,6 +149,9 @@ talklistCtrl.$inject = [ '$location', '$scope', 'db'];
 
 function talktagCtrl( $location, $scope, $routeParams, db) {
 
+    $scope.currentTag = $routeParams.hashTag;
+
+    //console.log($routeParams);
 
     $scope.time = "all";
     $scope.tweets = db.tweets.query({tag: $routeParams.hashTag, time:$scope.time});
@@ -134,14 +163,7 @@ function talktagCtrl( $location, $scope, $routeParams, db) {
     };
 
 
-    $scope.DropdownCtrl = function($scope) {
-
-      $scope.items = [
-        "The first choice!",
-        "And another choice for you.",
-        "but wait! A third!"
-      ];
-    }
+    
 
 
 
@@ -151,18 +173,18 @@ talktagCtrl.$inject = [ '$location', '$scope', '$routeParams', 'db'];
 
 function mapCtrl() {
 
-        var minZ = 6; //min map zoom
-        var maxZ = 19; //max map zoom
-        var map = new L.Map('map', {crs:L.CRS.EPSG3857}).setView([42.36219069106654,-83.06988000869751], 16);
-        var base = L.tileLayer('1.0.0/conftest/{z}/{x}/{y}.png', {minZoom:minZ, maxZoom:maxZ, tms:'true'});
+        // var minZ = 6; //min map zoom
+        // var maxZ = 19; //max map zoom
+        // var map = new L.Map('map', {crs:L.CRS.EPSG3857}).setView([42.36219069106654,-83.06988000869751], 16);
+        // var base = L.tileLayer('1.0.0/conftest/{z}/{x}/{y}.png', {minZoom:minZ, maxZoom:maxZ, tms:'true'});
 
-        //---------- ADDING OPTIONAL EXTERNAL WEB MAP LAYER (UNCOMMENT TO ACTIVATE) ----------//
+        // //---------- ADDING OPTIONAL EXTERNAL WEB MAP LAYER (UNCOMMENT TO ACTIVATE) ----------//
 
-        // var cloudUrl = 'http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
-        // cloud = new L.TileLayer(cloudUrl);
-        // map.addLayer(cloud,true); 
+        // // var cloudUrl = 'http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
+        // // cloud = new L.TileLayer(cloudUrl);
+        // // map.addLayer(cloud,true); 
 
-        map.addLayer(base,true);
+        // map.addLayer(base,true);
 
 
     

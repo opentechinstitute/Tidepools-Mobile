@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-	monguurl = require('monguurl'),
+    monguurl = require('monguurl'),
     https = require('https'),
     async = require('async'),
     _ = require('underscore'),
@@ -65,16 +65,35 @@ function transformJsonData(data) {
             blockTime = findBlockTimeString(datum); 
          
         lm.name = datum.title;
-        lm.description = datum.field_2013sesh_short_desc;
+        lm.description = _.pluck(datum['field_2013sesh_short_desc'], 'value');
+        lm.shortDescription = _.pluck(datum['field_2013tweetable'], 'value');
+
+        lm.etherpad = 'https://etherpad.alliedmedia.org/p/'+datum.nid;
+
         lm.type = 'session';
-        lm.id = 'uniqueID';       //?
-        lm.loc.unshift(42,-38);   //?
-        lm.mapID = '23434';       //?
+        //lm.id = 'uniqueID';       //?
+        //lm.loc.unshift(42,-38);   //?
+       // lm.mapID = '23434';       //?
         lm.stats.avatar = '/assets/images/nyan.gif';
         lm.time.created = new Date();
         lm.tags.addToSet(_.pluck(datum['field_2013hash'], 'value'));
-        lm.loc_nicknames.addToSet( _.pluck(datum['field_2013loc'], 'value'));
+        
 
+        //location
+        var nick_loc = _.pluck(datum['field_2013loc'], 'value');
+        lm.loc_nicknames.addToSet(datum.taxonomy[nick_loc].name);
+
+        //track
+        var track = _.pluck(datum['field_2013tracks'], 'value');
+        track = track[0]; //just because go away double cats
+        lm.category = datum.taxonomy[track].name;
+
+        //sesh type
+        var sesh_type = _.pluck(datum['field_2013seshtype'], 'value');
+        sesh_type = sesh_type[0];
+        lm.subType = datum.taxonomy[sesh_type].name;
+
+       
          if (blockTime) {
             if (blockTime.match(/ongoing/i)) {
                 lm.type = 'session-ongoing';
