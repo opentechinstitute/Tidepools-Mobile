@@ -171,7 +171,7 @@ function talktagCtrl( $location, $scope, $routeParams, db) {
 talktagCtrl.$inject = [ '$location', '$scope', '$routeParams', 'db'];
 
 
-function mapCtrl() {
+function mapCtrl($scope) {
 
         // var minZ = 6; //min map zoom
         // var maxZ = 19; //max map zoom
@@ -185,6 +185,28 @@ function mapCtrl() {
         // // map.addLayer(cloud,true); 
 
         // map.addLayer(base,true);
+
+        angular.extend($scope, {
+                london: {
+                    lat: 42.36219069106654,
+                    lng: -83.06988000869751,
+                    zoom: 16
+                },
+                markers: {
+                    m1: {
+                        lat: 51.505,
+                        lng: -0.09,
+                        message: "I'm a static marker"
+                    },
+                    m2: {
+                        lat: 51,
+                        lng: 0,
+                        focus: true,
+                        message: "Hey, drag me if you want",
+                        draggable: true
+                    }
+                }
+            });
 
 
     

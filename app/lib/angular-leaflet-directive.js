@@ -2,10 +2,17 @@ var leafletDirective = angular.module("leaflet-directive", []);
 
 leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
 
+
+   // var map = new L.Map('map', {crs:L.CRS.EPSG3857}).setView([42.36219069106654,-83.06988000869751], 16);
+   // var base = L.tileLayer('1.0.0/conftest/{z}/{x}/{y}.png', {minZoom:minZ, maxZoom:maxZ, tms:'true'});
+
     var defaults = {
-        maxZoom: 14,
-        tileLayer: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        maxZoom: 20,
+        tileLayer: '1.0.0/conftest/{z}/{x}/{y}.png',
+        
         tileLayerOptions: {
+            tms: 'true',
+            reuseTiles: true
         },
         icon: {
             url: 'http://cdn.leafletjs.com/leaflet-0.5.1/images/marker-icon.png',
