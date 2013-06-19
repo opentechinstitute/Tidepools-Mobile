@@ -3,7 +3,7 @@
 /* App Module */
 
 //route provider module listing Filters and Services as dependencies
-var app = angular.module('phonecat', ['phonecatFilters', 'phonecatServices','ngSanitize']).
+var app = angular.module('phonecat', ['phonecatFilters', 'phonecatServices','ngSanitize','ui.bootstrap']).
   config(['$routeProvider', function($routeProvider) {
   $routeProvider.
       when('/', {templateUrl: 'partials/phone-list.html',   controller: PhoneListCtrl}). //loading template with controller

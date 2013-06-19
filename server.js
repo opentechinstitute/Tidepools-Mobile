@@ -79,9 +79,15 @@ app.get('/api/:collection', function(req, res) {
 
                 var qw = {
                    'hashtags' : req.query.tag
+
                 };
 
-                db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
+               // var qw = req.query.tag;
+
+               // db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
+
+                db.collection('tweets').find(qw).sort({_id: -1}).toArray(fn(req, res));
+
 
                 //COMBINE with other query to db.collection('landmarks').find(qw)  
 
