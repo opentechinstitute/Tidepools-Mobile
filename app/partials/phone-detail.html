@@ -1,24 +1,65 @@
-<button>< BACK </button>
 
-<img ng-src="{{mainImageUrl}}" class="phone">
+<div style='padding-left:5px; padding-right:5px; width:99%;'>
+  <button ng-click="goBack()">< BACK </button>
+  <img ng-src="{{mainImageUrl}}" class="phone">
+  <h2>{{phone.name}}</h2>
+  <p>#{{phone.tags[0]}} </p>
+  <br>
+    <button class="btn" ng-click="open()">Notetaking (Etherpad)</button>
 
-<h1>{{phone.name}}</h1>
 
-<p>{{phone.description}}</p>
+  <p>{{phone.description}}</p>
 
-<!-- <ul class="phone-thumbs">
-  <li ng-repeat="img in phone.images">
-    <img ng-src="{{img}}" ng-click="setImage(img)">
-  </li>
-</ul> -->
+  <p>{{phone.category}}  |  {{phone.subType}} | {{phone.time.start | date:'h:mm a EEEE d MMMM'}}</p>
+
+
 
 <ul class="specs">
   
   <li>
     <span>Details</span>
     <dl>
-      <dt>Type</dt>
-      <dt>Talk Time</dt>
-      <dt>Standby time (max)</dt>
+      <dt>{{phone.time.start | date:'h:mm a EEEE d MMMM'}}</dt>
+      <dt>{{phone.category}}</dt>
+      <dt>{{phone.subType}}</dt>
     </dl>
   </li>
+
+ </ul>
+
+  <ul class="feed" style="padding-left:5px; padding-right:5px;">
+        <!-- FILTER QUERY?? for HASH? -->
+        <li ng-repeat="tweet in tweets| filter:query | orderBy:orderProp" class="thumbnail" >
+          <a ng-href="#/{{tweet.id}}" class="thumb"><img ng-src="{{tweet.user.profile_image_url}}"></a>
+          <a ng-href="#/{{tweet.id}}">{{tweet.user.name}}</a>
+          <a ng-href="#/{{tweet.id}}">{{tweet.user.screen_name}}</a>
+          <p ng-bind-html-unsafe="tweet.text | hashtag"></p>
+
+            <div ng-switch on = "tweet.media.media_type">
+               <span ng-switch-when="image"> <img src="{{tweet.media.media_url}}" width="200px"> </span>
+               <span ng-switch-when="vine"> <p><iframe src="{{tweet.media.media_url}}/card" width="380" height="380" frameborder="0"></iframe></p> </span>
+               <span ng-switch-when="youtube"> <iframe width="380" src="{{tweet.media.media_url}}" frameborder="0" allowFullScreen></iframe></span>
+               <span ng-switch-when="instagram"><img src="{{tweet.media.media_url}}media/?size=t" width="200px"> </span>
+               <span ng-switch-when="tumblr"><img src="{{tweet.media.media_url}}" width="200px"> </span>
+               <span ng-switch-default></span>
+             </div>
+
+
+        </li>
+
+
+        <li ng-show="!tweets.length"> No tweets from #{{currentTag}} (◕︵◕) </li>
+
+     </ul>
+
+</div>
+
+  <div modal="etherpad" style="width:100%; height:100%;" close="close()" options="opts">
+      <div class="modal-header">
+          <button ng-click="close()">Close X</button>  <h4>{{phone.name}} Notes</h4>
+      </div>
+      <div class="modal-body">
+            <iframe src="{{phone.etherpad}}" width="100%" height="100%">
+      </div>
+  </div>
+

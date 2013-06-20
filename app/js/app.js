@@ -3,7 +3,7 @@
 /* App Module */
 
 //route provider module listing Filters and Services as dependencies
-var app = angular.module('phonecat', ['phonecatFilters', 'phonecatServices','ngSanitize','ui.bootstrap', 'leaflet-directive']).
+var app = angular.module('phonecat', ['phonecatFilters', 'phonecatServices','ngSanitize','ui.bootstrap', 'leaflet-directive','infinite-scroll']).
   config(['$routeProvider', function($routeProvider) {
   $routeProvider.
       when('/', {templateUrl: 'partials/phone-list.html',   controller: PhoneListCtrl}). //loading template with controller
@@ -11,6 +11,7 @@ var app = angular.module('phonecat', ['phonecatFilters', 'phonecatServices','ngS
       when('/talk', {templateUrl: 'partials/talk-list.html', controller: talklistCtrl}). //loading template + controller
       when('/talk/:hashTag', {templateUrl: 'partials/talk-tag.html', controller: talktagCtrl}). //loading template + controller
       when('/map', {templateUrl: 'partials/map.html', controller: mapCtrl}). //loading template + controller
+      when('/map/:loc', {templateUrl: 'partials/map-loc.html', controller: maplocCtrl}). //loading template + controller
       otherwise({redirectTo: '/'}); 
 }]);
 

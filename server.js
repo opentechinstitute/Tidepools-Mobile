@@ -78,7 +78,7 @@ app.get('/api/:collection', function(req, res) {
             if (req.query.tag){ //hashtag search?
 
                 var qw = {
-                   'hashtags' : req.query.tag
+                   'text' : {$regex : ".*"+req.query.tag+".*", $options: 'i'}
 
                 };
 
@@ -96,9 +96,24 @@ app.get('/api/:collection', function(req, res) {
                 //combine JSON, sort by _id
             }
 
+            else if (req.query.session){
+
+                var qw = {
+                    
+                    "searchField" : {$regex : ".*"+req.query.session+".*", $options: 'i'}
+
+                };
+
+                //console.log(req.query.session);
+
+                db.collection('landmarks').find(qw).sort({_id: -1}).toArray(fn(req, res));
+            }
+
             else {
 
                 var qw = {};
+
+                console.log('asdf');
 
                 db.collection(req.params.collection).find(qw).sort({'time.start': 1}).toArray(fn(req, res));
 
@@ -130,7 +145,7 @@ app.get('/api/:collection', function(req, res) {
 
            // var currentTime = new Date(oldDateObj.getTime() + diff*60000); //adding 30 minutes to time for "soon" //http://stackoverflow.com/questions/1197928/how-to-add-30-minutes-to-a-javascript-date-object/1197939
            var currentTime = new Date(); 
-           currentTime.setMinutes(currentTime.getMinutes() + 30); // adding 30minutes to current time for "soon"
+           currentTime.setMinutes(currentTime.getMinutes() + 45); // adding 30minutes to current time for "soon"
 
            //LOGIC HERE ----> READ CURRENT TIME, determine place within hour, match to how conference schedule time is handled, ADD MORE TIME TO CURRENT TIME FOR QUERY based on how much avg. time is left in a conference BLOCK period
 

@@ -7,22 +7,21 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
    // var base = L.tileLayer('1.0.0/conftest/{z}/{x}/{y}.png', {minZoom:minZ, maxZoom:maxZ, tms:'true'});
 
     var defaults = {
-        maxZoom: 20,
-        tileLayer: '1.0.0/conftest/{z}/{x}/{y}.png',
+        minZoom: 13,
+        maxZoom: 17,
+        tileLayer: '1.0.0/amc2013/{z}/{x}/{y}.png',
         
         tileLayerOptions: {
             tms: 'true',
             reuseTiles: true
         },
         icon: {
-            url: 'http://cdn.leafletjs.com/leaflet-0.5.1/images/marker-icon.png',
-            retinaUrl: 'http://cdn.leafletjs.com/leaflet-0.5.1/images/marker-icon@2x.png',
+            url: 'img/marker-icon.png',
             size: [25, 41],
             anchor: [12, 40],
             popup: [0, -40],
             shadow: {
-                url: 'http://cdn.leafletjs.com/leaflet-0.5.1/images/marker-shadow.png',
-                retinaUrl: 'http://cdn.leafletjs.com/leaflet-0.5.1/images/marker-shadow.png',
+                url: 'img/marker-shadow.png',
                 size: [41, 41],
                 anchor: [12, 40]
             }

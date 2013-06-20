@@ -8,11 +8,13 @@
         <li class="thumbnail">
          <h2> Conversations (｡◕‿◕｡)</h2>
 
+
         </li>
 
-            
+     
+
           <form ng-submit="tagSearch()">
-            <input type="text" ng-model="searchText" size="30"
+            <input style="width:95%;" type="text" ng-model="searchText" size="30"
                    placeholder="#CURRENT HASHTAG (search)">
             <input class="btn-primary" type="submit" value="search">
           </form>
@@ -20,7 +22,7 @@
       </ul>
 
 
-      <ul class="feed">
+      <ul class="feed" style="padding-left:5px; padding-right:5px;">
 
         <!-- FILTER QUERY?? for HASH? -->
         <li ng-repeat="tweet in tweets| filter:query | orderBy:orderProp" class="thumbnail" >

@@ -12,6 +12,7 @@ monguurl = require('monguurl');
 		type: String, //write as "session"
 		subType: String, //session type
 		category: String, //track name (i.e. webmaking)
+		searchField: String,
 		id: String, //auto constructed based on name
 		loc: [Number], //don't worry
 		mapID: String, //don't worry
@@ -39,6 +40,7 @@ monguurl = require('monguurl');
 		},
 		etherpad: String,
 		loc_nicknames : [String], //room name "i.e. Hilberry A"
+		loc_nicknames_stripe : [String],
 		tags: [String], //hashtag for session from field_2013hash
 		permissions: {
 			hidden: Boolean,

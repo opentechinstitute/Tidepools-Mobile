@@ -52,6 +52,134 @@ function transformJsonData(data) {
 
     var sessions = JSON.parse(data); 
     return sessions.map(function(datum) {
+
+        loc_nicknames = {
+
+            McGregor_E : {
+                lat: 42.36271390643378,
+                lng: -83.07880640029907
+            },
+            Hilberry_C : {
+                lat: 42.36647141605843,
+                lng: -83.04028987884521
+            },
+            Education_204 : {
+                lat: 42.3502982579399,
+                lng: -83.07427883148193
+            },
+            Art_Ed_157 : {
+                lat: 42.35843292541744,
+                lng: -83.07511568069457
+            },
+            Community_Arts_Auditorium: {
+                lat: 42.36650312404415,
+                lng: -83.05760622024536
+            },
+            Art_Ed_156: {
+                lat: 42.35719614326714,
+                lng: -83.07335615158081
+            },
+            Hilberry_B: {
+                lat: 42.366423854049806,
+                lng: -83.0387020111084
+            },
+            Art_Ed_162: {
+                lat: 42.35648260403089,
+                lng: -83.06754112243651
+            },
+            McGregor_LM: {
+                lat: 42.36261877669108,
+                lng: -83.06801319122314
+            },
+            Education_189: {
+                lat: 42.346000571932635,
+                lng: -83.08202505111693
+            },
+            Hilberry_A: {
+                lat: 42.36658239393847,
+                lng: -83.03694248199463
+            },
+            Art_Ed_154: {
+                lat: 42.357132717885335,
+                lng: -83.07477235794066
+            },
+            Education_169: {
+                lat: 42.345984712768576,
+                lng: -83.08539390563965
+            },
+            McGregor_J: {
+                lat: 42.36566285701487,
+                lng: -83.07786226272583
+            },
+            Education_300: {
+                lat: 42.35099600949203,
+                lng: -83.05988073348999
+            },
+            North_side_of_McGregor: {
+                lat: 42.364109126111664,
+                lng: -83.08820486068726
+            },
+            McGregor_BC: {
+                lat: 42.362840745866635,
+                lng: -83.08374166488647
+            },
+            McGregor_Lobby: {
+                lat: 42.36415668987275,
+                lng: -83.08492183685303
+            },
+            McGregor_FGH: {
+                lat: 42.36288831058794,
+                lng: -83.07550191879272
+            },
+            Towers_Lounge_: {
+                lat: 42.352930643737494,
+                lng: -83.0432939529419
+            },
+            Cass_Cafe_: {
+                lat: 42.3486807131878,
+                lng: -83.03953886032104
+            },
+            Museum_of_Contemporary_Art_Detroit: {
+                lat: 42.348268391201444,
+                lng: -83.03762912750243
+            },
+            Charles_Wright_Museum_of_African_American_History: {
+                lat: 42.35018725129699,
+                lng: -83.03619146347046
+            },
+            Wasabi_Restaurant: {
+                lat: 42.353057502919036,
+                lng: -83.03797245025633
+            },
+            McGregor: {
+                lat: 42.3641249807027,
+                lng: -83.08665990829468
+            },
+            Art_Ed_161: {
+                lat: 42.35822679674948,
+                lng: -83.07157516479492
+            },
+            McGregor_I: {
+                lat: 42.36607506488643,
+                lng: -83.07382822036743
+            },
+            Outer_Galleries: {
+                lat: 42.36466403441681,
+                lng: -83.05742383003235
+            },
+            Majestic_Theater_Complex: {
+                lat: 42.34741202151109,
+                lng: -83.03762912750243
+            },
+            The_Commons_: {
+                lat: 42.36407741691762,
+                lng: -83.08193922042847
+            },
+            McGregor_A: {
+                lat: 42.36269805148666,
+                lng: -83.08674573898315
+            }
+       };
                        
         //monguurl to gen unique id based on landmark name
         landmarkSchema.plugin(monguurl({
@@ -72,9 +200,71 @@ function transformJsonData(data) {
 
         lm.type = 'session';
         //lm.id = 'uniqueID';       //?
-        //lm.loc.unshift(42,-38);   //?
        // lm.mapID = '23434';       //?
-        lm.stats.avatar = '/assets/images/nyan.gif';
+
+       //track
+        var track = _.pluck(datum['field_2013tracks'], 'value');
+        track = track[0]; //just because go away double cats
+        lm.category = datum.taxonomy[track].name;
+
+        var avatar;
+
+        if (datum.taxonomy[track].name == "Kids Transform the World"){
+            lm.stats.avatar = '/assets/images/avatars/kidstransform.png';
+        }
+        else if (datum.taxonomy[track].name == "General"){
+            lm.stats.avatar = '/assets/images/avatars/general.png';
+        }
+        else if (datum.taxonomy[track].name == "Research Justice"){
+            lm.stats.avatar = '/assets/images/avatars/researchjustice.png';
+        }
+        else if (datum.taxonomy[track].name == "Movement//Movement "){
+            lm.stats.avatar = '/assets/images/avatars/movement.png';
+        }
+        else if (datum.taxonomy[track].name == "Transformative Arts Practice Space (TAPS) "){
+            lm.stats.avatar = '/assets/images/avatars/taps.png';
+        }
+        else if (datum.taxonomy[track].name == "Engaging Power: Media Rights and Our Movements"){
+            lm.stats.avatar = '/assets/images/avatars/engagingpower.png';
+        }
+        else if (datum.taxonomy[track].name == "I ♥ Print Media"){
+            lm.stats.avatar = '/assets/images/avatars/printmedia.png';
+        }
+        else if (datum.taxonomy[track].name == "Webmaking"){
+            lm.stats.avatar = '/assets/images/avatars/webmaking.png';
+        }
+        else if (datum.taxonomy[track].name == "Discovering Technology Lab"){
+            lm.stats.avatar = '/assets/images/avatars/discovering.png';
+        }
+        else if (datum.taxonomy[track].name == "Science and Social Movements"){
+            lm.stats.avatar = '/assets/images/avatars/sciencesocial.png';
+        }
+        else if (datum.taxonomy[track].name == "Imagining Better Futures Through Play"){
+            lm.stats.avatar = '/assets/images/avatars/play.png';
+        }
+        else if (datum.taxonomy[track].name == "Fierce Fashion Futures"){
+            lm.stats.avatar = '/assets/images/avatars/fashion.png';
+        }
+        else if (datum.taxonomy[track].name == "(No) Blank Slates: A DET X NOLA Cultural Exchange"){
+            lm.stats.avatar = '/assets/images/avatars/noblankslates.png';
+        }
+        else if (datum.taxonomy[track].name == "Detroit Future Youth"){
+            lm.stats.avatar = '/assets/images/avatars/futureyouth.png';
+        }
+        else if (datum.taxonomy[track].name == "Practice Space"){
+            lm.stats.avatar = '/assets/images/avatars/practicespace.png';
+        }
+        else if (datum.taxonomy[track].name == "Network Gathering"){
+            lm.stats.avatar = '/assets/images/avatars/networkgathering.png';
+        }
+        else if (datum.taxonomy[track].name == "Healing Justice Practice Space"){
+            lm.stats.avatar = '/assets/images/avatars/healing.png';
+        }
+        else  {
+            lm.stats.avatar = '/assets/images/avatars/general.png';
+        }
+
+        lm.stats.avatar = '/assets/images/avatars/nyan.gif';
         lm.time.created = new Date();
         lm.tags.addToSet(_.pluck(datum['field_2013hash'], 'value'));
         
@@ -82,6 +272,17 @@ function transformJsonData(data) {
         //location
         var nick_loc = _.pluck(datum['field_2013loc'], 'value');
         lm.loc_nicknames.addToSet(datum.taxonomy[nick_loc].name);
+
+
+        //coords
+        //formatting for keylookup
+        var n = datum.taxonomy[nick_loc].name.replace(/ /g,"_");
+        n = n.replace(/\//g,'');
+        n = n.replace(/\./g, '');
+        lm.loc_nicknames_stripe.addToSet(n);
+        ///
+        lm.loc.unshift(loc_nicknames[n].lat,loc_nicknames[n].lng);   
+
 
         //track
         var track = _.pluck(datum['field_2013tracks'], 'value');
@@ -92,6 +293,8 @@ function transformJsonData(data) {
         var sesh_type = _.pluck(datum['field_2013seshtype'], 'value');
         sesh_type = sesh_type[0];
         lm.subType = datum.taxonomy[sesh_type].name;
+
+        lm.searchField = lm.name+lm.tags[0]+lm.loc_nicknames[0]+lm.subType+lm.category+lm.shortDescription+lm.description;
 
        
          if (blockTime) {

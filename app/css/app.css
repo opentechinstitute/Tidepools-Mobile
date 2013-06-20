@@ -6,7 +6,7 @@ body {
 
 .angular-leaflet-map {
 /*    width: 100%;
-*/    height: 500px;
+*/    height: 800px;
 }
 
 .phones {
@@ -23,7 +23,7 @@ body {
 
 .phones li {
   clear: both;
-  height: 100px;
+  /*height: 100px;*/
   padding-top: 15px;
 }
 
@@ -40,14 +40,14 @@ body {
 /** Detail View **/
 
 img.phone {
-  float: left;
+  float: right;
   border: 1px solid black;
   margin-right: 3em;
   margin-bottom: 2em;
   background-color: white;
-  padding: 2em;
-  height: 400px;
-  width: 400px;
+  /*padding: 2em;*/
+  height: 75px;
+  width: 75px;
 }
 
 ul.phone-thumbs {
@@ -129,7 +129,23 @@ body.menu #main {
   left: 0;
   width: 66%;
   bottom: 0px;
-  background: #369;
+
+background-image: linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 59%, rgb(247,179,186) 84%);
+  background-image: -o-linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 59%, rgb(247,179,186) 84%);
+  background-image: -moz-linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 59%, rgb(247,179,186) 84%);
+  background-image: -webkit-linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 59%, rgb(247,179,186) 84%);
+  background-image: -ms-linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 59%, rgb(247,179,186) 84%);
+
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.25, rgb(153,0,255)),
+    color-stop(0.59, rgb(215,115,228)),
+    color-stop(0.84, rgb(247,179,186))
+  );
+
+
   color: white;
   opacity: 0;
   -webkit-transition: opacity 0 0.2s;
@@ -244,7 +260,7 @@ body.menu #main {
 
 .menubutton {
   float:left; 
-  width:33.3%;
+  width:10%;
 }
 
 
@@ -262,15 +278,14 @@ body.menu #main {
 
 }
 
-
 /**
  * "Google Now" Card
  */
-/*body {
+body {
   background: #e1e1e1;
   min-height: 100%;
   margin: auto;
-}*/
+}
 ul.gNow {
   width: 450px;
   height: 100%;
