@@ -16,7 +16,7 @@
 
   //-->
 
-<html lang="en" ng-app="phonecat">
+<html lang="en" ng-app="Tidepools">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
@@ -26,7 +26,6 @@
   <link rel="stylesheet" href="css/tidepools/leaflet.css">
 <!--   <link rel="stylesheet" href="css/tidepools/tidepools.css">
  -->
-
   <link href="css/flat-ui.css" rel="stylesheet">
    <!-- Loading Flat UI -->
   <link rel="shortcut icon" href="images/favicon.ico">
@@ -47,15 +46,8 @@
   <script src="js/filters.js"></script>
   <script src="js/services.js"></script>
 
-
-
-
 </head>
 <body>
-
-
-<!-- <button ng-click="changeFoo()">what</button> -->
-
 
 
   <div id="wrapper">
@@ -74,13 +66,8 @@
         <img src="images/nyan.gif">
       </div>
 
-
-
     <div id="main">
 
-
-
-     
       <div class="row-fluid">
         <li class="thumbnail" style="height:43px;">
 
@@ -95,59 +82,10 @@
                 </div>
               </div>
 
-
-<!--         <li class="dropdown select-block">
-          <a class="dropdown-toggle">
-            Sessions Now
-          </a>
-          <ul class="dropdown-menu">
-            <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
-              <a ng-href="#/session/{{phone.id}}">{{phone.name}}</a>
-            </li>
-            <li ng-show="!phones.length"> No sessions now (◕︵◕) </li>
-          </ul>
-        </li> -->
-
-              
-
-
-
-
-
-           <!-- <li class="thumbnail" style="height:43px;"> -->
-             <!-- <div class="btn-toolbar">
-                <div class="btn-group">
-                  <a class="btn btn-primary" href="#">Sessions<i class="fui-time"></i></a>
-                  <a class="btn btn-primary" href="#/talk">Talk<i class="fui-chat"></i></a>
-                  <a class="btn btn-primary" href="#/map">Map<i class="fui-location"></i></a>
-                </div>
-              </div> -->
-<!-- 
-                <a href="#" ng-click="action()" class="menubutton">Sessions</a>
-                <a href="#/talk" ng-click="action()" class="menubutton">Conversations</a>
-                <a href="#/map" ng-click="action()" class="menubutton">AMC Map</a> -->
-            <!--   </li> -->
-          <!-- <div id="search" href="#"> Search </div> -->
         </li>
 
       </div>
 
-
-
-
-<!--       <div class="container-fluid"> -->
-        <div class="row-fluid">
-         
-         </div>
-
-
-
-      <!--  <div class="btn-group">
-          <button type="button" class="btn btn-primary" ng-model="checkModel.left" btn-checkbox>Left</button>
-          <button type="button" class="btn btn-primary" ng-model="checkModel.middle" btn-checkbox>Middle</button>
-          <button type="button" class="btn btn-primary" ng-model="checkModel.right" btn-checkbox>Right</button>
-      </div> -->
-    
       <div id="content">
        
           <div ng-view></div>
@@ -158,15 +96,11 @@
 
 <script>
 
-//temp use of jquery, switch to angular?
-$('#show').click(function(e) {
-    $('body').toggleClass('menu');
-    return false;
-});
-
-
-   
-
+  //temp use of jquery, switch to angular?
+  $('#show').click(function(e) {
+      $('body').toggleClass('menu');
+      return false;
+  });
 
 </script>
 
