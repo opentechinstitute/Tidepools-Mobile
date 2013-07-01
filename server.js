@@ -1,3 +1,19 @@
+/*
+
+.===.      .                    .
+  |  o     |                    |
+  |  .  .-.| .-. .,-.  .-.  .-. | .==.
+  |  | (   |(.-' |   )(   )(   )| `==.
+  '-' `-`-'`-`=='|`-'  `-'  `-' `-`==' Mobile ≈☯ v0.3
+                 |
+                 '
+  Open Technology Institute & J.R. Baldwin
+
+  tidepools.co <3 <3 <3 
+
+*/
+
+
 var express = require('express'),
     app = module.exports.app = express(), 
     db = require('mongojs').connect('amctest');
@@ -72,6 +88,9 @@ app.get('/api/:collection', function(req, res) {
         //------ Happening soon  ------//
 
         if (req.query.time == "all"){
+
+
+
            
             /////CHANGE FOR TWITTER to created
 
@@ -85,6 +104,8 @@ app.get('/api/:collection', function(req, res) {
                // var qw = req.query.tag;
 
                // db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
+
+
 
                 db.collection('tweets').find(qw).sort({_id: -1}).toArray(fn(req, res));
 
@@ -112,10 +133,32 @@ app.get('/api/:collection', function(req, res) {
             else {
 
                 var qw = {};
+                var limit;
 
-                console.log('asdf');
 
-                db.collection(req.params.collection).find(qw).sort({'time.start': 1}).toArray(fn(req, res));
+
+                //console.log(req.query.limit);
+
+               // console.log(req.params.collection);
+
+                if (req.params.collection == 'landmarks'){
+                     //console.log('asdf');
+                   db.collection(req.params.collection).find(qw).limit(limit).sort({'time.start': 1}).toArray(fn(req, res));
+                }
+
+                if (req.params.collection == 'tweets'){
+
+                        if (req.query.limit){
+                            limit = parseInt(req.query.limit);
+                            db.collection(req.params.collection).find(qw).limit(limit).sort({_id: -1}).toArray(fn(req, res));
+                        }
+
+                        else {
+
+                            db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
+                        }
+                        
+                }                
 
             }
         }

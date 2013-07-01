@@ -1,0 +1,24 @@
+{
+  "name": "tidepools-mobile-data-loader",
+  "description": "The tidepools-mobile data processing module. Transforms and loads Session API data into mongodb.",
+  "author": "J.R. Baldwin <jrbaldwin@opentechinstitute.org>",
+  "version": "0.0.1",
+  "private": false,
+  "scripts": {
+    "start": "node record_landmark.js",
+    "test": "test.js"
+  },
+  "dependencies": {
+    "mongoose": "3.6.x",
+    "monguurl": "0.1.x",
+    "underscore": "1.4.4",
+    "async": "0.2.9"
+  },
+  "repository": { 
+    "type": "git",
+    "url": "git://github.com/opentechinstitute/Tidepools-Mobile.git" 
+  },
+  "devDependencies": {
+  },
+  "engine": "node = 0.10.x"
+}

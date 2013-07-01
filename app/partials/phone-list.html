@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" style="padding-left:5px; padding-right:5px;">
   <div class="row-fluid">
 
     <div class="span10">
@@ -19,9 +19,9 @@
 
 
       <ul class="phones">
-        <li class="thumbnail">
-         <h2> ∆ ≈ Sessions happening ▓▒░░</h2>
-          <button ng-click="filter('now')">now </button> <button ng-click="filter('soon')">soon</button> <button ng-click="filter('today')">today</button> <button ng-click="filter('all')">all</button>
+        <li class="thumbnail" style="padding-top:0px;">
+         <h3> ∆ Sessions happening</h3>
+          <button class="btn" ng-click="filter('now')">now </button> <button class="btn" ng-click="filter('soon')">soon</button> <button  class="btn" ng-click="filter('today')">today</button> <button class="btn" ng-click="filter('all')">all</button>
 
 
 
@@ -35,23 +35,25 @@
                    placeholder="Search Sessions">
             <input class="btn-primary" type="submit" value="search">
           </form>
-          
+
       <ul class="phones">
-        <div id="fixed" when-scrolled="loadMore()">          
-          <li ng-repeat="phone in phones | filter:query | orderBy:orderProp" class="thumbnail">
-            <a ng-href="#/session/{{phone.id}}" class="thumb"><img ng-src="{{phone.stats.avatar}}"></a>
-            <a ng-href="#/session/{{phone.id}}">{{phone.name}}</a>
-            <p>{{phone.shortDescription}}</p>
-            <p style="font-size:10px;">{{phone.category}}  |  {{phone.subType}} | {{phone.time.start | date:'h:mm a EEEE d MMMM'}}</p>
-            <button ng-click="goTalk(phone.tags[0])">#{{phone.tags[0]}}</button> <button ng-click="goMap(phone.loc_nicknames_stripe[0])">{{phone.loc_nicknames[0]}}</button> 
+          <li ng-repeat="phone in phones | filter:query | orderBy:orderProp" class="thumbnail"  style="padding-bottom:20px;" >
+              <a ng-href="#/session/{{phone.id}}" class="thumb"><img ng-src="{{phone.stats.avatar}}"></a>
+              <h4><a ng-href="#/session/{{phone.id}}">{{phone.name}}</a></h4>
+              <p>{{phone.shortDescription}}</p>
+              <p style="font-size:12px;"><strong> {{phone.time.start | date:'h:mm a EEEE d MMMM'}} </strong> | {{phone.category}}  |  {{phone.subType}} </p>
+
+              <button class="" ng-click="goTalk(phone.tags[0])">#{{phone.tags[0]}}</button> <button class="" ng-click="goMap(phone.loc_nicknames_stripe[0])"><i class="fui-location"></i>{{phone.loc_nicknames[0]}}</button> 
+
+              <div style="float:left; background:#fff; height:100%; width: 30px;">
+          
 
           </li>
-        </div>
       </ul>
 
 
 
-       <li ng-show="!phones.length"> No sessions (◕︵◕) ------ CHOOSE ANOTHER TIME CLICK TO SEE ALL
+       <li ng-show="!phones.length"> No sessions at this time @(ᵕ.ᵕ)@
 
         <br>
 

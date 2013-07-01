@@ -1,18 +1,15 @@
 {
   "name": "tidepools-mobile",
-  "description": "The tidepools-mobile data processing module. Transforms and loads data into mongodb.",
-  "author": "Jonathan Baldwin <jonathan@oti.org>",
-  "version": "0.0.1",
+  "description": "Tidepools Mobile",
+  "author": "J.R. Baldwin <jrbaldwin@opentechinstitute.org>",
+  "version": "0.0.2",
   "private": false,
   "scripts": {
-    "start": "node record_landmark.js",
-    "test": "test.js"
+    "start": "node server.js" 
   },
   "dependencies": {
-    "mongoose": "3.6.x",
-    "monguurl": "0.1.x",
-    "underscore": "1.4.4",
-    "async": "0.2.9"
+    "express": "3.3.x",
+    "mongojs": "0.7.x"
   },
   "repository": { 
     "type": "git",

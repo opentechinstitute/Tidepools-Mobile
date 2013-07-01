@@ -93,7 +93,8 @@ function PhoneListCtrl( $location, $scope, db) {
 
     $scope.filter = function(filter) {
         $scope.time = filter;
-	    $scope.phones = db.phones.query({name:$scope.query, time:$scope.time});
+
+	    $scope.phones = db.phones.query({name:$scope.query,time:$scope.time});
   	};
 
     $scope.goTalk = function(url) {
@@ -140,7 +141,7 @@ PhoneListCtrl.$inject = [ '$location', '$scope', 'db'];
 
 
 
-function PhoneDetailCtrl(Phone, $routeParams, $scope, db) {  
+function PhoneDetailCtrl(Phone, $routeParams, $scope, db, $location) {  
 
 
     //console.log($scope);
@@ -176,6 +177,11 @@ function PhoneDetailCtrl(Phone, $routeParams, $scope, db) {
     dialogFade:true
   };
 
+      $scope.goMap = function(url) {
+       // alert(hash);
+      $location.path('map/'+url);
+    };
+
 
 
     $scope.setImage = function(imageUrl) {
@@ -195,7 +201,7 @@ function talklistCtrl( $location, $scope, db) {
 
     $scope.time = "all";
     $scope.types = "all";
-    $scope.tweets = db.tweets.query({name:$scope.query, time:$scope.time});
+    $scope.tweets = db.tweets.query({name:$scope.query, time:$scope.time, limit:100});
 
     //search
     $scope.tagSearch = function() { 
@@ -218,9 +224,18 @@ function talktagCtrl( $location, $scope, $routeParams, db) {
     $scope.tweets = db.tweets.query({tag: $routeParams.hashTag, time:$scope.time});
 
     //search
-    $scope.tagSearch = function() { 
-        var tagged = $scope.searchText.replace("#","");
-        $scope.tweets = db.tweets.query({name:$scope.query, time:$scope.time, tag: tagged});
+    // $scope.tagSearch = function() { 
+    //     var tagged = $scope.searchText.replace("#","");
+    //     $scope.tweets = db.tweets.query({name:$scope.query, time:$scope.time, tag: tagged});
+    // };
+
+    $scope.goBack = function(){
+        window.history.back();
+    }
+
+    $scope.goTalk = function(url) {
+       // alert(hash);
+      $location.path('talk');
     };
 
 }
@@ -231,44 +246,115 @@ function mapCtrl($location, $scope, db) {
 
        //-83.08968544006348 42.34157571000487 -83.03187847137451 42.36986407977127
 
-        $scope.time = "all";
+        $scope.time = "now";
 
         // $scope.phones = db.phones.query({name:$scope.query, time:$scope.time});
 
-        
-        var markers = {};
+       
 
-        angular.extend($scope, {
-            amc: {
-                lat: 42.36219069106654,
-                lng: -83.06988000869751,
-                zoom: 15
-            }
-        });
-           
 
         db.phones.query({ name:$scope.query, time:$scope.time }, //params
         function (data) {   //success
-             
-            for (var i=0;i<data.length;i++){ 
 
-                markers[data[i].id] = {
-                    lat: data[i].loc[0],
-                    lng: data[i].loc[1],
-                    //message: data[i].name,
-                    message: 'Go to: <a href=#/session/'+data[i].id+'> '+data[i].name+'</a>',
-                    focus: true
+            // var markers2 = {};
+
+            // for (var i=0;i<data.length;i++){ 
+
+            //     markers2[data[i].id] = {
+            //         lat: data[i].loc[0],
+            //         lng: data[i].loc[1],
+            //         //message: data[i].name,
+            //         message: '<h5>∆∆∆ Go to: <br><a href=#/session/'+data[i].id+'> '+data[i].name+'</a></h5>',
+            //         // focus: true
+            //     };
+            //     // var what = {
+            //     //     lat: 2
+            //     // }
+
+            //     //var id = data[i].id;
+
+            //     // var what = "id" : {
+            //     //         lat: data[i].loc[0],
+            //     //         lng: data[i].loc[1],
+            //     //         message: '<h5>∆∆∆ Go to: <br><a href=#/session/'+data[i].id+'> '+data[i].name+'</a></h5>'
+            //     //     }
+
+            //     // "what" : {
+            //     //     lat: 3,
+            //     //     lng: 5
+            //     // }
+
+
+
+            //      //var markers = id;
+
+            //     //console.log(data[i].id);
+            //     //console.log(what);
+
+            // }
+
+            //console.log(markers);
+
+
+            // $scope.amc = {
+            //     lat: 42.36219069106654,
+            //     lng: -83.06988000869751,
+            //     zoom: 15
+            // };
+
+            // $scope.markers = {
+            //     markersmarkers2
+            // };
+
+
+
+            // var markers = {};
+
+            // //var ids = ["1", "2", "3"];
+
+            // for (x in data) {
+            //     markers[data[x].id] = {
+            //         lat: data[x].loc[0],
+            //         lng: data[x].loc[1],
+            //         message: '<h5>∆∆∆ Go to: <br><a href=#/session/'+data[x].id+'> '+data[x].name+'</a></h5>'
+            //     };
+            // }
+
+            //$scope.markers = markers;
+
+            //console.log(markers);
+
+            angular.extend($scope, {
+                amc: {
+                    lat: 42.36219069106654,
+                    lng: -83.06988000869751,
+                    zoom: 15
                 }
-            }
+            });
+
+
+
 
         },
         function (data) {   //failure
             //error handling goes here
         });
+        
+        //$scope.markers = markers;
 
-        $scope.markers = markers;
+        // angular.extend($scope, {
+        //     amc: {
+        //         lat: 42.36219069106654,
+        //         lng: -83.06988000869751,
+        //         zoom: 15
+        //     }
+        // });
+           
 
-        console.log(markers);
+        
+
+
+       
 
         
         
@@ -477,6 +563,15 @@ maplocCtrl.$inject = [ '$location', '$scope', '$routeParams', 'db'];
 
 
 
+
+var sessionsNow = function ($scope, db) {
+
+    $scope.time = "now";
+
+    $scope.phones = db.phones.query({name:$scope.query, time:$scope.time});
+
+
+};
 
 
 

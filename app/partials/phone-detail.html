@@ -1,54 +1,59 @@
 
 <div style='padding-left:5px; padding-right:5px; width:99%;'>
-  <button ng-click="goBack()">< BACK </button>
-  <img ng-src="{{mainImageUrl}}" class="phone">
-  <h2>{{phone.name}}</h2>
-  <p>#{{phone.tags[0]}} </p>
+  <button class="btn" ng-click="goBack()">< BACK </button>
   <br>
-    <button class="btn" ng-click="open()">Notetaking (Etherpad)</button>
+  <img ng-src="{{mainImageUrl}}" class="phone">
+  <h3>{{phone.name}}</h3>
+  <h5>#{{phone.tags[0]}} </h5>
+  <br>
+  <a class="btn btn-large btn-block btn-info" ng-click="open()" href="">Notes (Etherpad)<i class="fui-new"></i></a>
 
 
-  <p>{{phone.description}}</p>
-
-  <p>{{phone.category}}  |  {{phone.subType}} | {{phone.time.start | date:'h:mm a EEEE d MMMM'}}</p>
+ 
 
 
 
 <ul class="specs">
-  
+  <br>
+  <h5><a ng-href="#/map/{{phone.loc_nicknames_stripe[0]}}"<i class="fui-location"></i>{{phone.loc_nicknames[0]}}</a></h5>
+  <br>
   <li>
-    <span>Details</span>
     <dl>
       <dt>{{phone.time.start | date:'h:mm a EEEE d MMMM'}}</dt>
-      <dt>{{phone.category}}</dt>
-      <dt>{{phone.subType}}</dt>
+      <dt>TRACK: {{phone.category}}</dt>
+      <dt>TYPE: {{phone.subType}}</dt>
     </dl>
   </li>
+
+   <p>{{phone.description}}</p>
+
+
+  
 
  </ul>
 
   <ul class="feed" style="padding-left:5px; padding-right:5px;">
         <!-- FILTER QUERY?? for HASH? -->
-        <li ng-repeat="tweet in tweets| filter:query | orderBy:orderProp" class="thumbnail" >
+        <li ng-repeat="tweet in tweets| filter:query | orderBy:orderProp" class="thumbnail" style="padding-bottom:10px;">
           <a ng-href="#/{{tweet.id}}" class="thumb"><img ng-src="{{tweet.user.profile_image_url}}"></a>
-          <a ng-href="#/{{tweet.id}}">{{tweet.user.name}}</a>
-          <a ng-href="#/{{tweet.id}}">{{tweet.user.screen_name}}</a>
+          <h4>{{tweet.user.name}}</h4>
+          <p style="opacity:0.7;">@{{tweet.user.screen_name}}</a>
           <p ng-bind-html-unsafe="tweet.text | hashtag"></p>
 
+         <a ng-href="https://twitter.com/{{tweet.user.screen_name}}/status/{{tweet.tweetID_str}}"><p style="font-size:12px;">{{tweet.created | date:'h:mm a EEEE d MMMM'}}</p></a>
+
             <div ng-switch on = "tweet.media.media_type">
-               <span ng-switch-when="image"> <img src="{{tweet.media.media_url}}" width="200px"> </span>
-               <span ng-switch-when="vine"> <p><iframe src="{{tweet.media.media_url}}/card" width="380" height="380" frameborder="0"></iframe></p> </span>
-               <span ng-switch-when="youtube"> <iframe width="380" src="{{tweet.media.media_url}}" frameborder="0" allowFullScreen></iframe></span>
-               <span ng-switch-when="instagram"><img src="{{tweet.media.media_url}}media/?size=t" width="200px"> </span>
-               <span ng-switch-when="tumblr"><img src="{{tweet.media.media_url}}" width="200px"> </span>
+               <span ng-switch-when="image"> <img src="{{tweet.media.media_url}}" width="250px"> </span>
+               <span ng-switch-when="vine"> <p><iframe src="{{tweet.media.media_url}}/card" width="250px" height="250px" frameborder="0"></iframe></p> </span>
+               <span ng-switch-when="youtube"> <iframe width="250px" src="{{tweet.media.media_url}}" frameborder="0" allowFullScreen></iframe></span>
+               <span ng-switch-when="instagram"><img src="{{tweet.media.media_url}}media/?size=t" width="250px"> </span>
+               <span ng-switch-when="tumblr"><img src="{{tweet.media.media_url}}" width="250px"> </span>
                <span ng-switch-default></span>
              </div>
+        </li>  
 
 
-        </li>
-
-
-        <li ng-show="!tweets.length"> No tweets from #{{currentTag}} (◕︵◕) </li>
+        <li ng-show="!tweets.length"> No tweets from #{{currentTag}} yet @(ᵕ.ᵕ)@ </li>
 
      </ul>
 
@@ -56,7 +61,7 @@
 
   <div modal="etherpad" style="width:100%; height:100%;" close="close()" options="opts">
       <div class="modal-header">
-          <button ng-click="close()">Close X</button>  <h4>{{phone.name}} Notes</h4>
+          <button class="btn-primary" ng-click="close()">Close X</button>  <h4>{{phone.name}} Notes</h4>
       </div>
       <div class="modal-body">
             <iframe src="{{phone.etherpad}}" width="100%" height="100%">
