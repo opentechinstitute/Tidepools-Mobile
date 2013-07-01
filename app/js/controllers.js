@@ -1,95 +1,11 @@
-// 'use strict';
 
-// /* Controllers */
+/* Tidepools Controllers */
 
-// function PhoneListCtrl($scope, Phone) {
-//   $scope.phones = Phone.query();
-//   $scope.orderProp = 'age';
-
-//   $scope.alert = function() {
-// 	    alert('wht');
-//   	};
-// }
-
-// //PhoneListCtrl.$inject = ['$scope', 'Phone'];
-
-// function alertCtrl($scope) {
-
-// 	$scope.alert = function() {
-// 	    alert('lol');
-//   	};
-
-// }  
-
-// function PhoneDetailCtrl($scope, $routeParams, Phone) {
-
-//   $scope.phone = Phone.get({phoneId: $routeParams.phoneId}, function(phone) {
-
-//   	console.log(phone);
-//     $scope.mainImageUrl = phone.images[0];
-//   });
-
-//   $scope.setImage = function(imageUrl) {
-//     $scope.mainImageUrl = imageUrl;
-//   }
-// }
-
-// //PhoneDetailCtrl.$inject = ['$scope', '$routeParams', 'Phone'];
-
-
-
-/* App Controllers */
-
-
-
-
-
-
-
-
-// myApp.controller('MyCtrl', function($scope) {
-
-//     $scope.addresses = [
-//         {'state': 'AL'},
-//         {'state': 'CA'},
-//         {'state': 'FL'}
-//     ];
-
-//     $scope.lov_state = [
-//         {'lookupCode': 'AL', 'description': 'Alabama'},
-//         {'lookupCode': 'FL', 'description': 'Florida'},
-//         {'lookupCode': 'CA', 'description': 'California'},
-//         {'lookupCode': 'DE', 'description': 'Delaware'}
-//     ];
-// });
-
-
-function PhoneListCtrl( $location, $scope, db) {
-
-    //$scope.orderProp = '_id';
-   // $scope.order = -1;
-    //$scope.phones = Phone.query({order:$scope.orderProp, name:$scope.query});
-
-    //$scope.phones = db.phones.query({order:$scope.orderProp, name:$scope.query});
+function LandmarkListCtrl( $location, $scope, db) {
 
     $scope.time = "now";
 
     $scope.phones = db.phones.query({name:$scope.query, time:$scope.time});
-
-
-    //var phones = $scope.phones;
-    
-    // $scope.remove = function (phone) {
-    //     var ok = db.phone.delete({_id: phone._id}, function (res) {
-    //         console.log('indexOf: '+phones.indexOf(phone));
-    //         if (res.ok === 1) {
-    //             phones.splice(phones.indexOf(phone), 1);
-    //         } else {
-    //             alert(JSON.stringify(res.ok));
-    //         }
-    //     })
-    // }
-    
 
     $scope.filter = function(filter) {
         $scope.time = filter;
@@ -98,91 +14,49 @@ function PhoneListCtrl( $location, $scope, db) {
   	};
 
     $scope.goTalk = function(url) {
-       // alert(hash);
       $location.path('talk/'+url);
     };
 
     $scope.goMap = function(url) {
-       // alert(hash);
       $location.path('map/'+url);
     };
 
 
     //search
     $scope.sessionSearch = function() { 
-        //var tagged = $scope.searchText.replace("#","");
         $scope.phones = db.phones.query({name:$scope.query, time:"all", session: $scope.searchText});
     };
 
-    // $scope.nextPage = function() {
-    //     if ($scope.busy) return;
-    //     $scope.busy = true;
-
-    //     var url = "http://api.reddit.com/hot?after=" + $scope.after + "&jsonp=JSON_CALLBACK";
-    //     $http.jsonp(url).success(function(data) {
-    //       var items = data.data.children;
-    //       for (var i = 0; i < items.length; i++) {
-    //         $scope.items.push(items[i].data);
-    //       }
-    //       $scope.after = "t3_" + $scope.items[$scope.items.length - 1].id;
-    //       $scope.busy = false;
-    //     });
-    // };
-
-    // $scope.items = [
-    //     "∆ The first choice!",
-    //     "∆ And another choice for you.",
-    //     "∆ but wait! A third!"
-    // ];
-
-    
 }
-PhoneListCtrl.$inject = [ '$location', '$scope', 'db'];
+LandmarkListCtrl.$inject = [ '$location', '$scope', 'db'];
 
 
 
-function PhoneDetailCtrl(Phone, $routeParams, $scope, db, $location) {  
+function LandmarkDetailCtrl(Landmark, $routeParams, $scope, db, $location) {  
 
-
-    //console.log($scope);
-
-    $scope.phone = Phone.get({_id: $routeParams.phoneId}, function(phone) {
-
-        //$scope.mainImageUrl = phone.details.images[0];
+    $scope.phone = Landmark.get({_id: $routeParams.phoneId}, function(phone) {
         $scope.mainImageUrl = phone.stats.avatar;
-
-       // console.log($scope.phone.tags);
-
         $scope.time = "all";
-
         $scope.currentTag = $scope.phone.tags[0];
-
         $scope.tweets = db.tweets.query({tag: $scope.phone.tags[0], time:$scope.time});
     });
 
-    
-
-  $scope.open = function () {
-    $scope.etherpad = true;
-  };
-
-  $scope.close = function () {
-    $scope.etherpad = false;
-  };
-
-  // $scope.items = ['item1', 'item2'];
-
-  $scope.opts = {
-    backdropFade: true,
-    dialogFade:true
-  };
-
-      $scope.goMap = function(url) {
-       // alert(hash);
-      $location.path('map/'+url);
+    $scope.open = function () {
+        $scope.etherpad = true;
     };
 
+    $scope.close = function () {
+        $scope.etherpad = false;
+    };
 
+    $scope.opts = {
+        backdropFade: true,
+        dialogFade:true
+    };
+
+    $scope.goMap = function(url) {
+      $location.path('map/'+url);
+    };
 
     $scope.setImage = function(imageUrl) {
         $scope.mainImageUrl = imageUrl;
@@ -192,8 +66,7 @@ function PhoneDetailCtrl(Phone, $routeParams, $scope, db, $location) {
         window.history.back();
     }
 }
-PhoneDetailCtrl.$inject = ['Phone', '$routeParams', '$scope', 'db'];
-
+LandmarkDetailCtrl.$inject = ['Landmark', '$routeParams', '$scope', 'db'];
 
 
 
@@ -213,28 +86,18 @@ talklistCtrl.$inject = [ '$location', '$scope', 'db'];
 
 
 
-
 function talktagCtrl( $location, $scope, $routeParams, db) {
 
     $scope.currentTag = $routeParams.hashTag;
 
-    //console.log($routeParams);
-
     $scope.time = "all";
     $scope.tweets = db.tweets.query({tag: $routeParams.hashTag, time:$scope.time});
-
-    //search
-    // $scope.tagSearch = function() { 
-    //     var tagged = $scope.searchText.replace("#","");
-    //     $scope.tweets = db.tweets.query({name:$scope.query, time:$scope.time, tag: tagged});
-    // };
 
     $scope.goBack = function(){
         window.history.back();
     }
 
     $scope.goTalk = function(url) {
-       // alert(hash);
       $location.path('talk');
     };
 
@@ -244,14 +107,7 @@ talktagCtrl.$inject = [ '$location', '$scope', '$routeParams', 'db'];
 
 function mapCtrl($location, $scope, db) {
 
-       //-83.08968544006348 42.34157571000487 -83.03187847137451 42.36986407977127
-
         $scope.time = "now";
-
-        // $scope.phones = db.phones.query({name:$scope.query, time:$scope.time});
-
-       
-
 
         db.phones.query({ name:$scope.query, time:$scope.time }, //params
         function (data) {   //success
@@ -332,9 +188,6 @@ function mapCtrl($location, $scope, db) {
                 }
             });
 
-
-
-
         },
         function (data) {   //failure
             //error handling goes here
@@ -349,16 +202,6 @@ function mapCtrl($location, $scope, db) {
         //         zoom: 15
         //     }
         // });
-           
-
-        
-
-
-       
-
-        
-        
-
     
 }
 mapCtrl.$inject = [ '$location', '$scope', 'db'];
@@ -498,14 +341,7 @@ function maplocCtrl($location, $scope, $routeParams, db) {
             }
        };
 
-       //console.log(loc_nicknames[$routeParams.loc].lat);
-
-        // $scope.time = "all";
-
-        // var markers = {};
-
-        // $scope.phones = db.phones.query({name:$scope.query, time:$scope.time});
-
+      
         angular.extend($scope, {
                 amc: {
                     lat: loc_nicknames[$routeParams.loc].lat,
@@ -523,34 +359,6 @@ function maplocCtrl($location, $scope, $routeParams, db) {
                 }
             });
 
-        // db.phones.query({ loc:$routeParams.loc, time:$scope.time }, //params
-        // function (data) {   //success
-        //     //$scope.entities = data.data;
-        //     //console.log(data);
-
-            
-
-        //     //console.log(data);
-             
-        //     // for (var i=0;i<data.length;i++){ 
-          
-        //     //     markers[data[i].id] = {
-        //     //         lat: data[i].loc[0],
-        //     //         lng: data[i].loc[1],
-        //     //         message: data[i].name,
-        //     //         focus: true
-        //     //     };
-        //     // }
-
-
-        // },
-        // function (data) {   //failure
-        //     //error handling goes here
-        // });
-
-        //console.log(markers);
-       // $scope.markers = markers;
-
     $scope.goBack = function(){
         window.history.back();
     }
@@ -560,115 +368,10 @@ function maplocCtrl($location, $scope, $routeParams, db) {
 maplocCtrl.$inject = [ '$location', '$scope', '$routeParams', 'db'];
 
 
-
-
-
-
 var sessionsNow = function ($scope, db) {
 
     $scope.time = "now";
-
     $scope.phones = db.phones.query({name:$scope.query, time:$scope.time});
-
-
 };
 
 
-
-
-
-
-
-
-
-
-
-var ModalDemoCtrl = function ($scope) {
-
-      $scope.open = function () {
-        $scope.shouldBeOpen = true;
-      };
-
-      $scope.close = function () {
-        $scope.closeMsg = 'I was closed at: ' + new Date();
-        $scope.shouldBeOpen = false;
-      };
-
-      $scope.items = ['item1', 'item2'];
-
-      $scope.opts = {
-        backdropFade: true,
-        dialogFade:true
-      };
-
-};
-
-
-
-
-
-
-
-// function TodoCtrl($scope) {
-//   $scope.todos = [
-//     {text:'learn angular', done:true},
-//     {text:'build an angular app', done:false}];
- 
-//   $scope.addTodo = function() {
-//     $scope.todos.push({text:$scope.todoText, done:false});
-//     $scope.todoText = '';
-//   };
- 
-//   $scope.remaining = function() {
-//     var count = 0;
-//     angular.forEach($scope.todos, function(todo) {
-//       count += todo.done ? 0 : 1;
-//     });
-//     return count;
-//   };
- 
-//   $scope.archive = function() {
-//     var oldTodos = $scope.todos;
-//     $scope.todos = [];
-//     angular.forEach(oldTodos, function(todo) {
-//       if (!todo.done) $scope.todos.push(todo);
-//     });
-//   };
-// }
-
-
-// function PhoneEditCtrl(Phone, $routeParams, $location, $scope) {
-//     $scope.phone = Phone.get({_id: $routeParams._id})
-    
-//     $scope.save = function () {
-//         Phone.save({}, $scope.phone, function (res) { if (res.ok === 1) { $location.path("/phones");}} ) 
-//     }
-// }
-// PhoneEditCtrl.$inject = ['Phone', '$routeParams', '$location', '$scope'];
-
-// var pho
-// function PhoneNewCtrl(Phone, $routeParams, $scope) {   
-//     pho = $scope.phone = new Phone();
-    
-//     console.log($scope.phone)
-    
-//     $scope.save = function () {
-//         Phone.save({}, $scope.phone, function (res) { if (res.ok === 1) { $location.path("/phones");}}) 
-//     }
-// }
-// PhoneNewCtrl.$inject = ['Phone', '$routeParams', '$scope'];
-
-// function PhoneAggreCtrl(Phone, $routeParams, $scope) {   
-//     $scope.count = Phone.count();
-//     $scope.distinct = Phone.distinct({}, {key:"carrier"});
-//     $scope.group = Phone.group({},{
-//                             key: {"carrier":true },   cond: {}, 
-//                             initial: {sum: 0, count:0, max:0, avg:0}, 
-//                             reduce: "function(doc,out){out.sum += doc.age; out.count += 1; out.max = Math.max(out.max, doc.age); out.avg = out.sum/out.count;}"
-//                         });
-//     $scope.mapReduce = Phone.mapReduce({},{ 
-//                             "map": "function(){emit(this.details.android.os, 1);}", 
-//                             "reduce": "function(key, values){return values.length;}"  
-//                         });
-// }
-// PhoneAggreCtrl.$inject = ['Phone', '$routeParams', '$scope'];

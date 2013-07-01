@@ -2,16 +2,7 @@
 
 /* Filters */
 
-angular.module('phonecatFilters', []).filter('checkmark', function() {
-  return function(input) {
-
-  	console.log(input);
-    return input ? '\u2713' : '\u2718';
-  };
-});
-
-
-angular.module('phonecatFilters', []).filter('hashtag', function() {
+angular.module('tidepoolsFilters', []).filter('hashtag', function() {
   return function(input) {
 
   	//http://www.simonwhatley.co.uk/parsing-twitter-usernames-hashtags-and-urls-with-javascript

@@ -2,22 +2,12 @@
 
 /* Services */
 
-//factory service to get JSON
-// //creating service called "phonecatServices"
-// angular.module('phonecatServices', ['ngResource']).
-//     factory('Phone', function($resource){
-//   return $resource('phones/:phoneId.json', {}, {
-//     query: {method:'GET', params:{phoneId:'phones'}, isArray:true}
-//   });
-// });
-
-
-//getting mongo data
+//let's get mongo data
 //from: https://github.com/dalcib/angular-phonecat-mongodb-rest
 var res;
-angular.module('phonecatServices', ['ngResource'])
+angular.module('tidepoolsServices', ['ngResource'])
 
-	.factory('Phone', ['$resource', '$http',
+	.factory('Landmark', ['$resource', '$http',
         function($resource, $http) {
 			var actions = {
                 'count': {method:'PUT', params:{_id: 'count'}},                           
@@ -31,26 +21,6 @@ angular.module('phonecatServices', ['ngResource'])
             return res;
         }
     ])
-
-
-    // .factory('db2', ['$resource', '$http',    
-    //     function($resource, $http) {
-    //         var actions = {
-    //                 'count': {method:'PUT', params:{_id: 'count'}},                           
-    //                 'distinct': {method:'PUT', params:{_id: 'distinct'}},      
-    //                 'find': {method:'PUT', params:{_id: 'find'}, isArray:true},              
-    //                 'group': {method:'PUT', params:{_id: 'group'}, isArray:true},            
-    //                 'mapReduce': {method:'PUT', params:{_id: 'mapReduce'}, isArray:true} ,  
-    //                 'aggregate': {method:'PUT', params:{_id: 'aggregate'}, isArray:true}   
-    //             }
-    //         var db2 = {};
-            
-    //         db2.tweets = $resource('api/tweets/:_id', {}, actions);
-    //        // db.tweets = $resource('api/tweets/:_id:id', {}, actions);
-    //         return db2;
-    //     }
-    // ])
-
 
     .factory('db', ['$resource', '$http',    
         function($resource, $http) {

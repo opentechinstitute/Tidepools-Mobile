@@ -1,5 +1,4 @@
 /*
-
 .===.      .                    .
   |  o     |                    |
   |  .  .-.| .-. .,-.  .-.  .-. | .==.
@@ -8,16 +7,12 @@
                  |
                  '
   Open Technology Institute & J.R. Baldwin
-
   tidepools.co <3 <3 <3 
-
 */
-
 
 var express = require('express'),
     app = module.exports.app = express(), 
     db = require('mongojs').connect('amctest');
-    //db = require('mongojs').connect('PhoneCat');
     
 app.configure(function () {
 	app.use(express.favicon());
@@ -30,6 +25,7 @@ app.configure(function () {
 
 /* Helpers */
 
+//Parts of express code from: https://github.com/dalcib/angular-phonecat-mongodb-rest
 //To allow use ObjectId or other any type of _id
 var objectId = function (_id) {
     if (_id.length === 24 && parseInt(db.ObjectId(_id).getTimestamp().toISOString().slice(0,4), 10) >= 2010) {
@@ -62,70 +58,23 @@ app.get('/api/:collection', function(req, res) {
 
     var item, sort = {};
 
-    // for (item in req.query) {
-    //     req.query[item] = (typeof +req.query[item] === 'number' && isFinite(req.query[item])) 
-    //         ? parseFloat(req.query[item],10) 
-    //         : req.query[item];
-    //     if (item != 'limit' && item != 'skip' && item != 'sort' && item != 'order' && req.query[item] != "undefined" && req.query[item]) {
-    //         qw[item] = req.query[item]; 
-    //     }
-    // }  
-    // if (req.query.sort) { 
-    //     sort[req.query.sort] = (req.query.order === 'desc' || req.query.order === -1) ? -1 : 1; 
-    // }
-
-   // console.log(req.query.sort);
-
-    //db.collection(req.params.collection).find(qw).sort(sort).skip(req.query.skip).limit(req.query.limit).toArray(fn(req, res))
-
-
-    //db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
-
-    //qw. = {level:{$gt:90}};
-
-
-    //if (req.query.time){
         //------ Happening soon  ------//
 
-        if (req.query.time == "all"){
+        if (req.query.time == "all"){ //no time sort
 
-
-
-           
-            /////CHANGE FOR TWITTER to created
-
-            if (req.query.tag){ //hashtag search?
-
+            if (req.query.tag){ //hashtag
                 var qw = {
                    'text' : {$regex : ".*"+req.query.tag+".*", $options: 'i'}
-
                 };
-
-               // var qw = req.query.tag;
-
-               // db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
-
-
-
                 db.collection('tweets').find(qw).sort({_id: -1}).toArray(fn(req, res));
-
-
-                //COMBINE with other query to db.collection('landmarks').find(qw)  
-
-                //COMMENTS in seperate collection!
-
-                //combine JSON, sort by _id
             }
 
-            else if (req.query.session){
+            else if (req.query.session){ //session search (THIS NEEDS TO BE FIXED TO INDEX TEXT FROM SESSIONS NOT A GIANT TEXT BLOCK IN MONGO)
 
                 var qw = {
                     
                     "searchField" : {$regex : ".*"+req.query.session+".*", $options: 'i'}
-
                 };
-
-                //console.log(req.query.session);
 
                 db.collection('landmarks').find(qw).sort({_id: -1}).toArray(fn(req, res));
             }
@@ -135,34 +84,23 @@ app.get('/api/:collection', function(req, res) {
                 var qw = {};
                 var limit;
 
-
-
-                //console.log(req.query.limit);
-
-               // console.log(req.params.collection);
-
                 if (req.params.collection == 'landmarks'){
-                     //console.log('asdf');
                    db.collection(req.params.collection).find(qw).limit(limit).sort({'time.start': 1}).toArray(fn(req, res));
                 }
 
                 if (req.params.collection == 'tweets'){
 
-                        if (req.query.limit){
+                        if (req.query.limit){ //limited tweet query
                             limit = parseInt(req.query.limit);
                             db.collection(req.params.collection).find(qw).limit(limit).sort({_id: -1}).toArray(fn(req, res));
                         }
 
                         else {
-
                             db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
                         }
-                        
                 }                
-
             }
         }
-
 
         else if (req.query.time == "today"){
 
@@ -185,21 +123,15 @@ app.get('/api/:collection', function(req, res) {
 
         else if (req.query.time == "soon"){
 
-
-           // var currentTime = new Date(oldDateObj.getTime() + diff*60000); //adding 30 minutes to time for "soon" //http://stackoverflow.com/questions/1197928/how-to-add-30-minutes-to-a-javascript-date-object/1197939
            var currentTime = new Date(); 
            currentTime.setMinutes(currentTime.getMinutes() + 45); // adding 30minutes to current time for "soon"
-
-           //LOGIC HERE ----> READ CURRENT TIME, determine place within hour, match to how conference schedule time is handled, ADD MORE TIME TO CURRENT TIME FOR QUERY based on how much avg. time is left in a conference BLOCK period
 
             var qw = {
                 'time.start': {$lt: currentTime},
                 'time.end': {$gt: currentTime}
             };
             db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
-            //SORT BY START TIME !!!
         }
-
 
         //------ Happening now ------//
         else {
@@ -210,18 +142,10 @@ app.get('/api/:collection', function(req, res) {
             };
             db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
         }
-  //  }
-
-
-
-    
-
-
 });
 
 // Read 
 app.get('/api/:collection/:id', function(req, res) {
-    //console.log(req.params);
     db.collection(req.params.collection).findOne({id:objectId(req.params.id)}, fn(req, res))
 });
 
@@ -256,5 +180,5 @@ app.put('/api/:collection/:cmd',  function (req, res) {
 })
 
 app.listen(3001, function() {
-    console.log("Listening on 3001");
+    console.log("Chillin' on 3001 ~ ~");
 });
