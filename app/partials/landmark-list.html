@@ -4,29 +4,12 @@
     <div class="span10">
       <!--Body content-->
 
-
-      <!-- <li class="dropdown">
-        <a class="dropdown-toggle">
-          Sessions Now
-        </a>
-        <ul class="dropdown-menu">
-          <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
-            <a ng-href="#/session/{{phone.id}}">{{phone.name}}</a>
-          </li>
-          <li ng-show="!phones.length"> No sessions now (◕︵◕) </li>
-        </ul>
-      </li> -->
-
-
-      <ul class="phones">
+      <ul class="landmarks">
         <li class="thumbnail" style="padding-top:0px;">
          <h3> ∆ Sessions happening</h3>
           <button class="btn" ng-click="filter('now')">now </button> <button class="btn" ng-click="filter('soon')">soon</button> <button  class="btn" ng-click="filter('today')">today</button> <button class="btn" ng-click="filter('all')">all</button>
 
-
-
         </li>
-
 
       </ul>
 
@@ -36,14 +19,14 @@
             <input class="btn-primary" type="submit" value="search">
           </form>
 
-      <ul class="phones">
-          <li ng-repeat="phone in phones | filter:query | orderBy:orderProp" class="thumbnail"  style="padding-bottom:20px;" >
-              <a ng-href="#/session/{{phone.id}}" class="thumb"><img ng-src="{{phone.stats.avatar}}"></a>
-              <h4><a ng-href="#/session/{{phone.id}}">{{phone.name}}</a></h4>
-              <p>{{phone.shortDescription}}</p>
-              <p style="font-size:12px;"><strong> {{phone.time.start | date:'h:mm a EEEE d MMMM'}} </strong> | {{phone.category}}  |  {{phone.subType}} </p>
+      <ul class="landmarks">
+          <li ng-repeat="landmark in landmarks | filter:query | orderBy:orderProp" class="thumbnail"  style="padding-bottom:20px;" >
+              <a ng-href="#/session/{{landmark.id}}" class="thumb"><img ng-src="{{landmark.stats.avatar}}"></a>
+              <h4><a ng-href="#/session/{{landmark.id}}">{{landmark.name}}</a></h4>
+              <p>{{landmark.shortDescription}}</p>
+              <p style="font-size:12px;"><strong> {{landmark.time.start | date:'h:mm a EEEE d MMMM'}} </strong> | {{landmark.category}}  |  {{landmark.subType}} </p>
 
-              <button class="" ng-click="goTalk(phone.tags[0])">#{{phone.tags[0]}}</button> <button class="" ng-click="goMap(phone.loc_nicknames_stripe[0])"><i class="fui-location"></i>{{phone.loc_nicknames[0]}}</button> 
+              <button class="" ng-click="goTalk(landmark.tags[0])">#{{landmark.tags[0]}}</button> <button class="" ng-click="goMap(landmark.loc_nicknames_stripe[0])"><i class="fui-location"></i>{{landmark.loc_nicknames[0]}}</button> 
 
               <div style="float:left; background:#fff; height:100%; width: 30px;">
           
@@ -51,42 +34,8 @@
           </li>
       </ul>
 
-
-
-       <li ng-show="!phones.length"> No sessions at this time @(ᵕ.ᵕ)@
-
-        <br>
-
-        <div style="height=1000px;" >
-
-
-
-          <p>
-
-
-            ~~~~~~~~~~~~~~
-            <br> <br> <br> <br>> <br> <br> <br>> <br> <br> <br>> <br> <br> <br>> <br> <br> <br>> <br> <br> <br>> <br> <br> <br>> <br> <br> <br>> <br> <br> <br>> <br> <br> <br>> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>> <br> <br> <br>> <br> <br> <br>
-            ~~~~~
-
-
-
-
-
-
-
-
-
-</p>
-
-
-
-
-
-
-
-        </div>
+       <li ng-show="!landmarks.length"> No sessions at this time @(ᵕ.ᵕ)@
        </li>
-
 
     </div>
   </div>

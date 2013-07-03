@@ -5,6 +5,7 @@
 //let's get mongo data
 //from: https://github.com/dalcib/angular-phonecat-mongodb-rest
 var res;
+
 angular.module('tidepoolsServices', ['ngResource'])
 
 	.factory('Landmark', ['$resource', '$http',
@@ -33,7 +34,7 @@ angular.module('tidepoolsServices', ['ngResource'])
                     'aggregate': {method:'PUT', params:{_id: 'aggregate'}, isArray:true}   
                 }
             var db = {};
-            db.phones = $resource('api/landmarks/:_id:id', {}, actions);
+            db.landmarks = $resource('api/landmarks/:_id:id', {}, actions);
             db.tweets = $resource('api/tweets/:_id', {}, actions);
             return db;
         }

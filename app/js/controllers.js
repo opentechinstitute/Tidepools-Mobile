@@ -5,12 +5,12 @@ function LandmarkListCtrl( $location, $scope, db) {
 
     $scope.time = "now";
 
-    $scope.phones = db.phones.query({name:$scope.query, time:$scope.time});
+    $scope.landmarks = db.landmarks.query({name:$scope.query, time:$scope.time});
 
     $scope.filter = function(filter) {
         $scope.time = filter;
 
-	    $scope.phones = db.phones.query({name:$scope.query,time:$scope.time});
+	    $scope.landmarks = db.landmarks.query({name:$scope.query,time:$scope.time});
   	};
 
     $scope.goTalk = function(url) {
@@ -24,7 +24,7 @@ function LandmarkListCtrl( $location, $scope, db) {
 
     //search
     $scope.sessionSearch = function() { 
-        $scope.phones = db.phones.query({name:$scope.query, time:"all", session: $scope.searchText});
+        $scope.landmarks = db.landmarks.query({name:$scope.query, time:"all", session: $scope.searchText});
     };
 
 }
@@ -34,11 +34,11 @@ LandmarkListCtrl.$inject = [ '$location', '$scope', 'db'];
 
 function LandmarkDetailCtrl(Landmark, $routeParams, $scope, db, $location) {  
 
-    $scope.phone = Landmark.get({_id: $routeParams.phoneId}, function(phone) {
-        $scope.mainImageUrl = phone.stats.avatar;
+    $scope.landmark = Landmark.get({_id: $routeParams.landmarkId}, function(landmark) {
+        $scope.mainImageUrl = landmark.stats.avatar;
         $scope.time = "all";
-        $scope.currentTag = $scope.phone.tags[0];
-        $scope.tweets = db.tweets.query({tag: $scope.phone.tags[0], time:$scope.time});
+        $scope.currentTag = $scope.landmark.tags[0];
+        $scope.tweets = db.tweets.query({tag: $scope.landmark.tags[0], time:$scope.time});
     });
 
     $scope.open = function () {
@@ -109,7 +109,7 @@ function mapCtrl($location, $scope, db) {
 
         $scope.time = "now";
 
-        db.phones.query({ name:$scope.query, time:$scope.time }, //params
+        db.landmarks.query({ name:$scope.query, time:$scope.time }, //params
         function (data) {   //success
 
             // var markers2 = {};
@@ -371,7 +371,7 @@ maplocCtrl.$inject = [ '$location', '$scope', '$routeParams', 'db'];
 var sessionsNow = function ($scope, db) {
 
     $scope.time = "now";
-    $scope.phones = db.phones.query({name:$scope.query, time:$scope.time});
+    $scope.landmarks = db.landmarks.query({name:$scope.query, time:$scope.time});
 };
 
 

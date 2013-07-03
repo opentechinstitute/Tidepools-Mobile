@@ -56,11 +56,11 @@
         <h3>Sessions Now</h3>
         <ul>
           <div ng-controller="sessionsNow">
-            <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
-              <h3>∆ <a ng-href="#/session/{{phone.id}}">{{phone.name}}</a></h3>
+            <li ng-repeat="landmark in landmarks | filter:query | orderBy:orderProp">
+              <h3>∆ <a ng-href="#/session/{{landmark.id}}">{{landmark.name}}</a></h3>
               <br>
             </li>
-            <li ng-show="!phones.length"> No sessions now (◕︵◕) </li>
+            <li ng-show="!landmarks.length"> No sessions now (◕︵◕) </li>
           </div>
         </ul>
         <img src="images/nyan.gif">
@@ -96,7 +96,7 @@
 
 <script>
 
-  //temp use of jquery, switch to angular?
+  //temp use of jquery, switch to angular animation?
   $('#show').click(function(e) {
       $('body').toggleClass('menu');
       return false;
