@@ -21,8 +21,8 @@
 
       <ul class="landmarks">
           <li ng-repeat="landmark in landmarks | filter:query | orderBy:orderProp" class="thumbnail"  style="padding-bottom:20px;" >
-              <a ng-href="#/session/{{landmark.id}}" class="thumb"><img ng-src="{{landmark.stats.avatar}}"></a>
-              <h4><a ng-href="#/session/{{landmark.id}}">{{landmark.name}}</a></h4>
+              <a ng-href="#/landmark/{{landmark.id}}" class="thumb"><img ng-src="{{landmark.stats.avatar}}"></a>
+              <h4><a ng-href="#/landmark/{{landmark.id}}">{{landmark.name}}</a></h4>
               <p>{{landmark.shortDescription}}</p>
               <p style="font-size:12px;"><strong> {{landmark.time.start | date:'h:mm a EEEE d MMMM'}} </strong> | {{landmark.category}}  |  {{landmark.subType}} </p>
 
