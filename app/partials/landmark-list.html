@@ -40,6 +40,11 @@
           <button class="btn" ng-click="filter('places','Park')">Parks</button>  
       </span> 
 
+          <form ng-submit="sessionSearch()">
+            <input style="width:95%;" type="text" ng-model="searchText" size="30"
+                   placeholder="Search events">
+            <input class="btn-primary" type="submit" value="search">
+          </form>
 
       <ul class="landmarks">
           <!--Looping through data-->
@@ -62,6 +67,7 @@
       </ul>
 
        <li ng-show="!landmarks.length"> Nothing here :( </li>
+
 
     </div>
   </div>

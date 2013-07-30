@@ -62,17 +62,23 @@
 <body>
 
 
+
   <div id="wrapper">
 
       <div id="menu">
-        <h3>Events</h3>
         <ul>
-          <div ng-controller="sessionsNow">
-            <li ng-repeat="landmark in landmarks | filter:query | orderBy:orderProp">
-              <h3>∆ <a ng-href="#/session/{{landmark.id}}">{{landmark.name}}</a></h3>
-              <br>
+          <div>
+            <li>
+              <h3> Local Applications </h3>
+              <h4><a ng-href="https://rhiwifi.co/bus/"><i class="fui-location"></i> Where's the B61 Bus?</a></h4>
+              <h4><a ng-href="https://rhiwifi.co/stopfrisk/"><i class="fui-check-inverted-2"></i> Report Stop & Frisk</a></h4>
+              <h3> More Information </h3>
+              <h4 class="infolink"><a ng-href="#/about"><i class="fui-cmd"></i> About RHI WiFi</a></h4>
+              <h4 class="infolink"><a ng-href="#/feedback"><i class="fui-new"></i> Feedback</a></h4>
+              <h4 class="infolink"><a ng-href="#/contact"><i class="fui-mail"></i> Contact Us</a></h4>
+              <h4 class="infolink"><a ng-href="#/partners"><i class="fui-user"></i> RHI WiFi Partners</a></h4>
+              <!-- <h2><a ng-href="https://rhiwifi.co/status/"> <i class="fui-radio-checked"></i> RHI Status</a></h2> -->
             </li>
-            <li ng-show="!landmarks.length"> No events coming up</li>
           </div>
         </ul>
         <img src="images/nyan.gif">
@@ -83,13 +89,14 @@
       <div class="row-fluid">
         <li class="thumbnail" style="height:43px;">
 
-          <div id="show" class="btn-primary" href="#"><div style="padding:7px; font-size:30px;"><i class="fui-list"></i></div></div>
+          <div id="show" class="btn btn-primary" href="#"><span style="margin-left:-1px;" class="fui-list" ></span></div>
 
 
             <div class="btn-toolbar" style="margin-top:0px;">
                 <div class="btn-group">
                   <a class="btn btn-primary" href="#">Home</a>
-                  <a class="btn btn-primary" href="#/talk">Talk<i class="fui-chat"></i></a>
+<!--                   <a class="btn btn-primary" href="#">Events<i class="fui-time"></i></a>
+ -->                  <a class="btn btn-primary" href="#/talk">Talk<i class="fui-chat"></i></a>
                   <a class="btn btn-primary" href="#/map">Map<i class="fui-location"></i></a>
                 </div>
               </div>
@@ -97,20 +104,23 @@
         </li>
 
       </div>
+      
 
       <div id="content">
        
           <div ng-view></div>
-
-      </div>
-
-  </div>
 
 <script>
 
   //temp use of jquery, switch to angular animation?
   $('#show').click(function(e) {
       $('body').toggleClass('menu');
+      return false;
+  });
+
+  $('.infolink').click(function(e) {
+      $('body').toggleClass('menu');
+      $location.path('/link');
       return false;
   });
 
