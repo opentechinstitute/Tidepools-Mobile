@@ -15,7 +15,7 @@ angular.module('tidepoolsServices', ['ngResource'])
                 'distinct': {method:'PUT', params:{_id: 'distinct'}},      
                 'find': {method:'PUT', params:{_id: 'find'}, isArray:true},              
                 'group': {method:'PUT', params:{_id: 'group'}, isArray:true},            
-                'mapReduce': {method:'PUT', params:{_id: 'mapReduce'}, isArray:true} ,  
+                'mapReduce': {method:'PUT', params:{_id: 'mapReduce'}, isArray:true},  
                 'aggregate': {method:'PUT', params:{_id: 'aggregate'}, isArray:true}   
             }
             res = $resource('api/landmarks/:_id:id', {}, actions);
@@ -30,8 +30,9 @@ angular.module('tidepoolsServices', ['ngResource'])
                     'distinct': {method:'PUT', params:{_id: 'distinct'}},      
                     'find': {method:'PUT', params:{_id: 'find'}, isArray:true},              
                     'group': {method:'PUT', params:{_id: 'group'}, isArray:true},            
-                    'mapReduce': {method:'PUT', params:{_id: 'mapReduce'}, isArray:true} ,  
-                    'aggregate': {method:'PUT', params:{_id: 'aggregate'}, isArray:true}   
+                    'mapReduce': {method:'PUT', params:{_id: 'mapReduce'}, isArray:true},  
+                    'aggregate': {method:'PUT', params:{_id: 'aggregate'}, isArray:true},
+                    'create':  {method:'POST', params:{_id: 'create'}, isArray:true}
                 }
             var db = {};
             db.landmarks = $resource('api/landmarks/:_id:id', {}, actions);

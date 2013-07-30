@@ -10,9 +10,12 @@
   tidepools.co <3 <3 <3 
 */
 
+var fs = require('fs');
+var im = require('imagemagick');
+
 var express = require('express'),
     app = module.exports.app = express(), 
-    db = require('mongojs').connect('amctest');
+    db = require('mongojs').connect('redhook');
     
 app.configure(function () {
 	app.use(express.favicon());
@@ -146,11 +149,11 @@ app.get('/api/:collection', function(req, res) {
 
 // Read 
 app.get('/api/:collection/:id', function(req, res) {
-    db.collection(req.params.collection).findOne({id:objectId(req.params.id)}, fn(req, res))
+    db.collection(req.params.collection).findOne({id:objectId(req.params.id)}, fn(req, res));
 });
 
 // Save 
-app.post('/api/:collection', function(req, res) {
+app.post('/api/:collection/create', function(req, res) {
     if (req.body._id) { req.body._id = objectId(req.body._id);}
     db.collection(req.params.collection).save(req.body, {safe:true}, fn(req, res));
 });
@@ -162,7 +165,7 @@ app.del('/api/:collection/:id', function(req, res) {
 
 //Group
 app.put('/api/:collection/group', function(req, res) {
-    db.collection(req.params.collection).group(req.body, fn(req, res))
+    db.collection(req.params.collection).group(req.body, fn(req, res));
 })
 
 // MapReduce
@@ -179,6 +182,78 @@ app.put('/api/:collection/:cmd',  function (req, res) {
     db.collection(req.params.collection)[req.params.cmd](req.body, fn(req, res)); 
 })
 
+
+app.post('/api/upload',  function (req, res) {
+
+
+    if (req.files.files[0].size <= 5242880){
+
+        fs.readFile(req.files.files[0].path, function (err, data) {
+
+            //console.log(req.files.files[0]);
+
+            var fileName = req.files.files[0].name.substr(0, req.files.files[0].name.lastIndexOf('.')) || req.files.files[0].name;
+            var fileType = req.files.files[0].name.split('.').pop();
+
+            while (1) {
+
+                var fileNumber = Math.floor((Math.random()*100000000)+1); //generate random file name
+                var fileNumber_str = fileNumber.toString(); 
+                var current = fileNumber_str + '.' + fileType;
+
+                //checking for existing file, if unique, write to dir
+                if (fs.existsSync(__dirname + "/app/uploads/" + current)) {
+                    continue; //if there are max # of files in the dir this will infinite loop...
+                } 
+                else {
+                    var newPath = __dirname + "/app/uploads/" + current;
+
+                    fs.writeFile(newPath, data, function (err) {
+
+                        im.crop({
+                          srcPath: newPath,
+                          dstPath: newPath,
+                          width: 100,
+                          height: 100,
+                          quality: 1,
+                          gravity: "Center"
+                        }, function(err, stdout, stderr){
+
+                            res.send("uploads/"+current);
+
+                        });
+                    });
+
+                    break;
+                }
+            }
+
+        });
+    }
+
+    else {
+
+        res.send('Not Saved: File is bigger than 5MB, please try again.');
+    }
+
+});
+
+
 app.listen(3001, function() {
     console.log("Chillin' on 3001 ~ ~");
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

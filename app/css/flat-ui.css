@@ -2325,7 +2325,9 @@ textarea[class*="span"] {
   -moz-border-radius: 6px;
   border-radius: 6px;
 }
-.dropdown-menu {
+
+
+/*.dropdown-menu {
   background-color: #f3f4f5;
   border: none;
   display: block;
@@ -2342,7 +2344,9 @@ textarea[class*="span"] {
   -o-transition: 0.25s;
   transition: 0.25s;
   -webkit-backface-visibility: hidden;
-}
+}*/
+
+
 .dropdown-menu.typeahead {
   display: none;
   opacity: 1;

@@ -70,6 +70,47 @@ LandmarkDetailCtrl.$inject = ['Landmark', '$routeParams', '$scope', 'db'];
 
 
 
+function LandmarkNewCtrl($location, $scope, db) {
+
+
+    $('#fileupload').fileupload({
+        url: '/api/upload',
+        dataType: 'text',
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .bar').css(
+                'width',
+                progress + '%'
+            );
+        },
+        done: function (e, data, $scope) {
+
+            $('<p/>').text('Saved: '+data.originalFiles[0].name).appendTo('#uploadedpic');
+          //  $("#preview").append("<img id='previewImg' src='"data.result"'/>");
+
+            $('<img src="'+ data.result +'">').load(function() {
+              $(this).width(150).height(150).appendTo('#preview');
+            });
+
+            $scope.landmark.avatar = data.result;
+        }
+    });
+
+
+    $scope.save = function () {
+
+         console.log($scope.landmark);
+         db.landmarks.create($scope.landmark);
+
+    }
+
+
+}
+
+LandmarkListCtrl.$inject = ['$location', '$scope', 'db'];
+
+
+
 function talklistCtrl( $location, $scope, db) {
 
     $scope.time = "all";
