@@ -77,14 +77,17 @@
   <div id="wrapper">
 
       <div id="menu">
-        <h3>Sessions Now</h3>
+        <h3>What's Happening?</h3>
         <ul>
           <div ng-controller="sessionsNow">
             <li ng-repeat="landmark in landmarks | filter:query | orderBy:orderProp">
+              <h3><a ng-href="https://rhiwifi.co/bus/"><i class="fui-location"></i> Where's the B61 Bus?</a></h3>
+              <h3><a ng-href="https://rhiwifi.co/stopfrisk/"><i class="fui-check-inverted-2"></i> Report Stop & Frisk</a></h3>
+              <!-- <h3><a ng-href="https://rhiwifi.co/status/"> <i class="fui-radio-checked"></i> RHI Status</a></h3> -->
               <h3>∆ <a ng-href="#/session/{{landmark.id}}">{{landmark.name}}</a></h3>
               <br>
             </li>
-            <li ng-show="!landmarks.length"> No sessions now (◕︵◕) </li>
+            <li ng-show="!landmarks.length"> No events now (◕︵◕) </li>
           </div>
         </ul>
         <img src="images/nyan.gif">
@@ -100,7 +103,7 @@
 
             <div class="btn-toolbar" style="margin-top:0px;">
                 <div class="btn-group">
-                  <a class="btn btn-primary" href="#">Sessions<i class="fui-time"></i></a>
+                  <a class="btn btn-primary" href="#">Events<i class="fui-time"></i></a>
                   <a class="btn btn-primary" href="#/talk">Talk<i class="fui-chat"></i></a>
                   <a class="btn btn-primary" href="#/map">Map<i class="fui-location"></i></a>
                 </div>
@@ -109,6 +112,23 @@
         </li>
 
       </div>
+      <h2> Welcome to Red Hook WiFi! </h2>
+      <p> Red Hook WiFi (RH WiFi) is a community-led effort to close the digital divide, generate economic opportunity, facilitate access to essential services and improve quality of life in Red Hook, Brooklyn via the deployment of a wireless Internet network.</p>
+        <p>We the Digital Stewards, young adults from the community, are helping to teach about, organize, and maintain the network, by providing this public wireless network for the community. Increasing the access, resources, and communication we have to the internet.</p>
+
+      <div id="rhiwifi-infomenu">
+        <a class="btn btn-small btn-block btn-info" href="#/about">About RHI WiFi</a>
+        <a class="btn btn-small btn-block btn-info" href="#/feedback">Feedback</a>
+        <a class="btn btn-small btn-block btn-info" href="#/contact">Contact Us</a>
+
+      </div>      
+
+      <div id="rhiwifi-appsmenu">
+        <a class="btn btn-small btn-block btn-success" href="https://rhiwifi.co/bus/">Where's the B61 bus? <i class="fui-location"></i></a>
+        <a class="btn btn-small btn-block btn-success" href="https://rhiwifi.co/stopfrisk/">Report Stop & Frisk <i class="fui-check-inverted-2"></i> </a>
+        <!-- <a class="btn btn-large btn-block btn-success" href="https://rhiwifi.co/status/">RHI Status  <i class="fui-radio-checked"></i></a> -->
+
+      </div> 
 
       <div id="content">
        

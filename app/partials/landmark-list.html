@@ -6,7 +6,7 @@
 
       <ul class="landmarks">
         <li class="thumbnail" style="padding-top:0px;">
-         <h3> ∆ Sessions happening</h3>
+         <h3> ∆ What's Happening?</h3>
           <button class="btn" ng-click="filter('now')">now </button> <button class="btn" ng-click="filter('soon')">soon</button> <button  class="btn" ng-click="filter('today')">today</button> <button class="btn" ng-click="filter('all')">all</button>
 
         </li>
@@ -15,7 +15,7 @@
 
           <form ng-submit="sessionSearch()">
             <input style="width:95%;" type="text" ng-model="searchText" size="30"
-                   placeholder="Search Sessions">
+                   placeholder="Search events">
             <input class="btn-primary" type="submit" value="search">
           </form>
 
@@ -33,7 +33,7 @@
           </li>
       </ul>
 
-       <li ng-show="!landmarks.length"> No sessions at this time @(ᵕ.ᵕ)@
+       <li ng-show="!landmarks.length"> Nothing at this time @(ᵕ.ᵕ)@
        </li>
 
     </div>
