@@ -10,6 +10,12 @@ var app = angular.module('Tidepools', ['tidepoolsFilters', 'tidepoolsServices','
   config(['$routeProvider', function($routeProvider) {
   $routeProvider.
       when('/', {templateUrl: 'partials/landmark-list.html', controller: LandmarkListCtrl}). 
+
+      when('/about', {templateUrl: 'partials/aboutRHIWiFi.html', controller: LandmarkListCtrl}). 
+      when('/contact', {templateUrl: 'partials/contact.html', controller: LandmarkListCtrl}). 
+      when('/feedback', {templateUrl: 'partials/feedback.html', controller: LandmarkListCtrl}). 
+      when('/partners', {templateUrl: 'partials/partners.html', controller: LandmarkListCtrl}). 
+
       when('/landmark/:landmarkId', {templateUrl: 'partials/landmark-detail.html', controller: LandmarkDetailCtrl}). 
       when('/landmark/:landmarkId/edit', {templateUrl: 'partials/landmark-edit.html', controller: LandmarkEditCtrl}). 
       when('/landmark/:landmarkId/:option', {templateUrl: 'partials/landmark-detail.html', controller: LandmarkDetailCtrl}). 
