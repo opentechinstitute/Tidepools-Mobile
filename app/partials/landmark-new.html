@@ -4,112 +4,65 @@
     <div class="span10">
       <!--Body content-->
 
-      <ul class="landmarks">
-        <li class="thumbnail" style="padding-top:0px;">
-         <h3> ∆ New Place / Event</h3>
+      <form>
+          <h3>Create new: </h3>
 
-
-        </li>
-
-      </ul>
-
-<!--           <form action="/file-upload"
-            class="dropzone"
-            id="my-awesome-dropzone">
-          </form>
-
-          <input type="file" name="file" /> -->
-      <form >
-          <p><label>Type: </label>
-              <input type="radio" ng-model="landmark.type" value="place" required/> Place
-              <input type="radio" ng-model="landmark.type" value="event" required/> Event 
+          <p>
+              <div style="padding-right:10px;"><input type="radio" ng-required="true" ng-model="landmark.type" value="place"/> <i style="font-size:25px;" class="fui-location"></i> Place</div>
+              <div style="padding-right:10px;"><input type="radio" ng-required="true" ng-model="landmark.type" value="event"/> <i style="font-size:25px;" class="fui-calendar-solid"></i> Event</div>
           </p>
 
-<!--           <div class="control-group input-append">
- -->          
-<!--           </div>
+<!--             <span ng-show="landmark.type == 'event' || landmark.type == 'place'">
  -->
-
-<!--             <div class="control-group input-append">
-              <input type="text" ng-model="datepicker.date" data-date-format="dd/mm/yyyy" bs-datepicker>
-              <button type="button" class="btn" data-toggle="datepicker"><i class="icon-calendar"></i></button>
-            </div> -->
-
-
-          <span class="btn btn-success fileinput-button">
-              <i class="icon-plus icon-white"></i>
-              <span>Add Profile Pic</span>
-              <input id="fileupload" type="file" name="files[]">
-          </span>
-          <div id="progress" class="progress">
-              <div class="bar" style="width: 0%;"></div>
-          </div>
-          <p id="uploadedpic"></p>
-          <div id="preview"></div>
-
-
-
-
-
-          <span ng-show="landmark.type == 'event'" type="text" >
-
-          <!--   <input type="text" ng-model="datepicker.date" data-date-format="dd/mm/yyyy" bs-datepicker>
-            <button type="button" class="btn" data-toggle="datepicker"><i class="icon-calendar"></i></button> -->
-
-
-
-                <p><label>Time Start:</label> <input type="text" ng-model="landmark.time.start" data-date-format="dd/mm/yyyy" bs-datepicker/>
-                <button type="button" class="btn" data-toggle="datepicker"><i class="icon-calendar"></i></button></p>  
-              
-
-
-                <p><label>Time End:</label> <input type="text" ng-model="landmark.time.end" data-date-format="dd/mm/yyyy" bs-datepicker/>                
-                <button type="button" class="btn" data-toggle="datepicker"><i class="icon-calendar"></i></button></p>  
-
-            </div>
-            
-
-          </span>
-
-          <p><label>Name:</label> <input type="text" name="landmark.name" ng:model="landmark.name" required/></p>
-          <p><label>Profile Picture:</label> <input type="text" name="landmark.stats.avatar" ng:model="landmark.stats.avatar" /></p>
-
-<!--           <p><label>Upload Profile Picture:</label> <input type="file" file-upload/></p>
- -->
-
-<!--           <div>
-              <input id="fileupload" type="file" name="files[]" data-url="/api/upload">
-
-          </div> -->
           
-          <button ng-click='addButtonClicked()'>Add File</button>
+                
+
+                <p><h4>Name of <span ng-show="landmark.type == 'event'"> Event</span><span ng-show="landmark.type == 'place'"> Place</span></h4> <input type="text" ng-required="true" name="landmark.name" ng:model="landmark.name" maxlength="50" /></p>
 
 
-      <!--     <div ng-controller="Ctrl">
-              <input type="file" file-upload multiple/>
-              <ul>
-                  <li ng-repeat="file in files">{{file.name}}</li>
-              </ul>
-          </div> -->
+                <span class="btn btn-success fileinput-button">
+                    <i class="icon-plus icon-white"></i>
+                    <span>Add Profile Pic</span>
+                    <input id="fileupload" type="file" name="files[]">
+                </span>
+                <br>
+                <div id="progress" class="progress">
+                    <div class="bar" style="width: 0%;"></div>
+                </div>
 
-          <p><label>Short Description:</label> <input type="text" name="landmark.shortDescription" ng:model="landmark.shortDescription" /></p>
-          <p><label>Description:</label> <input type="text" name="landmark.description" ng:model="landmark.description" /></p>
-          <p><label>Hashtags (Seperate with Commas):</label> <input type="text" name="landmark.tags" ng:model="landmark.tags" placeholder="Add hashtag for tweets"/></p>
-          <p><label>Video Embed:</label> <input type="text" name="landmark.video" ng:model="landmark.video" /></p>
-
-
-          <p><label><button ng:click="plot()">Add to Map</button></label> </p>
-
-          <p>And / Or</p>
-
-          <p><label>Add Street Address or Cross Streets </label> <input type="text" name="landmark.address" ng:model="landmark.address"/></p>
-          <p><label>Nicknames of Locations Nearby:</label> <input type="text" name="landmark.loc_nicknames" ng:model="landmark.loc_nicknames" /></p>
-
-          <p><label>Etherpad URL:</label> <input type="text" name="landmark.etherpad" ng:model="landmark.etherpad" /></p>
-
-          <input type="hidden" name="landmark.stats.avatar" ng:model="landmark.stats.avatar" size="45">
+                <p id="uploadedpic"></p>
+                <div id="preview"></div>         
 
 
+                <span ng-show="landmark.type == 'event'" type="text" >
+
+                      <p><label>Time Start</label> <input type="text" ng-model="landmark.time.start" data-date-format="dd/mm/yyyy hh:mm:ss" bs-datepicker/>
+                      <button type="button" class="btn" data-toggle="datepicker"><i class="icon-calendar"></i></button></p>  
+                    
+                      <p><label>Time End</label> <input type="text" ng-model="landmark.time.end" data-date-format="dd/mm/yyyy" bs-datepicker/>                
+                      <button type="button" class="btn" data-toggle="datepicker"><i class="icon-calendar"></i></button></p>  
+
+                </span>
+
+
+                <p><label>Short Description:</label> <textarea name="landmark.shortDescription" ng:model="landmark.shortDescription" maxlength="140"/></p>
+                <p><label>Description:</label> <textarea name="landmark.description" ng:model="landmark.description"></textarea></p>
+                <p><label>Hashtags (Seperate with Commas):</label> <input type="text" name="landmark.tags" ng:model="landmark.tags" placeholder="#example"/></p>
+                <p><label>Youtube Embed Code</label> <input type="text" name="landmark.video" ng:model="landmark.video" placeholder="Paste in Link"/></p>
+<!-- 
+                <span ng-show="landmark.video">
+
+                  <iframe width="300" height="169" src="//www.youtube.com/embed/{{landmark.video}}" frameborder="0" allowfullscreen></iframe>
+
+                </span> -->
+
+                  <div style="padding-left:5%; padding-right:5%;">
+                      <h4>Location:</h4> 
+                      <leaflet center="amc" markers="markers" ></leaflet>
+
+                      <p><input type="text" name="landmark.location" ng:model="landmark.location" placeholder="Example: Hicks and 9th Brooklyn NYC"/><button ng:click="locsearch()">Search</button></p>
+
+                  </div>
 
           <p> 
               <button ng:click="save()">Save</button>
@@ -117,9 +70,41 @@
               <button ng:click="cancel()">Cancel</button>
 
           </p>
+
+
+<!--           </span>
+ -->
+
       </form>    
 
+
+           
   
     </div>
+
+
   </div>
 </div>
+
+
+
+
+
+
+
+
+  <div modal="plotmap" style="width:100%; height:100%;" close="close()" options="opts">
+      <div class="modal-header">
+          <button class="btn-primary" ng-click="close()">Close X</button>  <h4>Click to Locate</h4>
+      </div>
+      <div class="modal-body">
+
+<!--           <canvas id="myCanvas" width="100%" height="100%"></canvas>
+ -->       
+      </div>
+  </div>
+
+
+
+
+

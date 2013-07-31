@@ -72,8 +72,12 @@ LandmarkDetailCtrl.$inject = ['Landmark', '$routeParams', '$scope', 'db'];
 
 function LandmarkNewCtrl($location, $scope, db) {
 
+ 
+    $scope.landmark = { stats: { avatar: "uploads/default.jpg" } };
 
-    $('#fileupload').fileupload({
+    //$scope.landmark.avatar = "uploads/default.jpg";
+
+    angular.element('#fileupload').fileupload({
         url: '/api/upload',
         dataType: 'text',
         progressall: function (e, data) {
@@ -83,26 +87,182 @@ function LandmarkNewCtrl($location, $scope, db) {
                 progress + '%'
             );
         },
-        done: function (e, data, $scope) {
+        done: function (e, data) {
 
             $('<p/>').text('Saved: '+data.originalFiles[0].name).appendTo('#uploadedpic');
-          //  $("#preview").append("<img id='previewImg' src='"data.result"'/>");
 
             $('<img src="'+ data.result +'">').load(function() {
               $(this).width(150).height(150).appendTo('#preview');
             });
 
-            $scope.landmark.avatar = data.result;
+            $scope.landmark.stats.avatar = data.result;
+
         }
     });
 
 
+    $scope.locsearch = function () {
+
+         //console.log($scope.landmark);
+         //db.landmarks.create($scope.landmark);
+
+        //  angular.element.ajax({
+        //   dataType: "json",
+        //   url: 'api/locsearch',
+        //   data: 'asdf',
+        //   success: success
+        // });
+
+       // $scope.landmark.locsearchquery = '220 hancock st brooklyn nyc';
+
+
+
+
+        var geocoder = new google.maps.Geocoder();
+
+          if (geocoder) {
+             geocoder.geocode({ 'address': $scope.landmark.location}, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                  //console.log(results[0].geometry.location);
+                  //$scope.markers.m.lat = results[0].geometry.location.jb;
+                  //$scope.markers.m.lng = results[0].geometry.location.jb;
+
+                  $scope.$apply(function () {
+                        
+                        angular.extend($scope, {
+                            amc: {
+                                lat: results[0].geometry.location.jb,
+                                lng: results[0].geometry.location.kb,
+                                zoom: 17
+                            },
+                            markers: {
+                                m: {
+                                    lat: results[0].geometry.location.jb,
+                                    lng: results[0].geometry.location.kb,
+                                    message: "Drag to Location",
+                                    focus: true,
+                                    draggable: true
+                                }
+                            }
+                        });
+
+                    });
+
+                  
+
+                    //scope.$apply();
+
+                } 
+                else {
+                  console.log('No results found: ' + status);
+                }
+             });
+          }
+
+         //GO TO 
+    }
+
+
+
     $scope.save = function () {
 
+
+
          console.log($scope.landmark);
+
+         $scope.landmark.loc = [$scope.markers.m.lat,$scope.markers.m.lng];
+
          db.landmarks.create($scope.landmark);
 
+         $location.path('/');
+         //GO TO 
     }
+
+    $scope.plot = function () {
+
+         //console.log($scope.landmark);
+
+         //db.landmarks.create($scope.landmark);
+         //GO TO 
+    }
+
+
+    $scope.open = function () {
+
+
+
+        $scope.plotmap = true;
+
+        // var canvas = document.getElementById('myCanvas');
+        // var context = canvas.getContext('2d');
+
+        // context.beginPath();
+        // context.moveTo(100, 150);
+        // context.lineTo(450, 50);
+        // context.stroke();
+
+    };
+
+    $scope.close = function () {
+        $scope.plotmap = false;
+    };
+
+    $scope.opts = {
+        backdropFade: true,
+        dialogFade:true
+    };
+
+    $scope.refresh = function () {
+
+        //$scope.$apply();
+
+        //console.log('adsf');
+
+        //$scope.$apply(function () {
+                        
+            // angular.extend($scope, {
+            //     amc: {
+            //         lat: 40.676752,
+            //         lng: -74.004618,
+            //         zoom: 17
+            //     },
+            //     markers: {
+            //         m: {
+            //             lat: 40.676752,
+            //             lng: -74.004618,
+            //             message: "Drag to Location",
+            //             focus: true,
+            //             draggable: true
+            //         }
+            //     }
+            // });
+
+        //});
+
+    }
+
+    angular.extend($scope, {
+        amc: {
+            lat: 40.676752,
+            lng: -74.004618,
+            zoom: 17
+        },
+        markers: {
+            m: {
+                lat: 40.676752,
+                lng: -74.004618,
+                message: "Drag to Location",
+                focus: true,
+                draggable: true
+            }
+
+        }
+    });
+
+    $scope.landmark.loc = [];
+
+        $scope.landmark.type = "place";
+
 
 
 }

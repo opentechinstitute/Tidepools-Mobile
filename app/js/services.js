@@ -32,7 +32,8 @@ angular.module('tidepoolsServices', ['ngResource'])
                     'group': {method:'PUT', params:{_id: 'group'}, isArray:true},            
                     'mapReduce': {method:'PUT', params:{_id: 'mapReduce'}, isArray:true},  
                     'aggregate': {method:'PUT', params:{_id: 'aggregate'}, isArray:true},
-                    'create':  {method:'POST', params:{_id: 'create'}, isArray:true}
+                    'create':  {method:'POST', params:{_id: 'create'}, isArray:true},
+                    'locsearch':  {method:'GET', params:{_id: 'locsearch'}, isArray:true}
                 }
             var db = {};
             db.landmarks = $resource('api/landmarks/:_id:id', {}, actions);

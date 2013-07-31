@@ -239,8 +239,18 @@ app.post('/api/upload',  function (req, res) {
 });
 
 
-app.listen(3001, function() {
-    console.log("Chillin' on 3001 ~ ~");
+app.get('/api/:collection/locsearch', function(req, res) { 
+
+    console.log('asdf');
+
+    res.send(req);
+
+
+});
+
+
+app.listen(3002, function() {
+    console.log("Chillin' on 3002 ~ ~");
 });
 
 
