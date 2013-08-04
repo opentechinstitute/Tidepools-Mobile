@@ -70,17 +70,30 @@ LandmarkDetailCtrl.$inject = ['Landmark', '$routeParams', '$scope', 'db'];
 
 
 
-function LandmarkNewCtrl($location, $scope, db) {
+function LandmarkNewCtrl($location, $scope, $routeParams, db) {
 
- 
-    $scope.landmark = { stats: { avatar: "uploads/default.jpg" } };
+    //routing
+    if ($routeParams.type == '' || $routeParams.type == 'place' || $routeParams.type == 'event' || $routeParams.type == 'job'){
 
-    //$scope.landmark.avatar = "uploads/default.jpg";
+    }
+    else {
+        $location.path('/new');
+    }
+
+    var currentDate = new Date();
+    //var currentDate = Date.today();
+
+    $scope.addEndDate = function () {
+        $scope.landmark.date.end = $scope.landmark.date.start;
+    }
 
     angular.element('#fileupload').fileupload({
         url: '/api/upload',
         dataType: 'text',
-        progressall: function (e, data) {
+        progressall: function (e, data) {  
+
+            $('#progress .bar').css('width', '0%');
+
             var progress = parseInt(data.loaded / data.total * 100, 10);
             $('#progress .bar').css(
                 'width',
@@ -88,6 +101,10 @@ function LandmarkNewCtrl($location, $scope, db) {
             );
         },
         done: function (e, data) {
+
+            $('#uploadedpic').html('');
+            $('#preview').html('');
+
 
             $('<p/>').text('Saved: '+data.originalFiles[0].name).appendTo('#uploadedpic');
 
@@ -103,29 +120,11 @@ function LandmarkNewCtrl($location, $scope, db) {
 
     $scope.locsearch = function () {
 
-         //console.log($scope.landmark);
-         //db.landmarks.create($scope.landmark);
-
-        //  angular.element.ajax({
-        //   dataType: "json",
-        //   url: 'api/locsearch',
-        //   data: 'asdf',
-        //   success: success
-        // });
-
-       // $scope.landmark.locsearchquery = '220 hancock st brooklyn nyc';
-
-
-
-
         var geocoder = new google.maps.Geocoder();
 
           if (geocoder) {
              geocoder.geocode({ 'address': $scope.landmark.location}, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
-                  //console.log(results[0].geometry.location);
-                  //$scope.markers.m.lat = results[0].geometry.location.jb;
-                  //$scope.markers.m.lng = results[0].geometry.location.jb;
 
                   $scope.$apply(function () {
                         
@@ -148,10 +147,6 @@ function LandmarkNewCtrl($location, $scope, db) {
 
                     });
 
-                  
-
-                    //scope.$apply();
-
                 } 
                 else {
                   console.log('No results found: ' + status);
@@ -166,78 +161,86 @@ function LandmarkNewCtrl($location, $scope, db) {
 
     $scope.save = function () {
 
+        
+        if (!$scope.landmark.date.end){
 
+            $scope.landmark.date.end = $scope.landmark.date.start;
+        }
 
-         console.log($scope.landmark);
+        //---- Date String converter to avoid timezone issues...could be optimized probably -----//
+        $scope.landmark.date.start = new Date($scope.landmark.date.start).toISOString();
+        $scope.landmark.date.end = new Date($scope.landmark.date.end).toISOString();
 
-         $scope.landmark.loc = [$scope.markers.m.lat,$scope.markers.m.lng];
+        $scope.landmark.date.start = dateConvert($scope.landmark.date.start);
+        $scope.landmark.date.end = dateConvert($scope.landmark.date.end);
 
-         db.landmarks.create($scope.landmark);
+        $scope.landmark.date.start = $scope.landmark.date.start.replace(/(\d+)-(\d+)-(\d+)/, '$2-$3-$1'); //rearranging so value still same in input field
+        $scope.landmark.date.end = $scope.landmark.date.end.replace(/(\d+)-(\d+)-(\d+)/, '$2-$3-$1');
 
-         $location.path('/');
+        function dateConvert(input){
+            var s = input;
+            var n = s.indexOf('T');
+            return s.substring(0, n != -1 ? n : s.length);
+        }
+        //-----------//
+
+        if (!$scope.landmark.time.start){
+            $scope.landmark.time.start = "00:00";
+        }
+
+        if (!$scope.landmark.time.end){
+            $scope.landmark.time.end = "23:59";
+        }
+
+        $scope.landmark.loc = [$scope.markers.m.lat,$scope.markers.m.lng];
+        db.landmarks.create($scope.landmark, function(response){
+
+            console.log('/landmark/'+response[0].id);
+            $location.path('/landmark/'+response[0].id);
+        });
+
+        //console.log($scope.landmark);
+
+         //$location.path('/');
          //GO TO 
     }
 
-    $scope.plot = function () {
+    // $scope.plot = function () {
 
-         //console.log($scope.landmark);
+    //      //console.log($scope.landmark);
 
-         //db.landmarks.create($scope.landmark);
-         //GO TO 
-    }
-
-
-    $scope.open = function () {
+    //      //db.landmarks.create($scope.landmark);
+    //      //GO TO 
+    // }
 
 
+    // $scope.open = function () {
 
-        $scope.plotmap = true;
 
-        // var canvas = document.getElementById('myCanvas');
-        // var context = canvas.getContext('2d');
 
-        // context.beginPath();
-        // context.moveTo(100, 150);
-        // context.lineTo(450, 50);
-        // context.stroke();
+    //     $scope.plotmap = true;
 
-    };
+    //     // var canvas = document.getElementById('myCanvas');
+    //     // var context = canvas.getContext('2d');
 
-    $scope.close = function () {
-        $scope.plotmap = false;
-    };
+    //     // context.beginPath();
+    //     // context.moveTo(100, 150);
+    //     // context.lineTo(450, 50);
+    //     // context.stroke();
 
-    $scope.opts = {
-        backdropFade: true,
-        dialogFade:true
-    };
+    // };
+
+    // $scope.close = function () {
+    //     $scope.plotmap = false;
+    // };
+
+    // $scope.opts = {
+    //     backdropFade: true,
+    //     dialogFade:true
+    // };
 
     $scope.refresh = function () {
 
-        //$scope.$apply();
-
-        //console.log('adsf');
-
-        //$scope.$apply(function () {
-                        
-            // angular.extend($scope, {
-            //     amc: {
-            //         lat: 40.676752,
-            //         lng: -74.004618,
-            //         zoom: 17
-            //     },
-            //     markers: {
-            //         m: {
-            //             lat: 40.676752,
-            //             lng: -74.004618,
-            //             message: "Drag to Location",
-            //             focus: true,
-            //             draggable: true
-            //         }
-            //     }
-            // });
-
-        //});
 
     }
 
@@ -259,9 +262,20 @@ function LandmarkNewCtrl($location, $scope, db) {
         }
     });
 
+    $scope.landmark = { 
+        stats: { 
+            avatar: "uploads/default.jpg" 
+        },
+        type: $routeParams.type,
+        date: {
+            start: currentDate
+        }
+    };
+
+
     $scope.landmark.loc = [];
 
-        $scope.landmark.type = "place";
+
 
 
 

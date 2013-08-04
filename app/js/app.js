@@ -8,7 +8,8 @@ var app = angular.module('Tidepools', ['tidepoolsFilters', 'tidepoolsServices','
   $routeProvider.
       when('/', {templateUrl: 'partials/landmark-list.html', controller: LandmarkListCtrl}). //loading template with controller
       when('/landmark/:landmarkId', {templateUrl: 'partials/landmark-detail.html', controller: LandmarkDetailCtrl}). //loading template + controller
-      when('/new', {templateUrl: 'partials/landmark-new.html', controller: LandmarkNewCtrl}). //loading template + controller
+      when('/new', {templateUrl: 'partials/landmark-new.html'}). //loading template + controller
+      when('/new/:type', {templateUrl: 'partials/landmark-new-type.html', controller: LandmarkNewCtrl}). //loading template + controller
       when('/talk', {templateUrl: 'partials/talk-list.html', controller: talklistCtrl}). //loading template + controller
       when('/talk/:hashTag', {templateUrl: 'partials/talk-tag.html', controller: talktagCtrl}). //loading template + controller
       when('/map', {templateUrl: 'partials/map.html', controller: mapCtrl}). //loading template + controller

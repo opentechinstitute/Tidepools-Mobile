@@ -11,5 +11,16 @@ angular.module('tidepoolsFilters', []).filter('hashtag', function() {
 		return t.link("#/talk/"+tag);
 	});
   };
+})
+
+
+.filter('youtubestrip', function() {
+  return function(input) {
+  		if(input){
+  			var newstr = input.replace(/^[^_]*=/, "");
+			return newstr;
+  		}
+  };
 });
+
 

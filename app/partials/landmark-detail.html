@@ -14,11 +14,12 @@
   <br>
   <h5><a ng-href="#/map/{{landmark.loc_nicknames_stripe[0]}}"<i class="fui-location"></i>{{landmark.loc_nicknames[0]}}</a></h5>
   <br>
+  <span ng-show="landmark.type == 'place'"><i style="font-size:25px;" class="fui-location"></i></span><span ng-show="landmark.type == 'event'"><i style="font-size:25px;" class="fui-calendar-solid"></i> </span><span ng-show="landmark.type == 'job'"><i style="font-size:25px;" class="fui-user"></i></span>
   <li>
     <dl>
       <dt>{{landmark.time.start | date:'h:mm a EEEE d MMMM'}}</dt>
       <dt>TRACK: {{landmark.category}}</dt>
-      <dt>TYPE: {{landmark.subType}}</dt>
+      <dt>TYPE: {{landmark.type}}</dt>
     </dl>
   </li>
 
