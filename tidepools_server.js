@@ -6,7 +6,7 @@
   '-' `-`-'`-`=='|`-'  `-'  `-' `-`==' Mobile ≈☯ v0.3
                  |
                  '
-  Open Technology Institute & J.R. Baldwin
+  J.R. Baldwin & Open Technology Institute  
   tidepools.co <3 <3 <3 
 */
 

@@ -34,6 +34,8 @@ LandmarkListCtrl.$inject = [ '$location', '$scope', 'db'];
 
 function LandmarkDetailCtrl(Landmark, $routeParams, $scope, db, $location) {  
 
+    $scope.option = $routeParams.option;
+
     $scope.landmark = Landmark.get({_id: $routeParams.landmarkId}, function(landmark) {
         $scope.mainImageUrl = landmark.stats.avatar;
         $scope.time = "all";
@@ -64,6 +66,10 @@ function LandmarkDetailCtrl(Landmark, $routeParams, $scope, db, $location) {
 
     $scope.goBack = function(){
         window.history.back();
+    }
+
+    $scope.edit = function(){
+        alert('Editing abilities soon');
     }
 }
 LandmarkDetailCtrl.$inject = ['Landmark', '$routeParams', '$scope', 'db'];
@@ -195,14 +201,10 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
         $scope.landmark.loc = [$scope.markers.m.lat,$scope.markers.m.lng];
         db.landmarks.create($scope.landmark, function(response){
 
-            console.log('/landmark/'+response[0].id);
-            $location.path('/landmark/'+response[0].id);
+            $location.path('/landmark/'+response[0].id+'/new');
         });
 
-        //console.log($scope.landmark);
 
-         //$location.path('/');
-         //GO TO 
     }
 
     // $scope.plot = function () {
@@ -264,7 +266,7 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
 
     $scope.landmark = { 
         stats: { 
-            avatar: "uploads/default.jpg" 
+            avatar: "img/tidepools/default.jpg" 
         },
         type: $routeParams.type,
         date: {
@@ -275,13 +277,170 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
 
     $scope.landmark.loc = [];
 
+}
+
+LandmarkNewCtrl.$inject = ['$location', '$scope', '$routeParams','db'];
 
 
 
+function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db) {
+
+    //console.log($routeParams.landmarkId);
+
+    Landmark.get({_id: $routeParams.landmarkId}, function(landmark) {
+
+        $scope.landmark = landmark;
+
+        angular.extend($scope, {
+            amc: {
+                lat: $scope.landmark.loc[0],
+                lng: $scope.landmark.loc[1],
+                zoom: 17
+            },
+            markers: {
+                m: {
+                    lat: $scope.landmark.loc[0],
+                    lng: $scope.landmark.loc[1],
+                    message: "Drag to Location",
+                    focus: true,
+                    draggable: true
+                }
+            }
+        });
+        
+    });
+
+    //console.log($scope.landmark);
+
+
+
+    var currentDate = new Date();
+    //var currentDate = Date.today();
+
+    $scope.addEndDate = function () {
+        $scope.landmark.date.end = $scope.landmark.date.start;
+    }
+
+    angular.element('#fileupload').fileupload({
+        url: '/api/upload',
+        dataType: 'text',
+        progressall: function (e, data) {  
+
+            $('#progress .bar').css('width', '0%');
+
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .bar').css(
+                'width',
+                progress + '%'
+            );
+        },
+        done: function (e, data) {
+
+            $('#uploadedpic').html('');
+            $('#preview').html('');
+
+
+            $('<p/>').text('Saved: '+data.originalFiles[0].name).appendTo('#uploadedpic');
+
+            $('<img src="'+ data.result +'">').load(function() {
+              $(this).width(150).height(150).appendTo('#preview');
+            });
+
+            $scope.landmark.stats.avatar = data.result;
+
+        }
+    });
+
+
+    $scope.locsearch = function () {
+
+        var geocoder = new google.maps.Geocoder();
+
+          if (geocoder) {
+             geocoder.geocode({ 'address': $scope.landmark.location}, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+
+                  $scope.$apply(function () {
+                        
+                        angular.extend($scope, {
+                            amc: {
+                                lat: results[0].geometry.location.jb,
+                                lng: results[0].geometry.location.kb,
+                                zoom: 17
+                            },
+                            markers: {
+                                m: {
+                                    lat: results[0].geometry.location.jb,
+                                    lng: results[0].geometry.location.kb,
+                                    message: "Drag to Location",
+                                    focus: true,
+                                    draggable: true
+                                }
+                            }
+                        });
+
+                    });
+
+                } 
+                else {
+                  console.log('No results found: ' + status);
+                }
+             });
+          }
+
+         //GO TO 
+    }
+
+
+
+    $scope.save = function () {
+
+        
+        if (!$scope.landmark.date.end){
+
+            $scope.landmark.date.end = $scope.landmark.date.start;
+        }
+
+        //---- Date String converter to avoid timezone issues...could be optimized probably -----//
+        $scope.landmark.date.start = new Date($scope.landmark.date.start).toISOString();
+        $scope.landmark.date.end = new Date($scope.landmark.date.end).toISOString();
+
+        $scope.landmark.date.start = dateConvert($scope.landmark.date.start);
+        $scope.landmark.date.end = dateConvert($scope.landmark.date.end);
+
+        $scope.landmark.date.start = $scope.landmark.date.start.replace(/(\d+)-(\d+)-(\d+)/, '$2-$3-$1'); //rearranging so value still same in input field
+        $scope.landmark.date.end = $scope.landmark.date.end.replace(/(\d+)-(\d+)-(\d+)/, '$2-$3-$1');
+
+        function dateConvert(input){
+            var s = input;
+            var n = s.indexOf('T');
+            return s.substring(0, n != -1 ? n : s.length);
+        }
+        //-----------//
+
+        if (!$scope.landmark.time.start){
+            $scope.landmark.time.start = "00:00";
+        }
+
+        if (!$scope.landmark.time.end){
+            $scope.landmark.time.end = "23:59";
+        }
+
+        $scope.landmark.loc = [$scope.markers.m.lat,$scope.markers.m.lng];
+        db.landmarks.create($scope.landmark, function(response){
+
+            $location.path('/landmark/'+response[0].id+'/new');
+        });
+
+
+    }
+
+
+   
 
 }
 
-LandmarkListCtrl.$inject = ['$location', '$scope', 'db'];
+LandmarkEditCtrl.$inject = ['Landmark','$location', '$scope', '$routeParams','db'];
 
 
 
@@ -426,148 +585,151 @@ mapCtrl.$inject = [ '$location', '$scope', 'db'];
 function maplocCtrl($location, $scope, $routeParams, db) {
 
 
-        $scope.currentLoc = $routeParams.loc;
+        //$scope.currentLoc = $routeParams.loc;
+        $scope.lat = $routeParams.lat;
+        $scope.lng = $routeParams.lng;
 
-        loc_nicknames = {
 
-            McGregor_E : {
-                lat: 42.36271390643378,
-                lng: -83.07880640029907
-            },
-            Hilberry_C : {
-                lat: 42.36647141605843,
-                lng: -83.04028987884521
-            },
-            Education_204 : {
-                lat: 42.3502982579399,
-                lng: -83.07427883148193
-            },
-            Art_Ed_157 : {
-                lat: 42.35843292541744,
-                lng: -83.07511568069457
-            },
-            Community_Arts_Auditorium: {
-                lat: 42.36650312404415,
-                lng: -83.05760622024536
-            },
-            Art_Ed_156: {
-                lat: 42.35719614326714,
-                lng: -83.07335615158081
-            },
-            Hilberry_B: {
-                lat: 42.366423854049806,
-                lng: -83.0387020111084
-            },
-            Art_Ed_162: {
-                lat: 42.35648260403089,
-                lng: -83.06754112243651
-            },
-            McGregor_LM: {
-                lat: 42.36261877669108,
-                lng: -83.06801319122314
-            },
-            Education_189: {
-                lat: 42.346000571932635,
-                lng: -83.08202505111693
-            },
-            Hilberry_A: {
-                lat: 42.36658239393847,
-                lng: -83.03694248199463
-            },
-            Art_Ed_154: {
-                lat: 42.357132717885335,
-                lng: -83.07477235794066
-            },
-            Education_169: {
-                lat: 42.345984712768576,
-                lng: -83.08539390563965
-            },
-            McGregor_J: {
-                lat: 42.36566285701487,
-                lng: -83.07786226272583
-            },
-            Education_300: {
-                lat: 42.35099600949203,
-                lng: -83.05988073348999
-            },
-            North_side_of_McGregor: {
-                lat: 42.364109126111664,
-                lng: -83.08820486068726
-            },
-            McGregor_BC: {
-                lat: 42.362840745866635,
-                lng: -83.08374166488647
-            },
-            McGregor_Lobby: {
-                lat: 42.36415668987275,
-                lng: -83.08492183685303
-            },
-            McGregor_FGH: {
-                lat: 42.36288831058794,
-                lng: -83.07550191879272
-            },
-            Towers_Lounge_: {
-                lat: 42.352930643737494,
-                lng: -83.0432939529419
-            },
-            Cass_Cafe_: {
-                lat: 42.3486807131878,
-                lng: -83.03953886032104
-            },
-            Museum_of_Contemporary_Art_Detroit: {
-                lat: 42.348268391201444,
-                lng: -83.03762912750243
-            },
-            Charles_Wright_Museum_of_African_American_History: {
-                lat: 42.35018725129699,
-                lng: -83.03619146347046
-            },
-            Wasabi_Restaurant: {
-                lat: 42.353057502919036,
-                lng: -83.03797245025633
-            },
-            McGregor: {
-                lat: 42.3641249807027,
-                lng: -83.08665990829468
-            },
-            Art_Ed_161: {
-                lat: 42.35822679674948,
-                lng: -83.07157516479492
-            },
-            McGregor_I: {
-                lat: 42.36607506488643,
-                lng: -83.07382822036743
-            },
-            Outer_Galleries: {
-                lat: 42.36466403441681,
-                lng: -83.05742383003235
-            },
-            Majestic_Theater_Complex: {
-                lat: 42.34741202151109,
-                lng: -83.03762912750243
-            },
-            The_Commons_: {
-                lat: 42.36407741691762,
-                lng: -83.08193922042847
-            },
-            McGregor_A: {
-                lat: 42.36269805148666,
-                lng: -83.08674573898315
-            }
-       };
+       //  loc_nicknames = {
+
+       //      McGregor_E : {
+       //          lat: 42.36271390643378,
+       //          lng: -83.07880640029907
+       //      },
+       //      Hilberry_C : {
+       //          lat: 42.36647141605843,
+       //          lng: -83.04028987884521
+       //      },
+       //      Education_204 : {
+       //          lat: 42.3502982579399,
+       //          lng: -83.07427883148193
+       //      },
+       //      Art_Ed_157 : {
+       //          lat: 42.35843292541744,
+       //          lng: -83.07511568069457
+       //      },
+       //      Community_Arts_Auditorium: {
+       //          lat: 42.36650312404415,
+       //          lng: -83.05760622024536
+       //      },
+       //      Art_Ed_156: {
+       //          lat: 42.35719614326714,
+       //          lng: -83.07335615158081
+       //      },
+       //      Hilberry_B: {
+       //          lat: 42.366423854049806,
+       //          lng: -83.0387020111084
+       //      },
+       //      Art_Ed_162: {
+       //          lat: 42.35648260403089,
+       //          lng: -83.06754112243651
+       //      },
+       //      McGregor_LM: {
+       //          lat: 42.36261877669108,
+       //          lng: -83.06801319122314
+       //      },
+       //      Education_189: {
+       //          lat: 42.346000571932635,
+       //          lng: -83.08202505111693
+       //      },
+       //      Hilberry_A: {
+       //          lat: 42.36658239393847,
+       //          lng: -83.03694248199463
+       //      },
+       //      Art_Ed_154: {
+       //          lat: 42.357132717885335,
+       //          lng: -83.07477235794066
+       //      },
+       //      Education_169: {
+       //          lat: 42.345984712768576,
+       //          lng: -83.08539390563965
+       //      },
+       //      McGregor_J: {
+       //          lat: 42.36566285701487,
+       //          lng: -83.07786226272583
+       //      },
+       //      Education_300: {
+       //          lat: 42.35099600949203,
+       //          lng: -83.05988073348999
+       //      },
+       //      North_side_of_McGregor: {
+       //          lat: 42.364109126111664,
+       //          lng: -83.08820486068726
+       //      },
+       //      McGregor_BC: {
+       //          lat: 42.362840745866635,
+       //          lng: -83.08374166488647
+       //      },
+       //      McGregor_Lobby: {
+       //          lat: 42.36415668987275,
+       //          lng: -83.08492183685303
+       //      },
+       //      McGregor_FGH: {
+       //          lat: 42.36288831058794,
+       //          lng: -83.07550191879272
+       //      },
+       //      Towers_Lounge_: {
+       //          lat: 42.352930643737494,
+       //          lng: -83.0432939529419
+       //      },
+       //      Cass_Cafe_: {
+       //          lat: 42.3486807131878,
+       //          lng: -83.03953886032104
+       //      },
+       //      Museum_of_Contemporary_Art_Detroit: {
+       //          lat: 42.348268391201444,
+       //          lng: -83.03762912750243
+       //      },
+       //      Charles_Wright_Museum_of_African_American_History: {
+       //          lat: 42.35018725129699,
+       //          lng: -83.03619146347046
+       //      },
+       //      Wasabi_Restaurant: {
+       //          lat: 42.353057502919036,
+       //          lng: -83.03797245025633
+       //      },
+       //      McGregor: {
+       //          lat: 42.3641249807027,
+       //          lng: -83.08665990829468
+       //      },
+       //      Art_Ed_161: {
+       //          lat: 42.35822679674948,
+       //          lng: -83.07157516479492
+       //      },
+       //      McGregor_I: {
+       //          lat: 42.36607506488643,
+       //          lng: -83.07382822036743
+       //      },
+       //      Outer_Galleries: {
+       //          lat: 42.36466403441681,
+       //          lng: -83.05742383003235
+       //      },
+       //      Majestic_Theater_Complex: {
+       //          lat: 42.34741202151109,
+       //          lng: -83.03762912750243
+       //      },
+       //      The_Commons_: {
+       //          lat: 42.36407741691762,
+       //          lng: -83.08193922042847
+       //      },
+       //      McGregor_A: {
+       //          lat: 42.36269805148666,
+       //          lng: -83.08674573898315
+       //      }
+       // };
 
       
         angular.extend($scope, {
                 amc: {
-                    lat: loc_nicknames[$routeParams.loc].lat,
-                    lng: loc_nicknames[$routeParams.loc].lng,
-                    zoom: 18
+                    lat: $scope.lat,
+                    lng: $scope.lng,
+                    zoom: 16
                 },
                 markers: {
                     m: {
-                        lat: loc_nicknames[$routeParams.loc].lat,
-                        lng: loc_nicknames[$routeParams.loc].lng,
-                        message: $routeParams.loc,
+                        lat: $scope.lat,
+                        lng: $scope.lng,
+                        message: $routeParams.name,
                         focus: true
                     }
 

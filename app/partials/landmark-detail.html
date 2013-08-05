@@ -1,32 +1,42 @@
 
 <div style='padding-left:5px; padding-right:5px; width:99%;'>
-  <button class="btn" ng-click="goBack()">< BACK </button>
-  <br>
-  <img ng-src="{{mainImageUrl}}" class="landmark">
-  <h3>{{landmark.name}}</h3>
-  <h5>#{{landmark.tags[0]}} </h5>
-  <br>
-  <a class="btn btn-large btn-block btn-info" ng-click="open()" href="">Notes (Etherpad)<i class="fui-new"></i></a>
+  <span ng-hide="option == 'new' "><button class="btn" ng-click="goBack()">< BACK </button></span>
+  <span ng-show="option == 'new' "><button class="btn" ng-click="edit()"> EDIT <i class="fui-new"></i></button></span>
 
-
+  <br>
+  <br>
+  <img ng-src="{{mainImageUrl}}" class="landmark" style="width:90px; height:90px;">
+   <h3> <span ng-show="landmark.type == 'place'"><i style="font-size:25px;" class="fui-location"></i></span><span ng-show="landmark.type == 'event'"><i style="font-size:25px;" class="fui-calendar-solid"></i> </span><span ng-show="landmark.type == 'job'"><i style="font-size:25px;" class="fui-user"></i></span>{{landmark.name}}</h3>
+  <h4>#{{landmark.tags[0]}} </h4>
+<!--   <a class="btn btn-large btn-block btn-info" ng-click="open()" href="">Notes (Etherpad)<i class="fui-new"></i></a>
+ -->
 
 <ul class="specs">
-  <br>
-  <h5><a ng-href="#/map/{{landmark.loc_nicknames_stripe[0]}}"<i class="fui-location"></i>{{landmark.loc_nicknames[0]}}</a></h5>
-  <br>
-  <span ng-show="landmark.type == 'place'"><i style="font-size:25px;" class="fui-location"></i></span><span ng-show="landmark.type == 'event'"><i style="font-size:25px;" class="fui-calendar-solid"></i> </span><span ng-show="landmark.type == 'job'"><i style="font-size:25px;" class="fui-user"></i></span>
+
+  <h5><a ng-href="#/map/coordinates/{{landmark.loc[0]}}/{{landmark.loc[1]}}/{{landmark.name}}"<i class="fui-location"></i><span ng-hide="landmark.loc_nicknames">Map Location</button></span>{{landmark.loc_nicknames[0]}}</a></h5>
+
   <li>
     <dl>
-      <dt>{{landmark.time.start | date:'h:mm a EEEE d MMMM'}}</dt>
-      <dt>TRACK: {{landmark.category}}</dt>
-      <dt>TYPE: {{landmark.type}}</dt>
+      <h5>{{landmark.type}}</h5>
+      <dt style="color:grey;">Starts </dt>
+      <dt>{{landmark.time.start | date:'MMMM d EEEE h:mm a'}}</dt>
+      <dt style="color:grey;">Ends: </dt>
+      <dt>{{landmark.time.end | date:'MMMM d EEEE h:mm a'}}</dt>
     </dl>
   </li>
 
-   <p>{{landmark.description}}</p>
+  <span ng-show="landmark.video">
+
+    <iframe width="95%" height="300" src="//www.youtube.com/embed/{{landmark.video | youtubestrip}}" frameborder="0" allowfullscreen></iframe>
+
+  </span>
+  <br><br><hr>
+  
+  <p>{{landmark.description}}</p>
 
 
- </ul>
+</ul>
+
 
   <ul class="feed" style="padding-left:5px; padding-right:5px;">
         <!-- FILTER QUERY?? for HASH? -->
@@ -49,7 +59,7 @@
         </li>  
 
 
-        <li ng-show="!tweets.length"> No tweets from #{{currentTag}} yet @(ᵕ.ᵕ)@ </li>
+        <li ng-show="!tweets.length"> No tweets from #{{currentTag}} yet </li>
 
      </ul>
 

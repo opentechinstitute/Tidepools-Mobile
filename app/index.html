@@ -8,7 +8,7 @@
   '-' `-`-'`-`=='|`-'  `-'  `-' `-`==' Mobile ≈☯ v0.3
                  |
                  '
-  Open Technology Institute & J.R. Baldwin
+    J.R. Baldwin & Open Technology Institute
 
     Contributors: Lisa J. Lovchik, Nicholas Frota, Hilal Koyuncu
 
@@ -63,14 +63,14 @@
   <div id="wrapper">
 
       <div id="menu">
-        <h3>Sessions Now</h3>
+        <h3>Events</h3>
         <ul>
           <div ng-controller="sessionsNow">
             <li ng-repeat="landmark in landmarks | filter:query | orderBy:orderProp">
               <h3>∆ <a ng-href="#/session/{{landmark.id}}">{{landmark.name}}</a></h3>
               <br>
             </li>
-            <li ng-show="!landmarks.length"> No sessions now (◕︵◕) </li>
+            <li ng-show="!landmarks.length"> No events coming up</li>
           </div>
         </ul>
         <img src="images/nyan.gif">
@@ -86,7 +86,7 @@
 
             <div class="btn-toolbar" style="margin-top:0px;">
                 <div class="btn-group">
-                  <a class="btn btn-primary" href="#">Sessions<i class="fui-time"></i></a>
+                  <a class="btn btn-primary" href="#">Events<i class="fui-time"></i></a>
                   <a class="btn btn-primary" href="#/talk">Talk<i class="fui-chat"></i></a>
                   <a class="btn btn-primary" href="#/map">Map<i class="fui-location"></i></a>
                 </div>
