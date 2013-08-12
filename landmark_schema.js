@@ -22,6 +22,12 @@ monguurl = require('monguurl');
 			start: { type: Date},
 			end: { type: Date}
 		},
+		timetext: {
+			datestart: String,
+			dateend: String,
+			timestart: String,
+			timeend: String
+		},
 		stats: { 
 			avatar: String,  //based off loc_nickname, point to room # avatar in /assets/images or based on track
 			level: Number,
@@ -43,7 +49,7 @@ monguurl = require('monguurl');
 		etherpad: String,
 		loc_nicknames : [String], //room name "i.e. Hilberry A"
 		loc_nicknames_stripe : [String],
-		tags: [String], //hashtag for session from field_2013hash
+		tags: String, 
 		permissions: {
 			hidden: Boolean,
 			viewers: [String],

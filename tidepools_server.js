@@ -38,6 +38,8 @@ db_mongoose.on('error', console.error.bind(console, 'connection error:'));
 var express = require('express'),
     app = module.exports.app = express(), 
     db = require('mongojs').connect('redhook');
+
+
     
 app.configure(function () {
 	app.use(express.favicon());
@@ -177,7 +179,9 @@ app.get('/api/:collection/:id', function(req, res) {
 // Save 
 app.post('/api/:collection/create', function(req, res) {
 
-    console.log(req.body);
+    //console.log(req.body);
+
+   // console.log(req);
 
     if (!req.body.name){
         console.log('must have name');
@@ -186,7 +190,24 @@ app.post('/api/:collection/create', function(req, res) {
     else {
 
         //FIND UNique ID based on user inputted Name
-        var uniqueIDer = urlify(req.body.name);
+
+        if (req.body._id){ //detecting if new landmark or an edit
+            if (req.body.idCheck == req.body.id){
+                saveLandmark(req.body.id);
+            }
+            else {
+                idGen(req.body.name);
+            }
+        }
+
+        else {
+            idGen(req.body.name);
+        }
+    }
+
+    function idGen(input){
+
+        var uniqueIDer = urlify(input);
         urlify(uniqueIDer, function(){
             db.collection('landmarks').findOne({'id':uniqueIDer}, function(err, data){
 
@@ -226,77 +247,157 @@ app.post('/api/:collection/create', function(req, res) {
 
     function saveLandmark(finalID){
 
-        var landmarkModel = mongoose.model('landmark', landmarkSchema, 'landmarks');  // compiling schema model into mongoose
+   
+        if (req.body._id){ //temp way to detect landmark edit
 
-        var lm = new landmarkModel();
 
-        lm.name = req.body.name;
-        lm.id = finalID;
-        lm.type = req.body.type;
-        lm.stats.avatar = req.body.stats.avatar;
+            var landmarkModel = mongoose.model('landmark', landmarkSchema, 'landmarks');
 
-        if (req.body.description){
-            lm.description = req.body.description;
+            landmarkModel.findOne({ id: req.body.id }, function (err, lm) {
+
+                if (err)
+                    console.log(err);
+
+                else {
+
+                    lm.name = req.body.name;
+                    lm.id = finalID;
+                    lm.type = req.body.type;
+                    lm.stats.avatar = req.body.stats.avatar;
+
+                    if (req.body.description){
+                        lm.description = req.body.description;
+                    }
+                    if (req.body.shortDescription){
+                        lm.shortDescription = req.body.shortDescription;
+                    }
+                    if (req.body.video){
+                        lm.video = req.body.video;
+                    }
+
+                    if (req.body.type == "event"){
+
+                        lm.timetext.datestart = req.body.datetext.start;
+                        lm.timetext.dateend = req.body.datetext.end;
+                        lm.timetext.timestart = req.body.timetext.start;
+                        lm.timetext.timeend = req.body.timetext.end;
+
+                        //------ Combining Date and Time values -----//
+                        var timeStart = req.body.time.start;
+                        var timeEnd = req.body.time.end;
+
+                        var dateStart = req.body.date.start;
+                        var dateEnd = req.body.date.end;
+
+                        var datetimeStart = new Date(dateStart+' '+timeStart);
+                        var datetimeEnd = new Date(dateEnd+' '+timeEnd);
+                        //----------//
+
+                        lm.time.start = datetimeStart;
+                        lm.time.end = datetimeEnd;
+                    }
+                    
+                    lm.loc.length = 0;
+                    lm.loc.unshift(req.body.loc[0],req.body.loc[1]);
+
+                    if (req.body.location){
+                        lm.loc_nicknames.addToSet(req.body.location);
+                    }    
+
+                    if (req.body.tags){
+                        
+                        var newTag = req.body.tags.replace(/[^A-Za-z]+/g, '');
+                        //lm.tags.addToSet(newTag);
+                        lm.tags = newTag;
+                        
+                    }     
+
+                    lm.save(function (err, landmark) {
+                        if (err)
+                            console.log(err);
+                        else{
+                            console.log(null, landmark);
+                            //console.log(finalID);
+                            var idArray = [{'id': finalID}];
+                            res.send(idArray);
+                        }
+                    });
+                }
+            });         
         }
-        if (req.body.shortDescription){
-            lm.shortDescription = req.body.shortDescription;
-        }
-        if (req.body.video){
-            lm.video = req.body.video;
-        }
-
-        if (req.body.type == "event"){
-
-            //------ Combining Date and Time values -----//
-            var timeStart = req.body.time.start;
-            var timeEnd = req.body.time.end;
-
-            var dateStart = req.body.date.start;
-            var dateEnd = req.body.date.end;
-
-            var datetimeStart = new Date(dateStart+' '+timeStart);
-            var datetimeEnd = new Date(dateEnd+' '+timeEnd);
-            //----------//
-
-            lm.time.start = datetimeStart;
-            lm.time.end = datetimeEnd;
-        }
-        
-
-        lm.loc.unshift(req.body.loc[0],req.body.loc[1]);
-
-        if (req.body.location){
-            lm.loc_nicknames.addToSet(req.body.location);
-        }    
-
-        if (req.body.tags){
-            
-            //temporarily allowing only one #hastag per entry
-            //var tagArray = req.body.tags.split(',');
-            var newTag = req.body.tags.replace(/[^A-Za-z]+/g, '');
-            lm.tags.addToSet(newTag);
-            // for (var i = 0; i < tagArray.length; i++) {
-            //     var regexp = /\#\w\w+\s?/g;
-            //     //var newTag = tagArray[i].replace(regexp, '');
-            //     var newTag = tagArray[i].replace(regexp, '');
-            //    // var newTag = tagArray[i].replace(/\b\#\w+/g, ''); 
-            //     console.log(newTag);
-            //     lm.tags.addToSet(newTag);
-            // }
-        }     
      
+         else {
 
-        lm.save(function (err, landmark) {
-            if (err)
-                console.log(err);
-            else{
-                console.log(null, landmark);
-                //console.log(finalID);
-                var idArray = [{'id': finalID}];
-                res.send(idArray);
-            }
-        });
+                var landmarkModel = mongoose.model('landmark', landmarkSchema, 'landmarks');  
+                var lm = new landmarkModel();
 
+                lm.name = req.body.name;
+                lm.id = finalID;
+                lm.type = req.body.type;
+                lm.stats.avatar = req.body.stats.avatar;
+
+                if (req.body.description){
+                    lm.description = req.body.description;
+                }
+                if (req.body.shortDescription){
+                    lm.shortDescription = req.body.shortDescription;
+                }
+                if (req.body.video){
+                    lm.video = req.body.video;
+                }
+
+                if (req.body.type == "event"){
+
+
+                    lm.timetext.datestart = req.body.datetext.start;
+                    lm.timetext.dateend = req.body.datetext.end;
+                    lm.timetext.timestart = req.body.timetext.start;
+                    lm.timetext.timeend = req.body.timetext.end;
+
+
+                    //------ Combining Date and Time values -----//
+                    var timeStart = req.body.time.start;
+                    var timeEnd = req.body.time.end;
+
+                    var dateStart = req.body.date.start;
+                    var dateEnd = req.body.date.end;
+
+                    var datetimeStart = new Date(dateStart+' '+timeStart);
+                    var datetimeEnd = new Date(dateEnd+' '+timeEnd);
+                    //----------//
+
+                    lm.time.start = datetimeStart;
+                    lm.time.end = datetimeEnd;
+                }
+                
+
+                lm.loc.unshift(req.body.loc[0],req.body.loc[1]);
+
+                if (req.body.location){
+                    lm.loc_nicknames.addToSet(req.body.location);
+                }    
+
+                if (req.body.tags){
+                    
+                    var newTag = req.body.tags.replace(/[^A-Za-z]+/g, '');
+                    //lm.tags.addToSet(newTag);
+                    lm.tags = newTag;
+                    
+                }  
+
+            lm.save(function (err, landmark) {
+                if (err)
+                    console.log(err);
+                else{
+                    console.log(null, landmark);
+                    //console.log(finalID);
+                    var idArray = [{'id': finalID}];
+                    res.send(idArray);
+                }
+            });
+        }
+
+    
     }
 
 
