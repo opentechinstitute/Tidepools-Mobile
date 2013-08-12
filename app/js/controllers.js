@@ -3,7 +3,7 @@
 
 function LandmarkListCtrl( $location, $scope, db) {
 
-    $scope.time = "now";
+    $scope.time = "all";
 
     $scope.landmarks = db.landmarks.query({name:$scope.query, time:$scope.time});
 
@@ -39,8 +39,8 @@ function LandmarkDetailCtrl(Landmark, $routeParams, $scope, db, $location) {
     $scope.landmark = Landmark.get({_id: $routeParams.landmarkId}, function(landmark) {
         $scope.mainImageUrl = landmark.stats.avatar;
         $scope.time = "all";
-        $scope.currentTag = $scope.landmark.tags[0];
-        $scope.tweets = db.tweets.query({tag: $scope.landmark.tags[0], time:$scope.time});
+        $scope.currentTag = $scope.landmark.tags;
+        $scope.tweets = db.tweets.query({tag: $scope.landmark.tags, time:$scope.time});
     });
 
     $scope.open = function () {
@@ -56,9 +56,11 @@ function LandmarkDetailCtrl(Landmark, $routeParams, $scope, db, $location) {
         dialogFade:true
     };
 
-    $scope.goMap = function(url) {
-      $location.path('map/'+url);
-    };
+    // $scope.goMap = function(url) {
+
+    //     console.log(url);
+    //     $location.path('map/'+url);
+    // };
 
     $scope.setImage = function(imageUrl) {
         $scope.mainImageUrl = imageUrl;
@@ -69,10 +71,13 @@ function LandmarkDetailCtrl(Landmark, $routeParams, $scope, db, $location) {
     }
 
     $scope.edit = function(){
-        alert('Editing abilities soon');
+       // console.log('landmark/'+$scope.landmark.id+'/edit');
+
+        $location.path('/landmark/'+$routeParams.landmarkId+'/edit');
+
     }
 }
-LandmarkDetailCtrl.$inject = ['Landmark', '$routeParams', '$scope', 'db'];
+LandmarkDetailCtrl.$inject = ['Landmark', '$routeParams', '$scope', 'db', '$location'];
 
 
 
@@ -132,18 +137,19 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
              geocoder.geocode({ 'address': $scope.landmark.location}, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
 
+
                   $scope.$apply(function () {
                         
                         angular.extend($scope, {
                             amc: {
-                                lat: results[0].geometry.location.jb,
-                                lng: results[0].geometry.location.kb,
+                                lat: results[0].geometry.location.lat(),
+                                lng: results[0].geometry.location.lng(),
                                 zoom: 17
                             },
                             markers: {
                                 m: {
-                                    lat: results[0].geometry.location.jb,
-                                    lng: results[0].geometry.location.kb,
+                                    lat: results[0].geometry.location.lat(),
+                                    lng: results[0].geometry.location.lng(),
                                     message: "Drag to Location",
                                     focus: true,
                                     draggable: true
@@ -173,6 +179,13 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
             $scope.landmark.date.end = $scope.landmark.date.start;
         }
 
+        $scope.landmark.datetext = {
+            start: $scope.landmark.date.start,
+            end: $scope.landmark.date.end
+        }
+
+
+
         //---- Date String converter to avoid timezone issues...could be optimized probably -----//
         $scope.landmark.date.start = new Date($scope.landmark.date.start).toISOString();
         $scope.landmark.date.end = new Date($scope.landmark.date.end).toISOString();
@@ -198,7 +211,17 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
             $scope.landmark.time.end = "23:59";
         }
 
+        $scope.landmark.timetext = {
+
+            start: $scope.landmark.time.start,
+            end: $scope.landmark.time.end
+
+        } 
+
         $scope.landmark.loc = [$scope.markers.m.lat,$scope.markers.m.lng];
+
+        console.log($scope.landmark);
+
         db.landmarks.create($scope.landmark, function(response){
 
             $location.path('/landmark/'+response[0].id+'/new');
@@ -241,10 +264,7 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
     //     dialogFade:true
     // };
 
-    $scope.refresh = function () {
 
-
-    }
 
     angular.extend($scope, {
         amc: {
@@ -283,39 +303,72 @@ LandmarkNewCtrl.$inject = ['$location', '$scope', '$routeParams','db'];
 
 
 
-function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db) {
 
-    //console.log($routeParams.landmarkId);
+
+
+function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeout) {
+
 
     Landmark.get({_id: $routeParams.landmarkId}, function(landmark) {
 
+        console.log(landmark);
+
         $scope.landmark = landmark;
 
-        angular.extend($scope, {
-            amc: {
-                lat: $scope.landmark.loc[0],
-                lng: $scope.landmark.loc[1],
-                zoom: 17
-            },
-            markers: {
-                m: {
-                    lat: $scope.landmark.loc[0],
-                    lng: $scope.landmark.loc[1],
-                    message: "Drag to Location",
-                    focus: true,
-                    draggable: true
-                }
+        $scope.landmark.location = landmark.loc_nicknames[0];
+
+        $scope.landmark.idCheck = landmark.id;
+
+
+        if (landmark.type=="event"){
+
+            $scope.landmark.date = {
+                start : landmark.timetext.datestart,
+                end: landmark.timetext.dateend
             }
+
+            $scope.landmark.time = {
+                start: landmark.timetext.timestart,
+                end: landmark.timetext.timeend
+            } 
+
+        }
+
+
+        $timeout(leafletUpdate, 500); //temp solution? leaflet isn't updating properly after callback...
+
+        function leafletUpdate(){
+
+
+             angular.extend($scope, {
+                    amc: {
+                        lat: $scope.landmark.loc[0],
+                        lng: $scope.landmark.loc[1],
+                        zoom: 17
+                    },
+                    markers: {
+                        m: {
+                            lat: $scope.landmark.loc[0],
+                            lng: $scope.landmark.loc[1],
+                            message: "Drag to Location",
+                            focus: true,
+                            draggable: true
+                        }
+                    }
+                });
+
+
+
+        }
+
+        $('<img src="'+ $scope.landmark.stats.avatar +'">').load(function() {
+          $(this).width(150).height(150).appendTo('#preview');
         });
-        
+
     });
-
-    //console.log($scope.landmark);
-
 
 
     var currentDate = new Date();
-    //var currentDate = Date.today();
 
     $scope.addEndDate = function () {
         $scope.landmark.date.end = $scope.landmark.date.start;
@@ -364,14 +417,14 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db) {
                         
                         angular.extend($scope, {
                             amc: {
-                                lat: results[0].geometry.location.jb,
-                                lng: results[0].geometry.location.kb,
+                                lat: results[0].geometry.location.lat(),
+                                lng: results[0].geometry.location.lng(),
                                 zoom: 17
                             },
                             markers: {
                                 m: {
-                                    lat: results[0].geometry.location.jb,
-                                    lng: results[0].geometry.location.kb,
+                                    lat: results[0].geometry.location.lat(),
+                                    lng: results[0].geometry.location.lng(),
                                     message: "Drag to Location",
                                     focus: true,
                                     draggable: true
@@ -395,38 +448,55 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db) {
 
     $scope.save = function () {
 
-        
-        if (!$scope.landmark.date.end){
+        if ($scope.landmark.type =="event"){
+            if (!$scope.landmark.date.end){
 
-            $scope.landmark.date.end = $scope.landmark.date.start;
+                $scope.landmark.date.end = $scope.landmark.date.start;
+            }
+
+            $scope.landmark.datetext = {
+                start: $scope.landmark.date.start,
+                end: $scope.landmark.date.end
+            }
+
+            //---- Date String converter to avoid timezone issues...could be optimized probably -----//
+            $scope.landmark.date.start = new Date($scope.landmark.date.start).toISOString();
+            $scope.landmark.date.end = new Date($scope.landmark.date.end).toISOString();
+
+            $scope.landmark.date.start = dateConvert($scope.landmark.date.start);
+            $scope.landmark.date.end = dateConvert($scope.landmark.date.end);
+
+            $scope.landmark.date.start = $scope.landmark.date.start.replace(/(\d+)-(\d+)-(\d+)/, '$2-$3-$1'); //rearranging so value still same in input field
+            $scope.landmark.date.end = $scope.landmark.date.end.replace(/(\d+)-(\d+)-(\d+)/, '$2-$3-$1');
+
+            function dateConvert(input){
+                var s = input;
+                var n = s.indexOf('T');
+                return s.substring(0, n != -1 ? n : s.length);
+            }
+            //-----------//
+
+            if (!$scope.landmark.time.start){
+                $scope.landmark.time.start = "00:00";
+            }
+
+            if (!$scope.landmark.time.end){
+                $scope.landmark.time.end = "23:59";
+            }
+
+            $scope.landmark.timetext = {
+
+                start: $scope.landmark.time.start,
+                end: $scope.landmark.time.end
+            } 
+
         }
 
-        //---- Date String converter to avoid timezone issues...could be optimized probably -----//
-        $scope.landmark.date.start = new Date($scope.landmark.date.start).toISOString();
-        $scope.landmark.date.end = new Date($scope.landmark.date.end).toISOString();
-
-        $scope.landmark.date.start = dateConvert($scope.landmark.date.start);
-        $scope.landmark.date.end = dateConvert($scope.landmark.date.end);
-
-        $scope.landmark.date.start = $scope.landmark.date.start.replace(/(\d+)-(\d+)-(\d+)/, '$2-$3-$1'); //rearranging so value still same in input field
-        $scope.landmark.date.end = $scope.landmark.date.end.replace(/(\d+)-(\d+)-(\d+)/, '$2-$3-$1');
-
-        function dateConvert(input){
-            var s = input;
-            var n = s.indexOf('T');
-            return s.substring(0, n != -1 ? n : s.length);
-        }
-        //-----------//
-
-        if (!$scope.landmark.time.start){
-            $scope.landmark.time.start = "00:00";
-        }
-
-        if (!$scope.landmark.time.end){
-            $scope.landmark.time.end = "23:59";
-        }
 
         $scope.landmark.loc = [$scope.markers.m.lat,$scope.markers.m.lng];
+
+
+
         db.landmarks.create($scope.landmark, function(response){
 
             $location.path('/landmark/'+response[0].id+'/new');
@@ -436,11 +506,32 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db) {
     }
 
 
+
+
+    angular.extend($scope, {
+        amc: {
+            lat: 40.676752,
+            lng: -74.004618,
+            zoom: 17
+        },
+        markers: {
+            m: {
+                lat: 40.676752,
+                lng: -74.004618,
+                message: "Drag to Location",
+                focus: true,
+                draggable: true
+            }
+
+        }
+    });
+
+
    
 
 }
 
-LandmarkEditCtrl.$inject = ['Landmark','$location', '$scope', '$routeParams','db'];
+LandmarkEditCtrl.$inject = ['Landmark','$location', '$scope', '$routeParams','db','$timeout'];
 
 
 
