@@ -202,11 +202,11 @@ app.post('/api/upload',  function (req, res) {
                 var current = fileNumber_str + '.' + fileType;
 
                 //checking for existing file, if unique, write to dir
-                if (fs.existsSync(__dirname + "/app/uploads/" + current)) {
+                if (fs.existsSync("app/uploads/" + current)) {
                     continue; //if there are max # of files in the dir this will infinite loop...
                 } 
                 else {
-                    var newPath = __dirname + "/app/uploads/" + current;
+                    var newPath = "app/uploads/" + current;
 
                     fs.writeFile(newPath, data, function (err) {
 
