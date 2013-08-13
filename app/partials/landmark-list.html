@@ -7,7 +7,8 @@
       <ul class="landmarks">
         <li class="thumbnail" style="padding-top:0px;">
          <h3> ∆ What's Happening?</h3>
-          <button class="btn" ng-click="filter('now')">now </button> <button class="btn" ng-click="filter('soon')">soon</button> <button  class="btn" ng-click="filter('today')">today</button> <button class="btn" ng-click="filter('all')">all</button>
+          <button class="btn" ng-click="filter('jobs')">jobs </button> <button class="btn" ng-click="filter('event')">events</button> <button  class="btn" ng-click="filter('place')">places</button> <button class="btn" ng-click="filter('news')">news</button> <button class="btn" ng-click="filter('all')">all</button>
+
 
         </li>
 
@@ -24,17 +25,15 @@
               <a ng-href="#/landmark/{{landmark.id}}" class="thumb"><img ng-src="{{landmark.stats.avatar}}"></a>
               <h4><a ng-href="#/landmark/{{landmark.id}}">{{landmark.name}}</a></h4>
               <p>{{landmark.shortDescription}}</p>
-              <p style="font-size:12px;"><strong> {{landmark.time.start | date:'h:mm a EEEE d MMMM'}} </strong> | {{landmark.category}}  |  {{landmark.subType}} </p>
+              <p style="font-size:12px;"><strong> {{landmark.time.start | date:'h:mm a EEEE d MMMM'}} </strong> | {{landmark.type}} </p>
 
-              <button class="" ng-click="goTalk(landmark.tags[0])">#{{landmark.tags[0]}}</button> <button class="" ng-click="goMap(landmark.loc_nicknames_stripe[0])"><i class="fui-location"></i>{{landmark.loc_nicknames[0]}}</button> 
+              <button class="" ng-click="goTalk(landmark.tags[0])">#{{landmark.tags[0]}}</button> <button class="" ng-click="goMap('#/map/coordinates/{{landmark.loc[0]}}/{{landmark.loc[1]}}/{{landmark.name}}')"><i class="fui-location"></i>Map Location</button> 
 
               <div style="float:left; background:#fff; height:100%; width: 30px;">
           
           </li>
       </ul>
-
-       <li ng-show="!landmarks.length"> Nothing at this time @(ᵕ.ᵕ)@
-       </li>
+       <li ng-show="!landmarks.length"> No events coming up, create one?</li>
 
     </div>
   </div>
