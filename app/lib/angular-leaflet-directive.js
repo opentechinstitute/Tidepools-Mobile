@@ -2,17 +2,15 @@ var leafletDirective = angular.module("leaflet-directive", []);
 
 leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
 
-
-   // var map = new L.Map('map', {crs:L.CRS.EPSG3857}).setView([42.36219069106654,-83.06988000869751], 16);
-   // var base = L.tileLayer('1.0.0/conftest/{z}/{x}/{y}.png', {minZoom:minZ, maxZoom:maxZ, tms:'true'});
-
     var defaults = {
-        minZoom: 13,
-        maxZoom: 17,
-        tileLayer: '1.0.0/amc2013/{z}/{x}/{y}.png',
+        minZoom: 1,
+        maxZoom: 23,
+        //tileLayer: 'http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
+        tileLayer: 'http://{s}.tiles.mapbox.com/v3/openplans.map-dmar86ym/{z}/{x}/{y}.png',
+        attribution: '&copy; OpenStreetMap contributors, CC-BY-SA. <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>',
+
         
         tileLayerOptions: {
-            tms: 'true',
             reuseTiles: true
         },
         icon: {
@@ -31,7 +29,35 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
             opacity: 1,
             color: '#0000ff'
         }
-    };
+    };    
+
+    //ENABLE TO LOAD LOCAL MAP
+    // var defaults = {
+    //     minZoom: 13,
+    //     maxZoom: 17,
+    //     tileLayer: '1.0.0/amc2013/{z}/{x}/{y}.png',
+        
+    //     tileLayerOptions: {
+    //         tms: 'true',
+    //         reuseTiles: true
+    //     },
+    //     icon: {
+    //         url: 'img/marker-icon.png',
+    //         size: [25, 41],
+    //         anchor: [12, 40],
+    //         popup: [0, -40],
+    //         shadow: {
+    //             url: 'img/marker-shadow.png',
+    //             size: [41, 41],
+    //             anchor: [12, 40]
+    //         }
+    //     },
+    //     path: {
+    //         weight: 10,
+    //         opacity: 1,
+    //         color: '#0000ff'
+    //     }
+    // };
 
     return {
         restrict: "E",

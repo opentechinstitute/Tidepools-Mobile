@@ -12,10 +12,15 @@ var app = angular.module('Tidepools', ['tidepoolsFilters', 'tidepoolsServices','
       when('/feedback', {templateUrl: 'partials/feedback.html', controller: LandmarkListCtrl}). //loading template with controller
       when('/partners', {templateUrl: 'partials/partners.html', controller: LandmarkListCtrl}). //loading template with controller
       when('/landmark/:landmarkId', {templateUrl: 'partials/landmark-detail.html', controller: LandmarkDetailCtrl}). //loading template + controller
-      when('/new', {templateUrl: 'partials/landmark-new.html', controller: LandmarkNewCtrl}). //loading template + controller
+      when('/landmark/:landmarkId/edit', {templateUrl: 'partials/landmark-edit.html', controller: LandmarkEditCtrl}). //loading template + controller
+      when('/landmark/:landmarkId/:option', {templateUrl: 'partials/landmark-detail.html', controller: LandmarkDetailCtrl}). //loading template + controller
+      when('/new', {templateUrl: 'partials/landmark-new.html'}). //loading template + controller
+      when('/new/:type', {templateUrl: 'partials/landmark-new-type.html', controller: LandmarkNewCtrl}). //loading template + controller
       when('/talk', {templateUrl: 'partials/talk-list.html', controller: talklistCtrl}). //loading template + controller
       when('/talk/:hashTag', {templateUrl: 'partials/talk-tag.html', controller: talktagCtrl}). //loading template + controller
       when('/map', {templateUrl: 'partials/map.html', controller: mapCtrl}). //loading template + controller
       when('/map/:loc', {templateUrl: 'partials/map-loc.html', controller: maplocCtrl}). //loading template + controller
+      when('/map/coordinates/:lat/:lng/:name', {templateUrl: 'partials/map-loc.html', controller: maplocCtrl}). //loading template + controller
+
       otherwise({redirectTo: '/'}); 
 }]);

@@ -8,7 +8,7 @@
   '-' `-`-'`-`=='|`-'  `-'  `-' `-`==' Mobile ≈☯ v0.3
                  |
                  '
-  Open Technology Institute & J.R. Baldwin
+    J.R. Baldwin & Open Technology Institute
 
     Contributors: Lisa J. Lovchik, Nicholas Frota, Hilal Koyuncu
 
@@ -25,45 +25,31 @@
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/tidepools/leaflet.css">
   <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="css/bootstrap-timepicker.css">
   <link rel="stylesheet" href="css/flat-ui.css" >
-
-  <link rel="stylesheet" href="http://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
-  <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
   <link rel="stylesheet" href="css/jquery.fileupload-ui.css">
 
   <link rel="shortcut icon" href="images/favicon.ico">
 
+  <script src="lib/jquery/jquery-2.0.3.min.js"></script>
 
+  <script src="http://maps.google.com/maps/api/js?sensor=false"></script> 
 
-  
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-
-
-  <script src="http://blueimp.github.com/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
-  <script src="http://blueimp.github.com/jQuery-File-Upload/js/jquery.fileupload.js"></script>
-
+  <script src="lib/jquery/jquery.ui.widget.js"></script>
+  <script src="lib/jquery/jquery.fileupload.js"></script>
   <script src="lib/jquery/jquery.iframe-transport.js"></script>
-
 
   <script src="lib/angular/angular.min.js"></script>
   <script src="lib/angular/angular-sanitize.min.js"></script>
   <script src="lib/angular/angular-resource.js"></script>
   <script src="lib/angular/angular-strap.js"></script>
 
-
-
-
   <script src="lib/angular/ui-bootstrap-0.3.0.min.js"></script>
   <script src="lib/bootstrap-datepicker.js"></script>
+  <script src="lib/bootstrap-timepicker.js"></script>
   <script src="lib/angular-leaflet-directive.js"></script>
   <script src="lib/leaflet.js"></script>
   <script src="lib/ng-infinite-scroll.min.js"></script>
-
-
-
-
 
   <script src="js/app.js"></script>
   <script src="js/controllers.js"></script>
@@ -77,7 +63,11 @@
   <div id="wrapper">
 
       <div id="menu">
+<<<<<<< HEAD
         <h3>What's Happening?</h3>
+=======
+        <h3>Events</h3>
+>>>>>>> master
         <ul>
           <div ng-controller="sessionsNow">
             <li ng-repeat="landmark in landmarks | filter:query | orderBy:orderProp">
@@ -91,7 +81,11 @@
               <h3>∆ <a ng-href="#/session/{{landmark.id}}">{{landmark.name}}</a></h3>
               <br>
             </li>
+<<<<<<< HEAD
             <li ng-show="!landmarks.length"> No events now (◕︵◕) </li>
+=======
+            <li ng-show="!landmarks.length"> No events coming up</li>
+>>>>>>> master
           </div>
         </ul>
         <img src="images/nyan.gif">

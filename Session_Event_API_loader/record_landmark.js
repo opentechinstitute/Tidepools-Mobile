@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
 	monguurl = require('monguurl'),
     loader = require('./load_landmarks.js');
 
-mongoose.connect('mongodb://localhost/amctest');
+mongoose.connect('mongodb://localhost/amctest2');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
