@@ -63,11 +63,7 @@
   <div id="wrapper">
 
       <div id="menu">
-<<<<<<< HEAD
         <h3>What's Happening?</h3>
-=======
-        <h3>Events</h3>
->>>>>>> master
         <ul>
           <div ng-controller="sessionsNow">
             <li ng-repeat="landmark in landmarks | filter:query | orderBy:orderProp">
@@ -81,11 +77,7 @@
               <h3>∆ <a ng-href="#/session/{{landmark.id}}">{{landmark.name}}</a></h3>
               <br>
             </li>
-<<<<<<< HEAD
-            <li ng-show="!landmarks.length"> No events now (◕︵◕) </li>
-=======
             <li ng-show="!landmarks.length"> No events coming up</li>
->>>>>>> master
           </div>
         </ul>
         <img src="images/nyan.gif">
