@@ -73,7 +73,8 @@
                   <div style="padding-left:5%; padding-right:5%;">
                       <h4>Map Location:</h4> 
                       <br>
-                      <leaflet center="amc" markers="markers" ></leaflet>
+                      <leaflet center="amc" markers="markers" tempMarker="tempMarker"></leaflet>
+
                       <br>
                       <label>Location Description:</label>
                       <p><input type="text" name="landmark.location" ng:model="landmark.location" placeholder="Example: Hicks and 9th Brooklyn NYC"/><button ng:click="locsearch()">Search</button></p>

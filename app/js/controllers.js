@@ -311,13 +311,14 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
 
     Landmark.get({_id: $routeParams.landmarkId}, function(landmark) {
 
-        console.log(landmark);
+        //console.log(landmark);
 
         $scope.landmark = landmark;
 
         $scope.landmark.location = landmark.loc_nicknames[0];
 
         $scope.landmark.idCheck = landmark.id;
+
 
 
         if (landmark.type=="event"){
@@ -339,23 +340,23 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
 
         function leafletUpdate(){
 
-
+            console.log($scope.landmark.loc);
              angular.extend($scope, {
-                    amc: {
+                amc: {
+                    lat: $scope.landmark.loc[0],
+                    lng: $scope.landmark.loc[1],
+                    zoom: 17
+                },
+                markers: {
+                    m: {
                         lat: $scope.landmark.loc[0],
                         lng: $scope.landmark.loc[1],
-                        zoom: 17
-                    },
-                    markers: {
-                        m: {
-                            lat: $scope.landmark.loc[0],
-                            lng: $scope.landmark.loc[1],
-                            message: "Drag to Location",
-                            focus: true,
-                            draggable: true
-                        }
+                        message: "Drag to Location",
+                        focus: true,
+                        draggable: true
                     }
-                });
+                }
+            });
 
 
 
@@ -492,8 +493,18 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
 
         }
 
+      
+        
+        //a temp fix for a problem with marker scope "unsyncing" from the marker's map position. using globalEditLoc global variable to pass values for now..better with $rootScope or legit fix...
+        if (!globalEditLoc.lat){
 
-        $scope.landmark.loc = [$scope.markers.m.lat,$scope.markers.m.lng];
+            $scope.landmark.loc = [$scope.markers.m.lat,$scope.markers.m.lng];
+        }
+
+        else {
+            $scope.landmark.loc = [globalEditLoc.lat,globalEditLoc.lng];
+        }
+
 
 
 
@@ -501,6 +512,7 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
 
             $location.path('/landmark/'+response[0].id+'/new');
         });
+
 
 
     }
