@@ -129,6 +129,28 @@ app.get('/api/:collection', function(req, res) {
             }
         }
 
+        else if (req.query.time == "event"){
+
+            var qw = {"type" : "event"};
+            var limit;
+
+            if (req.params.collection == 'landmarks'){
+               db.collection(req.params.collection).find(qw).limit(limit).sort({_id: -1}).toArray(fn(req, res));
+            }
+
+        }
+
+        else if (req.query.time == "place"){
+
+            var qw = {"type" : "place"};
+            var limit;
+
+            if (req.params.collection == 'landmarks'){
+               db.collection(req.params.collection).find(qw).limit(limit).sort({_id: -1}).toArray(fn(req, res));
+            }
+
+        }
+
         else if (req.query.time == "today"){
 
             //getting today & tomm

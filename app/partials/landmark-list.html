@@ -10,7 +10,7 @@
           <p> Red Hook WiFi (RH WiFi) is a community-led effort to close the digital divide, generate economic opportunity, facilitate access to essential services and improve quality of life in Red Hook, Brooklyn via the deployment of a wireless Internet network.</p>
           
          <h3>What's Happening?</h3>
-          <button class="btn" ng-click="filter('jobs')">jobs </button> <button class="btn" ng-click="filter('event')">events</button> <button  class="btn" ng-click="filter('place')">places</button> <button class="btn" ng-click="filter('news')">news</button> <button class="btn" ng-click="filter('all')">all</button>
+          <!-- <button class="btn" ng-click="filter('jobs')">Jobs </button>  --><button class="btn" ng-click="filter('event')"><i class="fui-time"></i>Events</button> <button  class="btn" ng-click="filter('place')"><i class="fui-location"></i>Places</button> <!-- <button class="btn" ng-click="filter('news')">News</button> --> <button class="btn" ng-click="filter('all')">All</button>
 
 
         </li>
@@ -28,7 +28,7 @@
               <a ng-href="#/landmark/{{landmark.id}}" class="thumb"><img ng-src="{{landmark.stats.avatar}}"></a>
               <h4><a ng-href="#/landmark/{{landmark.id}}">{{landmark.name}}</a></h4>
               <p>{{landmark.shortDescription}}</p>
-              <p style="font-size:12px;"><strong> {{landmark.time.start | date:'h:mm a EEEE d MMMM'}} </strong> | {{landmark.type}} </p>
+              <p style="font-size:12px;"><strong> {{landmark.time.start | date:'h:mm a EEEE d MMMM'}} </strong> </p>
 
               <button class="" ng-click="goTalk(landmark.tags)">#{{landmark.tags}}</button> <button class="" ng-click="goMap('#/map/coordinates/{{landmark.loc[0]}}/{{landmark.loc[1]}}/{{landmark.name}}')"><i class="fui-location"></i>Map Location</button> 
 
