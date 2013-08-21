@@ -2,6 +2,7 @@ var leafletDirective = angular.module("leaflet-directive", []);
 
 leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
 
+
     var defaults = {
         minZoom: 1,
         maxZoom: 23,
@@ -68,10 +69,17 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
             maxBounds: '=maxbounds',
             markers: '=markers',
             defaults: '=defaults',
-            paths: '=paths'
+            paths: '=paths',
+           // tempMarker: '=tempMarker'
         },
         template: '<div class="angular-leaflet-map"></div>',
         link: function ($scope, element, attrs /*, ctrl */) {
+
+            // var tempMarker = {
+            //     lat: "000",
+            //     lng: "000"
+            // }
+
             $scope.leaflet = {};
             $scope.leaflet.maxZoom = !!(attrs.defaults && $scope.defaults && $scope.defaults.maxZoom) ? parseInt($scope.defaults.maxZoom, 10) : defaults.maxZoom;
 
@@ -184,6 +192,7 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
                 }, true);
             }
 
+
             function createMarker(name, scopeMarker, map) {
                 var marker = buildMarker(name, scopeMarker);
                 map.addLayer(marker);
@@ -193,7 +202,9 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
                 }
 
                 marker.on("dragend", function () {
+
                     $scope.$apply(function (scope) {
+<<<<<<< HEAD:app/js/angular-leaflet-directive.js
 
                         console.log(scope);
                         console.log(marker.getLatLng().lat);
@@ -204,9 +215,47 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
 
                         $scope.markers.m.lat = marker.getLatLng().lat;
                         $scope.markers.m.lng = marker.getLatLng().lng;
+=======
+                        //scopeMarker.lat = marker.getLatLng().lat;
+                        //scopeMarker.lng = marker.getLatLng().lng;
+
+                        //console.log(scope);
+                       // console.log(marker.getLatLng().lat);
+                        //console.log(marker.getLatLng().lng);
+
+                       // console.log(scopeMarker.lat);
+                        //console.log(scopeMarker.lng);
+
+
+
+                        // $scope.markers.m.lat = marker.getLatLng().lat;
+                        // $scope.markers.m.lng = marker.getLatLng().lng;
+
+                        globalEditLoc = {}; //this is a fix for a problem with marker coordinates on landmarkedit
+                        globalEditLoc = {
+                            lat: marker.getLatLng().lat,
+                            lng: marker.getLatLng().lng
+                        };
+
+                       // console.log(scope);
+
+
+
+                        // $rootScope.marker.lat = marker.getLatLng().lat;
+                        // $rootScope.marker.lng = marker.getLatLng().lng;
+
+
+>>>>>>> master:app/js/angular-leaflet-directive.js
 
                         scopeMarker.lat = marker.getLatLng().lat;
                         scopeMarker.lng = marker.getLatLng().lng;
+
+                        // return scope.tempMarker = {
+                        //     lat: marker.getLatLng().lat,
+                        //     lng: marker.getLatLng().lng
+                        // };
+
+
                     });
                     if (scopeMarker.message) {
                         marker.openPopup();

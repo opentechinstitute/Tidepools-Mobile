@@ -1,8 +1,10 @@
 'use strict';
 
 /* App Module */
+//Loading Angular routes, filters, directives, etc.
 
-//route provider module listing Filters and Services as dependencies
+var globalEditLoc = {}; //this is a temp variable for an issue with angular leaflet directive in landmark-edit
+
 var app = angular.module('Tidepools', ['tidepoolsFilters', 'tidepoolsServices','ngSanitize','ui.bootstrap', 'leaflet-directive','infinite-scroll','$strap.directives']).
   config(['$routeProvider', function($routeProvider) {
   $routeProvider.

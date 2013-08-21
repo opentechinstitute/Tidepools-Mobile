@@ -3,13 +3,12 @@
 
 function LandmarkListCtrl( $location, $scope, db) {
 
-    $scope.time = "all";
+    $scope.time = "all"; //showing all tidepools items in database. not restricted to time. other options: "now", "today", "soon"
 
-    $scope.landmarks = db.landmarks.query({name:$scope.query, time:$scope.time});
+    $scope.landmarks = db.landmarks.query({name:$scope.query, time:$scope.time}); //querying database
 
     $scope.filter = function(filter) {
         $scope.time = filter;
-
 	    $scope.landmarks = db.landmarks.query({name:$scope.query,time:$scope.time});
   	};
 
@@ -22,7 +21,7 @@ function LandmarkListCtrl( $location, $scope, db) {
     };
 
 
-    //search
+    //search query
     $scope.sessionSearch = function() { 
         $scope.landmarks = db.landmarks.query({name:$scope.query, time:"all", session: $scope.searchText});
     };
@@ -311,12 +310,17 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
 
     Landmark.get({_id: $routeParams.landmarkId}, function(landmark) {
 
+<<<<<<< HEAD
+=======
+        //console.log(landmark);
+>>>>>>> master
 
         $scope.landmark = landmark;
 
         $scope.landmark.location = landmark.loc_nicknames[0];
 
         $scope.landmark.idCheck = landmark.id;
+
 
 
         if (landmark.type=="event"){
@@ -337,22 +341,33 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
 
         function leafletUpdate(){
 
+<<<<<<< HEAD
+=======
+            console.log($scope.landmark.loc);
+>>>>>>> master
              angular.extend($scope, {
-                    amc: {
+                amc: {
+                    lat: $scope.landmark.loc[0],
+                    lng: $scope.landmark.loc[1],
+                    zoom: 17
+                },
+                markers: {
+                    m: {
                         lat: $scope.landmark.loc[0],
                         lng: $scope.landmark.loc[1],
-                        zoom: 17
-                    },
-                    markers: {
-                        m: {
-                            lat: $scope.landmark.loc[0],
-                            lng: $scope.landmark.loc[1],
-                            message: "Drag to Location",
-                            focus: true,
-                            draggable: true
-                        }
+                        message: "Drag to Location",
+                        focus: true,
+                        draggable: true
                     }
+<<<<<<< HEAD
                 });
+=======
+                }
+            });
+
+
+
+>>>>>>> master
         }
 
         $('<img src="'+ $scope.landmark.stats.avatar +'">').load(function() {
@@ -486,8 +501,18 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
 
         }
 
+      
+        
+        //a temp fix for a problem with marker scope "unsyncing" from the marker's map position. using globalEditLoc global variable to pass values for now..better with $rootScope or legit fix...
+        if (!globalEditLoc.lat){
 
-        $scope.landmark.loc = [$scope.markers.m.lat,$scope.markers.m.lng];
+            $scope.landmark.loc = [$scope.markers.m.lat,$scope.markers.m.lng];
+        }
+
+        else {
+            $scope.landmark.loc = [globalEditLoc.lat,globalEditLoc.lng];
+        }
+
 
 
 
@@ -496,6 +521,18 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
             $location.path('/landmark/'+response[0].id+'/new');
         });
 
+
+
+    }
+
+
+    $scope.delete = function (){
+
+        var deleteItem = confirm('Are you absolutely sure you want to delete?'); 
+
+        if (deleteItem) {
+            alert('Going to delete the user');
+        }
 
     }
 
