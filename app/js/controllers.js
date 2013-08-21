@@ -310,10 +310,7 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
 
     Landmark.get({_id: $routeParams.landmarkId}, function(landmark) {
 
-<<<<<<< HEAD
-=======
         //console.log(landmark);
->>>>>>> master
 
         $scope.landmark = landmark;
 
@@ -337,14 +334,12 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
 
         }
 
+
         $timeout(leafletUpdate, 500); //temp solution? leaflet isn't updating properly after callback...
 
         function leafletUpdate(){
 
-<<<<<<< HEAD
-=======
             console.log($scope.landmark.loc);
->>>>>>> master
              angular.extend($scope, {
                 amc: {
                     lat: $scope.landmark.loc[0],
@@ -359,15 +354,11 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
                         focus: true,
                         draggable: true
                     }
-<<<<<<< HEAD
-                });
-=======
                 }
             });
 
 
 
->>>>>>> master
         }
 
         $('<img src="'+ $scope.landmark.stats.avatar +'">').load(function() {

@@ -204,18 +204,6 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
                 marker.on("dragend", function () {
 
                     $scope.$apply(function (scope) {
-<<<<<<< HEAD:app/js/angular-leaflet-directive.js
-
-                        console.log(scope);
-                        console.log(marker.getLatLng().lat);
-                        console.log(marker.getLatLng().lng);
-
-                        console.log(scopeMarker.lat);
-                        console.log(scopeMarker.lng);
-
-                        $scope.markers.m.lat = marker.getLatLng().lat;
-                        $scope.markers.m.lng = marker.getLatLng().lng;
-=======
                         //scopeMarker.lat = marker.getLatLng().lat;
                         //scopeMarker.lng = marker.getLatLng().lng;
 
@@ -245,7 +233,6 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
                         // $rootScope.marker.lng = marker.getLatLng().lng;
 
 
->>>>>>> master:app/js/angular-leaflet-directive.js
 
                         scopeMarker.lat = marker.getLatLng().lat;
                         scopeMarker.lng = marker.getLatLng().lng;
@@ -254,7 +241,6 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
                         //     lat: marker.getLatLng().lat,
                         //     lng: marker.getLatLng().lng
                         // };
-
 
                     });
                     if (scopeMarker.message) {
