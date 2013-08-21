@@ -194,6 +194,17 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
 
                 marker.on("dragend", function () {
                     $scope.$apply(function (scope) {
+
+                        console.log(scope);
+                        console.log(marker.getLatLng().lat);
+                        console.log(marker.getLatLng().lng);
+
+                        console.log(scopeMarker.lat);
+                        console.log(scopeMarker.lng);
+
+                        $scope.markers.m.lat = marker.getLatLng().lat;
+                        $scope.markers.m.lng = marker.getLatLng().lng;
+
                         scopeMarker.lat = marker.getLatLng().lat;
                         scopeMarker.lng = marker.getLatLng().lng;
                     });

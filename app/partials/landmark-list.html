@@ -30,7 +30,7 @@
               <p>{{landmark.shortDescription}}</p>
               <p style="font-size:12px;"><strong> {{landmark.time.start | date:'h:mm a EEEE d MMMM'}} </strong> | {{landmark.type}} </p>
 
-              <button class="" ng-click="goTalk(landmark.tags[0])">#{{landmark.tags[0]}}</button> <button class="" ng-click="goMap('#/map/coordinates/{{landmark.loc[0]}}/{{landmark.loc[1]}}/{{landmark.name}}')"><i class="fui-location"></i>Map Location</button> 
+              <button class="" ng-click="goTalk(landmark.tags)">#{{landmark.tags}}</button> <button class="" ng-click="goMap('#/map/coordinates/{{landmark.loc[0]}}/{{landmark.loc[1]}}/{{landmark.name}}')"><i class="fui-location"></i>Map Location</button> 
 
               <div style="float:left; background:#fff; height:100%; width: 30px;">
           

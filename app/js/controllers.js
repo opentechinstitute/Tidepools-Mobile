@@ -311,7 +311,6 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
 
     Landmark.get({_id: $routeParams.landmarkId}, function(landmark) {
 
-        console.log(landmark);
 
         $scope.landmark = landmark;
 
@@ -334,11 +333,9 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
 
         }
 
-
         $timeout(leafletUpdate, 500); //temp solution? leaflet isn't updating properly after callback...
 
         function leafletUpdate(){
-
 
              angular.extend($scope, {
                     amc: {
@@ -356,9 +353,6 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
                         }
                     }
                 });
-
-
-
         }
 
         $('<img src="'+ $scope.landmark.stats.avatar +'">').load(function() {
