@@ -7,23 +7,30 @@
   <br>
   <img ng-src="{{mainImageUrl}}" class="landmark" style="width:90px; height:90px;">
    <h3> <span ng-show="landmark.type == 'place'"><i style="font-size:25px;" class="fui-location"></i></span><span ng-show="landmark.type == 'event'"><i style="font-size:25px;" class="fui-calendar-solid"></i> </span><span ng-show="landmark.type == 'job'"><i style="font-size:25px;" class="fui-user"></i></span>{{landmark.name}}</h3>
-  <h4>#{{landmark.tags}} </h4>
+  <span ng-show="landmark.tags"> <h4>#{{landmark.tags}} </h4></span>
 <!--   <a class="btn btn-large btn-block btn-info" ng-click="open()" href="">Notes (Etherpad)<i class="fui-new"></i></a>
  -->
 
+ <br>
+  <p>{{landmark.shortDescription}}</p>
+
+  <p>{{landmark.description}}</p>
+
 <ul class="specs">
+
 
   <h5><a ng-href="#/map/coordinates/{{landmark.loc[0]}}/{{landmark.loc[1]}}/{{landmark.name}}"<i class="fui-location"></i><span ng-hide="landmark.loc_nicknames">Map Location</button></span>{{landmark.loc_nicknames[0]}}</a></h5>
 
+ <span ng-show="landmark.time.start">
   <li>
     <dl>
-      <h5>{{landmark.type}}</h5>
       <dt style="color:grey;">Starts </dt>
       <dt>{{landmark.time.start | date:'MMMM d EEEE h:mm a'}}</dt>
       <dt style="color:grey;">Ends: </dt>
       <dt>{{landmark.time.end | date:'MMMM d EEEE h:mm a'}}</dt>
     </dl>
   </li>
+</span>
 
   <span ng-show="landmark.video">
 
@@ -32,7 +39,7 @@
   </span>
   <br><br><hr>
   
-  <p>{{landmark.description}}</p>
+
 
 
 </ul>
