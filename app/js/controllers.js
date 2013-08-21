@@ -3,13 +3,12 @@
 
 function LandmarkListCtrl( $location, $scope, db) {
 
-    $scope.time = "all";
+    $scope.time = "all"; //showing all tidepools items in database. not restricted to time. other options: "now", "today", "soon"
 
-    $scope.landmarks = db.landmarks.query({name:$scope.query, time:$scope.time});
+    $scope.landmarks = db.landmarks.query({name:$scope.query, time:$scope.time}); //querying database
 
     $scope.filter = function(filter) {
         $scope.time = filter;
-
 	    $scope.landmarks = db.landmarks.query({name:$scope.query,time:$scope.time});
   	};
 
@@ -22,7 +21,7 @@ function LandmarkListCtrl( $location, $scope, db) {
     };
 
 
-    //search
+    //search query
     $scope.sessionSearch = function() { 
         $scope.landmarks = db.landmarks.query({name:$scope.query, time:"all", session: $scope.searchText});
     };
@@ -514,6 +513,17 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
         });
 
 
+
+    }
+
+
+    $scope.delete = function (){
+
+        var deleteItem = confirm('Are you absolutely sure you want to delete?'); 
+
+        if (deleteItem) {
+            alert('Going to delete the user');
+        }
 
     }
 

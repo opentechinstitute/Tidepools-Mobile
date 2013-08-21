@@ -1,8 +1,7 @@
 'use strict';
 
 /* App Module */
-
-//route provider module listing Filters and Services as dependencies
+//Loading Angular routes, filters, directives, etc.
 
 var globalEditLoc = {}; //this is a temp variable for an issue with angular leaflet directive in landmark-edit
 
