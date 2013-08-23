@@ -32,7 +32,8 @@ Assuming you are in Ubuntu terminal:
    * Start Mongod DB service:  
      `sudo service mongodb start`
    * Test that Mongo is running:  
-   	 `mongo` You should see something like: `MongoDB shell version: x.x.x. connecting to: test >`
+   	 `mongo`  
+   	 You should see something like: `MongoDB shell version: x.x.x. connecting to: test >`
 
 2. Now that MongoDB is running, we need to install Node.js:  
    `sudo apt-get install python-software-properties`  
@@ -84,7 +85,8 @@ Assuming you are in OSX terminal:
 	  `brew install mongodb`
 	* Start the mongod process in a terminal:  
 	  `mongod` to start MongoDB service  
-	  `mongo` to test it works: You should see something like `MongoDB shell version: x.x.x. connecting to: test >`
+	  `mongo` to test:  
+	  You should see something like `MongoDB shell version: x.x.x. connecting to: test >`
 
 2. Install Node.js
 	* Assuming you have installed Homebrew from the previous step:  
