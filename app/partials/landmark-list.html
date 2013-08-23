@@ -6,18 +6,36 @@
 
       <ul class="landmarks">
         <li class="thumbnail" style="padding-top:0px;">
-         <h3> ∆ Events happening</h3>
-          <button class="btn" ng-click="filter('now')">now </button> <button class="btn" ng-click="filter('soon')">soon</button> <button  class="btn" ng-click="filter('today')">today</button> <button class="btn" ng-click="filter('all')">all</button>
+         <h3>∆ What's Happening?</h3>
+          <button class="btn" ng-click="filter('now')">now </button> 
+          <button class="btn" ng-click="filter('soon')">soon</button> 
+          <button class="btn" ng-click="filter('today')">today</button> 
+          <button class="btn" ng-click="filter('all')">all</button>
+          <button class="btn inverse" ng-click="showDetails = ! showDetails"><i class="fui-search"></i>Search</button>
+          <button class="btn" ng-click="goNew()"><i class="fui-plus"></i>New</button>
 
+
+          <!-- <button class="btn" ng-click="filter('jobs')">Jobs </button>  -->
+          <button class="btn" ng-click="filter('event')"><i class="fui-time"></i>Events</button> 
+          <button class="btn" ng-click="filter('place')"><i class="fui-location"></i>Places</button> 
+          <!-- <button class="btn" ng-click="filter('news')">News</button> --> 
+          <button class="btn" ng-click="filter('all')">All</button>
         </li>
 
       </ul>
 
-          <form ng-submit="sessionSearch()">
-            <input style="width:95%;" type="text" ng-model="searchText" size="30"
-                   placeholder="Search Events">
-            <input class="btn-primary" type="submit" value="search">
-          </form>
+
+      <span ng-show="showDetails" >
+        
+        <form ng-submit="sessionSearch()">
+          <input style="width:95%;" type="text" ng-model="searchText" size="30"
+                 placeholder="Search Events">
+          <input class="btn-primary" type="submit" value="search">
+        </form> 
+
+      </span> 
+
+ 
 
       <ul class="landmarks">
           <li ng-repeat="landmark in landmarks | filter:query | orderBy:orderProp" class="thumbnail"  style="padding-bottom:20px;" >

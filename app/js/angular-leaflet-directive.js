@@ -75,11 +75,6 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
         template: '<div class="angular-leaflet-map"></div>',
         link: function ($scope, element, attrs /*, ctrl */) {
 
-            // var tempMarker = {
-            //     lat: "000",
-            //     lng: "000"
-            // }
-
             $scope.leaflet = {};
             $scope.leaflet.maxZoom = !!(attrs.defaults && $scope.defaults && $scope.defaults.maxZoom) ? parseInt($scope.defaults.maxZoom, 10) : defaults.maxZoom;
 
@@ -204,44 +199,17 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
                 marker.on("dragend", function () {
 
                     $scope.$apply(function (scope) {
-                        //scopeMarker.lat = marker.getLatLng().lat;
-                        //scopeMarker.lng = marker.getLatLng().lng;
 
-                        //console.log(scope);
-                       // console.log(marker.getLatLng().lat);
-                        //console.log(marker.getLatLng().lng);
-
-                       // console.log(scopeMarker.lat);
-                        //console.log(scopeMarker.lng);
-
-
-
-                        // $scope.markers.m.lat = marker.getLatLng().lat;
-                        // $scope.markers.m.lng = marker.getLatLng().lng;
-
-                        globalEditLoc = {}; //this is a fix for a problem with marker coordinates on landmarkedit
+                        //----this is a fix for a problem with marker coordinates on editing landmark --///////
+                        globalEditLoc = {}; 
                         globalEditLoc = {
                             lat: marker.getLatLng().lat,
                             lng: marker.getLatLng().lng
                         };
-
-                       // console.log(scope);
-
-
-
-                        // $rootScope.marker.lat = marker.getLatLng().lat;
-                        // $rootScope.marker.lng = marker.getLatLng().lng;
-
-
-
+                        //------------//
+                 
                         scopeMarker.lat = marker.getLatLng().lat;
                         scopeMarker.lng = marker.getLatLng().lng;
-
-                        // return scope.tempMarker = {
-                        //     lat: marker.getLatLng().lat,
-                        //     lng: marker.getLatLng().lng
-                        // };
-
 
                     });
                     if (scopeMarker.message) {

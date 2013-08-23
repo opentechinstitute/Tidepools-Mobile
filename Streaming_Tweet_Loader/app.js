@@ -13,7 +13,7 @@ var t = new twitter({
 });
 
 
-mongoose.connect('mongodb://localhost/amctest');
+mongoose.connect('mongodb://localhost/redhook');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 

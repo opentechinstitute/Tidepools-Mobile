@@ -3,7 +3,7 @@
 
 function LandmarkListCtrl( $location, $scope, db) {
 
-    $scope.time = "all"; //showing all tidepools items in database. not restricted to time. other options: "now", "today", "soon"
+    $scope.time = "all"; //showing all tidepools items in database. not restricted to time. other options: "now", "today", "soon"  ///NEED tO CLEAN UP THIS FLOW for expanded landmark type sorting
 
     $scope.landmarks = db.landmarks.query({name:$scope.query, time:$scope.time}); //querying database
 
@@ -20,11 +20,15 @@ function LandmarkListCtrl( $location, $scope, db) {
       $location.path('map/'+url);
     };
 
+    $scope.goNew = function() {
+        $location.path('new');
+    };
 
     //search query
     $scope.sessionSearch = function() { 
         $scope.landmarks = db.landmarks.query({name:$scope.query, time:"all", session: $scope.searchText});
     };
+
 
 }
 LandmarkListCtrl.$inject = [ '$location', '$scope', 'db'];
@@ -55,12 +59,6 @@ function LandmarkDetailCtrl(Landmark, $routeParams, $scope, db, $location) {
         dialogFade:true
     };
 
-    // $scope.goMap = function(url) {
-
-    //     console.log(url);
-    //     $location.path('map/'+url);
-    // };
-
     $scope.setImage = function(imageUrl) {
         $scope.mainImageUrl = imageUrl;
     }
@@ -70,7 +68,6 @@ function LandmarkDetailCtrl(Landmark, $routeParams, $scope, db, $location) {
     }
 
     $scope.edit = function(){
-       // console.log('landmark/'+$scope.landmark.id+'/edit');
 
         $location.path('/landmark/'+$routeParams.landmarkId+'/edit');
 
@@ -91,7 +88,6 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
     }
 
     var currentDate = new Date();
-    //var currentDate = Date.today();
 
     $scope.addEndDate = function () {
         $scope.landmark.date.end = $scope.landmark.date.start;
@@ -114,7 +110,6 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
 
             $('#uploadedpic').html('');
             $('#preview').html('');
-
 
             $('<p/>').text('Saved: '+data.originalFiles[0].name).appendTo('#uploadedpic');
 
@@ -264,7 +259,7 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
     // };
 
 
-
+    //------ PRE LOADING MAP (CHANGE THIS TO "CENTER OF AREA" your event/neighborhood is in -------//
     angular.extend($scope, {
         amc: {
             lat: 40.676752,
@@ -282,6 +277,8 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
 
         }
     });
+    //-----------------------------//
+
 
     $scope.landmark = { 
         stats: { 
@@ -515,11 +512,11 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
 
 
     }
-
+ 
 
     $scope.delete = function (){
 
-        var deleteItem = confirm('Are you absolutely sure you want to delete?'); 
+        var deleteItem = confirm('Are you sure you want to delete this item?'); 
 
         if (deleteItem) {
             alert('Going to delete the user');

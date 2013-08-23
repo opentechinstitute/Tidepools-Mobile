@@ -13,13 +13,32 @@ angular.module('tidepoolsFilters', []).filter('hashtag', function() {
   };
 })
 
-
+//Filtering youtube links to auto-display
 .filter('youtubestrip', function() {
   return function(input) {
+
+      //Filtering normal youtube link
   		if(input){
-  			var newstr = input.replace(/^[^_]*=/, "");
-			return newstr;
+  			//var newstr = input.replace(/^[^_]*=/, "");
+			  //return newstr;
+        return youtube_parser(input);
+
+        
   		}
+      
+     function youtube_parser(url){
+          var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+          var match = url.match(regExp);
+          if (match&&match[7].length==11){
+              return match[7];
+          }else{
+              console.log("The video link doesn't work :(");
+          }
+      }
+
+
+
+
   };
 });
 
