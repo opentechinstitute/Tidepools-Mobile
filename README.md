@@ -56,13 +56,20 @@ Assuming you are in Ubuntu terminal:
       Check node servers running: `forever list`  
       Stop: `forever stop tidepools_server.js`  
 
-4. Adding new Places and Events:
+4. Adding a custom map:
+	* Your Tidepools map settings are located in: app/js/angular-leaflet-directive.js
+	* By default, Tidepools is using cloud-based map tiles. Change the map URL, by modifying the `tilelayer` field
+	* To use local, custom tiles, comment out the first `var defaults = {}` and uncomment the second `var defaults = {}`
+	  This is now using local map tiles in the 1.0.0 folder. A conference map is included as an example.  
+	  To build your own custom tiles to add to the 1.0.0 folder, see: http://wiki.tidepools.co/view/Map_Tiles
+
+5. Adding new Places and Events:
 	* Navigate to "http://localhost:3002/new" (or wherever your localhost server is accessible)  
 	  Input form data. The "hashtag" section will auto-pull Tweets into your place or event, if the Tidepools Twitter Stream Server is running.  
 	* Edit places and events: "http://localhost:3002/#/landmark/UniqueID/edit" - "UniqueID" being the name of your place or event
 	* You can automate the adding process, by plugging in JSON directly (See the 'Session_Event_API_loader' directory for more info).
 
-5. Running Twitter Stream Server to integrate #hashtagged data into your Tidepools events and places:
+6. Running Twitter Stream Server to integrate #hashtagged data into your Tidepools events and places:
 	* Navigate to the "Streaming Tweet Loader" directory.
 	* Get your Twitter access tokens: https://dev.twitter.com/docs/auth/obtaining-access-tokens
 	* Edit the `credentials_example.js` file, adding in your unique Twitter tokens.
@@ -107,13 +114,20 @@ Assuming you are in OSX terminal:
       Check node servers running: `forever list`  
       Stop: `forever stop tidepools_server.js`  
 
-4. Adding new Places and Events:
+4. Adding a custom map:
+	* Your Tidepools map settings are located in: app/js/angular-leaflet-directive.js
+	* By default, Tidepools is using cloud-based map tiles. Change the map URL, by modifying the `tilelayer` field
+	* To use local, custom tiles, comment out the first `var defaults = {}` and uncomment the second `var defaults = {}`
+	  This is now using local map tiles in the 1.0.0 folder. A conference map is included as an example.  
+	  To build your own custom tiles to add to the 1.0.0 folder, see: http://wiki.tidepools.co/view/Map_Tiles
+
+5. Adding new Places and Events:
 	* Navigate to "http://localhost:3002/new" (or wherever your localhost server is accessible)  
 	  Input form data. The "hashtag" section will auto-pull Tweets into your place or event, if the Tidepools Twitter Stream Server is running.
 	* Edit places and events: "http://localhost:3002/#/landmark/UniqueID/edit" - "UniqueID" being the name of your place or event
 	* You can automate the adding process, by plugging in JSON directly (See the 'Session_Event_API_loader' directory for more info).
 
-5. Running Twitter Stream Server to integrate #hashtagged data into your Tidepools events and places:
+6. Running Twitter Stream Server to integrate #hashtagged data into your Tidepools events and places:
 	* Navigate to the "Streaming Tweet Loader" directory.
 	* Get your Twitter access tokens: https://dev.twitter.com/docs/auth/obtaining-access-tokens
 	* Edit the `credentials_example.js` file, adding in your unique Twitter tokens.
