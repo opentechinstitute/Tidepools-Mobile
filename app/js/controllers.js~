@@ -649,7 +649,7 @@ function mapCtrl($location, $scope, db) {
                 amc: {
                     lat: 42.36219069106654,
                     lng: -83.06988000869751,
-                    zoom: 13
+                    zoom: 15
                 }
             });
 

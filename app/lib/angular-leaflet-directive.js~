@@ -2,9 +2,6 @@ var leafletDirective = angular.module("leaflet-directive", []);
 
 leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
 
-
-//  MAP FROM THE WEB
-/*
     var defaults = {
         minZoom: 1,
         maxZoom: 23,
@@ -33,39 +30,36 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
             color: '#0000ff'
         }
     };    
-*/
 
 
 // MAP FROM FOLDERS
-//ENABLE TO LOAD LOCAL MAP
-var defaults = {
-    minZoom: 13,
-    maxZoom: 21,
-    tileLayer: 'map/{z}/{x}/{y}.png',
+    //ENABLE TO LOAD LOCAL MAP
+    // var defaults = {
+    //     minZoom: 13,
+    //     maxZoom: 21,
+    //     tileLayer: '1.0.0/amc2013/{z}/{x}/{y}.png',
         
-    tileLayerOptions: {
-        tms: 'true',
-        reuseTiles: true
-    },
-    icon: {
-        url: 'img/marker-icon.png',
-        size: [25, 41],
-        anchor: [12, 40],
-        popup: [0, -40],
-        shadow: {
-            url: 'img/marker-shadow.png',
-            size: [41, 41],
-            anchor: [12, 40]
-        }
-    },
-    path: {
-        weight: 10,
-        opacity: 1,
-        color: '#0000ff'
-    }
-};
-
-// end local load
+    //     tileLayerOptions: {
+    //         tms: 'true',
+    //         reuseTiles: true
+    //     },
+    //     icon: {
+    //         url: 'img/marker-icon.png',
+    //         size: [25, 41],
+    //         anchor: [12, 40],
+    //         popup: [0, -40],
+    //         shadow: {
+    //             url: 'img/marker-shadow.png',
+    //             size: [41, 41],
+    //             anchor: [12, 40]
+    //         }
+    //     },
+    //     path: {
+    //         weight: 10,
+    //         opacity: 1,
+    //         color: '#0000ff'
+    //     }
+    // };
 
     return {
         restrict: "E",
