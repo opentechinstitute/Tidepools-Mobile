@@ -1,18 +1,34 @@
 
-<!--   <iframe src="http://localhost:8888" width="100%" height="100%" seamless frameborder="0" scrolling="no"></iframe> 
- -->
-
-
-
 <div class="container-fluid">
   <div class="row-fluid">
+	   <!--Buttons-->
+	   <li class="thumbnail" style="padding-top:0px;">
+	      
+	      <button class="btn" ng-click="filter('all','all'); showTime = false; showSearch = false">All</button>
+	      <button class="btn" ng-click="filter('events','all'); showTime = ! showTime; showSearch = false"><i class="fui-time"></i>Events</button> 
+	      <button class="btn" ng-click="filter('places','all'); showTime = false; showSearch = false"><i class="fui-location"></i>Places</button> 
+	      <button class="btn inverse" ng-click="showSearch = ! showSearch; showTime = false"><i class="fui-search"></i>Search</button>
 
-  	Showing Current Sessions
-  	 <!-- <button ng-click="filter('now')">now </button> <button ng-click="filter('soon')">soon</button> <button ng-click="filter('today')">today</button> <button ng-click="filter('all')">all</button> -->
+	      <button class="btn" ng-click="goNew()"><i class="fui-plus"></i>New</button>
+	   </li>
+	  </ul>
 
+ 	  <!--When Search button clicked show-->
+      <span ng-show="showSearch" >       
+        <form ng-submit="sessionSearch()">
+          <input style="width:95%;" type="text" ng-model="searchText" size="30" placeholder="What to find?">
+          <input class="btn-primary" type="submit" value="search">
+        </form> 
+      </span> 
+
+ 	  <!--When Event button clicked show-->
+       <span ng-show="showTime" >   
+          <button class="btn" ng-click="filter('events','now')">now </button> 
+          <button class="btn" ng-click="filter('events','soon')">soon</button> 
+          <button class="btn" ng-click="filter('events','today')">today</button>  
+      </span> 
 
   </div>
 </div>
 
-
-    <leaflet center="amc" markers="markers"></leaflet>
+<leaflet center="amc" markers="markers"></leaflet>

@@ -29,7 +29,7 @@ var mongoose = require('mongoose'),
     landmarkSchema = require('./landmark_schema.js'),
     monguurl = require('monguurl');
 
-mongoose.connect('mongodb://localhost/redhook');
+mongoose.connect('mongodb://localhost/tidepools');
 var db_mongoose = mongoose.connection;
 db_mongoose.on('error', console.error.bind(console, 'connection error:'));
 //---------------//
@@ -37,7 +37,7 @@ db_mongoose.on('error', console.error.bind(console, 'connection error:'));
 
 var express = require('express'),
     app = module.exports.app = express(), 
-    db = require('mongojs').connect('redhook');
+    db = require('mongojs').connect('tidepools');
 
 
     
@@ -85,90 +85,122 @@ app.get('/api/:collection', function(req, res) {
 
     var item, sort = {};
 
-        //------ Happening soon  ------//
+    //querying landmark collection (events, places, etc)
+    if (req.params.collection == 'landmarks'){
 
-        if (req.query.time == "all"){ //no time sort
+        //return all items in landmarks
+        if (req.query.queryType == "all"){
+            var qw = {};
+            var limit;
+            db.collection(req.params.collection).find(qw).limit(limit).sort({_id: -1}).toArray(fn(req, res));         
+        }
 
-            if (req.query.tag){ //hashtag
+        //events
+        if (req.query.queryType == "events"){
+
+            if (req.query.queryFilter == "all"){
                 var qw = {
-                   'text' : {$regex : ".*"+req.query.tag+".*", $options: 'i'}
+                    'type' : 'event'
                 };
-                db.collection('tweets').find(qw).sort({_id: -1}).toArray(fn(req, res));
+                db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
             }
 
-            else if (req.query.session){ //session search (THIS NEEDS TO BE FIXED TO INDEX TEXT FROM SESSIONS NOT A GIANT TEXT BLOCK IN MONGO)
+            if (req.query.queryFilter == "now"){
+
+                var currentTime = new Date();
+                var qw = {
+                    'time.start': {$lt: currentTime},
+                    'time.end': {$gt: currentTime}
+                };
+                db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
+            }
+
+
+            if (req.query.queryFilter == "soon"){
+
+                var currentTime = new Date(); 
+                currentTime.setMinutes(currentTime.getMinutes() + 45); // adding 30minutes to current time for "soon"
+                var qw = {
+                    'time.start': {$lt: currentTime},
+                    'time.end': {$gt: currentTime}
+                };
+                db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
+            }
+
+
+            if (req.query.queryFilter == "today"){
+
+                //getting today & tomm
+                var tod = new Date();
+                var tom = new Date();
+                tom.setDate(tod.getDate()+1);
+                tod.setHours(0,0,0,0);
+                tom.setHours(0,0,0,0);
 
                 var qw = {
-                    
-                    "searchField" : {$regex : ".*"+req.query.session+".*", $options: 'i'}
+                    'time.start': {
+                        $gte: tod,
+                        $lt: tom
+                    }
                 };
+                db.collection(req.params.collection).find(qw).sort({'time.start': 1}).toArray(fn(req, res));
 
-                db.collection('landmarks').find(qw).sort({_id: -1}).toArray(fn(req, res));
+            }
+
+
+        }
+
+        //places
+        if (req.query.queryType == "places"){
+
+            //do a location radius search here option
+
+            if (req.query.queryFilter == "all"){
+                var qw = {
+                    'type' : 'place'
+                };
+                db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
+            }
+
+        }
+
+        //search
+        if (req.query.queryType == "search"){
+
+            var qw = {
+                "searchField" : {$regex : ".*"+req.query.session+".*", $options: 'i'}
+            };
+
+            db.collection('landmarks').find(qw).sort({_id: -1}).toArray(fn(req, res));
+        }
+
+    }
+
+
+    //querying tweets (social media and internal comments too, eventually)
+    if (req.params.collection == 'tweets'){
+
+        if (req.query.tag){ //hashtag filtering
+            var qw = {
+               'text' : {$regex : ".*"+req.query.tag+".*", $options: 'i'}
+            };
+            db.collection('tweets').find(qw).sort({_id: -1}).toArray(fn(req, res));
+        }
+
+        else {
+
+            if (req.query.limit){ //limited tweet query
+                limit = parseInt(req.query.limit);
+                db.collection(req.params.collection).find(qw).limit(limit).sort({_id: -1}).toArray(fn(req, res));
             }
 
             else {
-
-                var qw = {};
-                var limit;
-
-                if (req.params.collection == 'landmarks'){
-                   db.collection(req.params.collection).find(qw).limit(limit).sort({'time.start': 1}).toArray(fn(req, res));
-                }
-
-                if (req.params.collection == 'tweets'){
-
-                        if (req.query.limit){ //limited tweet query
-                            limit = parseInt(req.query.limit);
-                            db.collection(req.params.collection).find(qw).limit(limit).sort({_id: -1}).toArray(fn(req, res));
-                        }
-
-                        else {
-                            db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
-                        }
-                }                
+                db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
             }
         }
+    }
 
-        else if (req.query.time == "today"){
 
-            //getting today & tomm
-            var tod = new Date();
-            var tom = new Date();
-            tom.setDate(tod.getDate()+1);
-            tod.setHours(0,0,0,0);
-            tom.setHours(0,0,0,0);
-
-            var qw = {
-                'time.start': {
-                    $gte: tod,
-                    $lt: tom
-                }
-            };
-
-            db.collection(req.params.collection).find(qw).sort({'time.start': 1}).toArray(fn(req, res));
-        }
-
-        else if (req.query.time == "soon"){
-
-           var currentTime = new Date(); 
-           currentTime.setMinutes(currentTime.getMinutes() + 45); // adding 30minutes to current time for "soon"
-
-            var qw = {
-                'time.start': {$lt: currentTime},
-                'time.end': {$gt: currentTime}
-            };
-            db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
-        }
-
-        //------ Happening now ------//
-        else {
-            var currentTime = new Date();
-            var qw = {
-                'time.start': {$lt: currentTime},
-                'time.end': {$gt: currentTime}
-            };
-            db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
-        }
 });
 
 // Read 
@@ -178,10 +210,6 @@ app.get('/api/:collection/:id', function(req, res) {
 
 // Save 
 app.post('/api/:collection/create', function(req, res) {
-
-    //console.log(req.body);
-
-   // console.log(req);
 
     if (!req.body.name){
         console.log('must have name');
@@ -243,13 +271,9 @@ app.post('/api/:collection/create', function(req, res) {
 
     }
 
-
-
     function saveLandmark(finalID){
-
    
         if (req.body._id){ //temp way to detect landmark edit
-
 
             var landmarkModel = mongoose.model('landmark', landmarkSchema, 'landmarks');
 
@@ -348,7 +372,6 @@ app.post('/api/:collection/create', function(req, res) {
 
                 if (req.body.type == "event"){
 
-
                     lm.timetext.datestart = req.body.datetext.start;
                     lm.timetext.dateend = req.body.datetext.end;
                     lm.timetext.timestart = req.body.timetext.start;
@@ -395,14 +418,9 @@ app.post('/api/:collection/create', function(req, res) {
                     res.send(idArray);
                 }
             });
-        }
-
-    
+        }  
     }
 
-
-    //if (req.body._id) { req.body._id = objectId(req.body._id);}
-    //db.collection(req.params.collection).save(req.body, {safe:true}, fn(req, res));
 });
 
 // Delete

@@ -19,11 +19,9 @@ angular.module('tidepoolsFilters', []).filter('hashtag', function() {
 
       //Filtering normal youtube link
   		if(input){
-  			//var newstr = input.replace(/^[^_]*=/, "");
-			  //return newstr;
-        return youtube_parser(input);
-
-        
+  			var newstr = input.replace(/^[^_]*=/, "");
+			  return newstr;
+        //return youtube_parser(input);
   		}
       
      function youtube_parser(url){
@@ -35,9 +33,6 @@ angular.module('tidepoolsFilters', []).filter('hashtag', function() {
               console.log("The video link doesn't work :(");
           }
       }
-
-
-
 
   };
 });

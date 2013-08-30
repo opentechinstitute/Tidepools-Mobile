@@ -3,6 +3,7 @@ var twitter = require('ntwitter'),
     monguurl = require('monguurl');
 
 var credentials = require('./credentials.js');
+var hashtag = require('../app/js/global_settings.js').hashtag;
 
 
 var t = new twitter({
@@ -13,7 +14,7 @@ var t = new twitter({
 });
 
 
-mongoose.connect('mongodb://localhost/redhook');
+mongoose.connect('mongodb://localhost/tidepools');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
@@ -22,7 +23,7 @@ var tweetModel = mongoose.model('tweet', twitterSchema, 'tweets');  // compiling
 
 t.stream(
     'statuses/filter',
-    { track: ['#amc2013'] },
+    { track: [hashtag] },
     function(stream) {
         stream.on('data', function(tweet) {
 

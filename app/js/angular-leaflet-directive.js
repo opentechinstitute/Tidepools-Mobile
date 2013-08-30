@@ -9,8 +9,6 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
         //tileLayer: 'http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
         tileLayer: 'http://{s}.tiles.mapbox.com/v3/openplans.map-dmar86ym/{z}/{x}/{y}.png',
         attribution: '&copy; OpenStreetMap contributors, CC-BY-SA. <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>',
-
-        
         tileLayerOptions: {
             reuseTiles: true
         },

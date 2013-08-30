@@ -8,8 +8,9 @@
   <img ng-src="{{mainImageUrl}}" class="landmark" style="width:90px; height:90px;">
    <h3> <span ng-show="landmark.type == 'place'"><i style="font-size:25px;" class="fui-location"></i></span><span ng-show="landmark.type == 'event'"><i style="font-size:25px;" class="fui-calendar-solid"></i> </span><span ng-show="landmark.type == 'job'"><i style="font-size:25px;" class="fui-user"></i></span>{{landmark.name}}</h3>
   <span ng-show="landmark.tags"> <h4>#{{landmark.tags}} </h4></span>
-<!--   <a class="btn btn-large btn-block btn-info" ng-click="open()" href="">Notes (Etherpad)<i class="fui-new"></i></a>
- -->
+
+  <!--Module loader for embedded Etherpad link-->
+  <!-- <a class="btn btn-large btn-block btn-info" ng-click="open()" href="">Notes (Etherpad)<i class="fui-new"></i></a> -->
 
  <br>
   <p>{{landmark.shortDescription}}</p>
@@ -39,14 +40,9 @@
   </span>
   <br><br><hr>
   
-
-
-
 </ul>
 
-
   <ul class="feed" style="padding-left:5px; padding-right:5px;">
-        <!-- FILTER QUERY?? for HASH? -->
         <li ng-repeat="tweet in tweets| filter:query | orderBy:orderProp" class="thumbnail" style="padding-bottom:10px;">
           <a ng-href="#/{{tweet.id}}" class="thumb"><img ng-src="{{tweet.user.profile_image_url}}"></a>
           <h4>{{tweet.user.name}}</h4>
@@ -65,19 +61,19 @@
              </div>
         </li>  
 
-
         <li ng-show="!tweets.length"> No tweets from #{{currentTag}} yet </li>
 
      </ul>
 
 </div>
 
-  <div modal="etherpad" style="width:100%; height:100%;" close="close()" options="opts">
-      <div class="modal-header">
-          <button class="btn-primary" ng-click="close()">Close X</button>  <h4>{{landmark.name}} Notes</h4>
-      </div>
-      <div class="modal-body">
-            <iframe src="{{landmark.etherpad}}" width="100%" height="100%">
-      </div>
-  </div>
+<!--Etherpad Module controls -->
+<div modal="etherpad" style="width:100%; height:100%;" close="close()" options="opts">
+    <div class="modal-header">
+        <button class="btn-primary" ng-click="close()">Close X</button>  <h4>{{landmark.name}} Notes</h4>
+    </div>
+    <div class="modal-body">
+          <iframe src="{{landmark.etherpad}}" width="100%" height="100%">
+    </div>
+</div>
 

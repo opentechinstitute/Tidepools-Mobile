@@ -57,11 +57,12 @@ Assuming you are in Ubuntu terminal:
       Stop: `forever stop tidepools_server.js`  
 
 4. Adding a custom map:
-	* Your Tidepools map settings are located in: app/js/angular-leaflet-directive.js
+	* Your Tidepools base map settings are located in: app/js/angular-leaflet-directive.js
 	* By default, Tidepools is using cloud-based map tiles. Change the map URL, by modifying the `tilelayer` field
 	* To use local, custom tiles, comment out the first `var defaults = {}` and uncomment the second `var defaults = {}`
 	  This is now using local map tiles in the 1.0.0 folder. A conference map is included as an example.  
 	  To build your own custom tiles to add to the 1.0.0 folder, see: http://wiki.tidepools.co/view/Map_Tiles
+	* In `global_settings.js`, change the `global_mapCenter` to your map's lat lng center
 
 5. Adding new Places and Events:
 	* Navigate to "http://localhost:3002/new" (or wherever your localhost server is accessible)  
@@ -74,11 +75,11 @@ Assuming you are in Ubuntu terminal:
 	* Get your Twitter access tokens: https://dev.twitter.com/docs/auth/obtaining-access-tokens
 	* Edit the `credentials_example.js` file, adding in your unique Twitter tokens.
 	* Change the filename to `credentials.js`
-	* Edit app.js : Change the `track: ['#hashtag']` to your neighborhood or event's main Twitter hashtag (i.e. #Event2013)
+	* Edit `global_settings.js` in `../app/js` : Change the `global_hashtag` to your neighborhood or event's main Twitter hashtag (i.e. #Event2013)
 	* Start streaming:  
-	  `node apps.js`
+	  `node tweet_server.js`
 	* Make it stream forever:  
-	  `forever start app.js`
+	  `forever start tweet_server.js`
 
 
 OSX Installation
@@ -132,11 +133,11 @@ Assuming you are in OSX terminal:
 	* Get your Twitter access tokens: https://dev.twitter.com/docs/auth/obtaining-access-tokens
 	* Edit the `credentials_example.js` file, adding in your unique Twitter tokens.
 	* Change the filename to `credentials.js`
-	* Edit app.js : Change the `track: ['#hashtag']` to your neighborhood or event's main Twitter hashtag (i.e. #Event2013)
+	* Edit `global_settings.js` in `../app/js` : Change the `global_hashtag` to your neighborhood or event's main Twitter hashtag (i.e. #Event2013)
 	* Start streaming:  
-	  `node apps.js`
+	  `node tweet_server.js`
 	* Make it stream forever:  
-	  `forever start app.js`
+	  `forever start tweet_server.js`
 
 License
 --------------------
