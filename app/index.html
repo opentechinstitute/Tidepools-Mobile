@@ -22,7 +22,9 @@
   <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <title>Tidepools</title>
   <link rel="stylesheet" href="css/app.css">
-  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" media="screen and (max-width: 600px)" href="small.css" />
+  <link rel="stylesheet" media="only screen and (-webkit-min-device-pixel-ratio: 2)" type="text/css" href="ios.css" />
+<link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/tidepools/leaflet.css">
   <link rel="stylesheet" href="css/bootstrap-datepicker.css">
   <link rel="stylesheet" href="css/bootstrap-timepicker.css">
@@ -49,7 +51,6 @@
   <script src="lib/bootstrap-timepicker.js"></script>
   <script src="lib/leaflet.js"></script>
   <script src="lib/ng-infinite-scroll.min.js"></script>
-
   <script src="js/global_settings.js"></script>
   <script src="js/app.js"></script>
   <script src="js/controllers.js"></script>
@@ -69,33 +70,30 @@
         <ul>
           <div ng-controller="sessionsNow">
             <li ng-repeat="landmark in landmarks | filter:query | orderBy:orderProp">
-              <h3>∆ <a ng-href="#/session/{{landmark.id}}">{{landmark.name}}</a></h3>
+              <h3><a ng-href="#/session/{{landmark.id}}">{{landmark.name}}</a></h3>
               <br>
             </li>
             <li ng-show="!landmarks.length"> No events coming up</li>
           </div>
         </ul>
-        <img src="images/nyan.gif">
+        <img src="images/balloon.gif" width="65px" height="128px">
       </div>
 
     <div id="main">
 
       <div class="row-fluid">
         <li class="thumbnail" style="height:43px;">
-
           <div id="show" class="btn-primary" href="#"><div style="padding:7px; font-size:30px;"><i class="fui-list"></i></div></div>
-
-
             <div class="btn-toolbar" style="margin-top:0px;">
                 <div class="btn-group">
                   <a class="btn btn-primary" href="#">Home</a>
                   <a class="btn btn-primary" href="#/talk">Talk<i class="fui-chat"></i></a>
                   <a class="btn btn-primary" href="#/map">Map<i class="fui-location"></i></a>
+	<!--<div id="show" class="btn-primary" style="font-size:60px;" href="#">derp</div>-->
+		<a id="show" class="btn btn-primary" href="#">Menu</a>
                 </div>
               </div>
-
         </li>
-
       </div>
 
       <div id="content">

@@ -2,41 +2,64 @@ var leafletDirective = angular.module("leaflet-directive", []);
 
 leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
 
+    var defaults = {
+        minZoom: 1,
+        maxZoom: 23,
+        //tileLayer: 'http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
+        tileLayer: 'http://{s}.tiles.mapbox.com/v3/openplans.map-dmar86ym/{z}/{x}/{y}.png',
+        attribution: '&copy; OpenStreetMap contributors, CC-BY-SA. <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>',
+
+        
+        tileLayerOptions: {
+            reuseTiles: true
+        },
+        icon: {
+            url: 'img/marker-icon.png',
+            size: [25, 41],
+            anchor: [12, 40],
+            popup: [0, -40],
+            shadow: {
+                url: 'img/marker-shadow.png',
+                size: [41, 41],
+                anchor: [12, 40]
+            }
+        },
+        path: {
+            weight: 10,
+            opacity: 1,
+            color: '#0000ff'
+        }
+    };    
+
 
 // MAP FROM FOLDERS
-//ENABLE TO LOAD LOCAL MAP
-var defaults = {
-    minZoom: 13,
-    maxZoom: 21,
-    tileLayer: '1.0.0/amc2013/{z}/{x}/{y}.png',
+    //ENABLE TO LOAD LOCAL MAP
+    // var defaults = {
+    //     minZoom: 13,
+    //     maxZoom: 21,
+    //     tileLayer: '1.0.0/amc2013/{z}/{x}/{y}.png',
         
-    tileLayerOptions: {
-        tms: 'true',
-        reuseTiles: true
-    },
-    icon: {
-        url: 'img/marker-icon.png',
-        size: [25, 41],
-        anchor: [12, 40],
-        popup: [0, -40],
-        shadow: {
-            url: 'img/marker-shadow.png',
-            size: [41, 41],
-            anchor: [12, 40]
-        }
-    },
-    path: {
-        weight: 10,
-        opacity: 1,
-        color: '#0000ff'
-    }
-};
-
-// end local load
-
-    //-----------------------------------------------//
-
-
+    //     tileLayerOptions: {
+    //         tms: 'true',
+    //         reuseTiles: true
+    //     },
+    //     icon: {
+    //         url: 'img/marker-icon.png',
+    //         size: [25, 41],
+    //         anchor: [12, 40],
+    //         popup: [0, -40],
+    //         shadow: {
+    //             url: 'img/marker-shadow.png',
+    //             size: [41, 41],
+    //             anchor: [12, 40]
+    //         }
+    //     },
+    //     path: {
+    //         weight: 10,
+    //         opacity: 1,
+    //         color: '#0000ff'
+    //     }
+    // };
 
     return {
         restrict: "E",
@@ -47,12 +70,10 @@ var defaults = {
             maxBounds: '=maxbounds',
             markers: '=markers',
             defaults: '=defaults',
-            paths: '=paths',
-           // tempMarker: '=tempMarker'
+            paths: '=paths'
         },
         template: '<div class="angular-leaflet-map"></div>',
         link: function ($scope, element, attrs /*, ctrl */) {
-
             $scope.leaflet = {};
             $scope.leaflet.maxZoom = !!(attrs.defaults && $scope.defaults && $scope.defaults.maxZoom) ? parseInt($scope.defaults.maxZoom, 10) : defaults.maxZoom;
 
@@ -165,7 +186,6 @@ var defaults = {
                 }, true);
             }
 
-
             function createMarker(name, scopeMarker, map) {
                 var marker = buildMarker(name, scopeMarker);
                 map.addLayer(marker);
@@ -175,20 +195,9 @@ var defaults = {
                 }
 
                 marker.on("dragend", function () {
-
                     $scope.$apply(function (scope) {
-
-                        //----this is a fix for a problem with marker coordinates on editing landmark --///////
-                        globalEditLoc = {}; 
-                        globalEditLoc = {
-                            lat: marker.getLatLng().lat,
-                            lng: marker.getLatLng().lng
-                        };
-                        //------------//
-                 
                         scopeMarker.lat = marker.getLatLng().lat;
                         scopeMarker.lng = marker.getLatLng().lng;
-
                     });
                     if (scopeMarker.message) {
                         marker.openPopup();
