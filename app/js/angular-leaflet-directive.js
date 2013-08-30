@@ -2,11 +2,12 @@ var leafletDirective = angular.module("leaflet-directive", []);
 
 leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
 
-
+    //-------------ENABLE TO LOAD CLOUD MAP -----------//
+    
     var defaults = {
         minZoom: 1,
         maxZoom: 23,
-        //tileLayer: 'http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
+        //tileLayer: 'http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', //another tilelayer option
         tileLayer: 'http://{s}.tiles.mapbox.com/v3/openplans.map-dmar86ym/{z}/{x}/{y}.png',
         attribution: '&copy; OpenStreetMap contributors, CC-BY-SA. <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>',
         tileLayerOptions: {
@@ -30,7 +31,10 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
         }
     };    
 
-    //ENABLE TO LOAD LOCAL MAP
+    //--------------------------------------------------//
+
+    //-------------ENABLE TO LOAD LOCAL MAP -----------//
+
     // var defaults = {
     //     minZoom: 13,
     //     maxZoom: 17,
@@ -57,6 +61,10 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
     //         color: '#0000ff'
     //     }
     // };
+
+    //-----------------------------------------------//
+
+
 
     return {
         restrict: "E",

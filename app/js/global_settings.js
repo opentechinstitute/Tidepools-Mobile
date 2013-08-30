@@ -1,7 +1,3 @@
-// Database Name
-// Map Settings
-// Global Hashtag
-
 
 //this is the "center" of your community or event, for mapping purposes
 var global_mapCenter = {
@@ -9,6 +5,13 @@ var global_mapCenter = {
     lng: -74.004618,
     zoom: 15
 };
+
+// //AN EXAMPLE using local AMC2013 map
+// var global_mapCenter = {
+//     lat: 42.356886,
+//     lng: -83.069523,
+//     zoom: 14
+// };
 
 //one or more hashtags for base twitter gathering 
 var global_hashtag = "#lol";
@@ -21,3 +24,4 @@ var globalEditLoc = {}; //this is a temp variable for an issue with angular leaf
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined'){
     module.exports.hashtag = global_hashtag;
 }
+
