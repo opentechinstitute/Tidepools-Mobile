@@ -1,9 +1,9 @@
 
 //this is the "center" of your community or event, for mapping purposes
 var global_mapCenter = {
-    lat: 13.4202,
-    lng: 52.5126,
-    zoom: 13
+    lat: 52.5126,
+    lng: 13.4202,
+    zoom: 15
 };
 
 // //AN EXAMPLE using local AMC2013 map

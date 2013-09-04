@@ -1,5 +1,8 @@
 /* app css stylesheet */
 
+html {
+
+}
 body {
   margin: 0;
   overflow-x: hidden;
@@ -12,7 +15,7 @@ body {
 
 .angular-leaflet-map {
   width: 100%;
-  /*height: 350px;*/
+  /*height: 100%;*/
 }
 
 .landmarks {

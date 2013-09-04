@@ -7,12 +7,11 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
 //ENABLE TO LOAD LOCAL MAP
 var defaults = {
     minZoom: 13,
-    maxZoom: 21,
+    maxZoom: 22,
     tileLayer: '1.0.0/IS4CWN/{z}/{x}/{y}.png',
-        
     tileLayerOptions: {
-        tms: 'false',
-        reuseTiles: true
+        tms: true,
+        reuseTiles: false
     },
     icon: {
         url: 'img/marker-icon.png',
@@ -342,6 +341,15 @@ var defaults = {
                     });
                 return leafletLatLngs;
             }
+			$(window).on("resize", function() {
+				$(".angular-leaflet-map").height($(window).height()).width($(".angular-leaflet-map").width());
+				map.invalidateSize();
+			}).trigger("resize");
+			
+			$(window).on("load", function() {
+				$(".angular-leaflet-map").height($(window).height()).width($(".angular-leaflet-map").width());
+				map.invalidateSize();
+			});	
         }
     };
 }]);

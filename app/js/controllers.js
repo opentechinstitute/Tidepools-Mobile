@@ -105,7 +105,6 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
         progressall: function (e, data) {  
 
             $('#progress .bar').css('width', '0%');
-
             var progress = parseInt(data.loaded / data.total * 100, 10);
             $('#progress .bar').css(
                 'width',
