@@ -453,6 +453,8 @@ app.post('/api/upload',  function (req, res) {
     //disabled Max image upload size for NOW << enable later...
    // if (req.files.files[0].size <= 5242880){
 
+        //FILTER ANYTHING BUT GIF JPG PNG
+
         fs.readFile(req.files.files[0].path, function (err, data) {
 
             var fileName = req.files.files[0].name.substr(0, req.files.files[0].name.lastIndexOf('.')) || req.files.files[0].name;

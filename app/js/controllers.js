@@ -7,8 +7,8 @@ function LandmarkListCtrl( $location, $scope, db) {
     $scope.queryType = "all";
     $scope.queryFilter = "all";
     //Events Now example:
-    //$scope.queryType = "events";
-    //$scope.queryFilter = "now";
+    // $scope.queryType = "events";
+    // $scope.queryFilter = "now";
 
     $scope.landmarks = db.landmarks.query({ queryType:$scope.queryType, queryFilter:$scope.queryFilter });
     //---------//
@@ -239,6 +239,9 @@ LandmarkNewCtrl.$inject = ['$location', '$scope', '$routeParams','db'];
 
 function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeout) {
 
+    //if authenticate, show and provide this functionality:
+
+    //if not, login plz k thx
 
     Landmark.get({_id: $routeParams.landmarkId}, function(landmark) {
 

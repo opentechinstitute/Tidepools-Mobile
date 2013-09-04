@@ -4,44 +4,13 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
 
     //-------------ENABLE TO LOAD CLOUD MAP -----------//
     
-    var defaults = {
-        minZoom: 1,
-        maxZoom: 23,
-        //tileLayer: 'http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', //another tilelayer option
-        tileLayer: 'http://{s}.tiles.mapbox.com/v3/openplans.map-dmar86ym/{z}/{x}/{y}.png',
-        attribution: '&copy; OpenStreetMap contributors, CC-BY-SA. <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>',
-        tileLayerOptions: {
-            reuseTiles: true
-        },
-        icon: {
-            url: 'img/marker-icon.png',
-            size: [25, 41],
-            anchor: [12, 40],
-            popup: [0, -40],
-            shadow: {
-                url: 'img/marker-shadow.png',
-                size: [41, 41],
-                anchor: [12, 40]
-            }
-        },
-        path: {
-            weight: 10,
-            opacity: 1,
-            color: '#0000ff'
-        }
-    };    
-
-    //--------------------------------------------------//
-
-    //-------------ENABLE TO LOAD LOCAL MAP -----------//
-
     // var defaults = {
-    //     minZoom: 13,
-    //     maxZoom: 17,
-    //     tileLayer: '1.0.0/amc2013/{z}/{x}/{y}.png',
-        
+    //     minZoom: 1,
+    //     maxZoom: 23,
+    //     //tileLayer: 'http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', //another tilelayer option
+    //     tileLayer: 'http://{s}.tiles.mapbox.com/v3/openplans.map-dmar86ym/{z}/{x}/{y}.png',
+    //     attribution: '&copy; OpenStreetMap contributors, CC-BY-SA. <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>',
     //     tileLayerOptions: {
-    //         tms: 'true',
     //         reuseTiles: true
     //     },
     //     icon: {
@@ -60,7 +29,38 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
     //         opacity: 1,
     //         color: '#0000ff'
     //     }
-    // };
+    // };    
+
+    //--------------------------------------------------//
+
+    //-------------ENABLE TO LOAD LOCAL MAP -----------//
+
+    var defaults = {
+        minZoom: 13,
+        maxZoom: 17,
+        tileLayer: '1.0.0/amc2013/{z}/{x}/{y}.png',
+        
+        tileLayerOptions: {
+            tms: 'true',
+            reuseTiles: true
+        },
+        icon: {
+            url: 'img/marker-icon.png',
+            size: [25, 41],
+            anchor: [12, 40],
+            popup: [0, -40],
+            shadow: {
+                url: 'img/marker-shadow.png',
+                size: [41, 41],
+                anchor: [12, 40]
+            }
+        },
+        path: {
+            weight: 10,
+            opacity: 1,
+            color: '#0000ff'
+        }
+    };
 
     //-----------------------------------------------//
 
