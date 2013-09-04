@@ -34,8 +34,8 @@ function LandmarkListCtrl( $location, $scope, db) {
     $scope.sessionSearch = function() { 
         $scope.landmarks = db.landmarks.query({name:$scope.query, time:"all", session: $scope.searchText});
     };
-
 }
+
 LandmarkListCtrl.$inject = [ '$location', '$scope', 'db'];
 
 
@@ -83,7 +83,10 @@ LandmarkDetailCtrl.$inject = ['Landmark', '$routeParams', '$scope', 'db', '$loca
 function LandmarkNewCtrl($location, $scope, $routeParams, db) {
 
     //Showing form options based on type of "new" request
-    if ($routeParams.type == '' || $routeParams.type == 'place' || $routeParams.type == 'event' || $routeParams.type == 'job'){
+    if ($routeParams.type == '' ||
+		$routeParams.type == 'place' ||
+		$routeParams.type == 'event' ||
+		$routeParams.type == 'job'){
 
     }
     else {
@@ -514,7 +517,8 @@ function mapCtrl($location, $scope, db, $timeout) {
                     markerCollect[data[i].id] = {
                         lat: data[i].loc[0],
                         lng: data[i].loc[1],
-                        message: '<h4><img style="width:70px;" src="'+data[i].stats.avatar+'"><a href=#/landmark/'+data[i].id+'> '+data[i].name+'</a></h4>' 
+                        message: '<h4><img style="width:70px;" src="'+data[i].stats.avatar+'"><a href=#/landmark/'+data[i].id+'> '+data[i].name+'</a></h4>'
+						//icon: icons.data[i].type[0]
                     }
                 }
 

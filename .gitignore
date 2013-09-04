@@ -7,6 +7,8 @@ app/map/*
 app/maps/*
 app/1.0.0/*
 app/1.0.0/
+app/img/*
+app/img
 
 .project
 .settings

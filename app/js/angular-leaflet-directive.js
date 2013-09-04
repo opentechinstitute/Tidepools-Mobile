@@ -8,10 +8,10 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
 var defaults = {
     minZoom: 13,
     maxZoom: 21,
-    tileLayer: '1.0.0/amc2013/{z}/{x}/{y}.png',
+    tileLayer: '1.0.0/IS4CWN/{z}/{x}/{y}.png',
         
     tileLayerOptions: {
-        tms: 'true',
+        tms: 'false',
         reuseTiles: true
     },
     icon: {
@@ -19,11 +19,6 @@ var defaults = {
         size: [25, 41],
         anchor: [12, 40],
         popup: [0, -40],
-        shadow: {
-            url: 'img/marker-shadow.png',
-            size: [41, 41],
-            anchor: [12, 40]
-        }
     },
     path: {
         weight: 10,
