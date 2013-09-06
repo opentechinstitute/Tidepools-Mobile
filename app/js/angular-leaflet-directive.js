@@ -150,8 +150,15 @@ var defaults = {
 				var newIconAnchor = new L.Point(Math.round(newIconSize.x / 2), newIconSize.y);
 				console.log(newPopupSize)
 				// finally, declare a new icon and update the marker
+				if (e) {
+					icon = e
+				}
+				else {
+					icon = "img/marker-icon.png"
+				}
+
 				var newIcon = new L.Icon({
-					iconUrl: e,
+					iconUrl: icon,
                     iconRetinaUrl: defaults.icon.retinaUrl,
                     popupAnchor: newPopupSize,
 					iconSize: newIconSize,
@@ -236,7 +243,7 @@ var defaults = {
 				//===TODO: The method below needs stress testing. Should we create the various icon sizes first and not do this recalculation every zoom? Does it matter? ===//
 				map.on('viewreset', function(){
 					if(map.getZoom() > 13){
-						marker.setIcon(changeIconSize(scopeMarker.icon, newSizeFactor));
+						marker.setIcon(changeIconSize(scopeMarker.icon));
 					}
 				});
 
