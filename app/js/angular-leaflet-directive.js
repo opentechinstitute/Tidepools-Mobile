@@ -163,9 +163,9 @@ var defaults = {
 			
 			function sizeFactor(zoom) {
 				if (zoom <= 14) return 0.3;
-				else if (zoom == 15) return 1.0;
+				else if (zoom == 15) return 0.3;
 				  else if (zoom == 16) return 1.0;
-				  else if (zoom == 17) return 1.5;
+				  else if (zoom == 17) return 1.0;
 				  else if (zoom == 18) return 1.5;
 				  else if (zoom == 19) return 2.0;
 				  else if (zoom == 20) return 3.0;
@@ -233,10 +233,10 @@ var defaults = {
                         marker.openPopup();
                     }
                 });
-				
+				//===TODO: The method below needs stress testing. Should we create the various icon sizes first and not do this recalculation every zoom? Does it matter? ===//
 				map.on('viewreset', function(){
-					if(map.getZoom() > 15){
-						marker.setIcon(changeIconSize(scopeMarker.icon));
+					if(map.getZoom() > 13){
+						marker.setIcon(changeIconSize(scopeMarker.icon, newSizeFactor));
 					}
 				});
 
