@@ -6,68 +6,6 @@ var global_mapCenter = {
     zoom: 15
 };
 
-//TODO Add a function for icon sizing that calls this table for preset scaling.
-
-
-
-var global_icon_size = {
-	default_scale: {
-		size: 1,
-		anchor: [12, 40],
-		popup: [0, -40],
-	},
-	13: {
-		size: 1,
-		anchor: [12, 40],
-		popup: [0, -40],
-	},
-	14:{
-		size: 1,
-		anchor: [12, 40],
-		popup: [0, -40],
-	},
-	15:{
-		size: 1,
-		anchor: [12, 40],
-		popup: [0, -40],
-	},
-	16:{
-		size: 1,
-		anchor: [12, 40],
-		popup: [0, -40],
-	},
-	17:{
-		size: 1,
-		anchor: [12, 40],
-		popup: [0, -40],
-	},
-	18:{
-		size: 1,
-		anchor: [12, 40],
-		popup: [0, -40],
-	},
-	19:{
-		size: 1,
-		anchor: [12, 40],
-		popup: [0, -40],
-	},
-	20:{
-		size: 3,
-		anchor: [12, 40],
-		popup: [0, -40],
-
-	},
-	21:{
-		size: 3,
-		anchor: [12, 40],
-		popup: [0, -40],
-	},
-}
-
-//iconSize: defaults.icon.size* global_icon_size[$scope.center.zoom]['size'],
-//iconAnchor: global_icon_size[$scope.center.zoom]['anchor'],
-//popupAnchor: global_icon_size[$scope.center.zoom]['popup'],
-
 
 // //AN EXAMPLE using local AMC2013 map
 // var global_mapCenter = {

@@ -511,6 +511,7 @@ function mapCtrl($location, $scope, db, $timeout) {
                 var markerCollect = {};
 
                 for (var i=0;i<data.length;i++){
+					console.log(data)
                     markerCollect[data[i].id] = {
                         lat: data[i].loc[0],
                         lng: data[i].loc[1],

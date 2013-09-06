@@ -120,6 +120,7 @@ var defaults = {
                 });
 
                 map.on("zoomend", function (/* event */) {
+					console.log($scope.markers)
                     if ($scope.center.zoom !== map.getZoom()) {
                         $scope.$apply(function (s) {
                             s.center.zoom = map.getZoom();
@@ -132,35 +133,37 @@ var defaults = {
 
 			function changeIconSize(e) {
 
-				  // this is the default size (of the default icon); it should be known beforehand;
-				  var defaultIconSize = new L.Point(25, 41);
-				  //var defaultShadowSize = new L.Point(41, 41);
-
-				  // use leaflet's internal methods to scale the size (a bit overkill for this case...)
-				  var transformation = new L.Transformation(1, 0, 1, 0);
-
-				  var currentZoom = map.getZoom();
-				  var newIconSize = transformation.transform(defaultIconSize, sizeFactor(currentZoom));
-				  //var newShadowSize = transformation.transform(defaultShadowSize, sizeFactor(currentZoom));
-
-				  // adjust the icon anchor to the new size
-				  var newIconAnchor = new L.Point(Math.round(newIconSize.x / 2), newIconSize.y);
-
-				  // finally, declare a new icon and update the marker
-				  var newIcon = new L.Icon.Default({
-					  iconUrl: e,
-                      iconRetinaUrl: defaults.icon.retinaUrl,
-                      popupAnchor: defaults.icon.popup,
-					  iconSize: newIconSize,
-					  iconAnchor: newIconAnchor,
-					  //shadowSize: newShadowSize,
-				  });
+				// this is the default size (of the default icon); it should be known beforehand;
+				var defaultIconSize = new L.Point(25, 41);
+				//var defaultShadowSize = new L.Point(41, 41);
+				var defaultPopupSize = new L.Point(0, -40);
+				
+				// use leaflet's internal methods to scale the size (a bit overkill for this case...)
+				var transformation = new L.Transformation(1, 0, 1, 0);
+				
+				var currentZoom = map.getZoom();
+				var newIconSize = transformation.transform(defaultIconSize, sizeFactor(currentZoom));
+				//var newShadowSize = transformation.transform(defaultShadowSize, sizeFactor(currentZoom));
+				var newPopupSize = transformation.transform(defaultPopupSize, sizeFactor(currentZoom));
+				
+				// adjust the icon anchor to the new size
+				var newIconAnchor = new L.Point(Math.round(newIconSize.x / 2), newIconSize.y);
+				console.log(newPopupSize)
+				// finally, declare a new icon and update the marker
+				var newIcon = new L.Icon({
+					iconUrl: e,
+                    iconRetinaUrl: defaults.icon.retinaUrl,
+                    popupAnchor: newPopupSize,
+					iconSize: newIconSize,
+					iconAnchor: newIconAnchor,
+					//shadowSize: newShadowSize,
+				});
 				return newIcon
 			}
 			
 			function sizeFactor(zoom) {
 				if (zoom <= 14) return 0.3;
-				  else if (zoom == 15) return 1.0;
+				else if (zoom == 15) return 1.0;
 				  else if (zoom == 16) return 1.0;
 				  else if (zoom == 17) return 1.5;
 				  else if (zoom == 18) return 1.5;
@@ -396,12 +399,12 @@ var defaults = {
                 return leafletLatLngs;
             }
 			$(window).on("resize", function() {
-				$(".angular-leaflet-map").height($(window).height()).width($(".angular-leaflet-map").width());
+				$(".angular-leaflet-map").height($(window).height()).width($(".row-fluid").width());
 				map.invalidateSize();
 			}).trigger("resize");
 			
 			$(window).on("load", function() {
-				$(".angular-leaflet-map").height($(window).height()).width($(".angular-leaflet-map").width());
+				$(".angular-leaflet-map").height($(window).height()).width($(".row-fluid").width());
 				map.invalidateSize();
 			});	
         }
