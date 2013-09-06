@@ -133,7 +133,6 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
                 if (status == google.maps.GeocoderStatus.OK) {
 
                   $scope.$apply(function () {
-                        
                         angular.extend($scope, {
                             amc: {
                                 lat: results[0].geometry.location.lat(),
@@ -511,13 +510,12 @@ function mapCtrl($location, $scope, db, $timeout) {
 
                 var markerCollect = {};
 
-                for (var i=0;i<data.length;i++){ 
-
+                for (var i=0;i<data.length;i++){
                     markerCollect[data[i].id] = {
                         lat: data[i].loc[0],
                         lng: data[i].loc[1],
-                        message: '<h4><img style="width:70px;" src="'+data[i].stats.avatar+'"><a href=#/landmark/'+data[i].id+'> '+data[i].name+'</a></h4>'
-						//icon: icons.data[i].type[0]
+                        message: '<h4><img style="width:70px;" src="'+data[i].stats.avatar+'"><a href=#/landmark/'+data[i].id+'> '+data[i].name+'</a></h4>',
+						icon: "img/"+data[i].type+".svg"
                     }
                 }
 

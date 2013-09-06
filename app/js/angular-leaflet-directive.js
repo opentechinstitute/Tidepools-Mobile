@@ -130,6 +130,48 @@ var defaults = {
                 });
             }
 
+			function changeIconSize(e) {
+
+				  // this is the default size (of the default icon); it should be known beforehand;
+				  var defaultIconSize = new L.Point(25, 41);
+				  //var defaultShadowSize = new L.Point(41, 41);
+
+				  // use leaflet's internal methods to scale the size (a bit overkill for this case...)
+				  var transformation = new L.Transformation(1, 0, 1, 0);
+
+				  var currentZoom = map.getZoom();
+				  var newIconSize = transformation.transform(defaultIconSize, sizeFactor(currentZoom));
+				  //var newShadowSize = transformation.transform(defaultShadowSize, sizeFactor(currentZoom));
+
+				  // adjust the icon anchor to the new size
+				  var newIconAnchor = new L.Point(Math.round(newIconSize.x / 2), newIconSize.y);
+
+				  // finally, declare a new icon and update the marker
+				  var newIcon = new L.Icon.Default({
+					  iconUrl: e,
+                      iconRetinaUrl: defaults.icon.retinaUrl,
+                      popupAnchor: defaults.icon.popup,
+					  iconSize: newIconSize,
+					  iconAnchor: newIconAnchor,
+					  //shadowSize: newShadowSize,
+				  });
+				return newIcon
+			}
+			
+			function sizeFactor(zoom) {
+				if (zoom <= 14) return 0.3;
+				  else if (zoom == 15) return 1.0;
+				  else if (zoom == 16) return 1.0;
+				  else if (zoom == 17) return 1.5;
+				  else if (zoom == 18) return 1.5;
+				  else if (zoom == 19) return 2.0;
+				  else if (zoom == 20) return 3.0;
+				  else if (zoom == 21) return 3.5;
+				  else if (zoom == 22) return 3.9;
+				  else // zoom >= 22
+					    return 2.2;
+				}
+
             function setupMarkers() {
                 var markers = {};
                 $scope.leaflet.markers = !!attrs.testing ? markers : 'Add testing="testing" to <leaflet> tag to inspect this object';
@@ -188,6 +230,12 @@ var defaults = {
                         marker.openPopup();
                     }
                 });
+				
+				map.on('viewreset', function(){
+					if(map.getZoom() > 15){
+						marker.setIcon(changeIconSize(scopeMarker.icon));
+					}
+				});
 
                 $scope.$watch('markers.' + name, function (data, oldData) {
                     if (!data) {
@@ -225,9 +273,15 @@ var defaults = {
             }
 
             function buildMarker(name, data) {
+				if (data.icon) {
+					icon = data.icon
+				}
+				else {
+					icon = "img/marker-icon.png"
+				}
                 var marker = new L.marker($scope.markers[name],
                         {
-                            icon: buildIcon(),
+                            icon: buildIcon(icon),
                             draggable: data.draggable ? true : false
                         }
                 );
@@ -237,20 +291,20 @@ var defaults = {
                 return marker;
             }
 
-            function buildIcon() {
+            function buildIcon(icon) {
                 return L.icon({
-                    iconUrl: defaults.icon.url,
+                    iconUrl: icon,
                     iconRetinaUrl: defaults.icon.retinaUrl,
                     iconSize: defaults.icon.size,
                     iconAnchor: defaults.icon.anchor,
                     popupAnchor: defaults.icon.popup,
-                    shadowUrl: defaults.icon.shadow.url,
-                    shadowRetinaUrl: defaults.icon.shadow.retinaUrl,
-                    shadowSize: defaults.icon.shadow.size,
-                    shadowAnchor: defaults.icon.shadow.anchor
+                    //shadowUrl: defaults.icon.shadow.url,
+                    //shadowRetinaUrl: defaults.icon.shadow.retinaUrl,
+                    //shadowSize: defaults.icon.shadow.size,
+                    //shadowAnchor: defaults.icon.shadow.anchor
                 });
             }
-
+			
             function setupPaths() {
                 var paths = {};
                 $scope.leaflet.paths = !!attrs.testing ? paths : 'Add testing="testing" to <leaflet> tag to inspect this object';
