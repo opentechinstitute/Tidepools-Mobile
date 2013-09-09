@@ -11,7 +11,7 @@ var defaults = {
     tileLayer: '1.0.0/IS4CWN/{z}/{x}/{y}.png',
     tileLayerOptions: {
         tms: true,
-        reuseTiles: false
+        reuseTiles: true
     },
     icon: {
         url: 'img/marker-icon.png',
@@ -120,16 +120,37 @@ var defaults = {
                 });
 
                 map.on("zoomend", function (/* event */) {
-					console.log($scope.markers)
-                    if ($scope.center.zoom !== map.getZoom()) {
-                        $scope.$apply(function (s) {
-                            s.center.zoom = map.getZoom();
-                            s.center.lat = map.getCenter().lat;
-                            s.center.lng = map.getCenter().lng;
-                        });
-                    }
-                });
+                    if ($scope.center.zoom < map.getZoom()) {
+						if ($scope.center.zoom < 17 ||
+withinBoundingBox(map.getCenter().lat, map.getCenter().lng) == true) {
+							$scope.$apply(function (s) {
+								s.center.zoom = map.getZoom();
+								s.center.lat = map.getCenter().lat;
+								s.center.lng = map.getCenter().lng;
+							});
+						}
+						else {
+							map.zoomOut()
+						}
+					}
+					else if ($scope.center.zoom !== map.getZoom()) {
+						$scope.$apply(function (s) {
+							s.center.zoom = map.getZoom();
+							s.center.lat = map.getCenter().lat;
+							s.center.lng = map.getCenter().lng;
+						});
+					}
+				});
             }
+			
+			function withinBoundingBox(lat, lng) {
+				if (52.5156 > lat && lat > 52.5100) {
+					if (13.4263 > lng && lng > 13.4142) {
+						return true 
+					}
+				}
+			}
+			
 
 			function changeIconSize(e) {
 
@@ -148,13 +169,16 @@ var defaults = {
 				
 				// adjust the icon anchor to the new size
 				var newIconAnchor = new L.Point(Math.round(newIconSize.x / 2), newIconSize.y);
-				console.log(newPopupSize)
 				// finally, declare a new icon and update the marker
 				if (e) {
 					icon = e
 				}
 				else {
 					icon = "img/marker-icon.png"
+					newIconSize = defaultIconSize
+					newPopupSize = defaultPopupSize
+					newIconAnchor = [12, 40]
+
 				}
 
 				var newIcon = new L.Icon({
