@@ -50,7 +50,8 @@ monguurl = require('monguurl');
 			viewers: [String],
 			openedit: Boolean,
 			admins: [String]
-		}
+		},
+		feed: [String]
 	},
 	{_id: false}); //not writing _id let mongo kk
 
