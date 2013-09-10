@@ -7,13 +7,7 @@
         <li class="thumbnail" style="padding-top:0px;">
           <h2> Welcome to Red Hook WiFi! </h2>
           <p> Red Hook WiFi (RH WiFi) is a community-led effort to close the digital divide, generate economic opportunity, facilitate access to essential services and improve quality of life in Red Hook, Brooklyn via the deployment of a wireless Internet network.</p>
-<<<<<<< HEAD
-=======
-          
-         <h3>What's Happening?</h3>
-          <!-- <button class="btn" ng-click="filter('jobs')">Jobs </button>  --><button class="btn" ng-click="filter('event')"><i class="fui-time"></i>Events</button> <button  class="btn" ng-click="filter('place')"><i class="fui-location"></i>Places</button> <!-- <button class="btn" ng-click="filter('news')">News</button> --> <button class="btn" ng-click="filter('all')">All</button>
 
->>>>>>> 91b0256f3f33c2e0a95d03c0afca8a0358499a30
 
          <h3>∆ What's Happening?</h3>
           
@@ -63,7 +57,6 @@
               <p>{{landmark.shortDescription}}</p>
               <p style="font-size:12px;"><strong> {{landmark.time.start | date:'h:mm a EEEE d MMMM'}} </strong> </p>
 
-<<<<<<< HEAD
               <!--Show hashtag button if there's a hashtag-->
               <span ng-show="landmark.tags">  
                 <button class="" ng-click="goTalk(landmark.tags)">#{{landmark.tags}}</button> 
@@ -72,19 +65,12 @@
               <!--Show location name for button or default is its empty-->
               <button><a style="color:#34495e; text-decoration: none;" ng-href="#/map/coordinates/{{landmark.loc[0]}}/{{landmark.loc[1]}}/{{landmark.id}}"<i class="fui-location"></i>
               <span ng-hide="landmark.loc_nicknames">Map Location</span>{{landmark.loc_nicknames[0]}}</a></button>
-=======
               <span ng-show="landmark.tags">  <button class="" ng-click="goTalk(landmark.tags)">#{{landmark.tags}}</button> </span>  <button><a style="color:#34495e; text-decoration: none;" ng-href="#/map/coordinates/{{landmark.loc[0]}}/{{landmark.loc[1]}}/{{landmark.name}}"<i class="fui-location"></i><span ng-hide="landmark.loc_nicknames">Map Location</span>{{landmark.loc_nicknames[0]}}</a></button>
->>>>>>> 91b0256f3f33c2e0a95d03c0afca8a0358499a30
 
           </li>
       </ul>
-<<<<<<< HEAD
 
        <li ng-show="!landmarks.length"> Nothing here :( </li>
-
-=======
-       <li ng-show="!landmarks.length"> No events coming up, create one?</li>
->>>>>>> 91b0256f3f33c2e0a95d03c0afca8a0358499a30
 
     </div>
   </div>
