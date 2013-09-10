@@ -92,6 +92,18 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
 
     var currentDate = new Date();
 
+    //----- Loading sub categories from global settings ----//
+    $scope.subTypes = [];
+
+    if ($routeParams.type == 'event'){
+        $scope.subTypes = $scope.subTypes.concat(eventCategories);
+    }
+
+    if ($routeParams.type == 'place'){
+        $scope.subTypes = $scope.subTypes.concat(placeCategories);
+    }
+    //-----//
+
     $scope.addEndDate = function () {
         $scope.landmark.date.end = $scope.landmark.date.start;
     }
@@ -243,11 +255,25 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
 
     //if not, login plz k thx
 
+
+
     Landmark.get({_id: $routeParams.landmarkId}, function(landmark) {
 
         $scope.landmark = landmark;
         $scope.landmark.location = landmark.loc_nicknames[0];
         $scope.landmark.idCheck = landmark.id;
+
+        //----- Loading sub categories from global settings ----//
+        $scope.subTypes = [];
+
+        if (landmark.type == 'event'){
+            $scope.subTypes = $scope.subTypes.concat(eventCategories);
+        }
+
+        if (landmark.type == 'place'){
+            $scope.subTypes = $scope.subTypes.concat(placeCategories);
+        }
+        //-----//
 
         if (landmark.type=="event"){
 
@@ -434,9 +460,10 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
         var deleteItem = confirm('Are you sure you want to delete this item?'); 
 
         if (deleteItem) {
-            alert('Going to delete, not yet');
+            Landmark.del({_id: $scope.landmark._id}, function(landmark) {
+                $location.path('/'); 
+            });
         }
-
     }
 
     angular.extend($scope, {

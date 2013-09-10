@@ -162,6 +162,13 @@ app.get('/api/:collection', function(req, res) {
                 db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
             }
 
+            else {
+                var qw = {
+                    'subType' : req.query.queryFilter
+                };
+                db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
+            }
+
         }
 
         //search
@@ -287,6 +294,7 @@ app.post('/api/:collection/create', function(req, res) {
                     lm.name = req.body.name;
                     lm.id = finalID;
                     lm.type = req.body.type;
+                    lm.subType = req.body.subType;
                     lm.stats.avatar = req.body.stats.avatar;
                     lm.mapID = "TidepoolsBaseMap"; //compatibility with Old Tidepools Interface
 
@@ -359,6 +367,7 @@ app.post('/api/:collection/create', function(req, res) {
                 lm.name = req.body.name;
                 lm.id = finalID;
                 lm.type = req.body.type;
+                lm.subType = req.body.subType;
                 lm.stats.avatar = req.body.stats.avatar;
                 lm.mapID = "TidepoolsBaseMap"; //compatibility with Old Tidepools Interface
 
@@ -426,8 +435,8 @@ app.post('/api/:collection/create', function(req, res) {
 });
 
 // Delete
-app.del('/api/:collection/:id', function(req, res) {
-    db.collection(req.params.collection).remove({_id:objectId(req.params.id)}, {safe:true}, fn(req, res));
+app.delete('/api/:collection/:id', function(req, res) {
+   db.collection(req.params.collection).remove({_id:objectId(req.params.id)}, {safe:true}, fn(req, res));
 });
 
 //Group
