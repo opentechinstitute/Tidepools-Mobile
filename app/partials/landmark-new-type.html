@@ -70,18 +70,18 @@
                 <!-- Different Descriptions based on landmark type -->
 
                 <span ng-show="landmark.type == 'event'">
-                  <p><label><b>Short Description</b> (Preview snippet about the event, like a "tweet"):</label> <textarea name="landmark.shortDescription" ng:model="landmark.shortDescription" maxlength="140"/></p>
-                  <p><label><b>Description</b> (A longer summary of the event – include: Website, Contact Info, or other links?):</label> <textarea name="landmark.description" ng:model="landmark.description"></textarea></p>
+                  <p><label>Short Description <br>(Preview snippet about the event, like a "tweet"):</label> <textarea name="landmark.shortDescription" ng:model="landmark.shortDescription" maxlength="140"/></p>
+                  <p><label>Description (A longer summary of the event – include: Website, Contact Info, or other links?):</label> <textarea name="landmark.description" ng:model="landmark.description"></textarea></p>
                 </span>
 
                 <span ng-show="landmark.type == 'place'">
-                  <p><label><b>Short Description</b> (Preview snippet about the place, like a "tweet" - include: Business Hours? Phone Number?):</label> <textarea name="landmark.shortDescription" ng:model="landmark.shortDescription" maxlength="140"/></p>
-                  <p><label><b>Description</b> (A longer summary of the place – include: Website or other links?):</label> <textarea name="landmark.description" ng:model="landmark.description"></textarea></p>
+                  <p><label>Short Description <br>(Preview snippet about the place, like a "tweet" - include: Business Hours? Phone Number?):</label> <textarea name="landmark.shortDescription" ng:model="landmark.shortDescription" maxlength="140"/></p>
+                  <p><label>Description <br> (A longer summary of the place – include: Website or other links?):</label> <textarea name="landmark.description" ng:model="landmark.description"></textarea></p>
                 </span>
 
                 <span ng-show="landmark.type != 'place' && landmark.type != 'event'">
-                  <p><label><b>Short Description</b> (Preview snippet, like a "tweet" of what this is):</label> <textarea name="landmark.shortDescription" ng:model="landmark.shortDescription" maxlength="140"/></p>
-                  <p><label><b>Description</b> (A longer summary of what this is – include: Website, Contact, or other links?):</label> <textarea name="landmark.description" ng:model="landmark.description"></textarea></p>
+                  <p><label>Short Description<br> (Preview snippet, like a "tweet" of what this is):</label> <textarea name="landmark.shortDescription" ng:model="landmark.shortDescription" maxlength="140"/></p>
+                  <p><label>Description<br> (A longer summary of what this is – include: Website, Contact, or other links?):</label> <textarea name="landmark.description" ng:model="landmark.description"></textarea></p>
                 </span>
 
                 <!-- _______________________________________________ -->
