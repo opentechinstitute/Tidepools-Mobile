@@ -2,65 +2,31 @@ var leafletDirective = angular.module("leaflet-directive", []);
 
 leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
 
-    //-------------ENABLE TO LOAD CLOUD MAP -----------//
-    
-    // var defaults = {
-    //     minZoom: 1,
-    //     maxZoom: 23,
-    //     //tileLayer: 'http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', //another tilelayer option
-    //     tileLayer: 'http://{s}.tiles.mapbox.com/v3/openplans.map-dmar86ym/{z}/{x}/{y}.png',
-    //     attribution: '&copy; OpenStreetMap contributors, CC-BY-SA. <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>',
-    //     tileLayerOptions: {
-    //         reuseTiles: true
-    //     },
-    //     icon: {
-    //         url: 'img/marker-icon.png',
-    //         size: [25, 41],
-    //         anchor: [12, 40],
-    //         popup: [0, -40],
-    //         shadow: {
-    //             url: 'img/marker-shadow.png',
-    //             size: [41, 41],
-    //             anchor: [12, 40]
-    //         }
-    //     },
-    //     path: {
-    //         weight: 10,
-    //         opacity: 1,
-    //         color: '#0000ff'
-    //     }
-    // };    
 
-    //--------------------------------------------------//
+// MAP FROM FOLDERS
+//ENABLE TO LOAD LOCAL MAP
+var defaults = {
+    minZoom: 13,
+    maxZoom: 22,
+    tileLayer: '1.0.0/IS4CWN/{z}/{x}/{y}.png',
+    tileLayerOptions: {
+        tms: true,
+        reuseTiles: false
+    },
+    icon: {
+        url: 'img/marker-icon.png',
+        size: [25, 41],
+        anchor: [12, 40],
+        popup: [0, -40],
+    },
+    path: {
+        weight: 10,
+        opacity: 1,
+        color: '#0000ff'
+    }
+};
 
-    //-------------ENABLE TO LOAD LOCAL MAP -----------//
-
-    var defaults = {
-        minZoom: 13,
-        maxZoom: 17,
-        tileLayer: '1.0.0/amc2013/{z}/{x}/{y}.png',
-        
-        tileLayerOptions: {
-            tms: 'true',
-            reuseTiles: true
-        },
-        icon: {
-            url: 'img/marker-icon.png',
-            size: [25, 41],
-            anchor: [12, 40],
-            popup: [0, -40],
-            shadow: {
-                url: 'img/marker-shadow.png',
-                size: [41, 41],
-                anchor: [12, 40]
-            }
-        },
-        path: {
-            weight: 10,
-            opacity: 1,
-            color: '#0000ff'
-        }
-    };
+// end local load
 
     //-----------------------------------------------//
 
@@ -154,6 +120,7 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
                 });
 
                 map.on("zoomend", function (/* event */) {
+					console.log($scope.markers)
                     if ($scope.center.zoom !== map.getZoom()) {
                         $scope.$apply(function (s) {
                             s.center.zoom = map.getZoom();
@@ -163,6 +130,57 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
                     }
                 });
             }
+
+			function changeIconSize(e) {
+
+				// this is the default size (of the default icon); it should be known beforehand;
+				var defaultIconSize = new L.Point(25, 41);
+				//var defaultShadowSize = new L.Point(41, 41);
+				var defaultPopupSize = new L.Point(0, -40);
+				
+				// use leaflet's internal methods to scale the size (a bit overkill for this case...)
+				var transformation = new L.Transformation(1, 0, 1, 0);
+				
+				var currentZoom = map.getZoom();
+				var newIconSize = transformation.transform(defaultIconSize, sizeFactor(currentZoom));
+				//var newShadowSize = transformation.transform(defaultShadowSize, sizeFactor(currentZoom));
+				var newPopupSize = transformation.transform(defaultPopupSize, sizeFactor(currentZoom));
+				
+				// adjust the icon anchor to the new size
+				var newIconAnchor = new L.Point(Math.round(newIconSize.x / 2), newIconSize.y);
+				console.log(newPopupSize)
+				// finally, declare a new icon and update the marker
+				if (e) {
+					icon = e
+				}
+				else {
+					icon = "img/marker-icon.png"
+				}
+
+				var newIcon = new L.Icon({
+					iconUrl: icon,
+                    iconRetinaUrl: defaults.icon.retinaUrl,
+                    popupAnchor: newPopupSize,
+					iconSize: newIconSize,
+					iconAnchor: newIconAnchor,
+					//shadowSize: newShadowSize,
+				});
+				return newIcon
+			}
+			
+			function sizeFactor(zoom) {
+				if (zoom <= 14) return 0.3;
+				else if (zoom == 15) return 0.3;
+				  else if (zoom == 16) return 1.0;
+				  else if (zoom == 17) return 1.0;
+				  else if (zoom == 18) return 1.5;
+				  else if (zoom == 19) return 2.0;
+				  else if (zoom == 20) return 3.0;
+				  else if (zoom == 21) return 3.5;
+				  else if (zoom == 22) return 3.9;
+				  else // zoom >= 22
+					    return 2.2;
+				}
 
             function setupMarkers() {
                 var markers = {};
@@ -222,6 +240,12 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
                         marker.openPopup();
                     }
                 });
+				//===TODO: The method below needs stress testing. Should we create the various icon sizes first and not do this recalculation every zoom? Does it matter? ===//
+				map.on('viewreset', function(){
+					if(map.getZoom() > 13){
+						marker.setIcon(changeIconSize(scopeMarker.icon));
+					}
+				});
 
                 $scope.$watch('markers.' + name, function (data, oldData) {
                     if (!data) {
@@ -259,9 +283,15 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
             }
 
             function buildMarker(name, data) {
+				if (data.icon) {
+					icon = data.icon
+				}
+				else {
+					icon = "img/marker-icon.png"
+				}
                 var marker = new L.marker($scope.markers[name],
                         {
-                            icon: buildIcon(),
+                            icon: buildIcon(icon),
                             draggable: data.draggable ? true : false
                         }
                 );
@@ -271,20 +301,20 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
                 return marker;
             }
 
-            function buildIcon() {
+            function buildIcon(icon) {
                 return L.icon({
-                    iconUrl: defaults.icon.url,
+                    iconUrl: icon,
                     iconRetinaUrl: defaults.icon.retinaUrl,
                     iconSize: defaults.icon.size,
                     iconAnchor: defaults.icon.anchor,
                     popupAnchor: defaults.icon.popup,
-                    shadowUrl: defaults.icon.shadow.url,
-                    shadowRetinaUrl: defaults.icon.shadow.retinaUrl,
-                    shadowSize: defaults.icon.shadow.size,
-                    shadowAnchor: defaults.icon.shadow.anchor
+                    //shadowUrl: defaults.icon.shadow.url,
+                    //shadowRetinaUrl: defaults.icon.shadow.retinaUrl,
+                    //shadowSize: defaults.icon.shadow.size,
+                    //shadowAnchor: defaults.icon.shadow.anchor
                 });
             }
-
+			
             function setupPaths() {
                 var paths = {};
                 $scope.leaflet.paths = !!attrs.testing ? paths : 'Add testing="testing" to <leaflet> tag to inspect this object';
@@ -375,6 +405,15 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
                     });
                 return leafletLatLngs;
             }
+			$(window).on("resize", function() {
+				$(".angular-leaflet-map").height($(window).height()).width($(".row-fluid").width());
+				map.invalidateSize();
+			}).trigger("resize");
+			
+			$(window).on("load", function() {
+				$(".angular-leaflet-map").height($(window).height()).width($(".row-fluid").width());
+				map.invalidateSize();
+			});	
         }
     };
 }]);

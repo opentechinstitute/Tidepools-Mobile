@@ -1,7 +1,11 @@
 /* app css stylesheet */
 
+html {
+
+}
 body {
   margin: 0;
+  overflow-x: hidden;
 }
 
 .bar {
@@ -10,8 +14,8 @@ body {
 }
 
 .angular-leaflet-map {
-  width: 100%;
-  height: 350px;
+  /*width: 100%;*/
+  /*height: 100%;*/
 }
 
 .landmarks {
@@ -126,7 +130,8 @@ body.menu #main {
 
 #wrapper {
   position: relative;
-  overflow-x: hidden;
+  /*overflow-x: hidden;*/
+  min-height: 100%;
 }
 
 #menu {
@@ -135,8 +140,13 @@ body.menu #main {
   left: 0;
   width: 66%;
   bottom: 0px;
+  background: #34495e url('../images/cloud.gif');
+  box-shadow: 0px 0px 10px 6px #2c3e50 inset;
 
-background-image: linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 59%, rgb(247,179,186) 84%);
+
+/* Old Pinky
+
+  background-image: linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 59%, rgb(247,179,186) 84%);
   background-image: -o-linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 59%, rgb(247,179,186) 84%);
   background-image: -moz-linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 59%, rgb(247,179,186) 84%);
   background-image: -webkit-linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 59%, rgb(247,179,186) 84%);
@@ -151,6 +161,7 @@ background-image: linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 5
     color-stop(0.84, rgb(247,179,186))
   );
 
+*/
 
   color: white;
   opacity: 0;
@@ -163,9 +174,11 @@ background-image: linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 5
 
 #main {
   position: relative;
-  min-height: 100%;
-  background: #eee;
-  box-shadow: -4px 0px 5px rgba(0,0,0,0.5);
+/*  min-height: 100%;*/
+  width: 80%;
+  background: #ecf0f1;
+  margin: 0 auto;
+  box-shadow: 0px 3px 6px #34495e;
   -webkit-transition: -webkit-transform 0.2s;
   -moz-transition: -moz-transform 0.2s;
   -ms-transition: -ms-transform 0.2s;
@@ -188,14 +201,13 @@ background-image: linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 5
 
 /* App menu bar */
 
-#show { 
+#show { /* NYAN */
   float: left;
-  color: #000; 
-  background: #9900ff;
+  color: #fff; 
+  background: #5dade2;
   width: 44px;
   height: 100%;
   cursor: pointer;
-  font-size: 20px;
   display: inline-block;
 
 }
@@ -290,7 +302,7 @@ background-image: linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 5
  */
 body {
   background: #e1e1e1;
-  min-height: 100%;
+  /*min-height: 100%;*/
   margin: auto;
 }
 ul.gNow {
