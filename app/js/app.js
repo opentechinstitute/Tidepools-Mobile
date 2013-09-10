@@ -9,7 +9,7 @@
 var app = angular.module('Tidepools', ['tidepoolsFilters', 'tidepoolsServices','ngSanitize','ui.bootstrap', 'leaflet-directive','infinite-scroll','$strap.directives']).
   config(['$routeProvider', function($routeProvider) {
   $routeProvider.
-<<<<<<< HEAD
+
       when('/', {templateUrl: 'partials/landmark-list.html', controller: LandmarkListCtrl}). 
 
       when('/about', {templateUrl: 'partials/aboutRHIWiFi.html', controller: LandmarkListCtrl}). 

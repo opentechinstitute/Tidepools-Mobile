@@ -42,12 +42,12 @@ var express = require('express'),
 
     
 app.configure(function () {
-	app.use(express.favicon());
-	app.use(express.bodyParser());
-	app.use(express.logger('dev'));  //tiny, short, default
-	app.use(app.router);
-	app.use(express.static(__dirname + '/app'));
-	app.use(express.errorHandler({dumpExceptions: true, showStack: true, showMessage: true}));
+    app.use(express.favicon());
+    app.use(express.bodyParser());
+    app.use(express.logger('dev'));  //tiny, short, default
+    app.use(app.router);
+    app.use(express.static(__dirname + '/app'));
+    app.use(express.errorHandler({dumpExceptions: true, showStack: true, showMessage: true}));
 });
 
 /* Helpers */
@@ -150,7 +150,6 @@ app.get('/api/:collection', function(req, res) {
 
         }
 
-<<<<<<< HEAD
         //places
         if (req.query.queryType == "places"){
 
@@ -171,31 +170,6 @@ app.get('/api/:collection', function(req, res) {
             }
 
         }
-=======
-        else if (req.query.time == "event"){
-
-            var qw = {"type" : "event"};
-            var limit;
-
-            if (req.params.collection == 'landmarks'){
-               db.collection(req.params.collection).find(qw).limit(limit).sort({_id: -1}).toArray(fn(req, res));
-            }
-
-        }
-
-        else if (req.query.time == "place"){
-
-            var qw = {"type" : "place"};
-            var limit;
-
-            if (req.params.collection == 'landmarks'){
-               db.collection(req.params.collection).find(qw).limit(limit).sort({_id: -1}).toArray(fn(req, res));
-            }
-
-        }
-
-        else if (req.query.time == "today"){
->>>>>>> 91b0256f3f33c2e0a95d03c0afca8a0358499a30
 
         //search
         if (req.query.queryType == "search"){
