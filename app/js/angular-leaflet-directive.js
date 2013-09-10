@@ -223,6 +223,14 @@ leafletDirective.directive("leaflet", ["$http", "$log", function ($http, $log) {
                         scopeMarker.lat = marker.getLatLng().lat;
                         scopeMarker.lng = marker.getLatLng().lng;
 
+<<<<<<< HEAD
+=======
+                        // return scope.tempMarker = {
+                        //     lat: marker.getLatLng().lat,
+                        //     lng: marker.getLatLng().lng
+                        // };
+
+>>>>>>> 91b0256f3f33c2e0a95d03c0afca8a0358499a30
                     });
                     if (scopeMarker.message) {
                         marker.openPopup();
