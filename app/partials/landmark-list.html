@@ -5,16 +5,15 @@
 
       <ul class="landmarks">
         <li class="thumbnail" style="padding-top:0px;">
-          <h2> Welcome to Red Hook WiFi! </h2>
+         <h2> Welcome to Red Hook WiFi! </h2>
           <p> Red Hook WiFi (RH WiFi) is a community-led effort to close the digital divide, generate economic opportunity, facilitate access to essential services and improve quality of life in Red Hook, Brooklyn via the deployment of a wireless Internet network.</p>
 
-
-         <h3>∆ What's Happening?</h3>
-          
+          <h3> What's Happening?</h3>
           <button class="btn" ng-click="filter('all','all'); showTime = false; showSearch = false; showPlaces = false">All</button>
           <button class="btn" ng-click="filter('events','all'); showTime = ! showTime; showSearch = false; showPlaces = false"><i class="fui-time"></i>Events</button> 
           <button class="btn" ng-click="filter('places','all'); showPlaces = ! showPlaces; showTime = false; showSearch = false"><i class="fui-location"></i>Places</button> 
-          <button class="btn inverse" ng-click="showSearch = ! showSearch; showTime = false; showPlaces = false"><i class="fui-search"></i>Search</button>
+          <button class="btn inverse" ng-click="showSearch = ! showSearch; showTime = false; showPlaces = false"><i class="fui-search"></i></button>
+
           <!-- <button class="btn" ng-click="goNew()"><i class="fui-plus"></i>New</button> -->
         </li>
 
@@ -43,11 +42,6 @@
           <button class="btn" ng-click="filter('places','Park')">Parks</button>  
       </span> 
 
-          <form ng-submit="sessionSearch()">
-            <input style="width:95%;" type="text" ng-model="searchText" size="30"
-                   placeholder="Search events">
-            <input class="btn-primary" type="submit" value="search">
-          </form>
 
       <ul class="landmarks">
           <!--Looping through data-->
@@ -65,7 +59,6 @@
               <!--Show location name for button or default is its empty-->
               <button><a style="color:#34495e; text-decoration: none;" ng-href="#/map/coordinates/{{landmark.loc[0]}}/{{landmark.loc[1]}}/{{landmark.id}}"<i class="fui-location"></i>
               <span ng-hide="landmark.loc_nicknames">Map Location</span>{{landmark.loc_nicknames[0]}}</a></button>
-              <span ng-show="landmark.tags">  <button class="" ng-click="goTalk(landmark.tags)">#{{landmark.tags}}</button> </span>  <button><a style="color:#34495e; text-decoration: none;" ng-href="#/map/coordinates/{{landmark.loc[0]}}/{{landmark.loc[1]}}/{{landmark.name}}"<i class="fui-location"></i><span ng-hide="landmark.loc_nicknames">Map Location</span>{{landmark.loc_nicknames[0]}}</a></button>
 
           </li>
       </ul>
@@ -75,4 +68,3 @@
     </div>
   </div>
 </div>
-
