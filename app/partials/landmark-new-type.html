@@ -6,10 +6,9 @@
 
       <form>
         <br>
-          <h3>Create new {{landmark.type}} <span ng-show="landmark.type == 'place'"><i style="font-size:25px;" class="fui-location"></i></span><span ng-show="landmark.type == 'event'"><i style="font-size:25px;" class="fui-calendar-solid"></i> </span><span ng-show="landmark.type == 'job'"><i style="font-size:25px;" class="fui-user"></i></span></h3>
+          <h3>Create new {{landmark.type}} <span ng-show="landmark.type == 'place'"> <i style="font-size:25px;" class="fui-location"></i></span><span ng-show="landmark.type == 'event'"><i style="font-size:25px;" class="fui-calendar-solid"></i> </span><span ng-show="landmark.type == 'job'"><i style="font-size:25px;" class="fui-user"></i></span></h3>
 
                 <p><h4>Name of {{landmark.type}} <input type="text" ng-required="true" name="landmark.name" ng:model="landmark.name" maxlength="50" /></p>
-
 
                 <span class="btn btn-success fileinput-button">
                     <i class="icon-plus icon-white"></i>
@@ -30,7 +29,6 @@
 
                       <hr style="border-top: 2px solid #ccc;">
 
-
                       <p><label>Start Date</label> <input type="text" ng-model="landmark.date.start" data-date-format="MM dd, yyyy" bs-datepicker/>
                       <button type="button" class="btn" data-toggle="datepicker"><i class="icon-calendar"></i></button></p>  
 
@@ -39,7 +37,6 @@
 
                       <p><label>End Time</label> <input type="text" ng-model="landmark.time.end" data-date-format="hh:mm" bs-timepicker />
                       <button type="button" class="btn" data-toggle="timepicker"><i class="icon-time"></i></button></p>
-
 
                       <ul>
                           <h4><a ng-click="showDetails = ! showDetails ; addEndDate()">Add End Date?</a></h4>
@@ -57,7 +54,6 @@
                     <hr style="border-top: 2px solid #ccc;">
 
                 </span>
-
 
                 <p><label>Short Description:</label> <textarea name="landmark.shortDescription" ng:model="landmark.shortDescription" maxlength="140"/></p>
                 <p><label>Description:</label> <textarea name="landmark.description" ng:model="landmark.description"></textarea></p>
@@ -89,7 +85,6 @@
 
           </p>
 
-
       </form>    
 
     </div>
@@ -97,25 +92,12 @@
   </div>
 </div>
 
-
-
-
-
-
-
-
   <div modal="plotmap" style="width:100%; height:100%;" close="close()" options="opts">
       <div class="modal-header">
           <button class="btn-primary" ng-click="close()">Close X</button>  <h4>Click to Locate</h4>
       </div>
       <div class="modal-body">
 
-<!--           <canvas id="myCanvas" width="100%" height="100%"></canvas>
- -->       
+<!--           <canvas id="myCanvas" width="100%" height="100%"></canvas> -->
       </div>
   </div>
-
-
-
-
-
