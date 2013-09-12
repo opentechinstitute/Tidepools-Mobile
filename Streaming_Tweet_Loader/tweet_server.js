@@ -14,7 +14,7 @@ var t = new twitter({
 });
 
 
-mongoose.connect('mongodb://localhost/tidepools');
+mongoose.connect('mongodb://localhost/redhook');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 

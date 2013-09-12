@@ -29,7 +29,7 @@ var mongoose = require('mongoose'),
     landmarkSchema = require('./landmark_schema.js'),
     monguurl = require('monguurl');
 
-mongoose.connect('mongodb://localhost/tidepools');
+mongoose.connect('mongodb://localhost/redhook');
 var db_mongoose = mongoose.connection;
 db_mongoose.on('error', console.error.bind(console, 'connection error:'));
 //---------------//
@@ -37,7 +37,7 @@ db_mongoose.on('error', console.error.bind(console, 'connection error:'));
 
 var express = require('express'),
     app = module.exports.app = express(), 
-    db = require('mongojs').connect('tidepools');
+    db = require('mongojs').connect('redhook');
 
 
     
