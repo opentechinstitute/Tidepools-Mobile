@@ -1,6 +1,9 @@
+// Tidepools Global Settings
 
-//this is the "center" of your community or event, for mapping purposes
-var global_mapCenter = {
+//----------- THIS LOADS A CLOUD MAP --------//
+
+var mapSelect = 'cloud'; //loading 'cloud' setting as specified in: js/angular-leaflet-directive.js
+var global_mapCenter = { //this is the "center" of your community or event, for mapping purposes
     lat: 52.5126,
     lng: 13.4202,
     zoom: 15
@@ -8,11 +11,15 @@ var global_mapCenter = {
 
 
 // //AN EXAMPLE using local AMC2013 map
+ //----------- THIS LOADS A LOCAL MAP -----------------//
+
+// var mapSelect = 'amc2013'; //loading 'amc2013' local map setting as specified in: js/angular-leaflet-directive.js
 // var global_mapCenter = {
 //     lat: 42.356886,
 //     lng: -83.069523,
 //     zoom: 14
 // };
+
 /*var globalIcon = L.icon;
 var book_p = new globalIcon({iconUrl: 'img/book_p.svg'});
 var film_p = new globalIcon({iconUrl: 'img/film_p.svg'});
@@ -24,10 +31,20 @@ var hack = new globalIcon({iconUrl: 'img/hack_r.svg'});
 var meet = new globalIcon({iconUrl: 'img/meet_r.svg'});
 var eat = new globalIcon({iconUrl: 'img/fork_r.svg'});
 */
+
+//---------- TWEET STREAM -------//
 //one or more hashtags for base twitter gathering 
 var global_hashtag = "#is4cwn";
+
 //can also be multiple:
 //var global_hashtag = '#lol,#what,#soitgoes';
+//-------------------------------//
+
+
+var eventCategories = ['Meeting','Party','Hangout'];
+
+var placeCategories = ['Organization','Shop','Food/Drink','Park'];
+
 
 var globalEditLoc = {}; //this is a temp variable for an issue with angular leaflet directive in landmark-edit
 

@@ -7,10 +7,10 @@
         <li class="thumbnail" style="padding-top:0px;">
          <h3>∆ What's Happening?</h3>
           
-          <button class="btn" ng-click="filter('all','all'); showTime = false; showSearch = false">All</button>
-          <button class="btn" ng-click="filter('events','all'); showTime = ! showTime; showSearch = false"><i class="fui-time"></i>Events</button> 
-          <button class="btn" ng-click="filter('places','all'); showTime = false; showSearch = false"><i class="fui-location"></i>Places</button> 
-          <button class="btn inverse" ng-click="showSearch = ! showSearch; showTime = false"><i class="fui-search"></i>Search</button>
+          <button class="btn" ng-click="filter('all','all'); showTime = false; showSearch = false; showPlaces = false">All</button>
+          <button class="btn" ng-click="filter('events','all'); showTime = ! showTime; showSearch = false; showPlaces = false"><i class="fui-time"></i>Events</button> 
+          <button class="btn" ng-click="filter('places','all'); showPlaces = ! showPlaces; showTime = false; showSearch = false"><i class="fui-location"></i>Places</button> 
+          <button class="btn inverse" ng-click="showSearch = ! showSearch; showTime = false; showPlaces = false"><i class="fui-search"></i>Search</button>
 
           <button class="btn" ng-click="goNew()"><i class="fui-plus"></i>New</button>
         </li>
@@ -27,10 +27,19 @@
 
        <!--When Event button clicked show-->
        <span ng-show="showTime" >   
-          <button class="btn" ng-click="filter('events','now')">now </button> 
+          <button class="btn" ng-click="filter('events','now')">now</button> 
           <button class="btn" ng-click="filter('events','soon')">soon</button> 
           <button class="btn" ng-click="filter('events','today')">today</button>  
       </span> 
+
+      <!--When Places button clicked show-->
+       <span ng-show="showPlaces" >   
+          <button class="btn" ng-click="filter('places','Organization')">Orgs</button> 
+          <button class="btn" ng-click="filter('places','Shop')">Shops</button> 
+          <button class="btn" ng-click="filter('places','Food/Drink')">Food/Drink</button> 
+          <button class="btn" ng-click="filter('places','Park')">Parks</button>  
+      </span> 
+
 
       <ul class="landmarks">
           <!--Looping through data-->

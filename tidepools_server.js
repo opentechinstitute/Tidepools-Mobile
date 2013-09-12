@@ -162,6 +162,13 @@ app.get('/api/:collection', function(req, res) {
                 db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
             }
 
+            else {
+                var qw = {
+                    'subType' : req.query.queryFilter
+                };
+                db.collection(req.params.collection).find(qw).sort({_id: -1}).toArray(fn(req, res));
+            }
+
         }
 
         //search
@@ -273,7 +280,7 @@ app.post('/api/:collection/create', function(req, res) {
 
     function saveLandmark(finalID){
    
-        if (req.body._id){ //temp way to detect landmark edit
+        if (req.body._id){ //temp way to detect landmark edit by checking if mongo already generated _id
 
             var landmarkModel = mongoose.model('landmark', landmarkSchema, 'landmarks');
 
@@ -287,7 +294,9 @@ app.post('/api/:collection/create', function(req, res) {
                     lm.name = req.body.name;
                     lm.id = finalID;
                     lm.type = req.body.type;
+                    lm.subType = req.body.subType;
                     lm.stats.avatar = req.body.stats.avatar;
+                    lm.mapID = "TidepoolsBaseMap"; //compatibility with Old Tidepools Interface
 
                     if (req.body.description){
                         lm.description = req.body.description;
@@ -350,7 +359,7 @@ app.post('/api/:collection/create', function(req, res) {
             });         
         }
      
-         else {
+         else { //not an edit, a new landmark entirely
 
                 var landmarkModel = mongoose.model('landmark', landmarkSchema, 'landmarks');  
                 var lm = new landmarkModel();
@@ -358,7 +367,9 @@ app.post('/api/:collection/create', function(req, res) {
                 lm.name = req.body.name;
                 lm.id = finalID;
                 lm.type = req.body.type;
+                lm.subType = req.body.subType;
                 lm.stats.avatar = req.body.stats.avatar;
+                lm.mapID = "TidepoolsBaseMap"; //compatibility with Old Tidepools Interface
 
                 if (req.body.description){
                     lm.description = req.body.description;
@@ -424,8 +435,8 @@ app.post('/api/:collection/create', function(req, res) {
 });
 
 // Delete
-app.del('/api/:collection/:id', function(req, res) {
-    db.collection(req.params.collection).remove({_id:objectId(req.params.id)}, {safe:true}, fn(req, res));
+app.delete('/api/:collection/:id', function(req, res) {
+   db.collection(req.params.collection).remove({_id:objectId(req.params.id)}, {safe:true}, fn(req, res));
 });
 
 //Group
@@ -452,6 +463,8 @@ app.post('/api/upload',  function (req, res) {
 
     //disabled Max image upload size for NOW << enable later...
    // if (req.files.files[0].size <= 5242880){
+
+        //FILTER ANYTHING BUT GIF JPG PNG
 
         fs.readFile(req.files.files[0].path, function (err, data) {
 

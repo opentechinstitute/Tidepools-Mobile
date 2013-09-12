@@ -7,8 +7,8 @@ function LandmarkListCtrl( $location, $scope, db) {
     $scope.queryType = "all";
     $scope.queryFilter = "all";
     //Events Now example:
-    //$scope.queryType = "events";
-    //$scope.queryFilter = "now";
+    // $scope.queryType = "events";
+    // $scope.queryFilter = "now";
 
     $scope.landmarks = db.landmarks.query({ queryType:$scope.queryType, queryFilter:$scope.queryFilter });
     //---------//
@@ -94,6 +94,18 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
     }
 
     var currentDate = new Date();
+
+    //----- Loading sub categories from global settings ----//
+    $scope.subTypes = [];
+
+    if ($routeParams.type == 'event'){
+        $scope.subTypes = $scope.subTypes.concat(eventCategories);
+    }
+
+    if ($routeParams.type == 'place'){
+        $scope.subTypes = $scope.subTypes.concat(placeCategories);
+    }
+    //-----//
 
     $scope.addEndDate = function () {
         $scope.landmark.date.end = $scope.landmark.date.start;
@@ -240,12 +252,29 @@ LandmarkNewCtrl.$inject = ['$location', '$scope', '$routeParams','db'];
 
 function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeout) {
 
+    //if authenticate, show and provide this functionality:
+
+    //if not, login plz k thx
+
+
 
     Landmark.get({_id: $routeParams.landmarkId}, function(landmark) {
 
         $scope.landmark = landmark;
         $scope.landmark.location = landmark.loc_nicknames[0];
         $scope.landmark.idCheck = landmark.id;
+
+        //----- Loading sub categories from global settings ----//
+        $scope.subTypes = [];
+
+        if (landmark.type == 'event'){
+            $scope.subTypes = $scope.subTypes.concat(eventCategories);
+        }
+
+        if (landmark.type == 'place'){
+            $scope.subTypes = $scope.subTypes.concat(placeCategories);
+        }
+        //-----//
 
         if (landmark.type=="event"){
 
@@ -432,9 +461,10 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
         var deleteItem = confirm('Are you sure you want to delete this item?'); 
 
         if (deleteItem) {
-            alert('Going to delete, not yet');
+            Landmark.del({_id: $scope.landmark._id}, function(landmark) {
+                $location.path('/'); 
+            });
         }
-
     }
 
     angular.extend($scope, {
