@@ -27,17 +27,20 @@
 
        <!--When Event button clicked show-->
        <span ng-show="showTime" >   
-          <button class="btn" ng-click="filter('events','now')">now</button> 
-          <button class="btn" ng-click="filter('events','soon')">soon</button> 
-          <button class="btn" ng-click="filter('events','today')">today</button>  
+          <button class="btn-medium" ng-click="filter('events','now')">now</button> 
+          <button class="btn-medium" ng-click="filter('events','soon')">soon</button> 
+          <button class="btn-medium" ng-click="filter('events','today')">today</button>  
       </span> 
 
       <!--When Places button clicked show-->
        <span ng-show="showPlaces" >   
-          <button class="btn" ng-click="filter('places','Organization')">Orgs</button> 
-          <button class="btn" ng-click="filter('places','Shop')">Shops</button> 
-          <button class="btn" ng-click="filter('places','Food/Drink')">Food/Drink</button> 
-          <button class="btn" ng-click="filter('places','Park')">Parks</button>  
+          <button class="btn-medium" ng-click="filter('places','Session Room')">Conference Rooms</button> 
+          <button class="btn-medium" ng-click="filter('places','HackLab')">HackLab</button> 
+          <button class="btn-medium" ng-click="filter('places','Bar/Restaurant')">Bar/Restaurant</button> 
+          <button class="btn-medium" ng-click="filter('places','Hotel')">Hotel</button>
+          <button class="btn-medium" ng-click="filter('places','Outside')">Outside</button>  
+          <button class="btn-medium" ng-click="filter('places','Park')">Park</button>
+          <button class="btn-medium" ng-click="filter('places','Tourism Spot')">Tourism Spot</button>
       </span> 
 
 

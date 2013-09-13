@@ -41,9 +41,9 @@ var global_hashtag = "#is4cwn";
 //-------------------------------//
 
 
-var eventCategories = ['Meeting','Party','Hangout'];
+var eventCategories = ['IS4CWN-Keynote','IS4CWN-Presentation','IS4CWN-Film','IS4CWN-Information','IS4CWN-Hack','Meet','Collaborate','Eat'];
 
-var placeCategories = ['Organization','Shop','Food/Drink','Park'];
+var placeCategories = ['Session Room','HackLab','Bar/Restaurant','Hotel','Outside','Park','Tourism Spot'];
 
 
 var globalEditLoc = {}; //this is a temp variable for an issue with angular leaflet directive in landmark-edit
