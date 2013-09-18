@@ -8,9 +8,8 @@ body {
   overflow-x: hidden;
 }
 
-.bar {
-    height: 18px;
-    background: green;
+#bar {
+    height: 44px;
 }
 
 .angular-leaflet-map {
@@ -139,8 +138,10 @@ body.menu #main {
   top: 0;
   left: 0;
   width: 66%;
+  padding-top:50px;
   bottom: 0px;
-  background: #34495e url('../images/cloud.gif');
+  background: #34495e;
+  z-index: 1;
   box-shadow: 0px 0px 10px 6px #2c3e50 inset;
 
 
@@ -191,13 +192,7 @@ body.menu #main {
 #content { 
 /*  padding: 20px;*/ 
 }
-
-#bar {
-  height: 54px;
-  background: #333;
-}
-
-/* --- end code by Dave Cole */
+/* - end code by Dave Cole */
 
 /* App menu bar */
 
@@ -338,7 +333,7 @@ div.card {
   }
   div.card p.url {
     border-top: 1px solid #e5e5e5;
-    background-image: url('http://www.eriklindemann.com/wp-content/uploads/2013/05/url.png');
+    background-image: url('../img/url.png');
     background-repeat: no-repeat;
     padding: 6px 0 0 30px;
     height: 30px;
