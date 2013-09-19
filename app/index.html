@@ -22,15 +22,17 @@
   <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <title>Tidepools</title>
   <link rel="stylesheet" href="css/app.css">
-  <link rel="stylesheet" media="screen and (max-width: 600px)" href="small.css" />
-  <link rel="stylesheet" media="only screen and (-webkit-min-device-pixel-ratio: 2)" type="text/css" href="ios.css" />
-<link rel="stylesheet" href="css/bootstrap.css">
+  <!-- <link rel="stylesheet" media="screen and (max-width: 600px)" href="small.css" /> -->
+  <!-- <link rel="stylesheet" media="only screen and (-webkit-min-device-pixel-ratio: 2)" type="text/css" href="ios.css" /> -->
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/bubbles.css">
   <link rel="stylesheet" href="css/tidepools/leaflet.css">
   <link rel="stylesheet" href="css/bar-transform.css">
   <link rel="stylesheet" href="css/bootstrap-datepicker.css">
   <link rel="stylesheet" href="css/bootstrap-timepicker.css">
   <link rel="stylesheet" href="css/flat-ui.css" >
   <link rel="stylesheet" href="css/jquery.fileupload-ui.css">
+  <!-- <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"> -->
 
   <link rel="shortcut icon" href="images/favicon.ico">
 
@@ -74,9 +76,10 @@
           <!--<div id="show" class="btn-primary" href="#"><div style="padding:7px; font-size:30px;"><i class="fui-list"></i></div></div>-->
             <div class="btn-toolbar" style="margin-top:0px;">
                 <div class="btn-group">
+		<a href="#" id="" title="show small screen nav" class="small-Nav"></a>
                   <a class="btn btn-primary" href="#">Home</a>
-                  <a class="btn btn-primary" href="#/talk">Talk<i class="fui-chat"></i></a>
-                  <a class="btn btn-primary" href="#/map">Map<i class="fui-location"></i></a>
+                  <a class="btn btn-primary" href="#/talk">Talk</a>
+                  <a class="btn btn-primary" href="#/map">Map</a>
 	<!--<div id="show" class="btn-primary" style="font-size:60px;" href="#">derp</div>-->
 		<a id="show" class="btn btn-primary" href="#">Menu</a>
                 </div>
@@ -85,7 +88,61 @@
       </div>
   </header>
 
-      <div id="menu">
+<div id="menu">
+
+<!-- begin orbfest 98 -->
+
+    <div id="background-effects">
+      <div class="orb-layer" id="orb-layer-2">
+        <span class="orb" id="orb-4"></span>
+        <span class="orb" id="orb-5"></span>
+        <span class="orb" id="orb-6"></span>
+        <span class="orb" id="orb-7"></span>
+        <span class="orb" id="orb-8"></span>
+        <span class="orb" id="orb-9"></span>
+        <span class="orb" id="orb-10"></span>
+      </div>
+      <div class="orb-layer" id="orb-layer-3">
+        <span class="orb" id="orb-13"></span>
+        <span class="orb" id="orb-14"></span>
+        <span class="orb" id="orb-15"></span>
+        <span class="orb" id="orb-16"></span>
+        <span class="orb" id="orb-17"></span>
+        <span class="orb" id="orb-18"></span>
+        <span class="orb" id="orb-19"></span>
+        <span class="orb" id="orb-20"></span>
+      </div>
+      <div class="orb-layer" id="orb-layer-4">
+        <span class="orb" id="orb-21"></span>
+        <span class="orb" id="orb-22"></span>
+        <span class="orb" id="orb-23"></span>
+        <span class="orb" id="orb-24"></span>
+        <span class="orb" id="orb-25"></span>
+        <span class="orb" id="orb-26"></span>
+        <span class="orb" id="orb-27"></span>
+        <span class="orb" id="orb-28"></span>
+        <span class="orb" id="orb-29"></span>
+        <span class="orb" id="orb-30"></span>
+        <span class="orb" id="orb-31"></span>
+        <span class="orb" id="orb-32"></span>
+        <span class="orb" id="orb-33"></span>
+        <span class="orb" id="orb-34"></span>
+        <span class="orb" id="orb-35"></span>
+        <span class="orb" id="orb-36"></span>
+        <span class="orb" id="orb-37"></span>
+        <span class="orb" id="orb-38"></span>
+        <span class="orb" id="orb-39"></span>
+        <span class="orb" id="orb-40"></span>
+      </div>
+    </div>
+
+
+<!-- end orbpalooza -->
+
+
+
+
+
         <h3>Events</h3>
         <ul>
           <div ng-controller="sessionsNow">
@@ -121,6 +178,10 @@
       </div>
 
   </div>
+
+<footer>
+
+</footer>
 
 <script>
   //temp use of jquery, switch to angular animation?
