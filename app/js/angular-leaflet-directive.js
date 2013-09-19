@@ -62,13 +62,13 @@ var defaults = {
     //--------------------------------------------------//
     }
 
-    if (mapSelect == 'amc2013'){
+    if (mapSelect == 'is4cwn'){
     //-------------ENABLE TO LOAD LOCAL MAP -----------//
 
         var defaults = {
             minZoom: 13,
             maxZoom: 17,
-            tileLayer: '1.0.0/amc2013/{z}/{x}/{y}.png',
+            tileLayer: '1.0.0/is4cwn/{z}/{x}/{y}.png',
             
             tileLayerOptions: {
                 tms: 'true',
@@ -78,12 +78,7 @@ var defaults = {
                 url: 'img/marker-icon.png',
                 size: [25, 41],
                 anchor: [12, 40],
-                popup: [0, -40],
-                shadow: {
-                    url: 'img/marker-shadow.png',
-                    size: [41, 41],
-                    anchor: [12, 40]
-                }
+                popup: [0, -40]s,
             },
             path: {
                 weight: 10,

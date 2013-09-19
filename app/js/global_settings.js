@@ -13,12 +13,12 @@ var global_mapCenter = { //this is the "center" of your community or event, for 
 // //AN EXAMPLE using local AMC2013 map
  //----------- THIS LOADS A LOCAL MAP -----------------//
 
-// var mapSelect = 'amc2013'; //loading 'amc2013' local map setting as specified in: js/angular-leaflet-directive.js
-// var global_mapCenter = {
-//     lat: 42.356886,
-//     lng: -83.069523,
-//     zoom: 14
-// };
+ var mapSelect = 'is4cwn'; //loading 'amc2013' local map setting as specified in: js/angular-leaflet-directive.js
+ var global_mapCenter = {
+    lat: 52.5126,
+    lng: 13.4202,
+    zoom: 15
+ };
 
 /*var globalIcon = L.icon;
 var book_p = new globalIcon({iconUrl: 'img/book_p.svg'});
@@ -41,9 +41,9 @@ var global_hashtag = "#is4cwn";
 //-------------------------------//
 
 
-var eventCategories = ['IS4CWN-Keynote','IS4CWN-Presentation','IS4CWN-Film','IS4CWN-Information','IS4CWN-Hack','Meet','Collaborate','Eat'];
+var eventCategories = ['IS4CWN-Keynote','IS4CWN-Presentation','IS4CWN-Film','IS4CWN-Information','IS4CWN-Hack','Meet','Collaborate', 'IS4CWN-Document-Fair', 'IS4CWN-Tech-Support'];
 
-var placeCategories = ['Session Room','HackLab','Bar/Restaurant','Hotel','Outside','Park','Tourism Spot'];
+var placeCategories = ['HackLab','Bar-Restaurant','Hotel','Outside','Tourism-Spot'];
 
 
 var globalEditLoc = {}; //this is a temp variable for an issue with angular leaflet directive in landmark-edit
