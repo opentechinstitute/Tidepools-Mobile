@@ -9,7 +9,7 @@ function LandmarkListCtrl( $location, $scope, db) {
     //Events Now example:
     $scope.queryType = "events";
     $scope.queryFilter = "all";
-    $scope.showTime = true; //displaying sub menu for events
+    //$scope.showTime = true; //displaying sub menu for events
 
     $scope.landmarks = db.landmarks.query({ queryType:$scope.queryType, queryFilter:$scope.queryFilter });
     //---------//
@@ -545,6 +545,19 @@ function mapCtrl($location, $scope, db, $timeout) {
         $scope.queryFilter = "all";
 
         queryMap($scope.queryType, $scope.queryFilter); //showing all at first
+
+        //------- For Switching Button Classes ------//
+        $scope.items = ['all', 'events','places','search']; //specifying types, (probably better way to do this)
+        $scope.selected = $scope.items[0]; //starting out with selecting EVENTS 
+
+        $scope.select= function(item) {
+           $scope.selected = item; 
+        };
+
+        $scope.itemClass = function(item) {
+            return item === $scope.selected ? 'btn btn-block btn-lg btn-inverse' : 'btn';
+        };
+        //---------------------------//
 
         $scope.filter = function(type, filter) {
             queryMap(type,filter);
