@@ -279,7 +279,8 @@ app.post('/api/:collection/create', function(req, res) {
     }
 
     function saveLandmark(finalID){
-   
+        
+        //EDITING A LANDMARK
         if (req.body._id){ //temp way to detect landmark edit by checking if mongo already generated _id
 
             var landmarkModel = mongoose.model('landmark', landmarkSchema, 'landmarks');
@@ -339,7 +340,7 @@ app.post('/api/:collection/create', function(req, res) {
 
                     if (req.body.tags){
                         
-                        var newTag = req.body.tags.replace(/[^A-Za-z]+/g, '');
+                        var newTag = req.body.tags.replace(/[^ \w]+/, '');
                         //lm.tags.addToSet(newTag);
                         lm.tags = newTag;
                         
@@ -358,7 +359,8 @@ app.post('/api/:collection/create', function(req, res) {
                 }
             });         
         }
-     
+            
+        //NEW LANDMARK
          else { //not an edit, a new landmark entirely
 
                 var landmarkModel = mongoose.model('landmark', landmarkSchema, 'landmarks');  
@@ -413,7 +415,7 @@ app.post('/api/:collection/create', function(req, res) {
 
                 if (req.body.tags){
                     
-                    var newTag = req.body.tags.replace(/[^A-Za-z]+/g, '');
+                    var newTag = req.body.tags.replace(/[^ \w]+/, '');
                     //lm.tags.addToSet(newTag);
                     lm.tags = newTag;
                     
