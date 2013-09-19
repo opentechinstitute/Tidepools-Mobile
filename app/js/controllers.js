@@ -13,6 +13,21 @@ function LandmarkListCtrl( $location, $scope, db) {
     $scope.landmarks = db.landmarks.query({ queryType:$scope.queryType, queryFilter:$scope.queryFilter });
     //---------//
 
+    //------- For Switching Button Classes ------//
+    $scope.items = ['all', 'events','places','search']; //specifying types, (probably better way to do this)
+    $scope.selected = $scope.items[0]; //starting out with selecting EVENTS 
+
+    $scope.select= function(item) {
+       $scope.selected = item; 
+    };
+
+    $scope.itemClass = function(item) {
+        return item === $scope.selected ? 'btn btn-block btn-lg btn-inverse' : 'btn';
+    };
+    //---------------------------//
+
+    $scope.tweets = db.tweets.query({limit:1});
+
     //query function for all sorting buttons
     $scope.filter = function(type, filter) {
 	    $scope.landmarks = db.landmarks.query({ queryType: type, queryFilter: filter });
@@ -526,6 +541,19 @@ function mapCtrl($location, $scope, db, $timeout) {
         $scope.queryFilter = "all";
 
         queryMap($scope.queryType, $scope.queryFilter); //showing all at first
+
+        //------- For Switching Button Classes ------//
+        $scope.items = ['all', 'events','places','search']; //specifying types, (probably better way to do this)
+        $scope.selected = $scope.items[0]; //starting out with selecting EVENTS 
+
+        $scope.select= function(item) {
+           $scope.selected = item; 
+        };
+
+        $scope.itemClass = function(item) {
+            return item === $scope.selected ? 'btn btn-block btn-lg btn-inverse' : 'btn';
+        };
+        //---------------------------//
 
         $scope.filter = function(type, filter) {
             queryMap(type,filter);
