@@ -339,7 +339,7 @@ app.post('/api/:collection/create', function(req, res) {
 
                     if (req.body.tags){
                         
-                        var newTag = req.body.tags.replace(/[^A-Za-z]+/g, '');
+                        var newTag = req.body.tags.replace(/[^ \w]+/, '');
                         //lm.tags.addToSet(newTag);
                         lm.tags = newTag;
                         
@@ -413,7 +413,7 @@ app.post('/api/:collection/create', function(req, res) {
 
                 if (req.body.tags){
                     
-                    var newTag = req.body.tags.replace(/[^A-Za-z]+/g, '');
+                    var newTag = req.body.tags.replace(/[^ \w]+/, '');
                     //lm.tags.addToSet(newTag);
                     lm.tags = newTag;
                     

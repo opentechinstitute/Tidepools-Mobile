@@ -35,6 +35,16 @@ angular.module('tidepoolsFilters', []).filter('hashtag', function() {
       }
 
   };
-});
+})
 
+.filter('url', function() {
+  return function(input) {
+
+    var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;  
+    return input.replace(urlRegex, function(url) {  
+        return '<a href="' + url + '">' + url + '</a>';  
+    })  
+              
+  };
+});
 
