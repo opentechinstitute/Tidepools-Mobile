@@ -40,7 +40,6 @@ var global_hashtag = "#is4cwn";
 //var global_hashtag = '#lol,#what,#soitgoes';
 //-------------------------------//
 
-
 var eventCategories = ['IS4CWN-Keynote','IS4CWN-Presentation','IS4CWN-Film','IS4CWN-Information','IS4CWN-Hack','Meet','Collaborate', 'IS4CWN-Document-Fair', 'IS4CWN-Tech-Support'];
 
 var placeCategories = ['HackLab','Bar-Restaurant','Hotel','Outside','Tourism-Spot'];
