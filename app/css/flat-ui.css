@@ -569,7 +569,7 @@ h6 {
 .btn.btn-danger:hover,
 .btn.btn-danger:focus,
 .btn-group:focus .btn.btn-danger.dropdown-toggle {
-  background-color: #ec7063;
+  background-color: #e74c3c;
 }
 .btn.btn-danger:active,
 .btn-group.open .btn.btn-danger.dropdown-toggle,
@@ -577,17 +577,17 @@ h6 {
   background-color: #c44133;
 }
 .btn.btn-success {
-  background-color: #2ecc71;
+  background-color: #5DADE2;
 }
 .btn.btn-success:hover,
 .btn.btn-success:focus,
 .btn-group:focus .btn.btn-success.dropdown-toggle {
-  background-color: #58d68d;
+  background-color: #73b8e6;
 }
 .btn.btn-success:active,
 .btn-group.open .btn.btn-success.dropdown-toggle,
 .btn.btn-success.active {
-  background-color: #27ad60;
+  background-color: #3297da;
 }
 .btn.btn-warning {
   background-color: #f1c40f;

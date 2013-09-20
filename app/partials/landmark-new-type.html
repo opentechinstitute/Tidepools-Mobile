@@ -15,7 +15,7 @@
                     <span>Add Profile Pic</span>
                     <input id="fileupload" type="file" name="files[]">
                 </span>
-                <label>Or Drag & Drop Pic ↑</label>
+                <!--<label>Or Drag & Drop Pic ↑</label>-->
 
                 <div id="progress" class="progress">
                     <div class="bar" style="width: 0%;"></div>
@@ -66,24 +66,19 @@
 
                 </span>
 
-                  <div style="padding-left:5%; padding-right:5%;">
+                  <div class="map-new">
                       <h4>Map Location:</h4> 
                       <br>
                       <leaflet center="amc" markers="markers" ></leaflet>
                       <br>
                       <label>Location Description:</label>
-                      <p><input type="text" name="landmark.location" ng:model="landmark.location" placeholder="Example: Hicks and 9th Brooklyn NYC"/><button ng:click="locsearch()">Search</button></p>
+                      <p><input type="text" name="landmark.location" ng:model="landmark.location" placeholder="Example: Hicks and 9th Brooklyn NYC"/><!--<button ng:click="locsearch()">Search</button>--></p>
 
                   </div>
 
-         <hr style="border-top: 2px solid #ccc;">
-
-          <p> 
-              <button class="btn btn-success" ng:click="save()"><i class="fui-check"></i>Save</button>
-              <br><br>
-              <button ng:click="cancel()">Cancel</button>
-
-          </p>
+          <div class="submit-cancel">
+			  <button class="btn btn-success" ng:click="save()"><i class="fui-check"></i>Save</button>  <button class="btn btn-danger" ng:click="cancel()"><span  class="fui-cross"></span>Cancel</button>
+		  </div>
 
       </form>    
 

@@ -1,8 +1,5 @@
 /* app css stylesheet */
 
-html {
-
-}
 body {
   margin: 0;
   overflow-x: hidden;
@@ -10,6 +7,39 @@ body {
 
 #bar {
     height: 44px;
+}
+
+footer {
+min-height: 160px;
+width: 80%;
+margin-left: auto;
+margin-right: auto; 
+}
+
+footer p {
+line-height: 14px;
+padding-bottom: 3px;
+}
+
+footer a {
+color: #5dade2;
+}
+
+.submit-cancel {
+}
+
+.submit-cancel button {
+margin: 10px;
+}
+
+#footer {
+background-color: #252528;
+min-height: 180px;
+color: #ffffff;
+display: block;
+padding-top: 22px;
+padding-left: 25%;
+padding-right: 25%; 
 }
 
 .angular-leaflet-map {
@@ -108,6 +138,51 @@ h1 {
   border-bottom: 1px solid gray;
 }
 
+/* Nav bar */
+
+#nav {
+  width: 100%;
+  height: 45px;
+  float: left;
+  margin: 0 0 1em 0;
+  padding: 0;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ccc;  
+}
+
+#nav ul {
+  list-style: none;
+  width: 800px;
+  margin: 0 auto;
+  padding: 0; 
+}
+
+#nav li {
+  float: left; 
+}
+
+#nav li a {
+  display: block;
+  padding: 8px 15px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #069;
+  border-right: 1px solid #ccc; 
+}
+
+#nav li:first-child a {
+  border-left: 1px solid #ccc; 
+}
+
+#nav li a:hover {
+  color: #c00;
+  background-color: #fff; 
+}
+
+.menubutton {
+  float:left; 
+  width:10%;
+}
 
 /* Code below by Dave Cole from: https://gist.github.com/dhcole/5368613 */
 body.menu #menu {
@@ -188,8 +263,10 @@ body.menu #main {
   -webkit-backface-visibility: hidden;
 }
 
+
+
 #content { 
-/*  padding: 20px;*/ 
+  padding: 20px;
 }
 /* - end code by Dave Cole */
 
@@ -199,7 +276,7 @@ body.menu #main {
   float: left;
   color: #fff; 
   background: #5dade2;
-  width: 44px;
+  min-width: 44px;
   height: 100%;
   cursor: pointer;
   display: inline-block;
@@ -230,7 +307,7 @@ body.menu #main {
 }
 
 /* Nav bar */
-
+/*
 #nav {
   width: 100%;
   height: 45px;
@@ -276,7 +353,7 @@ body.menu #main {
   width:10%;
 }
 
-
+*/
 
 
 /* Cards */

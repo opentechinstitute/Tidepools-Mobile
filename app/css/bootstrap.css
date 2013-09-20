@@ -2826,8 +2826,8 @@ button.close {
 .btn-success.active,
 .btn-success.disabled,
 .btn-success[disabled] {
-  background-color: #51a351;
-  *background-color: #499249;
+  background-color: #2589cc;
+  *background-color: #227ebb;
 }
 
 .btn-success:active,
