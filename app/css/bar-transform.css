@@ -1,0 +1,91 @@
+.header-Nav {
+    background: #2c3e50;
+    border-bottom: 1px solid #34495e;
+    -moz-transition: all 0.35s;
+    -ms-transition: all 0.35s;
+    -o-transition: all 0.35s;
+    -webkit-transition: all 0.35s;
+    transition: all 0.35s;
+}
+@media (max-device-width: 480px),  screen and (max-width: 800px) {
+    .header-Nav {
+    position: fixed;
+    top: -900px !important;
+}
+}
+
+.header-Nav.show-Nav {
+    top: 0 !important;
+}
+.header-Nav a, .header-Nav a:visited {
+    color: #ecf0f1;
+    padding: 8px 12px;
+    text-decoration: none;
+}
+@media (max-device-width: 480px),  screen and (max-width: 800px) {
+    .header-Nav a, .header-Nav a: visited {
+    display: block;
+}
+}
+
+.header-Nav a:hover, .header-Nav a:visited:hover {
+    background: #5dade2;
+    text-decoration: underline;
+}
+.header-Nav a.selected, .header-Nav a:active, .header-Nav a:visited.selected, .header-Nav a:visited:active {
+    background: #5dade2;
+    text-decoration: underline;
+}
+
+
+.header-Nav {
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+}
+.logo {
+    left: -90px;
+    position: fixed;
+    -moz-transition: all 0.35s;
+    -ms-transition: all 0.35s;
+    -o-transition: all 0.35s;
+    -webkit-transition: all 0.35s;
+    transition: all 0.35s;
+}
+.logo.in-View {
+    left: 0 !important;
+    z-index: 99;
+}
+
+
+.constant-Nav {
+    margin-left: -88px;
+    -moz-transition: all 0.35s;
+    -ms-transition: all 0.35s;
+    -o-transition: all 0.35s;
+    -webkit-transition: all 0.35s;
+    transition: all 0.35s;
+}
+@media (max-device-width: 480px),  screen and (max-width: 800px) {
+    .constant-Nav {
+    margin-left: 0;
+}
+}
+
+.constant-Nav.in-View {
+    margin-left: 0;
+    padding-left: 70px;
+}
+@media (max-device-width: 480px),  screen and (max-width: 800px) {
+    .constant-Nav.in-View {
+    padding-left: 0;
+}
+}.add-Stripe {
+    border-bottom: 3px solid #34495e;
+}
+@media (max-device-width: 480px),  screen and (max-width: 800px) {
+    .add-Stripe {
+    border: 0;
+}

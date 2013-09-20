@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="83.581337"
+   height="122.60373"
+   id="svg4461">
+  <defs
+     id="defs4463">
+    <filter
+       x="-0.32395345"
+       y="-0.64790696"
+       width="1.6479069"
+       height="2.2958138"
+       color-interpolation-filters="sRGB"
+       id="filter4168-0-9-3-3-6-7-6">
+      <feGaussianBlur
+         id="feGaussianBlur4170-78-1-1-80-0-9-6"
+         stdDeviation="4.7814573" />
+    </filter>
+    <filter
+       x="-0.32395345"
+       y="-0.64790696"
+       width="1.6479069"
+       height="2.2958138"
+       color-interpolation-filters="sRGB"
+       id="filter4168-0-9-3-3-6">
+      <feGaussianBlur
+         id="feGaussianBlur4170-78-1-1-80-0"
+         stdDeviation="4.7814573" />
+    </filter>
+  </defs>
+  <metadata
+     id="metadata4466">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-354.27708,-419.51666)"
+     id="layer1">
+    <path
+       d="m 468.09351,628.04175 a 17.711645,8.8558226 0 1 1 -35.42329,0 17.711645,8.8558226 0 1 1 35.42329,0 z"
+       transform="matrix(1,0,0,0.47142855,-66.917647,236.45881)"
+       id="path4158-41-5-4-4-3"
+       style="opacity:0.72830188;color:#000000;fill:#6c5367;fill-opacity:0.53777777;fill-rule:nonzero;stroke:none;stroke-width:5;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4168-0-9-3-3-6);enable-background:accumulate" />
+    <path
+       d="m 396.57711,419.51666 c -22.79322,0 -41.28125,18.45678 -41.28125,41.25 0,22.79323 33.88144,72.47304 41.28125,72.47304 7.96994,0 41.2813,-49.67981 41.2813,-72.47304 0,-22.79322 -18.48808,-41.25 -41.2813,-41.25 z"
+       id="path2987-5-8-0-8-0"
+       style="color:#000000;fill:#9a56b5;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <text
+       x="375.69308"
+       y="487.79535"
+       id="text20923"
+       xml:space="preserve"
+       style="font-size:68.16441345px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans"><tspan
+         x="375.69308"
+         y="487.79535"
+         id="tspan20925"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#ffffff;font-family:Liberation Sans;-inkscape-font-specification:Liberation Sans Bold">?</tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+
+    <div class="span10">
+      <!--Body content-->
+
+      <ul class="phones">
+          <button class="btn" ng-click="goBack()">< BACK </button>
+
+        <li class="thumbnail">
+          <h2> #{{currentTag}}</h2>
+        </li>
+      </ul>
+
+
+      <ul class="feed" style="padding-left:1%; padding-right:5px;">
+
+        <li ng-repeat="tweet in tweets| filter:query | orderBy:orderProp" class="thumbnail" style="padding-bottom:10px;">
+          <a ng-href="#/{{tweet.id}}" class="thumb"><img ng-src="{{tweet.user.profile_image_url}}"></a>
+          <h4>{{tweet.user.name}}</h4>
+          <p style="opacity:0.7;">@{{tweet.user.screen_name}}</a>
+          <p ng-bind-html-unsafe="tweet.text | hashtag"></p>
+
+         <a ng-href="https://twitter.com/{{tweet.user.screen_name}}/status/{{tweet.tweetID_str}}"><p style="font-size:12px;">{{tweet.created | date:'h:mm a EEEE d MMMM'}}</p></a>
+         
+            <!--embedding media based on type -->
+            <div ng-switch on = "tweet.media.media_type">
+               <span ng-switch-when="image"> <img src="{{tweet.media.media_url}}" width="250px"> </span>
+               <span ng-switch-when="vine"> <p><iframe src="{{tweet.media.media_url}}/card" width="250px" height="250px" frameborder="0"></iframe></p> </span>
+               <span ng-switch-when="youtube"> <iframe width="250px" src="{{tweet.media.media_url}}" frameborder="0" allowFullScreen></iframe></span>
+               <span ng-switch-when="instagram"><img src="{{tweet.media.media_url}}media/?size=t" width="250px"> </span>
+               <span ng-switch-when="tumblr"><img src="{{tweet.media.media_url}}" width="250px"> </span>
+               <span ng-switch-default></span>
+             </div>
+        </li>  
+         
+
+        <li ng-show="!tweets.length"> No tweets from #{{currentTag}} yet
+
+          <br><br>
+
+          Try out: <button class="btn btn-block btn-success" ng-click="goTalk()"> {{globalhashtag}} Tweets  </button>
+
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</div>
