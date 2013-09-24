@@ -13,12 +13,12 @@ var global_mapCenter = { //this is the "center" of your community or event, for 
 // //AN EXAMPLE using local AMC2013 map
  //----------- THIS LOADS A LOCAL MAP -----------------//
 
- var mapSelect = 'is4cwn'; //loading 'amc2013' local map setting as specified in: js/angular-leaflet-directive.js
+ /*var mapSelect = 'is4cwn'; //loading 'amc2013' local map setting as specified in: js/angular-leaflet-directive.js
  var global_mapCenter = {
     lat: 52.5126,
     lng: 13.4202,
     zoom: 15
- };
+ };*/
 
 /*var globalIcon = L.icon;
 var book_p = new globalIcon({iconUrl: 'img/book_p.svg'});

@@ -78,7 +78,7 @@ var defaults = {
                 url: 'img/marker-icon.png',
                 size: [25, 41],
                 anchor: [12, 40],
-                popup: [0, -40]s,
+                popup: [0, -40],
             },
             path: {
                 weight: 10,
