@@ -525,9 +525,7 @@ h6 {
   filter: alpha(opacity=70);
 }
 .btn.btn-large {
-  font-size: 16.996px;
-  /* 17px */
-
+  font-size: 17px;
   line-height: 20px;
   padding: 12px 18px 13px;
 }
@@ -795,9 +793,7 @@ h6 {
 .navbar .nav > li > a {
   color: #526476;
   font-weight: 700;
-  font-size: 14.994px;
-  /* 15px */
-
+  font-size: 15px;
   padding: 29px 20px 27px;
   text-shadow: none;
   -webkit-transition: background-color .25s, color .25s, border-bottom-color .25s;
@@ -2331,6 +2327,8 @@ textarea[class*="span"] {
   -moz-border-radius: 6px;
   border-radius: 6px;
 }
+
+/* Causes massive conflicts on the datepicker
 .dropdown-menu {
   background-color: #f3f4f5;
   border: none;
@@ -2338,7 +2336,6 @@ textarea[class*="span"] {
   margin-top: 8px;
   opacity: 0;
   padding: 0;
-  visibility: hidden;
   width: 100%;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -2452,6 +2449,13 @@ textarea[class*="span"] {
   bottom: 4px;
   top: auto;
 }
+
+.open {
+  visibility: visible;
+  z-index: 1000;
+
+}
+
 .open.dropup > .dropdown-menu {
   margin-bottom: 18px;
 }
@@ -2538,6 +2542,8 @@ textarea[class*="span"] {
   background-color: #526476;
   border-bottom-color: #526476;
 }
+*/
+
 /* ============================================================
  * bootstrapSwitch v1.3 by Larentis Mattia @spiritualGuru
  * http://www.larentis.eu/switch/
