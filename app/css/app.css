@@ -18,6 +18,11 @@ z-index: 3;
 position: relative;
 }
 
+mapbutton a {
+color:#34495e; 
+text-decoration: none;
+}
+
 footer {
 min-height: 160px;
 width: 100%;

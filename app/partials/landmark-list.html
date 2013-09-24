@@ -54,8 +54,10 @@
               </span>  
 
               <!--Show location name for button or default is its empty-->
-              <button><a style="color:#34495e; text-decoration: none;" ng-href="#/map/coordinates/{{landmark.loc[0]}}/{{landmark.loc[1]}}/{{landmark.id}}"<i class="fui-location"></i>
-              <span ng-hide="landmark.loc_nicknames">Map Location</span>{{landmark.loc_nicknames[0]}}</a></button>
+              <span class="mapbutton"></span><a ng-href="#/map/coordinates/{{landmark.loc[0]}}/{{landmark.loc[1]}}/{{landmark.id}}"<i class="fui-location"></i>
+              <span ng-hide="landmark.loc_nicknames">Map Location</span>{{landmark.loc_nicknames[0]}}</a></span>
+              
+              
 
           </li>
       </ul>
