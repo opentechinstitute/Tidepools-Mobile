@@ -5,12 +5,41 @@
 
       <ul class="landmarks">
         <li class="thumbnail" style="padding-top:0px;">
-         <h3>∆ What's Happening?</h3>
+
+          <h4>News</h4>
+          <ul class="feed" style="background:#fff;">
+
+            <li ng-repeat="tweet in tweets| filter:query | orderBy:orderProp" class="thumbnail" style="padding-bottom:10px;">
+              <a ng-href="#/{{tweet.id}}" class="thumb"><img ng-src="{{tweet.user.profile_image_url}}"></a>
+              <h4>{{tweet.user.name}}</h4>
+              <p style="opacity:0.7;">@{{tweet.user.screen_name}}</a>
+              <p ng-bind-html-unsafe="tweet.text | hashtag"></p>
+
+             <a ng-href="https://twitter.com/{{tweet.user.screen_name}}/status/{{tweet.tweetID_str}}"><p style="font-size:12px;">{{tweet.created | date:'h:mm a EEEE d MMMM'}}</p></a>
+                <!--embedding media based on type -->
+                <div ng-switch on = "tweet.media.media_type">
+                   <span ng-switch-when="image"> <img src="{{tweet.media.media_url}}" width="250px"> </span>
+                   <span ng-switch-when="vine"> <p><iframe src="{{tweet.media.media_url}}/card" width="250px" height="250px" frameborder="0"></iframe></p> </span>
+                   <span ng-switch-when="youtube"> <iframe width="250px" src="{{tweet.media.media_url}}" frameborder="0" allowFullScreen></iframe></span>
+                   <span ng-switch-when="instagram"><img src="{{tweet.media.media_url}}media/?size=t" width="250px"> </span>
+                   <span ng-switch-when="tumblr"><img src="{{tweet.media.media_url}}" width="250px"> </span>
+                   <span ng-switch-default></span>
+                 </div>
+            </li>     
+
+          </ul>
+
+          <br>
+         <h4>∆ What's Happening?</h4>
+         <br>
           
-          <button class="btn" ng-click="filter('all','all'); showTime = false; showSearch = false; showPlaces = false">All</button>
-          <button class="btn" ng-click="filter('events','all'); showTime = ! showTime; showSearch = false; showPlaces = false"><i class="fui-time"></i>Events</button> 
-          <button class="btn" ng-click="filter('places','all'); showPlaces = ! showPlaces; showTime = false; showSearch = false"><i class="fui-location"></i>Places</button> 
-          <button class="btn inverse" ng-click="showSearch = ! showSearch; showTime = false; showPlaces = false"><i class="fui-search"></i>Search</button>
+         <button ng-class="itemClass('all')" ng-click="filter('all','all'); showTime = false; showSearch = false; showPlaces = false; select('all')">All</button>
+
+          <button ng-class="itemClass('events')" ng-click="filter('events','all'); showTime = ! showTime; showSearch = false; showPlaces = false; select('events')"><i class="fui-time"></i>Events</button> 
+
+          <button ng-class="itemClass('places')" ng-click="filter('places','all'); showPlaces = ! showPlaces; showTime = false; showSearch = false; select('places')"><i class="fui-location"></i>Places</button> 
+
+          <button ng-class="itemClass('search')" ng-click="showSearch = ! showSearch; showTime = false; showPlaces = false; select('search')"><i class="fui-search"></i></button>
 
           <button class="btn" ng-click="goNew()"><i class="fui-plus"></i>New</button>
         </li>

@@ -2330,6 +2330,9 @@ textarea[class*="span"] {
   -moz-border-radius: 6px;
   border-radius: 6px;
 }
+
+/* Causes massive conflict between bootstrap-datepicker and bootstrap-timepicker
+
 .dropdown-menu {
   background-color: #f3f4f5;
   border: none;
@@ -2348,6 +2351,7 @@ textarea[class*="span"] {
   transition: 0.25s;
   -webkit-backface-visibility: hidden;
 }
+
 .dropdown-menu.typeahead {
   display: none;
   opacity: 1;
@@ -2537,6 +2541,8 @@ textarea[class*="span"] {
   background-color: #526476;
   border-bottom-color: #526476;
 }
+*/
+
 /* ============================================================
  * bootstrapSwitch v1.3 by Larentis Mattia @spiritualGuru
  * http://www.larentis.eu/switch/
