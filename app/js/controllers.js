@@ -94,6 +94,7 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
     }
 
     var currentDate = new Date();
+//var currentDate = Date.today();
 
     $scope.addEndDate = function () {
         $scope.landmark.date.end = $scope.landmark.date.start;

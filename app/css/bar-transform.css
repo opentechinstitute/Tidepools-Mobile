@@ -1,17 +1,23 @@
 .header-Nav {
     background: #2c3e50;
     border-bottom: 1px solid #34495e;
+    min-height: 36px;
     -moz-transition: all 0.35s;
     -ms-transition: all 0.35s;
     -o-transition: all 0.35s;
     -webkit-transition: all 0.35s;
     transition: all 0.35s;
+    display: inline;
 }
 @media (max-device-width: 480px),  screen and (max-width: 800px) {
     .header-Nav {
     position: fixed;
     top: -900px !important;
 }
+}
+
+.topnav {
+	display: inline-block;
 }
 
 .header-Nav.show-Nav {
@@ -44,20 +50,25 @@
     top: 0;
     width: 100%;
     z-index: 3;
+    padding-left: 10%;
 }
 .logo {
-    left: -90px;
+    left: -130px;
     position: fixed;
     -moz-transition: all 0.35s;
     -ms-transition: all 0.35s;
     -o-transition: all 0.35s;
     -webkit-transition: all 0.35s;
     transition: all 0.35s;
+	width: 121px;
+	height: 25px;
 }
+
 .logo.in-View {
-    left: 0 !important;
+    left: 10% !important;
     z-index: 99;
 }
+
 
 
 .constant-Nav {
@@ -83,7 +94,7 @@
     padding-left: 0;
 }
 }.add-Stripe {
-    border-bottom: 3px solid #34495e;
+    border-bottom: 3px solid #e74c3c;
 }
 @media (max-device-width: 480px),  screen and (max-width: 800px) {
     .add-Stripe {

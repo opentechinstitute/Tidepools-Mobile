@@ -9,9 +9,15 @@ body {
     height: 44px;
 }
 
+#lefty {
+float: up;
+z-index: 3;
+position: relative;
+}
+
 footer {
 min-height: 160px;
-width: 80%;
+width: 100%;
 margin-left: auto;
 margin-right: auto; 
 }
@@ -23,6 +29,29 @@ padding-bottom: 3px;
 
 footer a {
 color: #5dade2;
+font-weight: bold;
+}
+
+
+#footer {
+background-color: #252528;
+color: #ffffff;
+display: block;
+padding-top: 22px;
+padding-bottom: 22px;
+padding-left: 20%;
+padding-right: 20%; 
+}
+
+#social img {
+padding: 10px;
+
+}
+
+#copyright p{
+margin-top: 10px;
+font-size: 10pt;
+font-weight: normal;
 }
 
 .submit-cancel {
@@ -32,14 +61,8 @@ color: #5dade2;
 margin: 10px;
 }
 
-#footer {
-background-color: #252528;
-min-height: 180px;
-color: #ffffff;
-display: block;
-padding-top: 22px;
-padding-left: 25%;
-padding-right: 25%; 
+hr {
+ ;
 }
 
 .angular-leaflet-map {

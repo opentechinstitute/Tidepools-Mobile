@@ -22,8 +22,8 @@
   <meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <title>Tidepools</title>
   <link rel="stylesheet" href="css/app.css">
-  <!-- <link rel="stylesheet" media="screen and (max-width: 600px)" href="small.css" /> -->
-  <!-- <link rel="stylesheet" media="only screen and (-webkit-min-device-pixel-ratio: 2)" type="text/css" href="ios.css" /> -->
+  <link rel="stylesheet" media="screen and (max-width: 600px)" href="css/small.css" />
+  <link rel="stylesheet" media="only screen and (max-width:480px)" type="text/css" href="css/ios.css" />
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/bubbles.css">
   <link rel="stylesheet" href="css/tidepools/leaflet.css">
@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="css/bootstrap-timepicker.css">
   <link rel="stylesheet" href="css/flat-ui.css" >
   <link rel="stylesheet" href="css/jquery.fileupload-ui.css">
+  
   <!-- <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"> -->
 
   <link rel="shortcut icon" href="images/favicon.ico">
@@ -63,25 +64,17 @@
   <script src="js/services.js"></script>
   <script src="js/angular-leaflet-directive.js"></script>
 
-
 </head>
 <body>
-
 
   <div id="wrapper">
 
   <header class="header-Base">
      <div id="bar">
         <nav class="header-Nav" role="navigation">
-            <div class="btn-toolbar" style="margin-top:0px;">
-                <div class="btn-group">
-				  <span class="logo"></span>
-                  <a class="btn btn-primary" href="#">Home</a>
-                  <a class="btn btn-primary" href="#/talk"><span class="fui-chat"></span>Talk</a>
-                  <a class="btn btn-primary" href="#/map"><span class="fui-location"></span>Map</a>
-		<a id="show" class="btn btn-primary" href="#"><span class="fui-plus"></span>Quick View</a>
-                </div>
-              </div>
+			<span class="logo2"><img src="img/logo2.png" /></span>
+			<span class="logo"><img src="img/logo.png" /></span>
+<div class="topnav"><a href="#">Home</a> | <a href="#/talk"><span class="fui-chat"></span>Talk</a> | <a href="#/map"><span class="fui-location"></span>Map</a> | <a id="show" href="#"><span class="fui-plus"></span>Quick View</a></div>
         </nav>
       </div>
   </header>
@@ -140,7 +133,7 @@
 
 
 
-
+	<div id="lefty">
         <h3>Events</h3>
         <ul>
           <div ng-controller="sessionsNow">
@@ -151,6 +144,7 @@
             <li ng-show="!landmarks.length"> No events coming up</li>
           </div>
         </ul>
+	</div> <!-- end lefty -->
        <!-- <img src="images/balloon.gif" width="65px" height="128px">-->
       </div>
 
@@ -172,24 +166,25 @@
 
       <div id="content">
           <div ng-view></div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
       </div>
-
-  </div>
 
 <footer>
 	<div id="footer">
 		<div id="social">
-			
+			<a href="https://opentechinstitute.org"><img src="img/oti.png" /></a> <a href="http://freifunk.net"><img src="img/ff.png" /> </a>
 		</div>
 		<div id="credits">
 		<p>Contact: <a href="mailto:team@wirelesssummit.org">team at wirelesssummit dot org</a> | <a href="http://lists.chambana.net/mailman/listinfo/cwn-summit">Announcement List</a></p>
 		<p>Past Events <a href="http://2012.wirelesssummit.org/">2012</a> | <a href="http://2010.wirelesssummit.org/">2010</a> | <a href="http://iscwn.wirelesssummit.org/2008">2008</a> | <a href="http://iscwn.wirelesssummit.org/2007summit">2007</a> | <a href="http://iscwn.wirelesssummit.org/2006summit">2006</a> | <a href="http://iscwn.wirelesssummit.org/2004summit">2004</a> </p>
-		
+		</div>
+		<div id="copyright">
 		<p>All public content on this site is under a <a href="https://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-Noncommercial-Share Alike 3.0 Unported License.</a></p>
 		</div>
 	</div>
 </footer>
+
+  </div>
+
 
 </div> <!-- end wrapper -->
 

@@ -1900,14 +1900,15 @@ textarea[class*="span"] {
 .progress {
   background: #ebedef;
   border-radius: 32px;
-  height: 12px;
+  height: 16px;
+  margin-top: 5px;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
   filter: unquote("progid:DXImageTransform.Microsoft.gradient(enabled = false)");
 }
 .progress .bar {
-  background: #5dade2;
+ /*  background: #5dade2; */
   -webkit-box-shadow: none !important;
   -moz-box-shadow: none !important;
   box-shadow: none !important;
@@ -2930,10 +2931,7 @@ footer {
   font-size: 15px;
   padding: 0;
 }
-footer a {
-  color: #9aa4af;
-  font-weight: 700;
-}
+
 footer p {
   font-size: 15px;
   line-height: 20px;
