@@ -7,8 +7,8 @@ function LandmarkListCtrl( $location, $scope, db) {
     $scope.queryType = "all";
     $scope.queryFilter = "all";
     //Events Now example:
-    // $scope.queryType = "events";
-    // $scope.queryFilter = "now";
+    //$scope.queryType = "events";
+    //$scope.queryFilter = "now";
 
     $scope.landmarks = db.landmarks.query({ queryType:$scope.queryType, queryFilter:$scope.queryFilter });
     //---------//
@@ -109,6 +109,7 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
     }
 
     var currentDate = new Date();
+//var currentDate = Date.today();
 
     //----- Loading sub categories from global settings ----//
     $scope.subTypes = [];
@@ -267,9 +268,6 @@ LandmarkNewCtrl.$inject = ['$location', '$scope', '$routeParams','db'];
 
 function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeout) {
 
-    //if authenticate, show and provide this functionality:
-
-    //if not, login plz k thx
 
 
 
@@ -569,11 +567,12 @@ function mapCtrl($location, $scope, db, $timeout) {
                 var markerCollect = {};
 
                 for (var i=0;i<data.length;i++){
+					console.log(data)
                     markerCollect[data[i].id] = {
                         lat: data[i].loc[0],
                         lng: data[i].loc[1],
                         message: '<h4><img style="width:70px;" src="'+data[i].stats.avatar+'"><a href=#/landmark/'+data[i].id+'> '+data[i].name+'</a></h4>',
-						icon: "img/"+data[i].subType+".svg"
+						icon: "img/"+data[i].type+".svg"
                     }
                 }
 

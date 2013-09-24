@@ -1,6 +1,5 @@
-
 <div style='padding-left:5px; padding-right:5px; width:99%;'>
-  <span ng-hide="option == 'new' "><button class="btn" ng-click="goBack()">< BACK </button></span>
+  <span ng-hide="option == 'new' "><button class="btn" ng-click="goBack()">&lt; BACK </button></span>
   <span ng-show="option == 'new' "><button class="btn" ng-click="edit()"> EDIT <i class="fui-new"></i></button></span>
 
   <br>
@@ -10,7 +9,7 @@
   <span ng-show="landmark.tags"> <h4>#{{landmark.tags}} </h4></span>
 
   <!--Module loader for embedded Etherpad link-->
-  <!-- <a class="btn btn-large btn-block btn-info" ng-click="open()" href="">Notes (Etherpad)<i class="fui-new"></i></a> -->
+<a class="btn btn-large btn-block btn-info" ng-click="open()" href="http://localhost/etherpad/{{event.id}}/">Event Notes<i class="fui-new"></i></a>
 
  <br>
   <p>{{landmark.subType}}</p> 

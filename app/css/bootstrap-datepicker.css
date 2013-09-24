@@ -53,7 +53,7 @@
   left: 7px;
 }
 .datepicker > div {
-  display: none;
+ /* display: none;*/
 }
 .datepicker.days div.datepicker-days {
   display: block;
