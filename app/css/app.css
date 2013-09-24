@@ -297,7 +297,6 @@ body.menu #main {
 /* App menu bar */
 
 #show { /* NYAN */
-  float: left;
   color: #fff; 
   background: #5dade2;
   min-width: 44px;
