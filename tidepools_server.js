@@ -57,7 +57,7 @@ app.configure(function () {
 var objectId = function (_id) {
     if (_id.length === 24 && parseInt(db.ObjectId(_id).getTimestamp().toISOString().slice(0,4), 10) >= 2010) {
         return db.ObjectId(_id);
-    } 
+   } 
     return _id;
 }
 

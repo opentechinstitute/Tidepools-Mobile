@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="82.562538"
+   height="121.95023"
+   id="svg4461">
+  <defs
+     id="defs4463">
+    <filter
+       x="-0.32395345"
+       y="-0.64790696"
+       width="1.6479069"
+       height="2.2958138"
+       color-interpolation-filters="sRGB"
+       id="filter4168-0-9-3-6-1">
+      <feGaussianBlur
+         id="feGaussianBlur4170-78-1-1-6-63"
+         stdDeviation="4.7814573" />
+    </filter>
+    <filter
+       x="-0.32395345"
+       y="-0.64790696"
+       width="1.6479069"
+       height="2.2958138"
+       color-interpolation-filters="sRGB"
+       id="filter4168-0-9-3-3-6-7-6">
+      <feGaussianBlur
+         id="feGaussianBlur4170-78-1-1-80-0-9-6"
+         stdDeviation="4.7814573" />
+    </filter>
+  </defs>
+  <metadata
+     id="metadata4466">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-340.56362,-412.93075)"
+     id="layer1">
+    <path
+       d="m 468.09351,628.04175 a 17.711645,8.8558226 0 1 1 -35.42329,0 17.711645,8.8558226 0 1 1 35.42329,0 z"
+       transform="matrix(1,0,0,0.47142855,-80.439361,229.21941)"
+       id="path4158-41-5-4-4-3-3-1"
+       style="opacity:0.709434;color:#000000;fill:#6c5367;fill-opacity:0.53777777;fill-rule:nonzero;stroke:none;stroke-width:5;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4168-0-9-3-3-6-7-6);enable-background:accumulate" />
+    <path
+       d="m 381.84487,412.93075 c -22.79322,0 -41.28125,18.45678 -41.28125,41.25 0,22.79323 33.88144,72.47304 41.28125,72.47304 7.96994,0 41.28129,-49.67981 41.28129,-72.47304 0,-22.79322 -18.48807,-41.25 -41.28129,-41.25 z"
+       id="path2987-5-8-0-93-9-6"
+       style="color:#000000;fill:#9a56b5;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <path
+       d="m 360.64705,473.52763 0,1.71875 c 1.34156,1.64421 2.88756,3.13285 4.5625,4.4375 l 0,-0.65625 0,-0.0625 2.71875,0 0,0.0625 30,0 0,0.0313 0.0313,0 0,1.9375 c 1.75309,-1.15415 3.36211,-2.49416 4.8125,-4 l 0,-3.46875 -42.125,0 z m 7.5625,8.1875 c 4.18824,2.47041 9.06672,3.90625 14.28125,3.90625 4.5973,0 8.91689,-1.10879 12.75,-3.0625 l 0,-0.84375 -27.03125,0 z"
+       id="rect20036"
+       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <path
+       d="m 379.0667,457.7506 c -8.29603,0 -14.97328,6.70707 -14.97328,15.00309 l 15.65931,0 -0.29828,-4.29511 c -0.87397,-0.66244 -1.45962,-1.69349 -1.52119,-2.86343 l 7.60595,0 c -0.0591,1.12289 -0.58226,2.10991 -1.40187,2.77393 l -0.29828,4.38461 15.68914,0 c 0,-8.29602 -6.67726,-15.00309 -14.97329,-15.00309 l -5.48821,0 z m 2.65463,3.78805 c 1.8565,0 3.40617,1.34919 3.75823,3.10205 l -7.48664,0 c 0.35206,-1.75286 1.87189,-3.10205 3.72841,-3.10205 z"
+       id="rect20045"
+       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    <path
+       d="m -90.473622,479.71124 a 11.243831,11.243831 0 1 1 -22.487658,0 11.243831,11.243831 0 1 1 22.487658,0 z"
+       transform="matrix(0.95447231,0,0,0.95447231,479.45,-11.573417)"
+       id="path20047"
+       style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+  </g>
+</svg>

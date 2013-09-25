@@ -2826,8 +2826,8 @@ button.close {
 .btn-success.active,
 .btn-success.disabled,
 .btn-success[disabled] {
-  background-color: #51a351;
-  *background-color: #499249;
+  background-color: #2589cc;
+  *background-color: #227ebb;
 }
 
 .btn-success:active,
@@ -4459,13 +4459,13 @@ input[type="submit"].btn.btn-mini {
   display: block;
   padding: 4px;
   line-height: 1;
-  border: 1px solid #ddd;
+/*  border: 1px solid #ddd;
   -webkit-border-radius: 4px;
      -moz-border-radius: 4px;
           border-radius: 4px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
      -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
-          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075); */
 }
 
 a.thumbnail:hover {
@@ -4662,10 +4662,10 @@ a.badge:hover {
      -moz-transition: width 0.6s ease;
       -ms-transition: width 0.6s ease;
        -o-transition: width 0.6s ease;
-          transition: width 0.6s ease;
+          transition: width 0.6s ease; 
 }
 
-.progress-striped .bar {
+.progress /*-striped*/ .bar {
   background-color: #149bdf;
   background-image: -o-linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
