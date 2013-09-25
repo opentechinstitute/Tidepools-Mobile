@@ -12,10 +12,19 @@ body {
     height: 44px;
 }
 
+#social a { 
+background: none;
+text-decoration: none;
+}
+
 #lefty {
-float: up;
 z-index: 3;
 position: relative;
+padding: 0.5em;
+}
+
+#lefty h3, #lefty li, #lefty p {
+background-color: rgba(029,068,095,0.8);
 }
 
 mapbutton a {
@@ -250,7 +259,7 @@ body.menu #main {
   position:absolute;
   top: 0;
   left: 0;
-  width: 66%;
+  width: 63%;
   padding-top:50px;
   bottom: 0px;
   background: #34495e;
@@ -300,10 +309,9 @@ body.menu #main {
   -webkit-backface-visibility: hidden;
 }
 
-
-
 #content { 
-  padding: 20px;
+  padding: 0 20px 20px 20px;
+  margin-top: -7px;
 }
 /* - end code by Dave Cole */
 
@@ -313,10 +321,9 @@ body.menu #main {
   color: #fff; 
   background: #5dade2;
   min-width: 44px;
-  height: 100%;
+  min-height: 20px;
   cursor: pointer;
   display: inline-block;
-
 }
 
 #selector {

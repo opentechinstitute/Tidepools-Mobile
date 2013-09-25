@@ -423,7 +423,7 @@ textarea {
   font-size: 14px;
 }
 a {
-  color: #5dade2;
+  color: #ecf0f1;
   text-decoration: underline;
   -webkit-transition: 0.25s;
   -moz-transition: 0.25s;
@@ -432,8 +432,9 @@ a {
   -webkit-backface-visibility: hidden;
 }
 a:hover {
-  color: #5dade2;
+  color: #252528;
   text-decoration: none;
+  background-color: #5dade2;
 }
 h1 {
   font-size: 32px;

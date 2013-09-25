@@ -24,19 +24,31 @@
     top: 0 !important;
 }
 .header-Nav a, .header-Nav a:visited {
-    color: #ecf0f1;
+    /*color: #ecf0f1;*/
+	text-decoration: none;
     padding: 8px 12px;
-    text-decoration: none;
+    -webkit-transition: 0.25s;
+	-moz-transition: 0.25s;
+	-o-transition: 0.25s;
+	transition: 0.25s;
+	-webkit-backface-visibility: hidden;
 }
+
 @media (max-device-width: 480px),  screen and (max-width: 800px) {
     .header-Nav a, .header-Nav a: visited {
-    display: block;
+    display: block
+    -webkit-transition: 0.25s;
+	-moz-transition: 0.25s;
+	-o-transition: 0.25s;
+	transition: 0.25s;
+	-webkit-backface-visibility: hidden;
 }
 }
 
 .header-Nav a:hover, .header-Nav a:visited:hover {
-    background: #5dade2;
-    text-decoration: underline;
+    color: #252528;
+    text-decoration: none;
+    background-color: #5dade2;
 }
 .header-Nav a.selected, .header-Nav a:active, .header-Nav a:visited.selected, .header-Nav a:visited:active {
     background: #5dade2;
@@ -49,8 +61,8 @@
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 3;
-    padding-left: 10%;
+    z-index: 500;
+    padding-left: 12%;
 }
 .logo {
     left: -130px;

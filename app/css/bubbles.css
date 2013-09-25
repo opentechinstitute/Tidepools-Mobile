@@ -13,10 +13,10 @@ background: #1D445F;
 position: absolute;
     top: 0;
     left: 0;
-    width: 66%;
+    width: 80%; /* width of the bubble zone to prevent overlap with other content */
     height: 100%;
     z-index: 1;
-   /* display: none; */}
+}
 
 .orb {
   background: #78aec1;
