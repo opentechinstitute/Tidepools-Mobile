@@ -430,6 +430,9 @@ a {
   transition: 0.25s;
   -webkit-backface-visibility: hidden;
 }
+a.fui-location {
+  text-decoration:none;
+}
 a:hover {
   color: #5dade2;
   text-decoration: none;
