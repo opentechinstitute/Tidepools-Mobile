@@ -572,7 +572,7 @@ function mapCtrl($location, $scope, db, $timeout) {
                         lat: data[i].loc[0],
                         lng: data[i].loc[1],
                         message: '<h4><img style="width:70px;" src="'+data[i].stats.avatar+'"><a href=#/landmark/'+data[i].id+'> '+data[i].name+'</a></h4>',
-						icon: "img/"+data[i].type+".svg"
+						icon: "img/"+data[i].subType+".svg"
                     }
                 }
 

@@ -46,7 +46,7 @@ app.configure(function () {
 	app.use(express.bodyParser());
 	app.use(express.logger('dev'));  //tiny, short, default
 	app.use(app.router);
-	app.use(express.static(__dirname + '/app'));
+	app.use(express.static(__dirname + '/app')); // which url directory to display tidepools as being in
 	app.use(express.errorHandler({dumpExceptions: true, showStack: true, showMessage: true}));
 });
 
