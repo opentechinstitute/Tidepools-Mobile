@@ -168,7 +168,7 @@ var defaults = {
 					newIconAnchor = [12, 40]
 
 				}
-
+// recreates the icon when you zoom throughout the map 
 				var newIcon = new L.Icon({
 					iconUrl: icon,
                     iconRetinaUrl: defaults.icon.retinaUrl,
