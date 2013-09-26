@@ -9,7 +9,7 @@ $(document).ready(function () {
 //        $(this).scrollTop() > 100 && ($(".logo").addClass("in-View"), $(".constant-Nav").addClass("in-View")), 
 //        100 > $(this).scrollTop() && ($(".logo").removeClass("in-View"), $(".constant-Nav").removeClass("in-View"))
 
-    }), $(".small-Nav").click(function () {
+   ), $(".small-Nav").click(function () {
         $(".header-Nav").toggleClass("show-Nav")
     })
 });
