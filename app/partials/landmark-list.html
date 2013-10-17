@@ -5,12 +5,27 @@
 
       <ul class="landmarks">
         <li class="thumbnail" style="padding-top:0px;">
+
+
+        <!-- REMOVING DEFAULT FOR TASTE OF RED HOOK EVENT 
          <h2> Welcome to Red Hook WiFi! </h2>
           <p> Red Hook WiFi (RH WiFi) is a community-led effort to close the digital divide, generate economic opportunity, facilitate access to essential services and improve quality of life in Red Hook, Brooklyn via the deployment of a wireless Internet network.</p>
-
+        -->
           
+        <h2> Welcome to  </h2>
 
-          <h4>News</h4>
+        <p><img src="img/tidepools/tasteofredhook_banner.png">
+          <br><br>
+          Normally this network splash page lists events, services and local businesses in Red Hook, but tonight we are highlighting our partners who have graciously donated their delicious food and drink.
+         <br>
+        All proceeds from tonights fundraiser benefits the work of RHI. This year's event is sponsored by Kamco, M&T Bank, Koya Leadership Partners, Williams Capital Group, and aptsandlofts.com.
+
+        <br><br>
+        Please watch this video the Digital Stewards made about our host, Pioneer Works.
+      </p>
+
+      <!-- REMOVED FOR TASTE OF RED HOOK -->
+<!--           <h4>News</h4>
           <ul class="feed" style="background:#fff;">
 
             <li ng-repeat="tweet in tweets| filter:query | orderBy:orderProp" class="thumbnail" style="padding-bottom:10px;">
@@ -20,7 +35,6 @@
               <p ng-bind-html-unsafe="tweet.text | hashtag"></p>
 
              <a ng-href="https://twitter.com/{{tweet.user.screen_name}}/status/{{tweet.tweetID_str}}"><p style="font-size:12px;">{{tweet.created | date:'h:mm a EEEE d MMMM'}}</p></a>
-                <!--embedding media based on type -->
                 <div ng-switch on = "tweet.media.media_type">
                    <span ng-switch-when="image"> <img src="{{tweet.media.media_url}}" width="250px"> </span>
                    <span ng-switch-when="vine"> <p><iframe src="{{tweet.media.media_url}}/card" width="250px" height="250px" frameborder="0"></iframe></p> </span>
@@ -31,7 +45,7 @@
                  </div>
             </li>     
 
-          </ul>
+          </ul> 
 
           <br>
           <h4> What's Happening?</h4>
@@ -43,6 +57,7 @@
 
           <button ng-class="itemClass('search')" ng-click="showSearch = ! showSearch; showTime = false; showPlaces = false; select('search')"><i class="fui-search"></i></button>
 
+          -->
 
           <!-- <button class="btn" ng-click="goNew()"><i class="fui-plus"></i>New</button> -->
         </li>
@@ -50,30 +65,31 @@
       </ul>
 
       <!--When Search button clicked show-->
-      <span ng-show="showSearch" >
+<!--       <span ng-show="showSearch" >
         <form ng-submit="sessionSearch()">
           <input style="width:95%;" type="text" ng-model="searchText" size="30" placeholder="What to find?">
           <input class="btn-primary" type="submit" value="search">
         </form> 
-      </span> 
+      </span>  -->
 
        <!--When Event button clicked show-->
-       <span ng-show="showTime" >   
+<!--        <span ng-show="showTime" >   
           <button class="btn" ng-click="filter('events','now')">now</button> 
           <button class="btn" ng-click="filter('events','soon')">soon</button> 
           <button class="btn" ng-click="filter('events','today')">today</button>  
-      </span> 
+      </span>  -->
 
       <!--When Places button clicked show-->
-       <span ng-show="showPlaces" >   
+<!--        <span ng-show="showPlaces" >   
           <button class="btn" ng-click="filter('places','Organization')">Orgs</button> 
           <button class="btn" ng-click="filter('places','Shop')">Shops</button> 
           <button class="btn" ng-click="filter('places','Food/Drink')">Food/Drink</button> 
           <button class="btn" ng-click="filter('places','Park')">Parks</button>  
       </span> 
-
+ -->
 
       <ul class="landmarks">
+        <h4>Taste of Red Hook Participants</h4>
           <!--Looping through data-->
           <li ng-repeat="landmark in landmarks | filter:query | orderBy:orderProp" class="thumbnail"  style="padding-bottom:20px;" >  
               <a ng-href="#/landmark/{{landmark.id}}" class="thumb"><img ng-src="{{landmark.stats.avatar}}"></a> 

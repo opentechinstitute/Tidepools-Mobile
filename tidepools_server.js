@@ -90,9 +90,20 @@ app.get('/api/:collection', function(req, res) {
 
         //return all items in landmarks
         if (req.query.queryType == "all"){
-            var qw = {};
-            var limit;
-            db.collection(req.params.collection).find(qw).limit(limit).sort({_id: -1}).toArray(fn(req, res));         
+
+            if (req.query.queryFilter == "specialEvent"){
+                var qw = {
+                    'specialEvent' : 'true'
+                };
+                var limit;
+                db.collection(req.params.collection).find(qw).limit(limit).sort({name: 1}).toArray(fn(req, res));   
+            }
+
+            else {
+                var qw = {};
+                var limit;
+                db.collection(req.params.collection).find(qw).limit(limit).sort({_id: -1}).toArray(fn(req, res));       
+            }  
         }
 
         //events

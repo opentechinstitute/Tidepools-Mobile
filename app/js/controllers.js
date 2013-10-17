@@ -6,9 +6,17 @@ function LandmarkListCtrl( $location, $scope, db) {
     //---- Initial Query on Page Load -----//
     // $scope.queryType = "all";
     // $scope.queryFilter = "all";
-    //Events Now example:
-    $scope.queryType = "events";
-    $scope.queryFilter = "all";
+
+    //REMOVED FOR TASTE OF RED HOOK
+    //---Events Now example:
+    // $scope.queryType = "events";
+    // $scope.queryFilter = "all";
+
+    //TASTE OF RED HOOK
+    $scope.queryType = "all";
+    $scope.queryFilter = "specialEvent";
+
+
     //$scope.showTime = true; //displaying sub menu for events
 
     $scope.landmarks = db.landmarks.query({ queryType:$scope.queryType, queryFilter:$scope.queryFilter });
@@ -546,8 +554,13 @@ talktagCtrl.$inject = [ '$location', '$scope', '$routeParams', 'db'];
 
 function mapCtrl($location, $scope, db, $timeout) {
 
+        //REMOVED FOR TASTE OF RED HOOK
+        // $scope.queryType = "all";
+        // $scope.queryFilter = "all";
+
+        //TASTE OF RED HOOK
         $scope.queryType = "all";
-        $scope.queryFilter = "all";
+        $scope.queryFilter = "specialEvent";
 
         queryMap($scope.queryType, $scope.queryFilter); //showing all at first
 
