@@ -232,6 +232,10 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
             end: $scope.landmark.time.end
         } 
 
+        if (!$scope.landmark.specialEvent){
+            $scope.landmark.specialEvent = "false";
+        }
+
         $scope.landmark.loc = [$scope.markers.m.lat,$scope.markers.m.lng];
 
         db.landmarks.create($scope.landmark, function(response){
@@ -466,6 +470,7 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
         else {
             $scope.landmark.loc = [globalEditLoc.lat,globalEditLoc.lng];
         }
+
 
         db.landmarks.create($scope.landmark, function(response){
 

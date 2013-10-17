@@ -280,6 +280,7 @@ app.post('/api/:collection/create', function(req, res) {
 
     function saveLandmark(finalID){
    
+        //EDITING LANDMARK
         if (req.body._id){ //temp way to detect landmark edit by checking if mongo already generated _id
 
             var landmarkModel = mongoose.model('landmark', landmarkSchema, 'landmarks');
@@ -295,6 +296,7 @@ app.post('/api/:collection/create', function(req, res) {
                     lm.id = finalID;
                     lm.type = req.body.type;
                     lm.subType = req.body.subType;
+                    lm.specialEvent = req.body.specialEvent;
                     lm.stats.avatar = req.body.stats.avatar;
                     lm.mapID = "TidepoolsBaseMap"; //compatibility with Old Tidepools Interface
 
@@ -358,7 +360,8 @@ app.post('/api/:collection/create', function(req, res) {
                 }
             });         
         }
-     
+
+         //CREATING NEW LANDMARK
          else { //not an edit, a new landmark entirely
 
                 var landmarkModel = mongoose.model('landmark', landmarkSchema, 'landmarks');  
@@ -368,6 +371,7 @@ app.post('/api/:collection/create', function(req, res) {
                 lm.id = finalID;
                 lm.type = req.body.type;
                 lm.subType = req.body.subType;
+                lm.specialEvent = req.body.specialEvent;
                 lm.stats.avatar = req.body.stats.avatar;
                 lm.mapID = "TidepoolsBaseMap"; //compatibility with Old Tidepools Interface
 
