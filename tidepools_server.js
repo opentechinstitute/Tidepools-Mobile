@@ -477,7 +477,9 @@ app.put('/api/:collection/:cmd',  function (req, res) {
 app.post('/api/upload',  function (req, res) {
 
     //disabled Max image upload size for NOW << enable later...
-   // if (req.files.files[0].size <= 5242880){
+   if (req.files.files[0].size <= 5242880){
+
+    if (req.files.files[0].type == 'image/png' || req.files.files[0].type == 'image/gif' || req.files.files[0].type == 'image/jpg' || req.files.files[0].type == 'image/jpeg'){
 
         //FILTER ANYTHING BUT GIF JPG PNG
 
@@ -519,11 +521,17 @@ app.post('/api/upload',  function (req, res) {
                 }
             }
         });
-  //  }
+    }
 
-  //  else {
-  //      res.send('Not Saved: File is bigger than 5MB, please try again.');
-  //  }
+    else {
+        res.send('Not Saved: Image is not a .jpg, .png, or .gif, please try again.');
+    }
+
+   }
+
+   else {
+       res.send('Not Saved: Image is bigger than 5MB, please try again.');
+   }
 
 });
 

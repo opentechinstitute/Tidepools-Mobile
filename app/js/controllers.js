@@ -152,11 +152,23 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
 
             $('#uploadedpic').html('');
             $('#preview').html('');
-            $('<p/>').text('Saved: '+data.originalFiles[0].name).appendTo('#uploadedpic');
-            $('<img src="'+ data.result +'">').load(function() {
-              $(this).width(150).height(150).appendTo('#preview');
-            });
-            $scope.landmark.stats.avatar = data.result;
+
+            if (data.result == 'Not Saved: Image is not a .jpg, .png, or .gif, please try again.' || data.result == 'Not Saved: Image is bigger than 5MB, please try again.'){
+                 console.log(data.result);
+                $('<h4/>').text(data.result).appendTo('#uploadedpic');
+            }
+
+            else {
+
+                $('<p/>').text('Saved: '+data.originalFiles[0].name).appendTo('#uploadedpic');
+
+                $('<img src="'+ data.result +'">').load(function() {
+                  $(this).width(150).height(150).appendTo('#preview');
+                });
+
+                $scope.landmark.stats.avatar = data.result;
+            }
+
         }
     });
 
@@ -372,13 +384,21 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
             $('#uploadedpic').html('');
             $('#preview').html('');
 
-            $('<p/>').text('Saved: '+data.originalFiles[0].name).appendTo('#uploadedpic');
+            if (data.result == 'Not Saved: Image is not a .jpg, .png, or .gif, please try again.' || data.result == 'Not Saved: Image is bigger than 5MB, please try again.'){
+                 console.log(data.result);
+                $('<h4/>').text(data.result).appendTo('#uploadedpic');
+            }
 
-            $('<img src="'+ data.result +'">').load(function() {
-              $(this).width(150).height(150).appendTo('#preview');
-            });
+            else {
 
-            $scope.landmark.stats.avatar = data.result;
+                $('<p/>').text('Saved: '+data.originalFiles[0].name).appendTo('#uploadedpic');
+
+                $('<img src="'+ data.result +'">').load(function() {
+                  $(this).width(150).height(150).appendTo('#preview');
+                });
+
+                $scope.landmark.stats.avatar = data.result;
+            }
 
         }
     });
