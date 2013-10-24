@@ -6,12 +6,11 @@
       <ul class="landmarks">
         <li class="thumbnail" style="padding-top:0px;">
 
-
-        <!-- REMOVING DEFAULT FOR TASTE OF RED HOOK EVENT 
          <h2> Welcome to Red Hook WiFi! </h2>
           <p> Red Hook WiFi (RH WiFi) is a community-led effort to close the digital divide, generate economic opportunity, facilitate access to essential services and improve quality of life in Red Hook, Brooklyn via the deployment of a wireless Internet network.</p>
-        -->
-          
+       
+       
+       <!-- TASTE OF RED HOOK EVENT    
         <h2> Welcome to  </h2>
 
         <p><img src="img/tidepools/tasteofredhook_banner.png">
@@ -21,6 +20,8 @@
         All proceeds from tonights fundraiser benefits the work of RHI. This year's event is sponsored by Kamco, M&T Bank, Koya Leadership Partners, Williams Capital Group, and aptsandlofts.com.
 
         <br><br>
+
+
         Please watch this video the Digital Stewards made about our host, Pioneer Works.
 
         <iframe width="95%" height="300" src="//www.youtube.com/embed/88oWpPBzx_Y" frameborder="0" allowfullscreen></iframe>
@@ -30,10 +31,10 @@
         <br>
         Download the Google+ <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.plus">Android</a> or <a href="http://itunes.apple.com/us/app/google+/id447119634">iPhone</a> and get into "Party Mode" to start!
 
-      </p>
+        </p>
+      -->
 
-      <!-- REMOVED FOR TASTE OF RED HOOK -->
-<!--           <h4>News</h4>
+          <h4>News</h4>
           <ul class="feed" style="background:#fff;">
 
             <li ng-repeat="tweet in tweets| filter:query | orderBy:orderProp" class="thumbnail" style="padding-bottom:10px;">
@@ -65,7 +66,7 @@
 
           <button ng-class="itemClass('search')" ng-click="showSearch = ! showSearch; showTime = false; showPlaces = false; select('search')"><i class="fui-search"></i></button>
 
-          -->
+         
 
           <!-- <button class="btn" ng-click="goNew()"><i class="fui-plus"></i>New</button> -->
         </li>
@@ -73,31 +74,30 @@
       </ul>
 
       <!--When Search button clicked show-->
-<!--       <span ng-show="showSearch" >
+      <span ng-show="showSearch" >
         <form ng-submit="sessionSearch()">
           <input style="width:95%;" type="text" ng-model="searchText" size="30" placeholder="What to find?">
           <input class="btn-primary" type="submit" value="search">
         </form> 
-      </span>  -->
+      </span> 
 
        <!--When Event button clicked show-->
-<!--        <span ng-show="showTime" >   
+       <span ng-show="showTime" >   
           <button class="btn" ng-click="filter('events','now')">now</button> 
           <button class="btn" ng-click="filter('events','soon')">soon</button> 
           <button class="btn" ng-click="filter('events','today')">today</button>  
-      </span>  -->
+      </span> 
 
       <!--When Places button clicked show-->
-<!--        <span ng-show="showPlaces" >   
+       <span ng-show="showPlaces" >   
           <button class="btn" ng-click="filter('places','Organization')">Orgs</button> 
           <button class="btn" ng-click="filter('places','Shop')">Shops</button> 
           <button class="btn" ng-click="filter('places','Food/Drink')">Food/Drink</button> 
           <button class="btn" ng-click="filter('places','Park')">Parks</button>  
       </span> 
- -->
+
 
       <ul class="landmarks">
-        <h4>Taste of Red Hook Participants</h4>
           <!--Looping through data-->
           <li ng-repeat="landmark in landmarks | filter:query | orderBy:orderProp" class="thumbnail"  style="padding-bottom:20px;" >  
               <a ng-href="#/landmark/{{landmark.id}}" class="thumb"><img ng-src="{{landmark.stats.avatar}}"></a> 

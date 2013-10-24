@@ -2,8 +2,8 @@
 <div class="container-fluid">
   <div class="row-fluid">
 	   <!--Buttons-->
-     <h4> Taste of Red Hook Participants</h4>
-	 <!--   <li class="thumbnail" style="padding-top:0px;">
+    
+	   <li class="thumbnail" style="padding-top:0px;">
 	      
            <button ng-class="itemClass('all')" ng-click="filter('all','all'); showTime = false; showSearch = false; showPlaces = false; select('all')">All</button>
 
@@ -12,31 +12,31 @@
           <button ng-class="itemClass('places')" ng-click="filter('places','all'); showPlaces = ! showPlaces; showTime = false; showSearch = false; select('places')"><i class="fui-location"></i>Places</button> 
 
           <button ng-class="itemClass('search')" ng-click="showSearch = ! showSearch; showTime = false; showPlaces = false; select('search')"><i class="fui-search"></i></button>
-	   </li> -->
+	   </li>
 	  </ul>
 
  	  <!--When Search button clicked show-->
-    <!--   <span ng-show="showSearch" >
+      <span ng-show="showSearch" >
         <form ng-submit="sessionSearch()">
           <input style="width:95%;" type="text" ng-model="searchText" size="30" placeholder="What to find?">
           <input class="btn-primary" type="submit" value="search">
         </form> 
-      </span>  -->
+      </span> 
 
        <!--When Event button clicked show-->
-<!--        <span ng-show="showTime" >   
+       <span ng-show="showTime" >   
           <button class="btn" ng-click="filter('events','now')">now</button> 
           <button class="btn" ng-click="filter('events','soon')">soon</button> 
           <button class="btn" ng-click="filter('events','today')">today</button>  
-      </span>  -->
+      </span> 
 
       <!--When Places button clicked show-->
-<!--        <span ng-show="showPlaces" >   
+       <span ng-show="showPlaces" >   
           <button class="btn" ng-click="filter('places','Organization')">Orgs</button> 
           <button class="btn" ng-click="filter('places','Shop')">Shops</button> 
           <button class="btn" ng-click="filter('places','Food/Drink')">Food/Drink</button> 
           <button class="btn" ng-click="filter('places','Park')">Parks</button>  
-      </span>  -->
+      </span> 
       
   </div>
 </div>

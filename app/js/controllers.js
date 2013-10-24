@@ -9,12 +9,12 @@ function LandmarkListCtrl( $location, $scope, db) {
 
     //REMOVED FOR TASTE OF RED HOOK
     //---Events Now example:
-    // $scope.queryType = "events";
-    // $scope.queryFilter = "all";
+    $scope.queryType = "events";
+    $scope.queryFilter = "all";
 
     //TASTE OF RED HOOK
-    $scope.queryType = "all";
-    $scope.queryFilter = "specialEvent";
+    // $scope.queryType = "all";
+    // $scope.queryFilter = "specialEvent";
 
 
     //$scope.showTime = true; //displaying sub menu for events
@@ -575,12 +575,12 @@ talktagCtrl.$inject = [ '$location', '$scope', '$routeParams', 'db'];
 function mapCtrl($location, $scope, db, $timeout) {
 
         //REMOVED FOR TASTE OF RED HOOK
-        // $scope.queryType = "all";
-        // $scope.queryFilter = "all";
+        $scope.queryType = "all";
+        $scope.queryFilter = "all";
 
         //TASTE OF RED HOOK
-        $scope.queryType = "all";
-        $scope.queryFilter = "specialEvent";
+        // $scope.queryType = "all";
+        // $scope.queryFilter = "specialEvent";
 
         queryMap($scope.queryType, $scope.queryFilter); //showing all at first
 
