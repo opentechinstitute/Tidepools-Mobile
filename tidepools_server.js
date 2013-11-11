@@ -185,11 +185,22 @@ app.get('/api/:collection', function(req, res) {
         //search
         if (req.query.queryType == "search"){
 
-            var qw = {
-                "searchField" : {$regex : ".*"+req.query.session+".*", $options: 'i'}
-            };
+            //  console.log(req.query.session);
 
-            db.collection('landmarks').find(qw).sort({_id: -1}).toArray(fn(req, res));
+            // var qw = {
+            //     "name" : {$regex : ".*"+req.query.session+".*", $options: 'i'},
+            //      "description" : {$regex : ".*"+req.query.session+".*", $options: 'i'}
+            // };
+
+
+
+            var re = new RegExp(req.query.session, 'i');
+
+            db.collection('landmarks').find( { $or :[ { 'name': { $regex: re }}, { 'description': { $regex: re }}, { 'shortDescription': { $regex: re }}, { 'type': { $regex: re }}, { 'subType': { $regex: re }}, { 'category': { $regex: re }}, { 'loc_nicknames': { $regex: re }} ] } ).sort('name', 1).toArray(fn(req, res));
+
+
+
+            //db.collection('landmarks').find(qw).sort({_id: -1}).toArray(fn(req, res));
         }
 
     }

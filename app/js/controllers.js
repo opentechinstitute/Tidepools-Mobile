@@ -59,7 +59,7 @@ function LandmarkListCtrl( $location, $scope, db) {
 
     //search query
     $scope.sessionSearch = function() { 
-        $scope.landmarks = db.landmarks.query({name:$scope.query, time:"all", session: $scope.searchText});
+        $scope.landmarks = db.landmarks.query({name:$scope.query, queryFilter:"all", queryType:"search", session: $scope.searchText});
     };
 
 }
