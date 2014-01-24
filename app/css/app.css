@@ -1,7 +1,17 @@
 /* app css stylesheet */
 
-body {
-  margin: 0;
+
+
+.circle{
+  width: 50px;
+  height: 50px;
+  background: red;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+  position: fixed;
+  bottom:0;
+  right:0;
 }
 
 .bar {

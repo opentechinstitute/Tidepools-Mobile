@@ -57,10 +57,21 @@ function LandmarkListCtrl( $location, $scope, db) {
         $location.path('new');
     };
 
+    $scope.goInfo = function(){
+        $location.path('info');
+    }
+
     //search query
     $scope.sessionSearch = function() { 
         $scope.landmarks = db.landmarks.query({name:$scope.query, queryFilter:"all", queryType:"search", session: $scope.searchText});
     };
+
+
+
+
+
+
+
 
 }
 LandmarkListCtrl.$inject = [ '$location', '$scope', 'db'];
