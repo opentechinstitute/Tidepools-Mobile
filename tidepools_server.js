@@ -90,20 +90,9 @@ app.get('/api/:collection', function(req, res) {
 
         //return all items in landmarks
         if (req.query.queryType == "all"){
-
-            if (req.query.queryFilter == "specialEvent"){
-                var qw = {
-                    'specialEvent' : 'true'
-                };
-                var limit;
-                db.collection(req.params.collection).find(qw).limit(limit).sort({name: 1}).toArray(fn(req, res));   
-            }
-
-            else {
-                var qw = {};
-                var limit;
-                db.collection(req.params.collection).find(qw).limit(limit).sort({_id: -1}).toArray(fn(req, res));       
-            }  
+            var qw = {};
+            var limit;
+            db.collection(req.params.collection).find(qw).limit(limit).sort({_id: -1}).toArray(fn(req, res));         
         }
 
         //events
@@ -185,22 +174,11 @@ app.get('/api/:collection', function(req, res) {
         //search
         if (req.query.queryType == "search"){
 
-            //  console.log(req.query.session);
+            var qw = {
+                "searchField" : {$regex : ".*"+req.query.session+".*", $options: 'i'}
+            };
 
-            // var qw = {
-            //     "name" : {$regex : ".*"+req.query.session+".*", $options: 'i'},
-            //      "description" : {$regex : ".*"+req.query.session+".*", $options: 'i'}
-            // };
-
-
-
-            var re = new RegExp(req.query.session, 'i');
-
-            db.collection('landmarks').find( { $or :[ { 'name': { $regex: re }}, { 'description': { $regex: re }}, { 'shortDescription': { $regex: re }}, { 'type': { $regex: re }}, { 'subType': { $regex: re }}, { 'category': { $regex: re }}, { 'loc_nicknames': { $regex: re }} ] } ).sort('name', 1).toArray(fn(req, res));
-
-
-
-            //db.collection('landmarks').find(qw).sort({_id: -1}).toArray(fn(req, res));
+            db.collection('landmarks').find(qw).sort({_id: -1}).toArray(fn(req, res));
         }
 
     }
@@ -302,7 +280,6 @@ app.post('/api/:collection/create', function(req, res) {
 
     function saveLandmark(finalID){
    
-        //EDITING LANDMARK
         if (req.body._id){ //temp way to detect landmark edit by checking if mongo already generated _id
 
             var landmarkModel = mongoose.model('landmark', landmarkSchema, 'landmarks');
@@ -318,7 +295,6 @@ app.post('/api/:collection/create', function(req, res) {
                     lm.id = finalID;
                     lm.type = req.body.type;
                     lm.subType = req.body.subType;
-                    lm.specialEvent = req.body.specialEvent;
                     lm.stats.avatar = req.body.stats.avatar;
                     lm.mapID = "TidepoolsBaseMap"; //compatibility with Old Tidepools Interface
 
@@ -363,7 +339,7 @@ app.post('/api/:collection/create', function(req, res) {
 
                     if (req.body.tags){
                         
-                        var newTag = req.body.tags.replace(/[^ \w]+/, '');
+                        var newTag = req.body.tags.replace(/[^A-Za-z]+/g, '');
                         //lm.tags.addToSet(newTag);
                         lm.tags = newTag;
                         
@@ -382,8 +358,7 @@ app.post('/api/:collection/create', function(req, res) {
                 }
             });         
         }
-
-         //CREATING NEW LANDMARK
+     
          else { //not an edit, a new landmark entirely
 
                 var landmarkModel = mongoose.model('landmark', landmarkSchema, 'landmarks');  
@@ -393,7 +368,6 @@ app.post('/api/:collection/create', function(req, res) {
                 lm.id = finalID;
                 lm.type = req.body.type;
                 lm.subType = req.body.subType;
-                lm.specialEvent = req.body.specialEvent;
                 lm.stats.avatar = req.body.stats.avatar;
                 lm.mapID = "TidepoolsBaseMap"; //compatibility with Old Tidepools Interface
 
@@ -439,7 +413,7 @@ app.post('/api/:collection/create', function(req, res) {
 
                 if (req.body.tags){
                     
-                    var newTag = req.body.tags.replace(/[^ \w]+/, '');
+                    var newTag = req.body.tags.replace(/[^A-Za-z]+/g, '');
                     //lm.tags.addToSet(newTag);
                     lm.tags = newTag;
                     
@@ -488,9 +462,7 @@ app.put('/api/:collection/:cmd',  function (req, res) {
 app.post('/api/upload',  function (req, res) {
 
     //disabled Max image upload size for NOW << enable later...
-   if (req.files.files[0].size <= 5242880){
-
-    if (req.files.files[0].type == 'image/png' || req.files.files[0].type == 'image/gif' || req.files.files[0].type == 'image/jpg' || req.files.files[0].type == 'image/jpeg'){
+   // if (req.files.files[0].size <= 5242880){
 
         //FILTER ANYTHING BUT GIF JPG PNG
 
@@ -532,17 +504,11 @@ app.post('/api/upload',  function (req, res) {
                 }
             }
         });
-    }
+  //  }
 
-    else {
-        res.send('Not Saved: Image is not a .jpg, .png, or .gif, please try again.');
-    }
-
-   }
-
-   else {
-       res.send('Not Saved: Image is bigger than 5MB, please try again.');
-   }
+  //  else {
+  //      res.send('Not Saved: File is bigger than 5MB, please try again.');
+  //  }
 
 });
 

@@ -16,7 +16,6 @@ var app = angular.module('Tidepools', ['tidepoolsFilters', 'tidepoolsServices','
       when('/contact', {templateUrl: 'partials/contact.html', controller: LandmarkListCtrl}). 
       when('/feedback', {templateUrl: 'partials/feedback.html', controller: LandmarkListCtrl}). 
       when('/partners', {templateUrl: 'partials/partners.html', controller: LandmarkListCtrl}). 
-      when('/info', {templateUrl: 'partials/info.html', controller: LandmarkListCtrl}). 
 
       when('/landmark/:landmarkId', {templateUrl: 'partials/landmark-detail.html', controller: LandmarkDetailCtrl}). 
       when('/landmark/:landmarkId/edit', {templateUrl: 'partials/landmark-edit.html', controller: LandmarkEditCtrl}). 

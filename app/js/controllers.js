@@ -4,41 +4,14 @@
 function LandmarkListCtrl( $location, $scope, db) {
 
     //---- Initial Query on Page Load -----//
-    // $scope.queryType = "all";
-    // $scope.queryFilter = "all";
-
-    //REMOVED FOR TASTE OF RED HOOK
-    //---Events Now example:
-    $scope.queryType = "events";
+    $scope.queryType = "all";
     $scope.queryFilter = "all";
-
-    //TASTE OF RED HOOK
-    // $scope.queryType = "all";
-    // $scope.queryFilter = "specialEvent";
-
-
-    //$scope.showTime = true; //displaying sub menu for events
+    //Events Now example:
+    // $scope.queryType = "events";
+    // $scope.queryFilter = "now";
 
     $scope.landmarks = db.landmarks.query({ queryType:$scope.queryType, queryFilter:$scope.queryFilter });
     //---------//
-
-
-    //------- For Switching Button Classes ------//
-    $scope.items = ['all', 'events','places','search']; //specifying types, (probably better way to do this)
-    $scope.selected = $scope.items[1]; //starting out with selecting EVENTS 
-
-    $scope.select= function(item) {
-       $scope.selected = item; 
-    };
-
-    $scope.itemClass = function(item) {
-        return item === $scope.selected ? 'btn btn-block btn-lg btn-inverse' : 'btn';
-    };
-    //---------------------------//
-
- 
-    $scope.tweets = db.tweets.query({limit:1});
-
 
     //query function for all sorting buttons
     $scope.filter = function(type, filter) {
@@ -57,21 +30,10 @@ function LandmarkListCtrl( $location, $scope, db) {
         $location.path('new');
     };
 
-    $scope.goInfo = function(){
-        $location.path('info');
-    }
-
     //search query
     $scope.sessionSearch = function() { 
-        $scope.landmarks = db.landmarks.query({name:$scope.query, queryFilter:"all", queryType:"search", session: $scope.searchText});
+        $scope.landmarks = db.landmarks.query({name:$scope.query, time:"all", session: $scope.searchText});
     };
-
-
-
-
-
-
-
 
 }
 LandmarkListCtrl.$inject = [ '$location', '$scope', 'db'];
@@ -163,23 +125,11 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
 
             $('#uploadedpic').html('');
             $('#preview').html('');
-
-            if (data.result == 'Not Saved: Image is not a .jpg, .png, or .gif, please try again.' || data.result == 'Not Saved: Image is bigger than 5MB, please try again.'){
-                 console.log(data.result);
-                $('<h4/>').text(data.result).appendTo('#uploadedpic');
-            }
-
-            else {
-
-                $('<p/>').text('Saved: '+data.originalFiles[0].name).appendTo('#uploadedpic');
-
-                $('<img src="'+ data.result +'">').load(function() {
-                  $(this).width(150).height(150).appendTo('#preview');
-                });
-
-                $scope.landmark.stats.avatar = data.result;
-            }
-
+            $('<p/>').text('Saved: '+data.originalFiles[0].name).appendTo('#uploadedpic');
+            $('<img src="'+ data.result +'">').load(function() {
+              $(this).width(150).height(150).appendTo('#preview');
+            });
+            $scope.landmark.stats.avatar = data.result;
         }
     });
 
@@ -262,10 +212,6 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
             start: $scope.landmark.time.start,
             end: $scope.landmark.time.end
         } 
-
-        if (!$scope.landmark.specialEvent){
-            $scope.landmark.specialEvent = "false";
-        }
 
         $scope.landmark.loc = [$scope.markers.m.lat,$scope.markers.m.lng];
 
@@ -395,21 +341,13 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
             $('#uploadedpic').html('');
             $('#preview').html('');
 
-            if (data.result == 'Not Saved: Image is not a .jpg, .png, or .gif, please try again.' || data.result == 'Not Saved: Image is bigger than 5MB, please try again.'){
-                 console.log(data.result);
-                $('<h4/>').text(data.result).appendTo('#uploadedpic');
-            }
+            $('<p/>').text('Saved: '+data.originalFiles[0].name).appendTo('#uploadedpic');
 
-            else {
+            $('<img src="'+ data.result +'">').load(function() {
+              $(this).width(150).height(150).appendTo('#preview');
+            });
 
-                $('<p/>').text('Saved: '+data.originalFiles[0].name).appendTo('#uploadedpic');
-
-                $('<img src="'+ data.result +'">').load(function() {
-                  $(this).width(150).height(150).appendTo('#preview');
-                });
-
-                $scope.landmark.stats.avatar = data.result;
-            }
+            $scope.landmark.stats.avatar = data.result;
 
         }
     });
@@ -510,7 +448,6 @@ function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeou
             $scope.landmark.loc = [globalEditLoc.lat,globalEditLoc.lng];
         }
 
-
         db.landmarks.create($scope.landmark, function(response){
 
             $location.path('/landmark/'+response[0].id+'/new');
@@ -585,28 +522,10 @@ talktagCtrl.$inject = [ '$location', '$scope', '$routeParams', 'db'];
 
 function mapCtrl($location, $scope, db, $timeout) {
 
-        //REMOVED FOR TASTE OF RED HOOK
         $scope.queryType = "all";
         $scope.queryFilter = "all";
 
-        //TASTE OF RED HOOK
-        // $scope.queryType = "all";
-        // $scope.queryFilter = "specialEvent";
-
         queryMap($scope.queryType, $scope.queryFilter); //showing all at first
-
-        //------- For Switching Button Classes ------//
-        $scope.items = ['all', 'events','places','search']; //specifying types, (probably better way to do this)
-        $scope.selected = $scope.items[0]; //starting out with selecting EVENTS 
-
-        $scope.select= function(item) {
-           $scope.selected = item; 
-        };
-
-        $scope.itemClass = function(item) {
-            return item === $scope.selected ? 'btn btn-block btn-lg btn-inverse' : 'btn';
-        };
-        //---------------------------//
 
         $scope.filter = function(type, filter) {
             queryMap(type,filter);

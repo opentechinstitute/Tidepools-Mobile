@@ -27,7 +27,7 @@ var global_mapCenter = { //this is the "center" of your community or event, for 
 
 //---------- TWEET STREAM -------//
 //one or more hashtags for base twitter gathering 
-var global_hashtag = "#redhookwifi,@redhookwifi";
+var global_hashtag = "#redhookwifi";
 //can also be multiple:
 //var global_hashtag = '#lol,#what,#soitgoes';
 //-------------------------------//
