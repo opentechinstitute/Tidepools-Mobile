@@ -46,7 +46,7 @@ app.configure(function () {
 	app.use(express.bodyParser());
 	app.use(express.logger('dev'));  //tiny, short, default
 	app.use(app.router);
-	app.use(express.static(__dirname + '/app'));
+	app.use(express.static(__dirname + '/app')); // which url directory to display tidepools as being in
 	app.use(express.errorHandler({dumpExceptions: true, showStack: true, showMessage: true}));
 });
 
@@ -57,7 +57,7 @@ app.configure(function () {
 var objectId = function (_id) {
     if (_id.length === 24 && parseInt(db.ObjectId(_id).getTimestamp().toISOString().slice(0,4), 10) >= 2010) {
         return db.ObjectId(_id);
-    } 
+   } 
     return _id;
 }
 

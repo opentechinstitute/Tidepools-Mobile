@@ -1,16 +1,12 @@
-# Credentialing
-Streaming_Tweet_Loader/credentials.js
-
-
 **/.DS_Store
 nbproject
 manifest.mf
 build.xml
 
-app/map/*
-app/maps/*
-app/1.0.0/*
-app/1.0.0/
+map/*
+maps/*
+1.0.0/*
+1.0.0/
 
 .project
 .settings

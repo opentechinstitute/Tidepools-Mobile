@@ -9,14 +9,13 @@
          <h4> {{globalhashtag}} Conversations</h4>
         </li>
 
-        <form ng-submit="tagSearch()">
+        <form class="inline" ng-submit="tagSearch()">
           <input style="width:95%;" type="text" ng-model="searchText" size="40"
                  placeholder="Search {{globalhashtag}} Tweets">
-          <input class="btn-primary" type="submit" value="search">
+          <input class=" btn btn-primary" type="submit" value="search">
         </form>
 
       </ul>
-
 
       <ul class="feed" style="padding-left:1%; padding-right:5px;">
 
@@ -42,7 +41,7 @@
 
       </ul>
 
-      (only showing last 100 tweets for now)
+      (only showing last 100 tweets)
 
     </div>
   </div>

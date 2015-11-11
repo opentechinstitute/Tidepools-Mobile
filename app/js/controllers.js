@@ -7,8 +7,8 @@ function LandmarkListCtrl( $location, $scope, db) {
     $scope.queryType = "all";
     $scope.queryFilter = "all";
     //Events Now example:
-    // $scope.queryType = "events";
-    // $scope.queryFilter = "now";
+    //$scope.queryType = "events";
+    //$scope.queryFilter = "now";
 
     $scope.landmarks = db.landmarks.query({ queryType:$scope.queryType, queryFilter:$scope.queryFilter });
     //---------//
@@ -49,8 +49,8 @@ function LandmarkListCtrl( $location, $scope, db) {
     $scope.sessionSearch = function() { 
         $scope.landmarks = db.landmarks.query({name:$scope.query, time:"all", session: $scope.searchText});
     };
-
 }
+
 LandmarkListCtrl.$inject = [ '$location', '$scope', 'db'];
 
 
@@ -98,7 +98,10 @@ LandmarkDetailCtrl.$inject = ['Landmark', '$routeParams', '$scope', 'db', '$loca
 function LandmarkNewCtrl($location, $scope, $routeParams, db) {
 
     //Showing form options based on type of "new" request
-    if ($routeParams.type == '' || $routeParams.type == 'place' || $routeParams.type == 'event' || $routeParams.type == 'job'){
+    if ($routeParams.type == '' ||
+		$routeParams.type == 'place' ||
+		$routeParams.type == 'event' ||
+		$routeParams.type == 'job'){
 
     }
     else {
@@ -106,6 +109,7 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
     }
 
     var currentDate = new Date();
+//var currentDate = Date.today();
 
     //----- Loading sub categories from global settings ----//
     $scope.subTypes = [];
@@ -129,7 +133,6 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
         progressall: function (e, data) {  
 
             $('#progress .bar').css('width', '0%');
-
             var progress = parseInt(data.loaded / data.total * 100, 10);
             $('#progress .bar').css(
                 'width',
@@ -158,7 +161,6 @@ function LandmarkNewCtrl($location, $scope, $routeParams, db) {
                 if (status == google.maps.GeocoderStatus.OK) {
 
                   $scope.$apply(function () {
-                        
                         angular.extend($scope, {
                             amc: {
                                 lat: results[0].geometry.location.lat(),
@@ -266,9 +268,6 @@ LandmarkNewCtrl.$inject = ['$location', '$scope', '$routeParams','db'];
 
 function LandmarkEditCtrl(Landmark, $location, $scope, $routeParams, db, $timeout) {
 
-    //if authenticate, show and provide this functionality:
-
-    //if not, login plz k thx
 
 
 
@@ -567,12 +566,13 @@ function mapCtrl($location, $scope, db, $timeout) {
 
                 var markerCollect = {};
 
-                for (var i=0;i<data.length;i++){ 
-
+                for (var i=0;i<data.length;i++){
+					console.log(data)
                     markerCollect[data[i].id] = {
                         lat: data[i].loc[0],
                         lng: data[i].loc[1],
-                        message: '<h4><img style="width:70px;" src="'+data[i].stats.avatar+'"><a href=#/landmark/'+data[i].id+'> '+data[i].name+'</a></h4>' 
+                        message: '<h4><img style="width:70px;" src="'+data[i].stats.avatar+'"><a href=#/landmark/'+data[i].id+'> '+data[i].name+'</a></h4>',
+						icon: "img/"+data[i].subType+".svg"
                     }
                 }
 

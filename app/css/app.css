@@ -1,17 +1,88 @@
 /* app css stylesheet */
 
+html {
+
+}
 body {
   margin: 0;
+  overflow-x: hidden;
 }
 
-.bar {
-    height: 18px;
-    background: green;
+#bar {
+    height: 44px;
+}
+
+#lefty {
+float: up;
+z-index: 3;
+position: relative;
+}
+
+mapbutton a {
+color:#34495e; 
+text-decoration: none;
+}
+
+footer {
+min-height: 160px;
+width: 100%;
+margin-left: auto;
+margin-right: auto; 
+}
+
+footer p {
+line-height: 14px;
+padding-bottom: 3px;
+}
+
+footer a {
+color: #5dade2;
+font-weight: bold;
+}
+
+
+#footer {
+background-color: #252528;
+color: #ffffff;
+display: block;
+padding-top: 22px;
+padding-bottom: 22px;
+padding-left: 20%;
+padding-right: 20%; 
+}
+
+#social {
+  margin: 0 auto;
+}
+
+#social img {
+padding: 10px;
+}
+
+#credits {
+  margin: 0 auto;
+}
+
+#copyright p{
+margin-top: 10px;
+font-size: 10pt;
+font-weight: normal;
+}
+
+.submit-cancel {
+}
+
+.submit-cancel button {
+margin: 10px;
+}
+
+hr {
+ ;
 }
 
 .angular-leaflet-map {
-  width: 100%;
-  height: 350px;
+  /*width: 100%;*/
+  /*height: 100%;*/
 }
 
 .landmarks {
@@ -105,6 +176,51 @@ h1 {
   border-bottom: 1px solid gray;
 }
 
+/* Nav bar */
+
+#nav {
+  width: 100%;
+  height: 45px;
+  float: left;
+  margin: 0 0 1em 0;
+  padding: 0;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ccc;  
+}
+
+#nav ul {
+  list-style: none;
+  width: 800px;
+  margin: 0 auto;
+  padding: 0; 
+}
+
+#nav li {
+  float: left; 
+}
+
+#nav li a {
+  display: block;
+  padding: 8px 15px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #069;
+  border-right: 1px solid #ccc; 
+}
+
+#nav li:first-child a {
+  border-left: 1px solid #ccc; 
+}
+
+#nav li a:hover {
+  color: #c00;
+  background-color: #fff; 
+}
+
+.menubutton {
+  float:left; 
+  width:10%;
+}
 
 /* Code below by Dave Cole from: https://gist.github.com/dhcole/5368613 */
 body.menu #menu {
@@ -126,7 +242,8 @@ body.menu #main {
 
 #wrapper {
   position: relative;
-  overflow-x: hidden;
+  /*overflow-x: hidden;*/
+  min-height: 100%;
 }
 
 #menu {
@@ -134,9 +251,13 @@ body.menu #main {
   top: 0;
   left: 0;
   width: 66%;
+  padding-top:50px;
   bottom: 0px;
+  background: #34495e;
+  box-shadow: 0px 0px 10px 6px #2c3e50 inset;
+/* Old Pinky
 
-background-image: linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 59%, rgb(247,179,186) 84%);
+  background-image: linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 59%, rgb(247,179,186) 84%);
   background-image: -o-linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 59%, rgb(247,179,186) 84%);
   background-image: -moz-linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 59%, rgb(247,179,186) 84%);
   background-image: -webkit-linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 59%, rgb(247,179,186) 84%);
@@ -151,6 +272,7 @@ background-image: linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 5
     color-stop(0.84, rgb(247,179,186))
   );
 
+*/
 
   color: white;
   opacity: 0;
@@ -163,9 +285,12 @@ background-image: linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 5
 
 #main {
   position: relative;
-  min-height: 100%;
-  background: #eee;
-  box-shadow: -4px 0px 5px rgba(0,0,0,0.5);
+/*  min-height: 100%;*/
+  width: 80%;
+  min-width: 320px; /* just-in-case mobile notation */
+  background: #ecf0f1;
+  margin: 0 auto;
+  box-shadow: 0px 3px 6px #34495e;
   -webkit-transition: -webkit-transform 0.2s;
   -moz-transition: -moz-transform 0.2s;
   -ms-transition: -ms-transform 0.2s;
@@ -175,27 +300,21 @@ background-image: linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 5
   -webkit-backface-visibility: hidden;
 }
 
+
+
 #content { 
-/*  padding: 20px;*/ 
+  padding: 20px;
 }
-
-#bar {
-  height: 54px;
-  background: #333;
-}
-
-/* --- end code by Dave Cole */
+/* - end code by Dave Cole */
 
 /* App menu bar */
 
-#show { 
-  float: left;
-  color: #000; 
-  background: #9900ff;
-  width: 44px;
+#show { /* NYAN */
+  color: #fff; 
+  background: #5dade2;
+  min-width: 44px;
   height: 100%;
   cursor: pointer;
-  font-size: 20px;
   display: inline-block;
 
 }
@@ -224,7 +343,7 @@ background-image: linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 5
 }
 
 /* Nav bar */
-
+/*
 #nav {
   width: 100%;
   height: 45px;
@@ -270,7 +389,7 @@ background-image: linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 5
   width:10%;
 }
 
-
+*/
 
 
 /* Cards */
@@ -290,7 +409,7 @@ background-image: linear-gradient(bottom, rgb(153,0,255) 25%, rgb(215,115,228) 5
  */
 body {
   background: #e1e1e1;
-  min-height: 100%;
+  /*min-height: 100%;*/
   margin: auto;
 }
 ul.gNow {
@@ -326,7 +445,7 @@ div.card {
   }
   div.card p.url {
     border-top: 1px solid #e5e5e5;
-    background-image: url('http://www.eriklindemann.com/wp-content/uploads/2013/05/url.png');
+    background-image: url('../img/url.png');
     background-repeat: no-repeat;
     padding: 6px 0 0 30px;
     height: 30px;
