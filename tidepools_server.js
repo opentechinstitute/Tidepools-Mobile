@@ -6,8 +6,8 @@
   '-' `-`-'`-`=='|`-'  `-'  `-' `-`==' Mobile ≈☯ v0.3
                  |
                  '
-  J.R. Baldwin & Open Technology Institute  
-  tidepools.co <3 <3 <3 
+  J.R. Baldwin & Open Technology Institute
+  tidepools.co <3 <3 <3
 */
 
 var fs = require('fs');
@@ -29,18 +29,18 @@ var mongoose = require('mongoose'),
     landmarkSchema = require('./landmark_schema.js'),
     monguurl = require('monguurl');
 
-mongoose.connect('mongodb://localhost/tidepools');
+mongoose.connect('mongodb://mongodb.service.consul/tidepools');
 var db_mongoose = mongoose.connection;
 db_mongoose.on('error', console.error.bind(console, 'connection error:'));
 //---------------//
 
 
 var express = require('express'),
-    app = module.exports.app = express(), 
+    app = module.exports.app = express(),
     db = require('mongojs').connect('tidepools');
 
 
-    
+
 app.configure(function () {
 	app.use(express.favicon());
 	app.use(express.bodyParser());
@@ -57,23 +57,23 @@ app.configure(function () {
 var objectId = function (_id) {
     if (_id.length === 24 && parseInt(db.ObjectId(_id).getTimestamp().toISOString().slice(0,4), 10) >= 2010) {
         return db.ObjectId(_id);
-   } 
+   }
     return _id;
 }
 
 //Function callback
 var fn = function (req, res) {
     res.contentType('application/json');
-    var fn = function (err, doc) { 
-        if (err) { 
+    var fn = function (err, doc) {
+        if (err) {
             if (err.message) {
-                doc = {error : err.message} 
+                doc = {error : err.message}
             } else {
-                doc = {error : JSON.stringify(err)} 
+                doc = {error : JSON.stringify(err)}
             }
         }
-        if (typeof doc === "number" || req.params.cmd === "distinct") { doc = {ok : doc}; } 
-        res.send(doc); 
+        if (typeof doc === "number" || req.params.cmd === "distinct") { doc = {ok : doc}; }
+        res.send(doc);
     };
     return fn;
 };
@@ -81,7 +81,7 @@ var fn = function (req, res) {
 /* Routes */
 
 // Query
-app.get('/api/:collection', function(req, res) { 
+app.get('/api/:collection', function(req, res) {
 
     var item, sort = {};
 
@@ -92,7 +92,7 @@ app.get('/api/:collection', function(req, res) {
         if (req.query.queryType == "all"){
             var qw = {};
             var limit;
-            db.collection(req.params.collection).find(qw).limit(limit).sort({_id: -1}).toArray(fn(req, res));         
+            db.collection(req.params.collection).find(qw).limit(limit).sort({_id: -1}).toArray(fn(req, res));
         }
 
         //events
@@ -118,7 +118,7 @@ app.get('/api/:collection', function(req, res) {
 
             if (req.query.queryFilter == "soon"){
 
-                var currentTime = new Date(); 
+                var currentTime = new Date();
                 currentTime.setMinutes(currentTime.getMinutes() + 45); // adding 30minutes to current time for "soon"
                 var qw = {
                     'time.start': {$lt: currentTime},
@@ -210,12 +210,12 @@ app.get('/api/:collection', function(req, res) {
 
 });
 
-// Read 
+// Read
 app.get('/api/:collection/:id', function(req, res) {
     db.collection(req.params.collection).findOne({id:objectId(req.params.id)}, fn(req, res));
 });
 
-// Save 
+// Save
 app.post('/api/:collection/create', function(req, res) {
 
     if (!req.body.name){
@@ -251,7 +251,7 @@ app.post('/api/:collection/create', function(req, res) {
                     var newUnique;
 
                     async.forever(function (next) {
-                      var uniqueNum_string = uniqueNumber.toString(); 
+                      var uniqueNum_string = uniqueNumber.toString();
                       newUnique = data.id + uniqueNum_string;
 
                       db.collection('landmarks').findOne({'id':newUnique}, function(err, data){
@@ -279,7 +279,7 @@ app.post('/api/:collection/create', function(req, res) {
     }
 
     function saveLandmark(finalID){
-        
+
         //EDITING A LANDMARK
         if (req.body._id){ //temp way to detect landmark edit by checking if mongo already generated _id
 
@@ -330,21 +330,21 @@ app.post('/api/:collection/create', function(req, res) {
                         lm.time.start = datetimeStart;
                         lm.time.end = datetimeEnd;
                     }
-                    
+
                     lm.loc.length = 0;
                     lm.loc.unshift(req.body.loc[0],req.body.loc[1]);
 
                     if (req.body.location){
                         lm.loc_nicknames.addToSet(req.body.location);
-                    }    
+                    }
 
                     if (req.body.tags){
-                        
+
                         var newTag = req.body.tags.replace(/[^ \w]+/, '');
                         //lm.tags.addToSet(newTag);
                         lm.tags = newTag;
-                        
-                    }     
+
+                    }
 
                     lm.save(function (err, landmark) {
                         if (err)
@@ -357,13 +357,13 @@ app.post('/api/:collection/create', function(req, res) {
                         }
                     });
                 }
-            });         
+            });
         }
-            
+
         //NEW LANDMARK
          else { //not an edit, a new landmark entirely
 
-                var landmarkModel = mongoose.model('landmark', landmarkSchema, 'landmarks');  
+                var landmarkModel = mongoose.model('landmark', landmarkSchema, 'landmarks');
                 var lm = new landmarkModel();
 
                 lm.name = req.body.name;
@@ -405,21 +405,21 @@ app.post('/api/:collection/create', function(req, res) {
                     lm.time.start = datetimeStart;
                     lm.time.end = datetimeEnd;
                 }
-                
+
 
                 lm.loc.unshift(req.body.loc[0],req.body.loc[1]);
 
                 if (req.body.location){
                     lm.loc_nicknames.addToSet(req.body.location);
-                }    
+                }
 
                 if (req.body.tags){
-                    
+
                     var newTag = req.body.tags.replace(/[^ \w]+/, '');
                     //lm.tags.addToSet(newTag);
                     lm.tags = newTag;
-                    
-                }  
+
+                }
 
             lm.save(function (err, landmark) {
                 if (err)
@@ -431,7 +431,7 @@ app.post('/api/:collection/create', function(req, res) {
                     res.send(idArray);
                 }
             });
-        }  
+        }
     }
 
 });
@@ -451,13 +451,13 @@ app.put('/api/:collection/mapReduce', function(req, res) {
     if (!req.body.options) {req.body.options  = {}};
     req.body.options.out = { inline : 1};
     req.body.options.verbose = false;
-    db.collection(req.params.collection).mapReduce(req.body.map, req.body.reduce, req.body.options, fn(req, res));    
+    db.collection(req.params.collection).mapReduce(req.body.map, req.body.reduce, req.body.options, fn(req, res));
 })
 
 // Command (count, distinct, find, aggregate)
 app.put('/api/:collection/:cmd',  function (req, res) {
     if (req.params.cmd === 'distinct') {req.body = req.body.key}
-    db.collection(req.params.collection)[req.params.cmd](req.body, fn(req, res)); 
+    db.collection(req.params.collection)[req.params.cmd](req.body, fn(req, res));
 })
 
 
@@ -476,13 +476,13 @@ app.post('/api/upload',  function (req, res) {
             while (1) {
 
                 var fileNumber = Math.floor((Math.random()*100000000)+1); //generate random file name
-                var fileNumber_str = fileNumber.toString(); 
+                var fileNumber_str = fileNumber.toString();
                 var current = fileNumber_str + '.' + fileType;
 
                 //checking for existing file, if unique, write to dir
                 if (fs.existsSync("app/uploads/" + current)) {
                     continue; //if there are max # of files in the dir this will infinite loop...
-                } 
+                }
                 else {
                     var newPath = "app/uploads/" + current;
 
@@ -514,10 +514,10 @@ app.post('/api/upload',  function (req, res) {
 
 });
 
+var port = (typeof(process.env.PORT) === 'undefined' || isNaN(process.env.PORT)) ? 3002 : process.env.PORT
 
-
-app.listen(3002, function() {
-    console.log("Chillin' on 3002 ~ ~");
+app.listen(port, function() {
+    console.log("Chillin' on " + port + " ~ ~");
 });
 
 
