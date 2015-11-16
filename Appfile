@@ -1,0 +1,17 @@
+application {
+  name = "Tidepools-Mobile"
+  type = "node"
+  dependency {
+    source = "github.com/ottohub/mongodb"
+  }
+}
+
+project {
+  name = "Tidepools-Mobile"
+  infrastructure = "Tidepools-Mobile"
+}
+
+infrastructure "Tidepools-Mobile" {
+  type = "aws"
+  flavor = "simple"
+}
