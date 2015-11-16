@@ -5,13 +5,14 @@
   "version": "0.0.2",
   "private": false,
   "scripts": {
-    "start": "node server.js" 
+    "start": "node server.js"
   },
   "dependencies": {
     "express": "3.3.x",
-    "mongojs": "0.7.x"
+    "mongojs": "0.7.x",
+    "foreman":"1.4.1"
   },
-  "repository": { 
+  "repository": {
     "type": "git",
     "url": "git://github.com/opentechinstitute/Tidepools-Mobile.git"
   },

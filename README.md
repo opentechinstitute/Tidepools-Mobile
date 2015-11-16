@@ -17,113 +17,64 @@ Runtime Dependencies
 * [LeafletJS](http://leafletjs.com/ "LeafletJS"): Map Rendering Engine (JS)
 * [MongoDB](http://www.mongodb.org/ "MongoDB"): noSQL Database (JSON)
 
+Otto Setup
+-----------------
+Works both Mac OS X, Linux, and Windows.
+
+1. Install otto [Download here](https://ottoproject.io/downloads.html)
+2. run `otto compile && otto dev`
+3. run `otto dev ssh` to ssh into development environment
+4. start at step 3 for Ubuntu setup, with the working directory is `/vagrant/`
+
 Ubuntu Installation
 -------------------
 Assuming you are in Ubuntu terminal:
 
 1. Install MongoDB. Reference: [How to install MongoDB on Ubuntu](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/)
    * Configure apt package tool: `sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10`
-   * Create a /etc/apt/sources.list.d/10gen.list file using the following command: 
+   * Create a /etc/apt/sources.list.d/10gen.list file using the following command:
      `echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/10gen.list`
-   * Now issue the following command to reload your repository:  
+   * Now issue the following command to reload your repository:
      `sudo apt-get update`
-   * Issue the following command to install the latest stable version of MongoDB:  
+   * Issue the following command to install the latest stable version of MongoDB:
    	 `sudo apt-get install mongodb-10gen`
-   * Start Mongod DB service:  
+   * Start Mongod DB service:
      `sudo service mongodb start`
-   * Test that Mongo is running:  
-   	 `mongo`  
+   * Test that Mongo is running:
+   	 `mongo`
    	 You should see something like: `MongoDB shell version: x.x.x. connecting to: test >`
 
-2. Now that MongoDB is running, we need to install Node.js:  
-   `sudo apt-get install python-software-properties`  
-   `sudo add-apt-repository ppa:chris-lea/node.js`  
-   `sudo apt-get update`  
-   `sudo apt-get install nodejs`  
+2. Now that MongoDB is running, we need to install Node.js:
+   `sudo apt-get install python-software-properties`
+   `sudo add-apt-repository ppa:chris-lea/node.js`
+   `sudo apt-get update`
+   `sudo apt-get install nodejs`
 
 3. Navigate to your local Tidepools-Mobile directory (`cd /Tidepools-Mobile/` etc):
 	* Start the Tidepools Mobile Node server:
 	  `node tidepools_server.js`
-	* IF there's an ERROR saying something like "Cannot find module 'example_module'", then you need to install additional modules using the Node NPM Package system:  
-	  `npm install example_module` - Replace "example_module" with the module listed in the error.  
+	* IF there's an ERROR saying something like "Cannot find module 'example_module'", then you need to install additional modules using the Node NPM Package system:
+	  `npm install example_module` - Replace "example_module" with the module listed in the error.
 	  `node tidepools_server.js` - If more modules errors persist, install those as well.
 	* IF the server is running, it should say: "Chillin' on 3002 ~ ~" -- "3002" being the port number Tidepools is running on.
-	* Test it! Open a web browser and navigate to: `http://localhost:3002/`  
+	* Test it! Open a web browser and navigate to: `http://localhost:3002/`
       Note: This localhost address might vary, depending on your Linux version.
-    * If you want to Tidepools to run after you close terminal, use Forever:  
-      `npm install forever`  
-      Start: `forever start tidepools_server.js`  
-      Check node servers running: `forever list`  
-      Stop: `forever stop tidepools_server.js`  
+    * If you want to Tidepools to run after you close terminal, use Forever:
+      `npm install forever`
+      Start: `forever start tidepools_server.js`
+      Check node servers running: `forever list`
+      Stop: `forever stop tidepools_server.js`
 
 4. Adding a custom map:
 	* Your Tidepools base map settings are located in: app/js/angular-leaflet-directive.js
 	* By default, Tidepools is using cloud-based map tiles. Change the map URL, by modifying the `tilelayer` field
 	* To use local, custom tiles, comment out the first `var defaults = {}` and uncomment the second `var defaults = {}`
-	  This is now using local map tiles in the 1.0.0 folder. A conference map is included as an example.  
+	  This is now using local map tiles in the 1.0.0 folder. A conference map is included as an example.
 	  To build your own custom tiles to add to the 1.0.0 folder, see: http://wiki.tidepools.co/view/Map_Tiles
 	* In `global_settings.js`, change the `global_mapCenter` to your map's lat lng center
 
 5. Adding new Places and Events:
-	* Navigate to "http://localhost:3002/new" (or wherever your localhost server is accessible)  
-	  Input form data. The "hashtag" section will auto-pull Tweets into your place or event, if the Tidepools Twitter Stream Server is running.  
-	* Edit places and events: "http://localhost:3002/#/landmark/UniqueID/edit" - "UniqueID" being the name of your place or event
-	* You can automate the adding process, by plugging in JSON directly (See the 'Session_Event_API_loader' directory for more info).
-
-6. Running Twitter Stream Server to integrate #hashtagged data into your Tidepools events and places:
-	* Navigate to the "Streaming Tweet Loader" directory.
-	* Get your Twitter access tokens: https://dev.twitter.com/docs/auth/obtaining-access-tokens
-	* Edit the `credentials_example.js` file, adding in your unique Twitter tokens.
-	* Change the filename to `credentials.js`
-	* Edit `global_settings.js` in `../app/js` : Change the `global_hashtag` to your neighborhood or event's main Twitter hashtag (i.e. #Event2013)
-	* Start streaming:  
-	  `node tweet_server.js`
-	* Make it stream forever:  
-	  `forever start tweet_server.js`
-
-
-OSX Installation
--------------------
-Assuming you are in OSX terminal:
-
-1. Install MongoDB. Reference: [How to install MongoDB on OSX](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/)
-	* Install Homebrew if you haven't already (package manager): http://brew.sh/
-	* Install Mongo via Homebrew:  
-	  `brew update`  
-	  `brew install mongodb`
-	* Start the mongod process in a terminal:  
-	  `mongod` to start MongoDB service  
-	  `mongo` to test:  
-	  You should see something like `MongoDB shell version: x.x.x. connecting to: test >`
-
-2. Install Node.js
-	* Assuming you have installed Homebrew from the previous step:  
-	  `brew install node`
-
-3. Navigate to your local Tidepools-Mobile directory (`cd /Tidepools-Mobile/` etc):
-	* Start the Tidepools Mobile Node server:  
-	  `node tidepools_server.js`
-	* IF there's an ERROR saying something like "Cannot find module 'example_module'", then you need to install additional modules using the Node NPM Package system:  
-	  `npm install example_module` - Replace "example_module" with the module listed in the error.
-	  `node tidepools_server.js` - If more modules errors persist, install those as well.
-	* IF the server is running, it should say: "Chillin' on 3002 ~ ~" -- "3002" being the port number Tidepools is running on.
-	* Test it! Open a web browser and navigate to: `http://localhost:3002/`  
-      Note: This localhost address might vary, depending on your Linux version.
-    * If you want to Tidepools to run after you close terminal, use Forever:  
-      `npm install forever`  
-      Start: `forever start tidepools_server.js`  
-      Check node servers running: `forever list`  
-      Stop: `forever stop tidepools_server.js`  
-
-4. Adding a custom map:
-	* Your Tidepools map settings are located in: app/js/angular-leaflet-directive.js
-	* By default, Tidepools is using cloud-based map tiles. Change the map URL, by modifying the `tilelayer` field
-	* To use local, custom tiles, comment out the first `var defaults = {}` and uncomment the second `var defaults = {}`
-	  This is now using local map tiles in the 1.0.0 folder. A conference map is included as an example.  
-	  To build your own custom tiles to add to the 1.0.0 folder, see: http://wiki.tidepools.co/view/Map_Tiles
-
-5. Adding new Places and Events:
-	* Navigate to "http://localhost:3002/new" (or wherever your localhost server is accessible)  
+	* Navigate to "http://localhost:3002/new" (or wherever your localhost server is accessible)
 	  Input form data. The "hashtag" section will auto-pull Tweets into your place or event, if the Tidepools Twitter Stream Server is running.
 	* Edit places and events: "http://localhost:3002/#/landmark/UniqueID/edit" - "UniqueID" being the name of your place or event
 	* You can automate the adding process, by plugging in JSON directly (See the 'Session_Event_API_loader' directory for more info).
@@ -134,9 +85,67 @@ Assuming you are in OSX terminal:
 	* Edit the `credentials_example.js` file, adding in your unique Twitter tokens.
 	* Change the filename to `credentials.js`
 	* Edit `global_settings.js` in `../app/js` : Change the `global_hashtag` to your neighborhood or event's main Twitter hashtag (i.e. #Event2013)
-	* Start streaming:  
+	* Start streaming:
 	  `node tweet_server.js`
-	* Make it stream forever:  
+	* Make it stream forever:
+	  `forever start tweet_server.js`
+
+
+OSX Installation
+-------------------
+Assuming you are in OSX terminal:
+
+1. Install MongoDB. Reference: [How to install MongoDB on OSX](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/)
+	* Install Homebrew if you haven't already (package manager): http://brew.sh/
+	* Install Mongo via Homebrew:
+	  `brew update`
+	  `brew install mongodb`
+	* Start the mongod process in a terminal:
+	  `mongod` to start MongoDB service
+	  `mongo` to test:
+	  You should see something like `MongoDB shell version: x.x.x. connecting to: test >`
+
+2. Install Node.js
+	* Assuming you have installed Homebrew from the previous step:
+	  `brew install node`
+
+3. Navigate to your local Tidepools-Mobile directory (`cd /Tidepools-Mobile/` etc):
+	* Start the Tidepools Mobile Node server:
+	  `node tidepools_server.js`
+	* IF there's an ERROR saying something like "Cannot find module 'example_module'", then you need to install additional modules using the Node NPM Package system:
+	  `npm install example_module` - Replace "example_module" with the module listed in the error.
+	  `node tidepools_server.js` - If more modules errors persist, install those as well.
+	* IF the server is running, it should say: "Chillin' on 3002 ~ ~" -- "3002" being the port number Tidepools is running on.
+	* Test it! Open a web browser and navigate to: `http://localhost:3002/`
+      Note: This localhost address might vary, depending on your Linux version.
+    * If you want to Tidepools to run after you close terminal, use Forever:
+      `npm install forever`
+      Start: `forever start tidepools_server.js`
+      Check node servers running: `forever list`
+      Stop: `forever stop tidepools_server.js`
+
+4. Adding a custom map:
+	* Your Tidepools map settings are located in: app/js/angular-leaflet-directive.js
+	* By default, Tidepools is using cloud-based map tiles. Change the map URL, by modifying the `tilelayer` field
+	* To use local, custom tiles, comment out the first `var defaults = {}` and uncomment the second `var defaults = {}`
+	  This is now using local map tiles in the 1.0.0 folder. A conference map is included as an example.
+	  To build your own custom tiles to add to the 1.0.0 folder, see: http://wiki.tidepools.co/view/Map_Tiles
+
+5. Adding new Places and Events:
+	* Navigate to "http://localhost:3002/new" (or wherever your localhost server is accessible)
+	  Input form data. The "hashtag" section will auto-pull Tweets into your place or event, if the Tidepools Twitter Stream Server is running.
+	* Edit places and events: "http://localhost:3002/#/landmark/UniqueID/edit" - "UniqueID" being the name of your place or event
+	* You can automate the adding process, by plugging in JSON directly (See the 'Session_Event_API_loader' directory for more info).
+
+6. Running Twitter Stream Server to integrate #hashtagged data into your Tidepools events and places:
+	* Navigate to the "Streaming Tweet Loader" directory.
+	* Get your Twitter access tokens: https://dev.twitter.com/docs/auth/obtaining-access-tokens
+	* Edit the `credentials_example.js` file, adding in your unique Twitter tokens.
+	* Change the filename to `credentials.js`
+	* Edit `global_settings.js` in `../app/js` : Change the `global_hashtag` to your neighborhood or event's main Twitter hashtag (i.e. #Event2013)
+	* Start streaming:
+	  `node tweet_server.js`
+	* Make it stream forever:
 	  `forever start tweet_server.js`
 
 License
