@@ -9,7 +9,7 @@
     "test": "test.js"
   },
   "dependencies": {
-    "mongoose": "3.6.x",
+    "mongoose": "5.7.x",
     "monguurl": "0.1.x",
     "underscore": "1.4.4",
     "async": "0.2.9"
