@@ -11,7 +11,7 @@
   "dependencies": {
     "mongoose": "5.7.x",
     "monguurl": "0.1.x",
-    "underscore": "1.4.4",
+    "underscore": "1.13.8",
     "async": "0.2.9"
   },
   "repository": { 
